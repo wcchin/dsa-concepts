@@ -35,3 +35,7 @@ site:
   template: book-theme
   options:
     logo_text: DSA Concepts
+    logo: assets/brand/logo.svg
+    logo_dark: assets/brand/logo.svg
+    favicon: assets/brand/favicon.ico
+    style: assets/custom.css

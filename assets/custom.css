@@ -1,0 +1,4 @@
+/* Hide only the theme credit at the bottom of the primary sidebar. */
+.myst-made-with-myst {
+  display: none !important;
+}
