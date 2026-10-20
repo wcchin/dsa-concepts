@@ -1,0 +1,1833 @@
+# Lecture-to-topic inventory
+
+Source: `wcchin/CS2040HS-2610`, main commit `254cb7e7684a93be1f06cde42e973df458fe9366`.
+All 25 lecture Markdown files were read. No notebook, rubric or solution files were used.
+This is an editorial map of source coverage, not a claim that all chapters have been written.
+
+## Main topics and page boundaries
+
+| Topic | Proposed concept pages | Lecture sources |
+|---|---|---|
+| 1. Foundations and Python’s object model | Data structures, algorithms and problem requirements; Objects, references, identity and equality; Mutability, aliasing, rebinding and copying; Built-in collections, classes and invariants | `cs2040hs_week00_classroom.md`, `cs2040hs_week01_classroom.md`, `cs2040hs_week01_online.md` |
+| 2. Analysing algorithms | Input size, operation counts and growth rates; Best, worst and average cases; O, Ω and Θ; Loops, repeated halving and auxiliary space | `cs2040hs_week02_classroom.md`, `cs2040hs_week02_online.md` |
+| 3. Recursion and divide-and-conquer | Base cases, progress, call stacks and termination; Divide, conquer, combine and recursion-tree shape; Implementation choices and their costs | `cs2040hs_week03_classroom.md`, `cs2040hs_week03_online.md` |
+| 4. Sorting | Insertion sort and bubble sort; Merging and merge sort; Partitioning, pivots and quicksort; Stability, space, strategy and the comparison lower bound | `cs2040hs_week03_classroom.md`, `cs2040hs_week03_online.md`, `cs2040hs_week04_classroom.md`, `cs2040hs_week04_online.md` |
+| 5. Abstract data types and linear structures | ADTs, contracts and implementation choices; Stacks and LIFO applications; Queues, deques and access policies; Arrays, dynamic arrays, length, capacity and resizing; Linked nodes, traversal, insertion, removal and update order | `cs2040hs_week01_classroom.md`, `cs2040hs_week05_classroom.md`, `cs2040hs_week05_online.md` |
+| 6. Maps, sets and hashing | Maps: keys, values and operations; Sets: membership and distinctness; Hashing: hash codes, indices, equality and hashability; Separate chaining: buckets and key comparisons; Open addressing: probing, deletion and tombstones; Load factor, rehashing and performance; Choosing a structure and connecting the concepts | `cs2040hs_week01_online.md`, `cs2040hs_week06_classroom.md`, `cs2040hs_week06_online.md` |
+| 7. Searching and binary search trees | Linear search, binary search and interval invariants; Tree terminology, traversal and whole-subtree ordering; BST lookup, insertion, deletion and height-dependent cost | `cs2040hs_week09_classroom.md`, `cs2040hs_week09_online.md` |
+| 8. Balanced search trees | Heights, balance factors and AVL invariants; Left/right rotations, inorder preservation and subtree transfer; LL/RR/LR/RL cases, height updates, insertion and deletion | `cs2040hs_week10_classroom.md`, `cs2040hs_week10_online.md` |
+| 9. Priority queues and heaps | Priority Queue behaviour and heap invariants; Array indices, sift-up, sift-down and root removal; Bottom-up construction and operation costs | `cs2040hs_week10_classroom.md`, `cs2040hs_week10_online.md` |
+| 10. Graphs and traversal | Graph terminology, directedness, degree and modelling; Adjacency matrices, lists and representation costs; BFS: discovery, queues, parents and hop distance; DFS: recursion, discovery, completion and components | `cs2040hs_week11_classroom.md`, `cs2040hs_week11_online.md` |
+| 11. Graph ordering, paths and spanning trees | DAGs, indegrees, Kahn’s algorithm and cycle detection; Relaxation, Dijkstra, lazy heaps and DAG shortest paths; Spanning trees, forests, cut property and exchange reasoning; Prim, Kruskal, union–find and complexity; Shortest-path trees versus minimum spanning trees | `cs2040hs_week12_classroom.md`, `cs2040hs_week12_online.md`, `cs2040hs_week13_classroom.md`, `cs2040hs_week13_online.md` |
+| 12. K-d trees | Active dimensions, split rules, ties and construction; Spatial partitions, exact search, range search and boundary pruning; Tree shape, median construction and nearest-neighbour concepts | `cs2040hs_week10_kd_tree_additional.md` |
+| 13. Union–find | Partitions, representatives and connectivity; Parent forests, find and union by size; Path compression, amortised cost and cycle checks | `cs2040hs_week12_union_find_additional.md`, `cs2040hs_week13_online.md` |
+| 14. Additional applications | Future integrated applications beyond the existing topic inventory |  |
+
+## Conversion decisions and gaps
+
+- Topic 11 explicitly includes the Week 13 minimum-spanning-tree material; it is core source coverage, not an unspecified future application.
+- Maps and Sets are separate ADT pages within Topic 6. Hashing is introduced separately as an implementation technique.
+- Week 10 sources currently combine AVL and heaps; split their content into Topics 8 and 9 without inheriting the week organisation.
+- Week 1 collection introductions feed Topic 1 and Topic 6; linked-route mechanics feed Topic 5. Use cross-links rather than duplicate explanations.
+- Merge-sort mechanism belongs to Topic 4; the general recursion strategy belongs to Topic 3.
+- Union–find belongs to Topic 13 and is linked from Kruskal in Topic 11.
+- The k-d source includes range search and a conceptual nearest-neighbour extension. Do not silently promote the latter into a complete algorithm chapter.
+- Topic 14 has no confirmed new material yet. Candidate contexts already in slides (undo, consultation queues, rolling windows, station counts and network connections) should first illustrate their parent topics.
+- Each page needs definitions, prerequisites, a continuous explanation, a worked example, boundary cases, qualified costs and related-concept links.
+- Slide reveal sequences require consolidation. Speaker timing notes, presentation directives and repeated navigation headings do not belong in student chapters.
+- Diagrams must be checked at reading-page width; no slide stylesheet is reused.
+
+## Source-by-source concept headings
+
+Headings below omit fenced code. They provide an audit trail, including repeated reveal headings that will be consolidated.
+
+### cs2040hs_week00_classroom.md
+
+- Welcome to CS2040HS
+- What will we discuss today?
+- Part 1
+- What is this course about?
+- Why? 
+- Programming gives instructions; DSA provides structure.
+- A simple problem
+- How many measurements and comparisons are needed?
+- Data structures and algorithms
+- Why does this matter?
+- What this course is not
+- Part 2
+- How is the course organised?
+- Three learning components
+- Online
+- Classroom
+- Lab
+- Online lessons
+- Classroom sessions
+- Lab sessions
+- Lab schedule
+- Part 3
+- What will we learn?
+- Main topics
+- Weekly plan: first half
+- Weekly plan: second half
+- Part 4
+- How will assessment work?
+- Assessment overview
+- Quizzes
+- Assignments
+- Midterm and final exam
+- Class participation
+- What will assessments actually test?
+- Part 5
+- What tools will we use?
+- Course platforms
+- Python environment
+- Communication
+- Part 6
+- Some Final Notes
+- About AI tools
+- Academic integrity
+
+### cs2040hs_week01_classroom.md
+
+- How does Python represent data, objects and relationships?
+- The challenge for today
+- Learning outcomes
+- Part 1
+- Can we build a route from connected objects?
+- What objects do we need?
+- `ShuttleStop`
+- `RouteNode`
+- Readiness challenge
+- Task 1: construct the route
+- How will you verify the structure?
+- Part 2
+- Can we visit every node without knowing the route length?
+- Task 2: traverse the route
+- Task 2: traverse the route
+- Trace one traversal
+- Optional Extension: find a stop
+- Part 3
+- How can we insert a node without losing the route?
+- Task 3: insert after Museum
+- Which update order is safe?
+- Version A
+- Version B
+- Which update order is safe?
+- Version A
+- Version B
+- Generalise the insertion operation
+- Generalise the insertion operation
+- Why is insertion at the front different?
+- Part 4
+- Can we repair a broken route?
+- Broken implementation 1
+- Repair `remove_after`
+- Repair `remove_after`
+- Broken implementation 2
+- Part 5
+- How do we know that the route is still valid?
+- State the structural invariants
+- Design a compact test set
+- Final group explanation
+- Summary
+- What did we do today?
+- Prepare for Week 2
+
+### cs2040hs_week01_online.md
+
+- Python for Data Structures
+- The question for this week
+- Learning outcomes
+- Part 1
+- What are variables in Python?
+- Does a variable contain a value?
+- What happens during reassignment?
+- Mutable and immutable objects
+- Why does this distinction matter?
+- Part 2
+- Which built-in collection fits the problem?
+- Why not store everything in one kind of collection?
+- Lists: ordered and mutable
+- Tuples: fixed records
+- Dictionaries: keys mapped to values
+- Sets: membership without duplicates
+- A collection-comprehension checkpoint
+- Part 3
+- Why can two names change the same object?
+- Aliasing
+- Equality and identity
+- Mutation vs. rebinding in a function
+- Why are the outputs different?
+- Does copying remove all sharing?
+- Why are mutable default arguments risky?
+- Part 4
+- Why define our own classes?
+- From loose values to one meaningful object
+- Defining a class
+- What does `self` mean?
+- What is an invariant?
+- Does Python enforce privacy?
+- Do type hints enforce types?
+- Why define `__repr__`?
+- Part 5
+- How can objects be connected?
+- A route node
+- Building a chain of objects
+- How do we follow the chain?
+- Checkpoint
+- Summary
+- Week 1 summary (online)
+
+### cs2040hs_week02_classroom.md
+
+- Analysing Algorithms
+- The question for this week
+- Learning outcomes
+- Part 1
+- What should we measure?
+- Why not compare seconds (time) alone?
+- Begin with input size --- The $n$
+- What is the input size?
+- Count representative work
+- Express work as a function
+- How does route work grow?
+- How does route work grow?
+- Part 2
+- Can one algorithm take different amounts of work?
+- Linear search
+- Best, worst and average cases
+- A rendering metaphor
+- Two different questions
+- Part 3
+- Which details matter as $n$ grows?
+- Compare two work functions
+- Which growth term dominates?
+- Which growth term dominates?
+- Common growth classes
+- Rank these functions
+- Rank these functions
+- Part 4
+- Upper, lower and tight bounds
+- A (not entirely accurate) video-watching metaphor
+- What does asymptotic mean?
+- What does asymptotic mean?
+- Big-$O$: an asymptotic upper bound
+- Big-$\Omega$: an asymptotic lower bound
+- Big-$\Theta$: a tight asymptotic bound
+- Which claims are true?
+- Part 5
+- Reading growth from code
+- Consecutive loops: add
+- Full nested loops: multiply
+- A triangular loop: multiply
+- Repeated halving: log
+- One function, different cases
+- Part 6
+- Closing remarks
+- Auxiliary-space complexity
+- Compare complete claims
+- Exit question
+- Exit question
+- Complete Week 2
+
+### cs2040hs_week02_online.md
+
+- Cases and Bounds
+- The two questions students often mix up
+- Learning outcomes
+- Part 1
+- Which situations are we talking about?
+- A simple example
+- Best case
+- Worst case
+- Average case needs assumptions
+- Case analysis selects inputs
+- Part 2
+- How strong is our mathematical claim?
+- The Example function
+- Start with an exact function
+- Three ways to describe growth
+- Three ways to describe growth
+- Think of bounds as growth limits
+- Big-$O$: upper bounds
+- Big-$\Omega$: lower bounds
+- Big-$\Theta$: matching bounds
+- A compact picture
+- Part 3
+- Cases and bounds belong in the same sentence
+- Return to linear search
+- Return to linear search
+- Is “Big-$O$ means worst case” correct?
+- Is “Big-$O$ means worst case” correct?
+- Is “Big-$\Omega$ means best case” correct?
+- Is “Big-$\Omega$ means best case” correct?
+- A precise analysis states both
+- Part 4
+- Guided code checks
+- Consecutive loops
+- Consecutive loops
+- Triangular nested loops
+- Triangular nested loops
+- A conditional with different cases
+- A conditional with different cases
+- Repeated halving
+- Repeated halving
+- Part 5
+- Analysing code
+- Analyse simple code in five steps
+- Diagnose this answer
+- Diagnose this answer
+
+### cs2040hs_week03_classroom.md
+
+- Recursion and Merge Sort
+- The question for this week
+- Learning outcomes
+- Part 1
+- How can a function call itself?
+- Start with a smaller version
+- A place to stop
+- Base case
+- Recursive case
+- The same idea in Python
+- Calls go down...
+- Calls go down...
+- Why does recursion terminate?
+- 1. A stopping condition
+- 2. Progress
+- Checkpoint: will this terminate?
+- Part 2
+- What is divide and conquer?
+- Divide and conquer 
+- Divide and conquer 
+- Divide, conquer, combine
+- Divide
+- Conquer
+- Combine
+- Divide, conquer, combine
+- Divide, conquer, combine
+- Apply the idea to sorting
+- The division structure
+- Part 3
+- How can sorted pieces be combined?
+- Two sorted sequences
+- Two sorted sequences
+- Two sorted sequences
+- Merge step by step
+- Why can we append the remainder?
+- How much work is one merge?
+- Do some merges need more comparisons?
+- Part 4
+- How does merge sort put the pieces together?
+- Merge sort
+- Merge sort
+- Merge
+- Merge (FYI)
+- Downward and upward work
+- Why can we trust it?
+- Base
+- Smaller calls
+- Combine
+- Part 5
+- Why does merge sort scale well?
+- What work are we counting?
+- Focus on the slicing part
+- Focus on the merging part
+- What happens at each level?
+- How deep is the tree
+- How deep is the tree
+- How deep is the tree
+- How many times can we divide?
+- Put the two ideas together
+- Does the input order matter?
+- Input order can affect comparisons
+- Best, average, and worst cases
+- Part 6
+- Closing remarks
+- Summary
+- Weekly understanding check
+
+### cs2040hs_week03_online.md
+
+- Beyond Merge Sort
+- The question for this lesson
+- Learning outcomes
+- Part 1
+- Does divide-and-conquer always divide evenly?
+- Divide-and-conquer is a design strategy
+- Divide
+- Conquer
+- Combine
+- Divide-and-conquer is a design strategy
+- Different ways to divide
+- What happens with an odd number of items?
+- The recursion still works
+- Balanced does not mean perfectly equal
+- Balanced and unbalanced
+- What if the split is very unbalanced?
+- Think
+- Think
+- Key takeaway
+- Part 2
+- Is recursion always a binary tree?
+- Recursion is more general
+- Base case
+- Progress
+- One recursive call
+- Two recursive calls
+- Recursion and divide-and-conquer are related, but different
+- Recursion
+- Divide-and-conquer
+- A useful question to ask
+- Part 3
+- Can implementation choices change the cost?
+- The algorithmic idea
+- The algorithmic idea
+- But what does `pop(0)` cost?
+- Why does this matter?
+- Move a pointer instead
+- Move a pointer instead
+- Same idea, different implementation cost
+- Algorithmic idea
+- Data structure
+- Part 4
+- Closing remarks
+- Divide-and-conquer is broader than merge sort
+- Recursion is a mechanism
+- Implementation matters
+- Weekly understanding check
+-  Summary
+
+### cs2040hs_week04_classroom.md
+
+- Sorting Strategies
+- One problem, many strategies
+- Learning outcomes
+- Part 1
+- Insertion sort: grow a sorted region
+- Arrange values like playing cards
+- What remains true?
+- What are the steps
+- The full process
+- Trace the full process
+- Predict before revealing
+- What actually moves?
+- Example: nearly sorted input
+- Contrast: reverse-sorted input
+- Best and worst cases
+- Where does $O(n^2)$ come from?
+- Task 1: trace insertion sort
+- Diagnose an incorrect trace
+- Why keep insertion sort?
+- Part 2
+- Bubble sort: fix neighbouring order
+- Compare neighbours
+- One finished left-to-right pass
+- Why does the largest value reach the end?
+- Predict one pass
+- Trace that pass
+- What happens on the second pass?
+- What happens on the next pass?
+- The sorted suffix grows
+- Could bubble sort go the other way?
+- A useful optimisation: Early Stop
+- Nearly sorted example
+- Bubble sort cases
+- Task 2: two bubble passes
+- Diagnose an incorrect bubble step
+- Insertion vs. bubble
+- Part 3
+- Partitioning: organise around a Pivot
+- A different strategy
+- More than one partition can be correct
+- Partitioning is not sorting
+- How to build the partition with one scan
+- How to build the partition with one scan
+- How to build the partition with one scan
+- How to build the partition with one scan
+- How to build the partition with one scan
+- How to build the partition with one scan
+- How to build the partition with one scan
+- How to build the partition with one scan
+- How to build the partition with one scan
+- The rule
+- What stays true during the scan?
+- Task 3: partition a new list
+- Task 3: partition a new list
+- What about values equal to the pivot?
+- Running time for one scan
+- Bridging
+- Partition in Python
+- Part 4
+- Quicksort: partition, then recurse
+- One value is now finished
+- Quicksort
+- Why does recursion stop?
+- Full quicksort trace: first partition
+- Sort the left side
+- Sort the right side
+- Sort the right of right side
+- The completed result
+- The structure of the quicksort tree
+- Think in terms of partition sizes
+- Balanced partitions
+- Balanced total work
+- One-sided partitions
+- One-sided total work
+- Dangerous input with last-item pivot
+- Reverse-sorted is also dangerous
+- Many duplicates can also be awkward
+- The pivot choice matters
+- Randomisation
+- Task 4: predict partition shapes
+- Diagnose a recursive-range bug
+- Diagnose a recursive-range bug
+- Part 5
+- Compare the sorting strategies
+- Four algorithms, four strategies
+- Time complexity
+- Space complexity
+- Scenario: almost sorted data
+- Scenario: predictable worst-case time
+- Scenario: tiny input
+- Diagnose the statement
+- What should guide the choice?
+- Part 6
+- Closing remarks
+- Four mental models
+- Weekly understanding check
+
+### cs2040hs_week04_online.md
+
+- Beyond Big-$O$ in Sorting
+- The deeper question
+- How and what can be sorted?
+- Learning outcomes
+- Part 1
+- Sorting as reorganisation and strategy
+- What is sorting?
+- Ordering rules can describe many kinds of data
+- Problem specification is not algorithmic strategy
+- Four ways to organise the work
+- Insertion sort: grow the already ordered
+- Bubble sort: repair local disorder
+- Insertion and bubble make progress differently
+- Divide and conquer is a strategy
+- Merge sort: divide first, order while combining
+- Quicksort: partition first, then recurse
+- Merge and quicksort divide differently
+- A more general lesson
+- Part 2
+- Why strategy changes performance
+- Input size is not the whole story
+- Cases describe different inputs of the same size
+- Some algorithms exploit existing structure
+- Disorder can sometimes be quantified
+- Strategy can reshape the work that remains
+- Decomposition shape controls accumulated work
+- A broader divide-and-conquer lesson
+- Randomisation changes the claim we make
+- Worst-case and expected behaviour are different
+- What can “better” mean?
+- Time, space, and representation
+- Equal keys may still carry information
+- Algorithm choice depends on the requirement
+- Part 3
+- How fast can sorting be?
+- Can comparison sorting run in $O(n)$?
+- Start with three distinct items
+- One comparison reveals limited information
+- The decision tree 
+- The decision tree needs enough leaves
+- Generalise to $n$ items
+- The comparison-sorting lower bound
+- What does the lower bound tell us?
+- Can sorting ever beat $n\log n$?
+- There is no contradiction
+- Part 4
+- From sorting to algorithmic thinking
+- Why study sorting when Python already has `sorted()`?
+- From sorting algorithms to reusable strategies
+- 1. What structure already exists?
+- 2. What operation makes useful progress?
+- 3. What remains true, and what remains unsolved?
+- 4. How does the work accumulate?
+- What assumptions make the claim valid?
+- A reusable reasoning process
+- Part 5
+- Closing remarks
+- When you meet a new algorithm
+- The main idea
+- Summary
+
+### cs2040hs_week05_classroom.md
+
+- Abstract Data Types and Linear Structures
+- One collection, different needs
+- From Week 4 to Week 5
+- Learning outcomes
+- The Week 5 reasoning chain
+- Part 1
+- From Problems to Abstract Data Types
+- A task manager
+- Two different questions
+- Describe operations before structures
+- Same operation, different behaviour?
+- Abstract Data Type
+- Unpacking the name: .red[Data]
+- Unpacking the name: .red[Type]
+- Unpacking the name: .red[Abstract]
+- Think of an ADT as a contract
+- A Stack contract
+- Operations may observe or modify
+- ADT is not implementation
+- One ADT, several implementations
+- Ask a better first question
+- What users see and do
+- Change the implementation, preserve the use
+- Reason about correctness separately
+- Connect the contract to cost
+- Which statement describes an ADT?
+- From a problem to an ADT
+- A problem-specific Print Queue ADT
+- A problem-specific Print Queue ADT
+- Part 2
+- Choosing the Right Linear Structure
+- What makes a structure linear?
+- Examples of linear organisation
+- Control comes from allowed operations
+- Begin with a flexible sequence
+- Positional operations
+- Predict the state
+- Follow the positions carefully
+- What if we deliberately restrict access?
+- The ends organise the family
+- Browser history
+- Students waiting for consultation
+- A rolling window of readings
+- Editing a route
+- “Tasks always use a queue”
+- Translate words into operations
+- Why not always choose the most flexible ADT?
+- Task 1: identify the behaviour
+- Justify, do not merely label
+- Part 3
+- Stack: Last In, First Out
+- One accessible end
+- Core Stack operations
+- Trace a sequence of operations
+- Build the state one operation at a time
+- Observe or remove?
+- What if the stack is empty?
+- Undo history
+- Function calls also nest
+- Nested structures need the latest opener
+- Is this expression balanced?
+- What remains true?
+- Task 2: trace the stack
+- Is this still a Stack?
+- Part 4
+- Queue and Deque: Controlling the Ends
+- Opposite ends
+- Core Queue operations
+- Trace a queue
+- Arrival order is preserved
+- FIFO represents a policy
+- Explore in discovery order
+- A Queue or a Stack?
+- What if both ends are available?
+- Core Deque operations
+- Predict a Deque trace
+- Track both ends
+- A Deque can reproduce restricted behaviour
+- Maintain a fixed-size window
+- Task 3: same values, different rules
+- The key difference is access policy
+- Part 5
+- Comparing and Choosing Linear ADTs
+- Behavioural comparison
+- Identify the .red[next-item] rule
+- List the operations that repeat
+- Check the restrictions
+- Emergency triage
+- Navigation with Back and Forward
+- Two histories, two Stacks
+- Palindrome check
+- Palindrome check
+- Task 4: choose and defend
+- Diagnose the claims
+- A reusable selection process
+- Part 6
+- Closing Remarks
+- Three ideas to keep
+- Four mental models for linear problems
+- The unanswered question
+- Why do ADTs still matter in the AI era?
+- Weekly understanding check
+
+### cs2040hs_week05_online.md
+
+- Implementing Linear ADTs
+- We specified the behaviour
+- Learning outcomes
+- Continue the Week 5 reasoning chain
+- Part 1: Representation
+- Arrays and Dynamic Arrays
+- A logical sequence needs physical storage
+- Consecutive positions
+- Why indexed access is direct
+- Replacing an existing value
+- Inserting creates a space problem
+- Shift from right to left
+- We have seen shifting before
+- Removal closes a gap
+- Length and capacity are different
+- Make the array appear to grow
+- A resizing event
+- Is append always constant time?
+- Expensive resizes are occasional
+- Python `list`
+- Part 2: Representation
+- Linked Structures
+- You have already built one
+- Values need not occupy adjacent slots
+- The .red[entry] reference matters
+- How do we know when to .red[stop]?
+- Access follows references
+- No address formula for index $i$
+- Insert after a known node
+- Reference-update order matters
+- Remove after a known node
+- Finding and changing are separate costs
+- A tail reference changes append cost
+- Move in both directions
+- Array and linked trade-offs
+- Which representation is better?
+- Part 3: Implementation
+- Stack, Queue, Deque
+- Behaviour above, representation below
+- Put the Stack top at the array back
+- Put the Stack top at the linked head
+- Same Stack, different machinery
+- A functionally correct Queue
+- Dequeue from the array front
+- Avoid shifting with a moving front
+- Wrap around to reuse capacity
+- A linked Queue needs both ends
+- Extra references require extra rules
+- Both ends must be cheap
+- `collections.deque`
+- Two tests for an implementation
+- Implementation map
+- Which layer is wrong?
+- The implementation design question
+- Part 4: Closing Remarks
+- Choices & Costs
+- Typical operation costs
+- State the precondition behind the cost
+- There is no universally best representation
+- Frequent indexed queries
+- Frequent front removal
+- Representation affects more than runtime class
+- Do not confuse two guarantees
+- The complete Week 5 reasoning chain
+- Summary
+
+### cs2040hs_week06_classroom.md
+
+- Hashing and Collision Resolution
+- One identifier, one record
+- Learning outcomes
+- Part 1: Maps, Sets
+- and Required Operations
+- Map
+- Map ADT
+- Map update
+- Choose the Map operations
+- Map operations revealed
+- Set
+- Set ADT
+- Worked membership
+- Map, Set, or Queue?
+- Choices revealed
+- Behaviour and implementation
+- One Map, different implementations
+- Part 2
+- From Keys to Table Positions
+- Why organise .red[keys]?
+- Let the key be the index
+- Could we just store the entries in an array/sequence?
+- Dense or sparse?
+- Direct addressing revealed
+- Key, hash code, and table index
+- What should a hash function do?
+- Compute the initial positions
+- Initial positions revealed
+- Collisions are normal
+- Character order must matter
+- String hashing
+- Part 3
+- Separate Chaining
+- One bucket per table position
+- Search only the selected bucket
+- Build a chained table
+- Chained table revealed
+- How long are the buckets?
+- Same load, different behaviour
+- The two conditions
+- Distribution revealed
+- Part 4
+- Open Addressing and Probing
+- Chaining vs. open addressing
+- Move to the next position
+- The three terms
+- Trace linear-probing insertion
+- Reproduce the probe sequence
+- Where may lookup stop?
+- Lookup rules revealed
+- Linear probing forms clusters
+- Why ordinary deletion fails
+- A tombstone preserves the path
+- Insert through a tombstone
+- Tombstone insertion revealed
+- Part 5
+- Load, Resizing, and Design Choices
+- Occupancy controls probe length
+- Why resizing requires rehashing
+- Rehashing revealed
+- Common rehashing steps
+- Expected cost is not a guarantee
+- Choose a collision strategy
+- `dict` and `set` use hashing
+- Exact-key lookup, not spatial search
+- Choose the representation
+- Representation choices revealed
+- Final trace: explain every decision
+- Final trace revealed
+- Final trace revealed
+- Part 6
+- Closing Remarks
+- The main purpose of hashing
+- The full idea in one table
+- Hash tables and Map/Set
+- Exit ticket
+
+### cs2040hs_week06_online.md
+
+- Hash Tables: Implementation and Performance
+- What does the online lesson add?
+- Learning outcomes
+- Part 1
+- Keys, Equality, and Python Hashability
+- The three steps in lookup
+- Two ways for keys to meet
+- What does hashable mean?
+- Why changing a key can break lookup
+- Python behaviour: key vs. value
+- Hashing does not imply sorted order
+- Part 2
+- Separate Chaining: From Rules to Code
+- A bucket can be a Python list
+- Read the chaining lookup
+- Trace the code, not just the answer
+- One loop handles two absence cases
+- Why returning None can be ambiguous
+- Updating must not duplicate a key
+- What load factor does and does not say
+- Part 3
+- Open Addressing: Preserving Reachability
+- The slot states control the algorithm
+- Use distinct markers: EMPTY vs. DELETED
+- Read a bounded probing lookup
+- Why the order of checks matters
+- Example: 
+- Example: 
+- Insert with the same probing rule
+- A tombstone does not prove a key is new
+- Remember first; decide later
+- Wraparound is part of the same sequence
+- Live load can hide tombstone pressure
+- Part 4
+- Rehashing, Doubling, and Amortised Cost
+- Resize and rehash are related
+- Specify the reinsertion sequence
+- Worked resize: first identify live keys
+- Worked resize: recalculate and reinsert
+- Doubling splits a .red[chained bucket]
+- Why grow by a factor?
+- One insertion can still be expensive
+- Amortised: spread rebuilding over insertions
+- Expected and amortised answer different questions
+- Qualify the claim
+- Part 5
+- Design Choices and Python Applications
+- Apply Map and Set behaviour in Python
+- Use hashing to count repeated items
+- Use a Set to detect repetition
+- Alternative probes: optional extension
+- Match the structure to the query
+- Part 6
+- Closing Remarks
+- The important connections
+- Final checkpoint
+- Checkpoint explanations
+
+### cs2040hs_week09_classroom.md
+
+- Binary Search and Binary Search Trees
+- Searching with evidence
+- Learning outcomes
+- The route through this lesson
+- Part 1
+- Binary Search
+- Linear search
+- Worked linear search
+- Count the work
+- Explained
+- Binary-search precondition
+- Worked first decision
+- When is elimination unsafe?
+- Precondition check explained
+- Closed candidate interval
+- Interval updates
+- Trace the interval
+- Trace the interval
+- Successful trace explained
+- Binary-search bugs
+- Infinite loop
+- Diagnose the loop
+- Time Complexity
+- Summary
+- Part 2
+- Trees and the BST Invariant
+- Tree vocabulary
+- Worked labels
+- Label a tree
+- Revealed
+- Binary tree
+- Binary Search Tree
+- Worked distinction
+- Binary tree or BST?
+- BST invariant
+- A global violation
+- Validate the BST
+- Validation explained
+- Binary search and BST search
+- Worked search paths
+- Why do links help insertion?
+- Update comparison explained
+- Part 3
+- BST Search and Insertion
+- BST construction
+- Worked construction
+- Construct a BST
+- Revealed
+- BST search
+- Worked search
+- Trace two searches
+- Searches explained
+- BST insertion
+- Worked insertion
+- Insert two keys
+- Insertions explained
+- Duplicate-key policy
+- Possible policies
+- Diagnose ambiguity
+- Contract check explained
+- Part 4
+- Traversal and Ordered Operations
+- Inorder traversal
+- Inorder traversal: Demo
+- Produce the order
+- Traversal explained
+- Minimum and maximum
+- Worked extremes
+- Find both
+- Extremes explained
+- Deleting a leaf
+- Worked leaf deletion
+- Delete a leaf
+- Leaf deletion explained
+- Part 5
+- Deletion, Shape, and Performance
+- Deleting a node with one child
+- Worked bypass
+- Trace the root case
+- Root deletion explained
+- Deleting a node with two children
+- A successor with a child
+- Trace both changes
+- Successor deletion explained
+- Height and performance
+- Same keys, different shapes & heights
+- Compare the work
+- Costs explained
+- Part 6
+- Closing Remarks
+- Binary search: the controlling rule
+- BSTs: the controlling rule
+- Operations and height
+- Three deletion cases
+- Exit ticket
+
+### cs2040hs_week09_online.md
+
+- Binary Search and Binary Search Trees
+- One name, two ideas
+- Learning outcomes
+- What does the online lesson add?
+- Part 1
+- Binary Search and Its Invariant
+- Searching a sequence
+- Information in a sorted sequence
+- When the ordering precondition fails
+- Binary-search interval
+- Middle index and updates
+- Empty interval
+- Iterative binary search
+- Successful trace
+- A mismatch must make progress
+- Search-interval invariant
+- Preserving the invariant
+- Correctness structure
+- Part 2
+- Complexity, Boundaries, and Tree Motivation
+- Binary-search complexity
+- Repeated halving
+- Space cost
+- Boundary conventions
+- A mixed-convention bug
+- Boundary check explained
+- Recursive binary search
+- Base and recursive cases
+- Iteration and recursion
+- Limits of sorted arrays
+- Dynamic ordered data
+- A Python node
+- Part 3
+- BST Search and Insertion
+- Tree terminology
+- Binary tree
+- Whole-subtree ordering
+- A valid BST
+- A global violation
+- Duplicate policy
+- BST search
+- Search paths
+- Cost by height
+- BST insertion
+- Insert 65
+- Insertion preserves ancestor bounds
+- Part 4
+- Traversal and Ordered Operations
+- Minimum and maximum
+- Recursive inorder traversal
+- A worked traversal
+- Traversal checkpoint
+- Traversal checkpoint explained
+- Part 5
+- Deletion and Tree Shape
+- BST deletion
+- Leaf deletion trace
+- One-child deletion trace
+- Why the successor works
+- A successor with a right child
+- Two-child deletion explained
+- Deletion checkpoint
+- Link check explained
+- Same keys, different heights
+- Qualified operation costs
+- Why introduce self-balancing trees?
+- Part 6
+- Closing Remarks
+- The important connections
+- Final checkpoint
+- Checkpoint explanations
+
+### cs2040hs_week10_classroom.md
+
+- Balanced Search Trees and Binary Heaps
+- Two requirements for trees
+- Learning outcomes
+- The route through this lesson
+- Part 1
+- Why Balance a Search Tree?
+- Tree height and cost
+- Balance factor
+- Worked factors
+- Calculate factors
+- Factors revealed
+- First unbalanced ancestor
+- Worked path
+- Locate the repair
+- Repair revealed
+- Two AVL requirements
+- Worked inorder check
+- State both checks
+- Checks revealed
+- Part 2
+- Single and Double Rotations
+- LL case
+- Worked LL rotation
+- Trace LL
+- LL revealed
+- RR case
+- Worked RR rotation
+- Trace RR
+- RR revealed
+- LR case
+- Worked LR rotation
+- Trace LR
+- LR revealed
+- RL case
+- Worked RL rotation
+- Trace RL
+- RL revealed
+- Part 3
+- Maintaining AVL Trees
+- Rotation link roles
+- Worked right rotation
+- Place the transferred subtree
+- Placement revealed
+- AVL insertion process
+- AVL complexity
+- Maintenance trade-off
+- Choose the tree
+- Choice revealed
+- AVL deletion boundary
+- What remains familiar
+- Explain the boundary
+- Boundary revealed
+- Part 4
+- Priority Queues and Heap Representation
+- Priority Queue ADT
+- Arrival order and priority
+- Which job comes next?
+- Priority trace explained
+- ADT and implementation
+- Complete binary tree
+- A complete shape
+- Is this shape complete?
+- Shape check explained
+- Min-heap invariant
+- A valid min-heap
+- Which array represents a min-heap?
+- Order checks explained
+- Array representation
+- Find the relatives
+- Indices explained
+- Part 5
+- Heap Operations and Construction
+- Heap insertion
+- Worked insertion
+- Trace insertion
+- Insertion explained
+- Removing the minimum
+- Worked removal
+- Why choose the smaller child?
+- Child choice explained
+- Trace another removal
+- Removal explained
+- Boundary cases
+- Bottom-up heap construction
+- Worked bottom-up build
+- Trace a small build
+- Build explained
+- Two ways to build
+- A connection to sorting
+- Part 6
+- Closing Remarks
+- AVL trees and heaps
+- Heap operation costs
+- Which structure fits?
+- Choices explained
+- Exit ticket
+
+### cs2040hs_week10_kd_tree_additional.md
+
+- K-d Trees and Multidimensional Search
+- A different search requirement
+- Learning outcomes
+- The route through this lesson
+- Part 1
+- Queries and the K-d-Tree Rule
+- What does the query ask?
+- A limit of ordering by x
+- Alternating dimensions
+- A split inside an inherited region
+- Tie and duplicate policy
+- Coordinate-equality checkpoint
+- Rules explained
+- Part 2
+- Construction with a Shared Dataset
+- The shared points
+- The first three insertions
+- Insert (1,3)
+- Insert (3,6)
+- Insertion explained
+- Complete the right side
+- The constructed tree
+- Insertion decision in Python
+- Part 3
+- Spatial Partitions and Exact Search
+- A node divides its current region
+- Tree decisions as spatial cuts
+- Describe a descendant region
+- Region explained
+- Exact-point search
+- Read exact search
+- Trace two exact queries
+- Exact-search traces explained
+- Part 4
+- Range Search and Safe Pruning
+- An inclusive rectangular query
+- The query and the root split
+- Point inclusion and subtree reachability
+- Axis-based pruning conditions
+- What if the query touches the split?
+- Boundary rules explained
+- Trace the shared query
+- The reported points
+- Range search: current point
+- Range search: child decisions
+- Diagnose incorrect pruning
+- Pruning diagnosis explained
+- Part 5
+- Shape, Cost, and Extensions
+- Search cost depends on shape
+- Range search visits candidates and reports results
+- Median construction: a separate option
+- Why median ties need care
+- Why ordinary AVL rotations do not transfer directly
+- Nearest-neighbour search: conceptual extension
+- When spatial pruning helps less
+- Part 6
+- Closing Remarks
+- The important connections
+- Final checkpoint
+- Checkpoint explanations
+
+### cs2040hs_week10_online.md
+
+- AVL Trees and Heap Algorithms
+- Two invariants for two workloads
+- Learning outcomes
+- Classroom to online
+- Part 1
+- Controlling BST Height
+- The BST height problem
+- Same keys, different heights
+- Why height matters
+- AVL invariant
+- Balance factor
+- Two invariants
+- Updating heights
+- Bottom-up checking
+- Local repair
+- Single rotations
+- LL example
+- Order preservation
+- Part 2
+- AVL Rotations and Insertion
+- Double rotations
+- LR example
+- Why two steps?
+- AVL insertion
+- Insertion outline
+- Complexity
+- Rotation correctness
+- Right rotation roles
+- Transferred subtree
+- AVL scope and trade-off
+- Deletion note
+- Purpose of balance
+- Part 3
+- Priority Queues and Array Representation
+- Priority Queue behaviour
+- Priority is different from arrival order
+- Complete binary tree
+- Min-heap priority order
+- Zero-based array indices
+- Representation checkpoint
+- Representation explained
+- Teaching implementation contract
+- Part 4
+- Heap Insertion and Removal
+- Sift-up rule
+- Read sift-up
+- Insertion trace
+- Sift-down rule
+- Read sift-down
+- Remove and return the minimum
+- Removal trace
+- Boundary checkpoint
+- Boundary cases explained
+- What do the repairs preserve?
+- Part 5
+- Construction, Cost, and Applications
+- Bottom-up heap construction
+- Bottom-up build trace
+- Why bottom-up construction is linear
+- Operation costs and array growth
+- Storing items with priorities
+- Heap extraction and heapsort
+- Choosing between AVL and heaps
+- Part 6
+- Closing Remarks
+- The important connections
+- Final checkpoint
+- Checkpoint explanations
+
+### cs2040hs_week11_classroom.md
+
+- Graphs, Representations, and Traversal
+- Beyond tree-shaped connections
+- Learning outcomes
+- The route through this lesson
+- Part 1
+- Graph Vocabulary and Meaning
+- A graph represents connections
+- A shared graph
+- Different meanings for the same structure
+- Directed and undirected edges
+- A directed example
+- Which moves are allowed?
+- Direction explained
+- Adjacency and degree
+- Find the neighbours
+- Neighbours explained
+- Paths and cycles
+- Examples of routes
+- Unweighted and weighted graphs
+- Trees are a special case
+- Part 2
+- Representing a Graph
+- An explicit edge list
+- Adjacency matrix
+- The shared adjacency matrix
+- Read the matrix
+- Matrix reading explained
+- Direction changes matrix entries
+- Adjacency lists
+- The shared adjacency lists
+- Build a small adjacency list
+- List construction explained
+- Space depends on representation
+- Operation costs
+- Choose a representation
+- Choices explained
+- Our traversal conventions
+- Part 3
+- Breadth-First Search
+- BFS explores distance layers
+- Discovered and expanded
+- BFS procedure
+- Initial state
+- Expand A
+- Expand B
+- What happens at C?
+- Expansion of C explained
+- Finish the traversal
+- Completed BFS trace
+- Why mark before enqueueing?
+- BFS outputs
+- Recovering a path
+- Which path is shorter?
+- Path comparison explained
+- Why first discovery gives a shortest hop count
+- What can change with neighbour order?
+- BFS cost with adjacency lists
+- Part 4
+- Depth-First Search
+- DFS explores a branch before returning
+- Recursive DFS procedure
+- The active path
+- The first branch
+- What happens at F?
+- Expansion of F explained
+- Returns resume unfinished work
+- DFS discovery and completion
+- Trace the stack
+- Stack trace explained
+- The DFS parent tree
+- DFS finds a path, but not necessarily the shortest
+- Why discovery marking matters
+- Does every skipped edge prove a cycle?
+- Skipped-edge reasoning
+- Neighbour order affects DFS strongly
+- DFS cost with adjacency lists
+- Part 5
+- Reachability and Connected Components
+- A start vertex reaches only its reachable region
+- Undirected connected components
+- Traverse every component
+- A disconnected example
+- Components explained
+- Directed reachability is a different question
+- What does traversal provide?
+- Part 6
+- Closing Remarks
+- Representation summary
+- Traversal comparison
+- A reusable traversal checklist
+- Exit ticket
+
+### cs2040hs_week11_online.md
+
+- Graphs, Representations, and Traversal
+- What does the online lesson add?
+- Learning outcomes
+- Scope and conventions
+- Part 1
+- Representations and Python Data
+- Vertices, edges and direction
+- The graph used throughout
+- A Python adjacency-list representation
+- Representation contract
+- Adjacency matrix
+- An explicit construction
+- Edge tests and neighbour enumeration
+- Representation checkpoint
+- Representation explained
+- Part 2
+- Breadth-First Search
+- BFS uses a FIFO frontier
+- Mark at enqueue time
+- Read BFS
+- What does each collection store?
+- Queue trace from A
+- BFS result
+- Recovering a route
+- Shortest hop distances
+- Discovery checkpoint
+- Discovery explained
+- BFS boundary cases
+- Part 3
+- Depth-First Search
+- DFS uses the call stack
+- Read recursive DFS
+- Discovery and completion
+- A shared DFS trace
+- DFS result
+- Parents provide a path, not a distance guarantee
+- Return-order checkpoint
+- Return order explained
+- Cycles and skipped neighbours
+- An explicit stack is another implementation
+- Recursion depth is a separate constraint
+- Part 4
+- Reachability and Connected Components
+- What a single start can reach
+- Undirected components
+- Find undirected components
+- The restart loop
+- Disconnected checkpoint
+- Disconnected cases explained
+- Do not reinterpret restart groups as directed components
+- Part 5
+- Complexity and Algorithm Choice
+- Counting work with adjacency lists
+- What changes with a matrix?
+- Storage and auxiliary space
+- Implementation assumptions
+- Why components remain linear
+- BFS or DFS?
+- Traversal summary
+- Part 6
+- Closing Remarks
+- The important connections
+- Final checkpoint
+- Checkpoint explanations
+
+### cs2040hs_week12_classroom.md
+
+- DAGs, Topological Sorting, and Shortest Paths
+- Week 12 in the graph sequence
+- Learning outcomes
+- Classroom and online topics
+- Part 1
+- Directed Acyclic Graphs
+- Direction expresses precedence
+- Dependency task
+- Dependency task explained
+- Directed acyclic graph
+- Acyclicity depends on arrow direction
+- Topological order
+- Why a directed cycle prevents an order
+- Checking an order
+- Our dependency graph
+- Order task
+- Order task explained
+- Part 2
+- Topological Sorting with Kahn’s Algorithm
+- Incoming edges count unfinished requirements
+- Initial indegrees
+- Kahn’s algorithm
+- Trace conventions
+- Removing A
+- Removing B
+- Removing the isolated vertex
+- The next two removals
+- Completing the order
+- Why every emitted vertex is safe
+- An empty queue can leave unfinished vertices
+- Why a DAG always has a ready vertex
+- A new edge changes the outcome
+- Cycle task explained
+- Topological sorting cost
+- FIFO order and alphabetical order
+- Part 3
+- Single-Source Shortest Paths
+- Distances from one source
+- Edges versus total weight
+- BFS finds fewest-edge paths
+- Equal edge weights
+- A cheaper route can use more edges
+- Weight task explained
+- A route through u may improve v
+- Tentative distances describe known routes
+- Our directed weighted graph
+- Initial state
+- A route comparison on the shared graph
+- Part 4
+- Dijkstra’s Algorithm
+- Dijkstra’s main step
+- Nonnegative weights
+- Why the smallest distance becomes final
+- Settling A at distance 0
+- State after A
+- Settling C at distance 1
+- An earlier discovery can improve
+- State after C
+- Your turn at B
+- Settling B explained
+- State after B
+- Settling D at distance 4
+- Settling E at distance 7
+- Finishing the reachable vertices
+- Final distances and parents
+- A shortest route to F
+- Recovery task
+- Recovery task explained
+- Ties can produce different shortest paths
+- Zero-weight edges
+- Part 5
+- Implementation Choices and Algorithm Selection
+- Selecting the next tentative distance
+- Outdated entries in our trace
+- A negative edge breaks settlement
+- DAGs and negative weights
+- Dijkstra’s implementation affects cost
+- Space in the lazy heap implementation
+- Matching the question to the algorithm
+- Choice task
+- Choice task explained
+- Union–Find belongs to the MST preparation
+- Part 6
+- Closing
+- What to carry forward
+- Exit check
+- Before Week 13
+
+### cs2040hs_week12_online.md
+
+- DAGs, Topological Sorting, and Shortest Paths
+- Online lesson purpose
+- Learning outcomes
+- Online lesson route
+- Part 1
+- DAG Representation and Order Validation
+- Acyclic direction and precedence
+- The shared DAG in Python
+- The same dependency graph
+- Checking a proposed order
+- Why both membership checks matter
+- Validation task
+- Validation task explained
+- Part 2
+- Kahn’s Algorithm in Python
+- Calculating incoming counts
+- Initial ready vertices
+- Kahn’s algorithm
+- Remaining indegrees
+- Queue and output trace
+- The processed-count test
+- Cycle task
+- Cycle task explained
+- FIFO and other valid orders
+- Kahn’s cost with adjacency lists
+- Part 3
+- Shortest-Path State and Relaxation
+- Unweighted shortest paths
+- A weighted adjacency list
+- Weighted routes from A
+- Distances and parents
+- Strict improvement
+- A relaxation checkpoint
+- Relaxation checkpoint explained
+- Part 4
+- Dijkstra’s Implementation and Route Recovery
+- Input assumptions
+- A lazy min-heap
+- Dijkstra with outdated-entry skipping
+- The source begins the search
+- Why the equality check matters
+- An up-to-date pop settles the vertex
+- Discovery marking would be wrong
+- Current distances after each settlement
+- Heap entries include outdated candidates
+- A pause at E
+- The pause explained
+- Final predecessor state
+- Recovering a route
+- Route results
+- Zero weights and equal routes
+- General labels need a tie counter
+- The nonnegative precondition
+- Negative task explained
+- Part 5
+- Complexity and Algorithm Choice
+- Counting lazy heap operations
+- Total time
+- Auxiliary storage
+- Data structure choices change the bound
+- Shortest paths in topological order
+- What should we run?
+- Algorithm and result checkpoint
+- Checkpoint explained
+- Part 6
+- Closing
+- Invariants to explain without code
+- Before Week 13
+
+### cs2040hs_week12_union_find_additional.md
+
+- Union–Find Disjoint Sets
+- Preparation for Kruskal
+- Learning outcomes
+- Additional online route
+- Part 1
+- Disjoint Sets and Operations
+- Every object belongs to one set
+- A connectivity interpretation
+- The disjoint-set operations
+- A representative identifies a set
+- A partition task
+- Partition task explained
+- Membership and route information
+- Part 2
+- Parent Forests and Find
+- An array of parent pointers
+- Singleton initialisation
+- Seven singleton trees
+- Following pointers to the root
+- A forest with three sets
+- A find trace
+- Find checkpoint
+- Find checkpoint explained
+- Parent links describe the data structure
+- Part 3
+- Union by Size
+- Union links different roots
+- The smaller tree joins the larger tree
+- Only root sizes are authoritative
+- Trace conventions
+- The first two unions
+- union(0, 2)
+- union(4, 5)
+- union(0, 4)
+- A merge that does not happen
+- Why union by size limits depth
+- A union checkpoint
+- Union checkpoint explained
+- Part 4
+- Path Compression and Python Code
+- Shortening a path during find
+- Before find(3)
+- After find(3)
+- An array-based disjoint-set class
+- Two-pass iterative find
+- Union by size
+- Connectivity query
+- Running the shared unions
+- A compression checkpoint
+- Compression checkpoint explained
+- Initialisation and per-operation costs
+- Amortized does not mean every call is constant
+- Part 5
+- Cycle Checks and Preparation for Kruskal
+- Testing a candidate connection
+- A cycle-check trace
+- Cycle-check trace explained
+- Accepting edges that join components
+- Directed cycles need a different test
+- Where edge weights enter
+- Components and stopping
+- Kruskal preparation checkpoint
+- Checkpoint explained
+- Part 6
+- Closing
+- What to carry into Week 13
+- A final parent-array check
+- Exit check explained
+
+### cs2040hs_week13_classroom.md
+
+- Minimum Spanning Trees
+- Week 13 in the graph sequence
+- Learning outcomes
+- Classroom and online topics
+- Part 1
+- Spanning Trees and Total Cost
+- Connecting a collection of vertices
+- A spanning tree uses all vertices
+- Why the edge count is n−1
+- Minimum total edge weight
+- The graph model matters
+- What a disconnected input can produce
+- A spanning-tree task
+- Spanning-tree task explained
+- Five edges can still fail to span
+- Our undirected weighted graph
+- Shared edge weights
+- Part 2
+- Greedy Choices and the Cut Property
+- A local choice needs a reason
+- A cut divides the vertices
+- A cut in the shared graph
+- The cut boundary in the diagram
+- The cut property
+- Why a lightest crossing edge is safe
+- Why the accepted forest survives the exchange
+- A safe-edge task
+- Safe-edge task explained
+- Equal weights and uniqueness
+- Part 3
+- Prim’s Growing Tree
+- One connected tree grows from a start vertex
+- A connected, cycle-free partial tree
+- Starting at A
+- A–C joins the tree
+- C–B joins the tree
+- Your turn at S = {A, B, C}
+- Next-edge task explained
+- D–E becomes eligible
+- The final attachment
+- Prim’s full trace
+- Does the start change the optimum?
+- A start-at-D task
+- Start-at-D task explained
+- Completing the alternate growth order
+- Candidate edges in a min-heap
+- Prim and disconnected inputs
+- Part 4
+- Kruskal’s Component Merges
+- Edges in nondecreasing weight order
+- A forest that can extend to an optimum
+- The shared edge order
+- Representatives answer the cycle question
+- The first accepted edge
+- Two independent merges
+- E–F joins another component
+- Your turn at A–B
+- Cycle task explained
+- Union–Find state before the final merge
+- B–D completes the tree
+- The root merge differs from a graph edge drawing
+- Kruskal’s final tree
+- What if we keep scanning?
+- Kruskal’s accepted and rejected edges
+- Why globally sorted edges support the cut rule
+- Part 5
+- Comparison and Course Consolidation
+- Different structures, one objective
+- A shortest-path tree has a different objective
+- A triangle separates the objectives
+- Comparing routes in the triangle
+- Triangle task explained
+- Costs depend on the implementation
+- Ties, negative weights and isolated vertices
+- A tied-weight task
+- Tied-weight task explained
+- Which graph question are we answering?
+- How earlier structures support graph algorithms
+- A reusable algorithm check
+- Reasoning task explained for Kruskal
+- Part 6
+- Closing
+- What distinguishes the algorithms
+- Exit check
+- Exit check explained
+- Consolidation for independent study
+
+### cs2040hs_week13_online.md
+
+- Minimum Spanning Trees
+- Online lesson purpose
+- Learning outcomes
+- Online lesson route
+- Part 1
+- Graph Model and Representations
+- The minimum spanning objective
+- The shared graph as an edge list
+- Our undirected graph
+- Both directions in adjacency storage
+- Representation checkpoint
+- Representation checkpoint explained
+- Input assumptions for the code
+- Part 2
+- Prim’s Lazy Edge Heap
+- Candidates crossing the growing boundary
+- Entries store an edge cost
+- Prim returns a minimum spanning forest
+- A new root begins another component
+- Why the destination check prevents cycles
+- The first candidates
+- An obsolete entry checkpoint
+- Obsolete entry explained
+- The rest of the shared trace
+- Running Prim
+- Heap ties and reproducibility
+- Adding an isolated vertex
+- Disconnected task explained
+- Part 3
+- Kruskal and Union–Find
+- Kruskal’s candidate order
+- Union–Find initialisation
+- Find with path compression
+- Union by size returns whether sets merged
+- String labels map to integer indices
+- Kruskal returns a minimum spanning forest
+- Union implements the acceptance condition
+- Accepted edges and components
+- A root comparison checkpoint
+- Root checkpoint explained
+- A full scan after connectivity
+- Running Kruskal
+- Vertices matter even without edges
+- Part 4
+- Correctness and Complexity
+- The shared correctness argument
+- The exchange argument
+- Counting lazy edge-heap work
+- Space for lazy candidate edges
+- Sorting and component checks
+- Storage of sorting and Union–Find
+- Costs include the chosen representation
+- A complexity checkpoint
+- Complexity checkpoint explained
+- Part 5
+- Boundary Cases and Course Consolidation
+- Several trees can share the optimum
+- Negative weights are valid for MSTs
+- Empty graphs and singleton components
+- A triangle with different objectives
+- Objective checkpoint
+- Objective checkpoint explained
+- The graph question determines the method
+- Earlier structures become algorithm components
+- The same reasoning questions apply across algorithms
+- Part 6
+- Closing
+- Prim and Kruskal in one comparison
+- Independent trace and explanation

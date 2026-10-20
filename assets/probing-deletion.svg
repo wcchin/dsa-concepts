@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="250" viewBox="0 0 840 250" role="img" aria-labelledby="title desc">
+<title id="title">A tombstone preserves lookup for key 1</title>
+<desc id="desc">In a capacity seven table, key 14 is at index zero, a deleted marker is at index one, and key 1 is at index two. Lookup for key 1 starts at one and continues past the tombstone to two.</desc>
+<rect width="840" height="250" fill="#fff"/>
+<g font-family="sans-serif" text-anchor="middle" fill="#172438">
+<text x="420" y="30" font-size="20">After deleting key 21: lookup for key 1</text>
+<g font-size="16">
+<text x="90" y="73">0</text><text x="200" y="73">1</text><text x="310" y="73">2</text><text x="420" y="73">3</text><text x="530" y="73">4</text><text x="640" y="73">5</text><text x="750" y="73">6</text>
+<rect x="40" y="85" width="100" height="55" rx="5" fill="#e7eef5" stroke="#52708c"/>
+<rect x="150" y="85" width="100" height="55" rx="5" fill="#ffedbf" stroke="#886400"/>
+<rect x="260" y="85" width="100" height="55" rx="5" fill="#d8f0e6" stroke="#206a51"/>
+<rect x="370" y="85" width="100" height="55" rx="5" fill="#f4f5f7" stroke="#77818b"/>
+<rect x="480" y="85" width="100" height="55" rx="5" fill="#f4f5f7" stroke="#77818b"/>
+<rect x="590" y="85" width="100" height="55" rx="5" fill="#f4f5f7" stroke="#77818b"/>
+<rect x="700" y="85" width="100" height="55" rx="5" fill="#f4f5f7" stroke="#77818b"/>
+<text x="90" y="118">14 → A</text><text x="200" y="118">DELETED</text><text x="310" y="118">1 → E</text><text x="420" y="118">EMPTY</text><text x="530" y="118">EMPTY</text><text x="640" y="118">EMPTY</text><text x="750" y="118">EMPTY</text>
+<text x="200" y="174">Start: 1 mod 7 = 1</text><text x="310" y="213">Continue → match key 1 → return E</text>
+</g></g>
+<path d="M200 142 V188 H304" fill="none" stroke="#206a51" stroke-width="3"/>
+<path d="M298 182 L308 188 L298 194" fill="none" stroke="#206a51" stroke-width="3"/>
+</svg>

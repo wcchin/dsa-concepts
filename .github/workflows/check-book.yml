@@ -1,0 +1,25 @@
+name: Check book
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+      - run: npm install -g jupyter-book@2.1.7
+      - name: Build HTML
+        env:
+          BASE_URL: /${{ github.event.repository.name }}
+        run: jupyter-book build --html
+      - uses: actions/upload-artifact@v4
+        with:
+          name: book-preview
+          path: _build/html

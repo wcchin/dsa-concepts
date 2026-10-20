@@ -1,0 +1,37 @@
+version: 1
+project:
+  title: Data Structures and Algorithms
+  subtitle: Concepts, Python Examples, and Algorithmic Reasoning
+  github: wcchin/dsa-concepts
+  description: A searchable guide to concepts, representations and algorithmic reasoning.
+  authors:
+    - name: Benny Chin
+  toc:
+    - file: index.md
+    - file: concepts.md
+    - file: topics/foundations/foundations.md
+    - file: topics/analysis/analysis.md
+    - file: topics/recursion/recursion.md
+    - file: topics/sorting/sorting.md
+    - file: topics/linear-structures/linear-structures.md
+    - file: topics/maps-sets-hashing/maps-sets-hashing.md
+      children:
+        - file: topics/maps-sets-hashing/maps.md
+        - file: topics/maps-sets-hashing/sets.md
+        - file: topics/maps-sets-hashing/hashing.md
+        - file: topics/maps-sets-hashing/chaining.md
+        - file: topics/maps-sets-hashing/open-addressing.md
+        - file: topics/maps-sets-hashing/performance.md
+        - file: topics/maps-sets-hashing/choosing.md
+    - file: topics/searching/searching.md
+    - file: topics/balanced-trees/balanced-trees.md
+    - file: topics/heaps/heaps.md
+    - file: topics/graphs/graphs.md
+    - file: topics/graph-algorithms/graph-algorithms.md
+    - file: topics/kd-trees/kd-trees.md
+    - file: topics/union-find/union-find.md
+    - file: topics/applications/applications.md
+site:
+  template: book-theme
+  options:
+    logo_text: DSA Concepts
