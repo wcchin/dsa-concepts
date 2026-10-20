@@ -8,7 +8,7 @@ A standalone Jupyter Book 2 project for a searchable, self-reading course resour
 - A developed Maps, Sets and Hashing pilot: seven concept pages and an overview.
 - An original probing-deletion diagram.
 - An author-facing source inventory under `planning/`.
-- A build-check workflow and a separate, manually triggered publishing workflow.
+- A build-check workflow and automatic publishing on pushes to `main`.
 
 No notebooks, rubric files, solution files, slide files or Git history are included. The other thirteen topics are scope outlines, not finished chapters.
 
@@ -38,10 +38,11 @@ The pinned builder matches the established geo-stat-vis workflow. Use Jupyter Bo
 ## Publish when ready
 
 1. In this repository, select Settings → Pages → Source → GitHub Actions.
-2. Open Actions → Publish book manually → Run workflow on `main`.
+2. Push changes to `main` (including merging a pull request) to publish automatically.
+   To rebuild manually, open Actions → Publish book → Run workflow on `main`.
 3. Follow the deployment URL after the workflow succeeds.
 
-Publishing is manual: an ordinary push only checks the build. The workflows derive the Pages base path from the repository name (`/dsa-concepts`). For a custom domain or an `owner.github.io` root site, adjust `BASE_URL` accordingly. Hosting availability for a private repository depends on the GitHub account's Pages entitlement.
+Every push to `main` builds and publishes the site. Pull requests run the build check; merging them into `main` triggers publishing. The workflows derive the Pages base path from the repository name (`/dsa-concepts`). For a custom domain or an `owner.github.io` root site, adjust `BASE_URL` accordingly. Hosting availability for a private repository depends on the GitHub account's Pages entitlement.
 
 ## Editorial work
 
