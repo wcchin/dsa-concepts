@@ -2,7 +2,7 @@
 
 A **Map** associates each distinct key with one value. A key identifies an entry; the value carries its associated information. Different keys may have equal values. A key may also be associated with a collection, such as a list of readings, without changing the one-key/one-value rule.
 
-## The behavioural contract
+## Map ADT and operations
 
 | Operation | Meaning | Changes the size? |
 |---|---|---|
@@ -14,7 +14,7 @@ A **Map** associates each distinct key with one value. A key identifies an entry
 
 The Map ADT does not specify that keys occupy any particular array position. It also does not require hashing: other implementations are possible.
 
-## A complete Python example
+## Map operations in Python
 
 Python’s `dict` supplies Map behaviour, although the operation names differ from our abstract contract.
 
@@ -29,7 +29,7 @@ present = "S04" in directory     # False: membership checks keys
 
 The final directory has two keys. Updating S01 changes its associated name; it does not add a second S01 entry. In contrast, `"Museum" in directory` tests whether that string is a **key**, not whether it occurs among the values. Use `directory.values()` when the question concerns values.
 
-## Missing is different from a stored value
+## Missing keys and `None` values
 
 `directory[key]` raises `KeyError` when the key is absent. `directory.get(key)` returns `None` by default, but `None` may itself be a legitimate stored value. If the distinction matters, test membership or supply a unique sentinel:
 
@@ -42,8 +42,10 @@ if result is missing:
 
 The sentinel is compared by identity because it represents one particular marker object.
 
-## Order and identity
+## Dictionary insertion order
 
 Python dictionaries preserve insertion order. That is a property of Python’s dictionary, not a requirement of every Map, and it is not sorted-key order. Replacing a value does not make the key numerically or alphabetically sorted.
 
 If you only need to know which identifiers occur, read [Sets](sets.md). To see how a key can guide retrieval, continue to [Hashing](hashing.md).
+
+**Browse:** [Maps, Sets and Hashing](maps-sets-hashing.md) · [Concept index](../../concepts.md)
