@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="350" viewBox="0 0 780 350" role="img" aria-labelledby="title desc">
+<title id="title">A shallow copy shares inner lists</title><desc id="desc">routes and backup point to different outer lists. Both outer lists point to the same two inner lists.</desc>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8" fill="#2852a3"/></marker></defs>
+<rect width="780" height="350" rx="8" fill="#fff"/>
+<text x="24" y="32" font-family="sans-serif" font-size="20" fill="#172438">backup = routes.copy()</text>
+<text x="25" y="103" font-family="sans-serif" font-size="17" fill="#172438">routes</text>
+<text x="25" y="249" font-family="sans-serif" font-size="17" fill="#172438">backup</text>
+<rect x="160" y="62" width="210" height="92" rx="7" fill="#eaf2fb" stroke="#52708c" stroke-width="1.5"/>
+<text x="172" y="114.0" font-family="sans-serif" font-size="17" fill="#172438">outer list 1</text>
+<rect x="160" y="208" width="210" height="92" rx="7" fill="#eaf2fb" stroke="#52708c" stroke-width="1.5"/>
+<text x="172" y="260.0" font-family="sans-serif" font-size="17" fill="#172438">outer list 2</text>
+<rect x="510" y="74" width="240" height="62" rx="7" fill="#dcf3eb" stroke="#52708c" stroke-width="1.5"/>
+<text x="522" y="111.0" font-family="sans-serif" font-size="17" fill="#172438">inner 0: [&#x27;KR&#x27;, &#x27;MUS&#x27;]</text>
+<rect x="510" y="226" width="240" height="62" rx="7" fill="#dcf3eb" stroke="#52708c" stroke-width="1.5"/>
+<text x="522" y="263.0" font-family="sans-serif" font-size="17" fill="#172438">inner 1: [&#x27;KR&#x27;, &#x27;UTN&#x27;]</text>
+<path d="M90 98 H155" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M90 244 H155" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M370 89 H505" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M370 130 L505 245" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M370 230 L505 118" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M370 275 H505" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="25" y="329" font-family="sans-serif" font-size="16" fill="#172438">Different outer lists; shared inner objects.</text>
+</svg>

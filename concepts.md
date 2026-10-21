@@ -2,7 +2,7 @@
 
 Find a concept by its name or browse concepts by topic.
 
-The wiki is being developed progressively. Topic 6, Maps, Sets and Hashing, is the first developed topic. Other topics currently provide scope outlines.
+The wiki is being developed progressively. Topics 1 (Foundations) and 6 (Maps, Sets and Hashing) have developed explanations. Other topics currently provide scope outlines.
 
 ## Browse by topic
 
@@ -23,72 +23,147 @@ The wiki is being developed progressively. Topic 6, Maps, Sets and Hashing, is t
 
 ## Find a concept alphabetically
 
-This index currently covers the developed Maps, Sets and Hashing topic. Entries link to the relevant explanation.
+This index covers the developed Foundations and Maps, Sets and Hashing topics. Entries link to the relevant explanation.
 
 ### A
+
+- [Algorithm](topics/foundations/data-and-algorithms.md#algorithm)
+- [Algorithm specification and reasoning](topics/foundations/data-and-algorithms.md#algorithm-reasoning)
+- [Aliasing](topics/foundations/objects-and-references.md#aliasing)
 - [Amortised complexity](topics/maps-sets-hashing/performance.md#expected-and-amortised-complexity)
-
+- [Assignment and binding](topics/foundations/objects-and-references.md#objects-and-bindings)
+- [Attributes](topics/foundations/collections-and-classes.md#classes-and-instances)
 ### B
+
 - [Buckets](topics/maps-sets-hashing/chaining.md#buckets-and-lookup-in-separate-chaining)
-
+- [Built-in collections](topics/foundations/collections-and-classes.md#built-in-collections)
 ### C
+
+- [Classes and instances](topics/foundations/collections-and-classes.md#classes-and-instances)
 - [Collision](topics/maps-sets-hashing/hashing.md#hash-collisions-and-key-equality)
-
+- [Comprehensions](topics/foundations/collections-and-classes.md#unpacking-and-comprehensions)
 ### D
-- [Dictionary (`dict`)](topics/maps-sets-hashing/maps.md#map-operations-in-python)
+
+- [Data structure](topics/foundations/data-and-algorithms.md#data-structure)
+- [Deep copy](topics/foundations/mutation-and-copying.md#deep-copy)
 - [Deletion in open addressing](topics/maps-sets-hashing/open-addressing.md#deletion-and-tombstones)
-
+- [Dictionary (`dict`)](topics/maps-sets-hashing/maps.md#map-operations-in-python)
 ### E
-- [Equality and hashing](topics/maps-sets-hashing/hashing.md#hash-collisions-and-key-equality)
-- [Expected complexity](topics/maps-sets-hashing/performance.md#expected-and-amortised-complexity)
 
+- [Encapsulation conventions](topics/foundations/collections-and-classes.md#encapsulation-and-hints)
+- [Equality and hashing](topics/maps-sets-hashing/hashing.md#hash-collisions-and-key-equality)
+- [Equality and identity](topics/foundations/objects-and-references.md#identity-and-equality)
+- [Expected complexity](topics/maps-sets-hashing/performance.md#expected-and-amortised-complexity)
+### F
+
+- [Function arguments and shared objects](topics/foundations/mutation-and-copying.md#function-arguments)
 ### H
+
 - [Hash code](topics/maps-sets-hashing/hashing.md#keys-hash-codes-and-table-indices)
 - [Hash function](topics/maps-sets-hashing/hashing.md#keys-hash-codes-and-table-indices)
 - [Hashability](topics/maps-sets-hashing/hashing.md#hashability-in-python)
-
 ### I
+
+- [Immutable objects](topics/foundations/mutation-and-copying.md#mutability)
 - [Insertion order](topics/maps-sets-hashing/maps.md#dictionary-insertion-order)
-
+- [Invariants](topics/foundations/collections-and-classes.md#invariants)
 ### K
+
 - [Key-value association](topics/maps-sets-hashing/maps.md#map-adt-and-operations)
-
 ### L
+
 - [Linear probing](topics/maps-sets-hashing/open-addressing.md#linear-probing-and-wraparound)
+- [Linked objects](topics/foundations/collections-and-classes.md#linked-objects)
 - [Load factor](topics/maps-sets-hashing/performance.md#load-factor-and-collision-strategies)
-
 ### M
+
 - [Map ADT](topics/maps-sets-hashing/maps.md#map-adt-and-operations)
+- [Methods](topics/foundations/collections-and-classes.md#classes-and-instances)
 - [Missing keys](topics/maps-sets-hashing/maps.md#missing-keys-and-none-values)
+- [Mutability](topics/foundations/mutation-and-copying.md#mutability)
+- [Mutable default arguments](topics/foundations/mutation-and-copying.md#mutable-defaults)
+- [Mutation and rebinding](topics/foundations/mutation-and-copying.md#mutation-and-rebinding)
+### N
 
+- [None](topics/foundations/objects-and-references.md#none-sentinel)
 ### O
+
+- [Objects and references](topics/foundations/objects-and-references.md#objects-and-bindings)
 - [Open addressing](topics/maps-sets-hashing/open-addressing.md)
-
 ### P
-- [Probing](topics/maps-sets-hashing/open-addressing.md#linear-probing-and-wraparound)
 
+- [Probing](topics/maps-sets-hashing/open-addressing.md#linear-probing-and-wraparound)
 ### R
+
+- [Rebinding](topics/foundations/mutation-and-copying.md#mutation-and-rebinding)
 - [Rehashing](topics/maps-sets-hashing/performance.md#why-changing-capacity-requires-rehashing)
 - [Replacement in a Map](topics/maps-sets-hashing/maps.md#map-adt-and-operations)
-
+- [Representation and required operations](topics/foundations/data-and-algorithms.md#representation-and-operations)
 ### S
+
+- [Self](topics/foundations/collections-and-classes.md#self)
 - [Separate chaining](topics/maps-sets-hashing/chaining.md)
 - [Set ADT](topics/maps-sets-hashing/sets.md)
 - [Set difference](topics/maps-sets-hashing/sets.md#union-intersection-and-difference)
 - [Set intersection](topics/maps-sets-hashing/sets.md#union-intersection-and-difference)
 - [Set membership](topics/maps-sets-hashing/sets.md#set-operations-and-membership)
 - [Set union](topics/maps-sets-hashing/sets.md#union-intersection-and-difference)
-
+- [Shallow copy](topics/foundations/mutation-and-copying.md#shallow-copy)
 ### T
+
 - [Tombstone](topics/maps-sets-hashing/open-addressing.md#deletion-and-tombstones)
-
+- [Type hints](topics/foundations/collections-and-classes.md#encapsulation-and-hints)
 ### U
-- [Used load](topics/maps-sets-hashing/performance.md#live-load-and-used-load)
 
+- [Unpacking](topics/foundations/collections-and-classes.md#unpacking-and-comprehensions)
+- [Used load](topics/maps-sets-hashing/performance.md#live-load-and-used-load)
 ### W
+
 - [Wraparound](topics/maps-sets-hashing/open-addressing.md#linear-probing-and-wraparound)
 
 ## Concepts grouped by topic
+
+### 1. Foundations and Python’s object model
+
+**Data structures and algorithms**
+
+- [Algorithm](topics/foundations/data-and-algorithms.md#algorithm)
+- [Algorithm specification and reasoning](topics/foundations/data-and-algorithms.md#algorithm-reasoning)
+- [Data structure](topics/foundations/data-and-algorithms.md#data-structure)
+- [Representation and required operations](topics/foundations/data-and-algorithms.md#representation-and-operations)
+
+**Objects and references**
+
+- [Aliasing](topics/foundations/objects-and-references.md#aliasing)
+- [Assignment and binding](topics/foundations/objects-and-references.md#objects-and-bindings)
+- [Equality and identity](topics/foundations/objects-and-references.md#identity-and-equality)
+- [None](topics/foundations/objects-and-references.md#none-sentinel)
+- [Objects and references](topics/foundations/objects-and-references.md#objects-and-bindings)
+
+**Mutation and copying**
+
+- [Deep copy](topics/foundations/mutation-and-copying.md#deep-copy)
+- [Function arguments and shared objects](topics/foundations/mutation-and-copying.md#function-arguments)
+- [Immutable objects](topics/foundations/mutation-and-copying.md#mutability)
+- [Mutability](topics/foundations/mutation-and-copying.md#mutability)
+- [Mutable default arguments](topics/foundations/mutation-and-copying.md#mutable-defaults)
+- [Mutation and rebinding](topics/foundations/mutation-and-copying.md#mutation-and-rebinding)
+- [Rebinding](topics/foundations/mutation-and-copying.md#mutation-and-rebinding)
+- [Shallow copy](topics/foundations/mutation-and-copying.md#shallow-copy)
+
+**Collections and classes**
+
+- [Attributes](topics/foundations/collections-and-classes.md#classes-and-instances)
+- [Built-in collections](topics/foundations/collections-and-classes.md#built-in-collections)
+- [Classes and instances](topics/foundations/collections-and-classes.md#classes-and-instances)
+- [Comprehensions](topics/foundations/collections-and-classes.md#unpacking-and-comprehensions)
+- [Encapsulation conventions](topics/foundations/collections-and-classes.md#encapsulation-and-hints)
+- [Invariants](topics/foundations/collections-and-classes.md#invariants)
+- [Linked objects](topics/foundations/collections-and-classes.md#linked-objects)
+- [Methods](topics/foundations/collections-and-classes.md#classes-and-instances)
+- [Self](topics/foundations/collections-and-classes.md#self)
+- [Type hints](topics/foundations/collections-and-classes.md#encapsulation-and-hints)
+- [Unpacking](topics/foundations/collections-and-classes.md#unpacking-and-comprehensions)
 
 ### 6. Maps, sets and hashing
 
@@ -139,3 +214,4 @@ This index currently covers the developed Maps, Sets and Hashing topic. Entries 
 
 - [Choosing by operations and complexity](topics/maps-sets-hashing/choosing.md#choosing-by-operations-and-complexity)
 - [Questions to revisit](topics/maps-sets-hashing/choosing.md#questions-to-revisit)
+

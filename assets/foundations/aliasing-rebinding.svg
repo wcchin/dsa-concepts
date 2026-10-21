@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="350" viewBox="0 0 760 350" role="img" aria-labelledby="title desc">
+<title id="title">Aliasing and rebinding</title><desc id="desc">The upper panel shows route_a and route_b sharing one list; the lower panel shows route_b rebound to a new list while route_a keeps the original.</desc>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8" fill="#2852a3"/></marker></defs>
+<rect width="760" height="350" rx="8" fill="#fff"/>
+<text x="24" y="32" font-family="sans-serif" font-size="20" fill="#172438">1. route_b = route_a</text>
+<text x="35" y="82" font-family="sans-serif" font-size="17" fill="#172438">route_a</text>
+<text x="35" y="132" font-family="sans-serif" font-size="17" fill="#172438">route_b</text>
+<rect x="270" y="68" width="420" height="64" rx="7" fill="#eaf2fb" stroke="#52708c" stroke-width="1.5"/>
+<text x="282" y="106.0" font-family="sans-serif" font-size="17" fill="#172438">list: [&#x27;KR&#x27;, &#x27;MUS&#x27;]</text>
+<path d="M115 76 H205 L265 89" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M115 126 H205 L265 111" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M24 164 H736" stroke="#d7dce3"/>
+<text x="24" y="199" font-family="sans-serif" font-size="20" fill="#172438">2. route_b = [&#x27;CLM&#x27;]</text>
+<text x="35" y="248" font-family="sans-serif" font-size="17" fill="#172438">route_a</text>
+<text x="35" y="312" font-family="sans-serif" font-size="17" fill="#172438">route_b</text>
+<rect x="270" y="219" width="420" height="50" rx="7" fill="#eaf2fb" stroke="#52708c" stroke-width="1.5"/>
+<text x="282" y="250.0" font-family="sans-serif" font-size="17" fill="#172438">original list: [&#x27;KR&#x27;, &#x27;MUS&#x27;]</text>
+<rect x="270" y="284" width="420" height="50" rx="7" fill="#dcf3eb" stroke="#52708c" stroke-width="1.5"/>
+<text x="282" y="315.0" font-family="sans-serif" font-size="17" fill="#172438">new list: [&#x27;CLM&#x27;]</text>
+<path d="M115 243 H265" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M115 307 H265" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#arrow)"/>
+</svg>

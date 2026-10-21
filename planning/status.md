@@ -1,8 +1,10 @@
-# Pilot status
+# Book development status
 
-1. Lecture inventory: complete for the 25 Markdown sources at the recorded main tree. Source headings and topic/page assignments are in `topic-inventory.md`.
-2. Page boundaries: proposed for all 14 topics; implemented for Topic 6.
-3. Pilot: seven self-reading concept pages plus a topic overview. Classroom and online explanations are consolidated; examples are explanatory code, not notebook tasks or assessment solutions.
-4. Book structure: Jupyter Book 2.1.7 with an explicit TOC; all other topics are labelled scope outlines. The build-check workflow runs on pushes and PRs. A separate publishing workflow runs only when manually requested.
+- Fourteen topic areas retained. Topics 1 and 6 now contain developed self-reading explanations; twelve topic areas remain outlines.
+- Topic 1: four pages covering problem requirements; objects and references; mutation and copying; collections, classes and invariants. Three original SVG diagrams illustrate aliasing/rebinding, shallow copying and linked objects.
+- Topic 1 uses explicit concept labels for stable indexed targets. The alphabetical and topic-grouped indexes include these concepts and retain the Topic 6 entries.
+- Source basis: Week 1 classroom and online lecture material; the general problem/representation framing also follows the course introduction. No notebook, rubric or solution file was used. The book text consolidates the slide explanations rather than reproducing presentation directives.
+- Editorial corrections: the passenger-count class validates nonnegative integer updates; linked-object examples distinguish the node from its stop payload and mutation from rebinding.
+- Jupyter Book 2.1.7 remains pinned. Pushes to main build and publish automatically; pull requests build without publishing.
 
-Next: review the pilot’s explanation depth and diagrams, then develop Topics 1–5 to supply the foundational reading route. Later review the source versions for AVL/heap separation.
+Next: develop Topic 2 (Analysing algorithms), followed by recursion, sorting and linear structures. Continue adding concept entries as explanations become available.

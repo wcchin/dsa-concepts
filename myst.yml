@@ -10,6 +10,11 @@ project:
     - file: index.md
     - file: concepts.md
     - file: topics/foundations/foundations.md
+      children:
+        - file: topics/foundations/data-and-algorithms.md
+        - file: topics/foundations/objects-and-references.md
+        - file: topics/foundations/mutation-and-copying.md
+        - file: topics/foundations/collections-and-classes.md
     - file: topics/analysis/analysis.md
     - file: topics/recursion/recursion.md
     - file: topics/sorting/sorting.md
@@ -39,3 +44,4 @@ site:
     logo_dark: assets/brand/logo.svg
     favicon: assets/brand/favicon.ico
     style: assets/custom.css
+
