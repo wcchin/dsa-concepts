@@ -6,6 +6,8 @@ Maps and Sets describe these two kinds of behaviour. Hashing is a technique that
 
 ## Reading route
 
+Looking for a particular term? Use the [concept index](../../concepts.md) to find concepts alphabetically or browse them by topic.
+
 1. [Maps](maps.md): associate unique keys with values.
 2. [Sets](sets.md): represent distinct elements and membership.
 3. [Hashing fundamentals](hashing.md): turn a key into an initial table index.
