@@ -17,5 +17,5 @@ You should be able to read basic Python assignments, function calls, `if` statem
 
 After reading, you should be able to draw references between objects, predict the effect of mutation and rebinding, explain shallow copying, and identify the invariant maintained by a small class.
 
-For a particular term, use the [concept index](../../concepts.md). The next planned topic is [Analysing algorithms](../analysis/analysis.md). For a developed application of these foundations, see [Maps, Sets and Hashing](../maps-sets-hashing/maps-sets-hashing.md).
+For a particular term, use the [concept index](../../concepts.md). Continue with [Analysing algorithms](../analysis/analysis.md). For a developed application of these foundations, see [Maps, Sets and Hashing](../maps-sets-hashing/maps-sets-hashing.md).
 

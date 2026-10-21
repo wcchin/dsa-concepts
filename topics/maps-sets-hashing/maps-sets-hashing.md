@@ -18,6 +18,7 @@ Looking for a particular term? Use the [concept index](../../concepts.md) to fin
 
 ## Prerequisites
 
-You should be able to read Python lists, loops, tuples and functions, and distinguish mutation from rebinding. The planned [ADTs topic](../linear-structures/linear-structures.md) develops the contract/implementation distinction; the planned [analysis topic](../analysis/analysis.md) develops asymptotic bounds.
+You should be able to read Python lists, loops, tuples and functions, and distinguish mutation from rebinding. The planned [ADTs topic](../linear-structures/linear-structures.md) develops the contract/implementation distinction; the [analysis topic](../analysis/analysis.md) develops asymptotic bounds.
 
 By the end, you should be able to trace lookup, insertion, replacement and deletion, explain why collisions do not imply equal keys, and state the assumptions behind a constant-time claim.
+

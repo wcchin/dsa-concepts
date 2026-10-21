@@ -16,6 +16,11 @@ project:
         - file: topics/foundations/mutation-and-copying.md
         - file: topics/foundations/collections-and-classes.md
     - file: topics/analysis/analysis.md
+      children:
+        - file: topics/analysis/counting-work.md
+        - file: topics/analysis/growth-rates.md
+        - file: topics/analysis/cases-and-bounds.md
+        - file: topics/analysis/code-and-space.md
     - file: topics/recursion/recursion.md
     - file: topics/sorting/sorting.md
     - file: topics/linear-structures/linear-structures.md

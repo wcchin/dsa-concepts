@@ -2,7 +2,7 @@
 
 Find a concept by its name or browse concepts by topic.
 
-The wiki is being developed progressively. Topics 1 (Foundations) and 6 (Maps, Sets and Hashing) have developed explanations. Other topics currently provide scope outlines.
+The wiki is being developed progressively. Topics 1 (Foundations), 2 (Analysing algorithms) and 6 (Maps, Sets and Hashing) have developed explanations. Other topics currently provide scope outlines.
 
 ## Browse by topic
 
@@ -23,7 +23,7 @@ The wiki is being developed progressively. Topics 1 (Foundations) and 6 (Maps, S
 
 ## Find a concept alphabetically
 
-This index covers the developed Foundations and Maps, Sets and Hashing topics. Entries link to the relevant explanation.
+This index covers developed explanations in Topics 1, 2 and 6. Entries link directly to the relevant section.
 
 ### A
 
@@ -32,31 +32,52 @@ This index covers the developed Foundations and Maps, Sets and Hashing topics. E
 - [Aliasing](topics/foundations/objects-and-references.md#aliasing)
 - [Amortised complexity](topics/maps-sets-hashing/performance.md#expected-and-amortised-complexity)
 - [Assignment and binding](topics/foundations/objects-and-references.md#objects-and-bindings)
+- [Asymptotic bounds](topics/analysis/cases-and-bounds.md#asymptotic-bounds)
+- [Asymptotic growth](topics/analysis/growth-rates.md#asymptotic-growth)
 - [Attributes](topics/foundations/collections-and-classes.md#classes-and-instances)
+- [Auxiliary and output space](topics/analysis/code-and-space.md#auxiliary-and-output-space)
+- [Average-case analysis](topics/analysis/cases-and-bounds.md#average-case)
 ### B
 
+- [Basic operation](topics/analysis/counting-work.md#cost-model)
+- [Best and worst cases](topics/analysis/cases-and-bounds.md#best-and-worst-cases)
+- [Big-O (upper bound)](topics/analysis/cases-and-bounds.md#big-o)
+- [Big-Omega (lower bound)](topics/analysis/cases-and-bounds.md#big-omega)
+- [Big-Theta (tight bound)](topics/analysis/cases-and-bounds.md#big-theta)
+- [Branch costs](topics/analysis/code-and-space.md#branch-costs)
 - [Buckets](topics/maps-sets-hashing/chaining.md#buckets-and-lookup-in-separate-chaining)
 - [Built-in collections](topics/foundations/collections-and-classes.md#built-in-collections)
 ### C
 
+- [Cases versus bounds](topics/analysis/cases-and-bounds.md#cases-versus-bounds)
 - [Classes and instances](topics/foundations/collections-and-classes.md#classes-and-instances)
 - [Collision](topics/maps-sets-hashing/hashing.md#hash-collisions-and-key-equality)
+- [Complete complexity claims](topics/analysis/code-and-space.md#complete-complexity-claim)
 - [Comprehensions](topics/foundations/collections-and-classes.md#unpacking-and-comprehensions)
+- [Consecutive loops](topics/analysis/code-and-space.md#consecutive-loops)
+- [Constant versus linear work](topics/analysis/counting-work.md#constant-vs-linear-work)
+- [Cost model](topics/analysis/counting-work.md#cost-model)
 ### D
 
 - [Data structure](topics/foundations/data-and-algorithms.md#data-structure)
 - [Deep copy](topics/foundations/mutation-and-copying.md#deep-copy)
 - [Deletion in open addressing](topics/maps-sets-hashing/open-addressing.md#deletion-and-tombstones)
 - [Dictionary (`dict`)](topics/maps-sets-hashing/maps.md#map-operations-in-python)
+- [Dominant term](topics/analysis/growth-rates.md#dominant-term)
+- [Doubling the input](topics/analysis/growth-rates.md#doubling-input)
 ### E
 
 - [Encapsulation conventions](topics/foundations/collections-and-classes.md#encapsulation-and-hints)
 - [Equality and hashing](topics/maps-sets-hashing/hashing.md#hash-collisions-and-key-equality)
 - [Equality and identity](topics/foundations/objects-and-references.md#identity-and-equality)
+- [Expected comparisons in search](topics/analysis/cases-and-bounds.md#average-case)
 - [Expected complexity](topics/maps-sets-hashing/performance.md#expected-and-amortised-complexity)
 ### F
 
 - [Function arguments and shared objects](topics/foundations/mutation-and-copying.md#function-arguments)
+### G
+
+- [Growth classes](topics/analysis/growth-rates.md#growth-classes)
 ### H
 
 - [Hash code](topics/maps-sets-hashing/hashing.md#keys-hash-codes-and-table-indices)
@@ -65,6 +86,7 @@ This index covers the developed Foundations and Maps, Sets and Hashing topics. E
 ### I
 
 - [Immutable objects](topics/foundations/mutation-and-copying.md#mutability)
+- [Input size](topics/analysis/counting-work.md#input-size)
 - [Insertion order](topics/maps-sets-hashing/maps.md#dictionary-insertion-order)
 - [Invariants](topics/foundations/collections-and-classes.md#invariants)
 ### K
@@ -75,6 +97,7 @@ This index covers the developed Foundations and Maps, Sets and Hashing topics. E
 - [Linear probing](topics/maps-sets-hashing/open-addressing.md#linear-probing-and-wraparound)
 - [Linked objects](topics/foundations/collections-and-classes.md#linked-objects)
 - [Load factor](topics/maps-sets-hashing/performance.md#load-factor-and-collision-strategies)
+- [Logarithms and base](topics/analysis/growth-rates.md#logarithms-and-base)
 ### M
 
 - [Map ADT](topics/maps-sets-hashing/maps.md#map-adt-and-operations)
@@ -85,11 +108,13 @@ This index covers the developed Foundations and Maps, Sets and Hashing topics. E
 - [Mutation and rebinding](topics/foundations/mutation-and-copying.md#mutation-and-rebinding)
 ### N
 
+- [Nested and triangular loops](topics/analysis/code-and-space.md#nested-and-triangular-loops)
 - [None](topics/foundations/objects-and-references.md#none-sentinel)
 ### O
 
 - [Objects and references](topics/foundations/objects-and-references.md#objects-and-bindings)
 - [Open addressing](topics/maps-sets-hashing/open-addressing.md)
+- [Operation counts](topics/analysis/counting-work.md#operation-count)
 ### P
 
 - [Probing](topics/maps-sets-hashing/open-addressing.md#linear-probing-and-wraparound)
@@ -97,6 +122,7 @@ This index covers the developed Foundations and Maps, Sets and Hashing topics. E
 
 - [Rebinding](topics/foundations/mutation-and-copying.md#mutation-and-rebinding)
 - [Rehashing](topics/maps-sets-hashing/performance.md#why-changing-capacity-requires-rehashing)
+- [Repeated halving](topics/analysis/code-and-space.md#repeated-halving)
 - [Replacement in a Map](topics/maps-sets-hashing/maps.md#map-adt-and-operations)
 - [Representation and required operations](topics/foundations/data-and-algorithms.md#representation-and-operations)
 ### S
@@ -109,8 +135,11 @@ This index covers the developed Foundations and Maps, Sets and Hashing topics. E
 - [Set membership](topics/maps-sets-hashing/sets.md#set-operations-and-membership)
 - [Set union](topics/maps-sets-hashing/sets.md#union-intersection-and-difference)
 - [Shallow copy](topics/foundations/mutation-and-copying.md#shallow-copy)
+- [Space complexity](topics/analysis/code-and-space.md#space-complexity)
 ### T
 
+- [Tight and loose bounds](topics/analysis/cases-and-bounds.md#tight-and-loose-bounds)
+- [Timing and analysis](topics/analysis/counting-work.md#measurement-and-analysis)
 - [Tombstone](topics/maps-sets-hashing/open-addressing.md#deletion-and-tombstones)
 - [Type hints](topics/foundations/collections-and-classes.md#encapsulation-and-hints)
 ### U
@@ -165,6 +194,46 @@ This index covers the developed Foundations and Maps, Sets and Hashing topics. E
 - [Type hints](topics/foundations/collections-and-classes.md#encapsulation-and-hints)
 - [Unpacking](topics/foundations/collections-and-classes.md#unpacking-and-comprehensions)
 
+### 2. Analysing algorithms
+
+**Counting work**
+
+- [Input size](topics/analysis/counting-work.md#input-size)
+- [Cost model](topics/analysis/counting-work.md#cost-model)
+- [Basic operation](topics/analysis/counting-work.md#cost-model)
+- [Operation counts](topics/analysis/counting-work.md#operation-count)
+- [Constant versus linear work](topics/analysis/counting-work.md#constant-vs-linear-work)
+- [Timing and analysis](topics/analysis/counting-work.md#measurement-and-analysis)
+
+**Growth rates**
+
+- [Asymptotic growth](topics/analysis/growth-rates.md#asymptotic-growth)
+- [Dominant term](topics/analysis/growth-rates.md#dominant-term)
+- [Growth classes](topics/analysis/growth-rates.md#growth-classes)
+- [Doubling the input](topics/analysis/growth-rates.md#doubling-input)
+- [Logarithms and base](topics/analysis/growth-rates.md#logarithms-and-base)
+
+**Cases and bounds**
+
+- [Best and worst cases](topics/analysis/cases-and-bounds.md#best-and-worst-cases)
+- [Average-case analysis](topics/analysis/cases-and-bounds.md#average-case)
+- [Expected comparisons in search](topics/analysis/cases-and-bounds.md#average-case)
+- [Asymptotic bounds](topics/analysis/cases-and-bounds.md#asymptotic-bounds)
+- [Big-O (upper bound)](topics/analysis/cases-and-bounds.md#big-o)
+- [Big-Omega (lower bound)](topics/analysis/cases-and-bounds.md#big-omega)
+- [Big-Theta (tight bound)](topics/analysis/cases-and-bounds.md#big-theta)
+- [Tight and loose bounds](topics/analysis/cases-and-bounds.md#tight-and-loose-bounds)
+- [Cases versus bounds](topics/analysis/cases-and-bounds.md#cases-versus-bounds)
+
+**Code and space**
+
+- [Consecutive loops](topics/analysis/code-and-space.md#consecutive-loops)
+- [Nested and triangular loops](topics/analysis/code-and-space.md#nested-and-triangular-loops)
+- [Repeated halving](topics/analysis/code-and-space.md#repeated-halving)
+- [Branch costs](topics/analysis/code-and-space.md#branch-costs)
+- [Space complexity](topics/analysis/code-and-space.md#space-complexity)
+- [Auxiliary and output space](topics/analysis/code-and-space.md#auxiliary-and-output-space)
+- [Complete complexity claims](topics/analysis/code-and-space.md#complete-complexity-claim)
 ### 6. Maps, sets and hashing
 
 **Maps**

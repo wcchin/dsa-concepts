@@ -6,12 +6,13 @@ A standalone Jupyter Book 2 project for a searchable, self-reading course resour
 
 - Fourteen topic areas, with alphabetical and topic-based concept indexes.
 - A developed Foundations topic: four reading pages, an overview and three object diagrams.
+- A developed Algorithm Analysis topic: four reading pages, an overview and three original mathematical figures.
 - A developed Maps, Sets and Hashing pilot: seven concept pages and an overview.
 - An original probing-deletion diagram.
 - An author-facing source inventory under `planning/`.
 - A build-check workflow and automatic publishing on pushes to `main`.
 
-No notebooks, rubric files, solution files, slide files or Git history are included. Twelve topics remain scope outlines, not finished chapters.
+No notebooks, rubric files, solution files, slide files or Git history are included. Eleven topics remain scope outlines, not finished chapters.
 
 ## Repository
 
@@ -49,5 +50,5 @@ Every push to `main` builds and publishes the site. Pull requests run the build 
 
 Read `planning/topic-inventory.md` for the fourteen topics, page boundaries, lecture-source mapping and gaps. The inventory records the private course-source provenance but the source files themselves are not bundled. Do not place assessment solutions in this book project.
 
-Topics 1 and 6 establish the reading and navigation pattern. Continue with Topic 2 (Analysing algorithms). No content licence has been selected yet.
+Topics 1, 2 and 6 contain developed reading material. Continue with Topic 3 (Recursion and divide-and-conquer). No content licence has been selected yet.
 
