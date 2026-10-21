@@ -2,7 +2,7 @@
 
 Open addressing stores entries directly in table slots. A collision triggers a sequence of candidate positions. For **linear probing**, position $j$ in the sequence is $(h(k)+j)\bmod m$, for $j=0,\ldots,m-1$.
 
-## Insertion and wraparound
+## Linear probing and wraparound
 
 Use $h(k)=k$ and capacity 7. Insert 6, 13 and 20, in that order:
 
@@ -14,13 +14,15 @@ Use $h(k)=k$ and capacity 7. Insert 6, 13 and 20, in that order:
 
 Modulo wraps the sequence back to index 0. Lookup must follow the same sequence used for insertion. The boundary of the array is not a stopping condition.
 
-## Three slot states
+## Empty, occupied and deleted slots
 
 | State | What lookup does | Why |
 |---|---|---|
 | Occupied | Compare keys; return on equality, otherwise continue | A collision may belong to another key |
 | `DELETED` | Continue | A later entry may have been displaced past this slot |
 | `EMPTY` | Report absence | Under this placement rule, the key would have been inserted before passing this unused slot |
+
+## Deletion and tombstones
 
 The `EMPTY` stopping rule depends on preserving the insertion invariant. Deleted entries must not simply be marked empty.
 
@@ -51,7 +53,7 @@ def get_probed(table, key):
 
 Create a new table with `[EMPTY] * 7`; sharing an unmodified marker object is intentional. Check marker identity before unpacking an occupied pair. The loop visits at most m slots, including when tombstones or live entries leave no `EMPTY` slot. Capacity must be positive.
 
-## A tombstone is reusable, but does not prove absence
+## Tombstones and insertion
 
 Suppose indices 1, 2 and 3 contain `DELETED`, `(22, C)` and `EMPTY`. Both key 22 and key 15 start at index 1.
 
@@ -63,3 +65,5 @@ Inserting immediately at the tombstone could create two copies of key 22. The in
 ## Clustering and alternatives
 
 Linear probing can form contiguous clusters, making later probes longer. Quadratic probing and double hashing change the sequence. Their parameters and capacity rules must ensure adequate coverage; they cannot be substituted without changing the trace. The [performance page](performance.md) explains why low live load alone does not guarantee a short probe sequence.
+
+**Browse:** [Maps, Sets and Hashing](maps-sets-hashing.md) · [Concept index](../../concepts.md)
