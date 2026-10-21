@@ -29,6 +29,14 @@ project:
         - file: topics/recursion/recursion-costs.md
         - file: topics/recursion/implementation-costs.md
     - file: topics/sorting/sorting.md
+      children:
+        - file: topics/sorting/sorting-properties.md
+        - file: topics/sorting/insertion-sort.md
+        - file: topics/sorting/bubble-sort.md
+        - file: topics/sorting/partitioning.md
+        - file: topics/sorting/quicksort.md
+        - file: topics/sorting/comparing-strategies.md
+        - file: topics/sorting/comparison-lower-bound.md
     - file: topics/linear-structures/linear-structures.md
     - file: topics/maps-sets-hashing/maps-sets-hashing.md
       children:

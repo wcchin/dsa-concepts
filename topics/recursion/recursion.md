@@ -18,4 +18,4 @@ Review [objects and references](../foundations/objects-and-references.md) and [a
 
 After reading, you should be able to trace calls and returns, justify termination for valid inputs, distinguish recursion from divide-and-conquer, and explain why recursion depth alone does not determine time complexity.
 
-For a particular term, use the [concept index](../../concepts.md). The planned [Sorting topic](../sorting/sorting.md) will compare merge sort with other strategies; here merge sort supplies a concrete example of recursive decomposition.
+For a particular term, use the [concept index](../../concepts.md). The [Sorting topic](../sorting/sorting.md) compares merge sort with other strategies; here merge sort supplies a concrete example of recursive decomposition.
