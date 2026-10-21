@@ -2,7 +2,7 @@
 
 Separate chaining associates each table index with a bucket of entries. Several unequal keys can share a bucket. Lookup selects one bucket and compares keys inside it.
 
-## Representation and a worked lookup
+## Buckets and lookup in separate chaining
 
 Use $h(k)=k$, $m=7$, and insert entries in the order shown below. New entries are appended within a bucket.
 
@@ -32,7 +32,7 @@ def get_chained(table, key):
 
 The index calculation selects a bucket. The loop establishes whether an equal key occurs there. Reaching the exception means every candidate was checked. The function assumes a nonempty bucket array and a hashable query key.
 
-## Insert or replace
+## Insertion and replacement
 
 ```python
 def put_chained(table, key, value):
@@ -58,3 +58,5 @@ table = [[] for _ in range(7)]
 Each bucket above is a different list. `[[]] * 7` would repeat references to one list and make all buckets change together—an [aliasing](../foundations/foundations.md) error.
 
 The expected cost depends on distribution and [load factor](performance.md). If all keys land in one bucket, lookup may inspect all stored entries.
+
+**Browse:** [Maps, Sets and Hashing](maps-sets-hashing.md) · [Concept index](../../concepts.md)
