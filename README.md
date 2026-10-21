@@ -9,12 +9,13 @@ A standalone Jupyter Book 2 project for a searchable, self-reading course resour
 - A developed Algorithm Analysis topic: four reading pages, an overview and three original mathematical figures.
 - A developed Recursion topic: five reading pages, an overview and eight original SVG explanations.
 - A developed Sorting topic: seven reading pages, an overview and seven original SVG explanations.
+- A developed Linear Structures topic: nine reading pages, an overview and twelve original SVG explanations.
 - A developed Maps, Sets and Hashing pilot: seven concept pages and an overview.
 - An original probing-deletion diagram.
 - An author-facing source inventory under `planning/`.
 - A build-check workflow and automatic publishing on pushes to `main`.
 
-No notebooks, rubric files, solution files, slide files or Git history are included. Ten topics remain scope outlines, not finished chapters.
+No notebooks, rubric files, solution files, slide files or Git history are included. Eight topics remain scope outlines, not finished chapters.
 
 ## Repository
 
@@ -52,5 +53,5 @@ Every push to `main` builds and publishes the site. Pull requests run the build 
 
 Read `planning/topic-inventory.md` for the fourteen topics, page boundaries, lecture-source mapping and gaps. The inventory records the private course-source provenance but the source files themselves are not bundled. Do not place assessment solutions in this book project.
 
-Topics 1, 2, 3, 4 and 6 contain developed reading material. Continue with Topic 5 (Abstract data types and linear structures). No content licence has been selected yet.
+Topics 1–6 contain developed reading material. Continue with Topic 7 (Searching and binary search trees). No content licence has been selected yet.
 

@@ -2,7 +2,7 @@
 
 Find a concept by its name or browse concepts by topic.
 
-The wiki is being developed progressively. Topics 1 (Foundations), 2 (Analysing algorithms), 3 (Recursion), 4 (Sorting) and 6 (Maps, Sets and Hashing) have developed explanations. Other topics currently provide scope outlines.
+The wiki is being developed progressively. Topics 1–6 (Foundations through Maps, Sets and Hashing) have developed explanations. Other topics currently provide scope outlines.
 
 ## Browse by topic
 
@@ -23,16 +23,26 @@ The wiki is being developed progressively. Topics 1 (Foundations), 2 (Analysing 
 
 ## Find a concept alphabetically
 
-This index covers developed explanations in Topics 1, 2, 3, 4 and 6. Entries link directly to the relevant section.
+This index covers developed explanations in Topics 1–6. Entries link directly to the relevant section.
 
 ### A
 
+- [Abstract data type (ADT)](topics/linear-structures/adts-and-contracts.md#abstract-data-type)
 - [Adaptive sorting](topics/sorting/insertion-sort.md#adaptive-sorting)
 - [Adjacent swaps and stability](topics/sorting/bubble-sort.md#adjacent-swap-stability)
+- [ADT contracts](topics/linear-structures/adts-and-contracts.md#adt-contract)
+- [ADT reasoning process](topics/linear-structures/choosing-linear-structures.md#adt-reasoning-process)
+- [ADTs and representations](topics/linear-structures/adts-and-contracts.md#adt-and-representation)
 - [Algorithm](topics/foundations/data-and-algorithms.md#algorithm)
 - [Algorithm specification and reasoning](topics/foundations/data-and-algorithms.md#algorithm-reasoning)
 - [Aliasing](topics/foundations/objects-and-references.md#aliasing)
+- [Amortised array append](topics/linear-structures/dynamic-arrays.md#amortised-array-append)
 - [Amortised complexity](topics/maps-sets-hashing/performance.md#expected-and-amortised-complexity)
+- [Array insertion](topics/linear-structures/arrays.md#array-insertion)
+- [Array locality](topics/linear-structures/arrays.md#array-locality)
+- [Array removal](topics/linear-structures/arrays.md#array-removal)
+- [Array representation and indexing](topics/linear-structures/arrays.md#array-representation)
+- [Array-backed stack](topics/linear-structures/stacks.md#array-stack)
 - [Assignment and binding](topics/foundations/objects-and-references.md#objects-and-bindings)
 - [Asymptotic bounds](topics/analysis/cases-and-bounds.md#asymptotic-bounds)
 - [Asymptotic growth](topics/analysis/growth-rates.md#asymptotic-growth)
@@ -50,7 +60,10 @@ This index covers developed explanations in Topics 1, 2, 3, 4 and 6. Entries lin
 - [Big-O (upper bound)](topics/analysis/cases-and-bounds.md#big-o)
 - [Big-Omega (lower bound)](topics/analysis/cases-and-bounds.md#big-omega)
 - [Big-Theta (tight bound)](topics/analysis/cases-and-bounds.md#big-theta)
+- [Bounded queue and overflow](topics/linear-structures/circular-queues.md#bounded-queue)
+- [Bracket matching](topics/linear-structures/stacks.md#bracket-matching)
 - [Branch costs](topics/analysis/code-and-space.md#branch-costs)
+- [Browser history with stacks](topics/linear-structures/choosing-linear-structures.md#browser-history-stacks)
 - [Bubble sort](topics/sorting/bubble-sort.md#bubble-sort)
 - [Bubble-sort invariant](topics/sorting/bubble-sort.md#bubble-invariant)
 - [Buckets](topics/maps-sets-hashing/chaining.md#buckets-and-lookup-in-separate-chaining)
@@ -62,7 +75,11 @@ This index covers developed explanations in Topics 1, 2, 3, 4 and 6. Entries lin
 - [Call stack](topics/recursion/call-stack.md#stack-frames)
 - [Calls and returns](topics/recursion/recursive-calls.md#calls-and-returns)
 - [Cases versus bounds](topics/analysis/cases-and-bounds.md#cases-versus-bounds)
+- [Choosing a linear ADT](topics/linear-structures/choosing-linear-structures.md#linear-adt-selection)
 - [Choosing a sorting strategy](topics/sorting/comparing-strategies.md#choosing-sorting-strategy)
+- [Circular-array queue](topics/linear-structures/circular-queues.md#circular-array-queue)
+- [Circular-queue costs](topics/linear-structures/circular-queues.md#circular-queue-cost)
+- [Circular-queue invariant](topics/linear-structures/circular-queues.md#circular-queue-invariant)
 - [Classes and instances](topics/foundations/collections-and-classes.md#classes-and-instances)
 - [Collision](topics/maps-sets-hashing/hashing.md#hash-collisions-and-key-equality)
 - [Comparison sorting](topics/sorting/comparison-lower-bound.md#comparison-sorting)
@@ -78,10 +95,14 @@ This index covers developed explanations in Topics 1, 2, 3, 4 and 6. Entries lin
 - [Data structure](topics/foundations/data-and-algorithms.md#data-structure)
 - [Deep copy](topics/foundations/mutation-and-copying.md#deep-copy)
 - [Deletion in open addressing](topics/maps-sets-hashing/open-addressing.md#deletion-and-tombstones)
+- [Deque](topics/linear-structures/queues-and-deques.md#deque-adt)
 - [Dictionary (`dict`)](topics/maps-sets-hashing/maps.md#map-operations-in-python)
 - [Divide-and-conquer](topics/recursion/divide-and-conquer.md#divide-conquer-combine)
 - [Dominant term](topics/analysis/growth-rates.md#dominant-term)
 - [Doubling the input](topics/analysis/growth-rates.md#doubling-input)
+- [Doubly linked list](topics/linear-structures/linked-structures.md#doubly-linked-list)
+- [Dynamic-array resizing](topics/linear-structures/dynamic-arrays.md#dynamic-array-resize)
+- [Dynamic-array storage](topics/linear-structures/dynamic-arrays.md#dynamic-array-space)
 
 ### E
 
@@ -106,6 +127,7 @@ This index covers developed explanations in Topics 1, 2, 3, 4 and 6. Entries lin
 - [Hash code](topics/maps-sets-hashing/hashing.md#keys-hash-codes-and-table-indices)
 - [Hash function](topics/maps-sets-hashing/hashing.md#keys-hash-codes-and-table-indices)
 - [Hashability](topics/maps-sets-hashing/hashing.md#hashability-in-python)
+- [Head and tail invariant](topics/linear-structures/linked-queues.md#head-tail-invariant)
 
 ### I
 
@@ -125,8 +147,18 @@ This index covers developed explanations in Topics 1, 2, 3, 4 and 6. Entries lin
 
 ### L
 
+- [Length and capacity](topics/linear-structures/dynamic-arrays.md#length-and-capacity)
 - [Linear probing](topics/maps-sets-hashing/open-addressing.md#linear-probing-and-wraparound)
+- [Linear sequences and positional access](topics/linear-structures/adts-and-contracts.md#linear-sequence-adt)
+- [Linear-representation costs](topics/linear-structures/choosing-linear-structures.md#linear-representation-costs)
+- [Linked insertion](topics/linear-structures/linked-structures.md#linked-insertion)
 - [Linked objects](topics/foundations/collections-and-classes.md#linked-objects)
+- [Linked queue](topics/linear-structures/linked-queues.md#linked-queue)
+- [Linked removal](topics/linear-structures/linked-structures.md#linked-removal)
+- [Linked traversal](topics/linear-structures/linked-structures.md#linked-traversal)
+- [Linked-queue costs](topics/linear-structures/linked-queues.md#linked-queue-cost)
+- [Linked-queue implementation](topics/linear-structures/linked-queues.md#linked-queue-code)
+- [Linked-update costs](topics/linear-structures/linked-structures.md#linked-update-cost)
 - [List slicing costs](topics/recursion/implementation-costs.md#slicing-cost)
 - [Load factor](topics/maps-sets-hashing/performance.md#load-factor-and-collision-strategies)
 - [Logarithms and base](topics/analysis/growth-rates.md#logarithms-and-base)
@@ -152,12 +184,14 @@ This index covers developed explanations in Topics 1, 2, 3, 4 and 6. Entries lin
 ### O
 
 - [Objects and references](topics/foundations/objects-and-references.md#objects-and-bindings)
+- [Observers and mutators](topics/linear-structures/adts-and-contracts.md#observers-and-mutators)
 - [Odd-sized recursive splits](topics/recursion/recursion-costs.md#balanced-and-odd-splits)
 - [Open addressing](topics/maps-sets-hashing/open-addressing.md)
 - [Operation counts](topics/analysis/counting-work.md#operation-count)
 
 ### P
 
+- [Palindrome checking](topics/linear-structures/queues-and-deques.md#palindrome-deque)
 - [Partition contract](topics/sorting/partitioning.md#partition-contract)
 - [Partition cost](topics/sorting/partitioning.md#partition-cost)
 - [Partition invariant](topics/sorting/partitioning.md#partition-invariant)
@@ -169,6 +203,7 @@ This index covers developed explanations in Topics 1, 2, 3, 4 and 6. Entries lin
 
 ### Q
 
+- [Queue and FIFO](topics/linear-structures/queues-and-deques.md#queue-adt)
 - [Quicksort](topics/sorting/quicksort.md#quicksort)
 - [Quicksort termination](topics/sorting/quicksort.md#quicksort-progress)
 - [Quicksort worst case](topics/sorting/quicksort.md#quicksort-worst-case)
@@ -187,6 +222,7 @@ This index covers developed explanations in Topics 1, 2, 3, 4 and 6. Entries lin
 - [Replacement in a Map](topics/maps-sets-hashing/maps.md#map-adt-and-operations)
 - [Representation and required operations](topics/foundations/data-and-algorithms.md#representation-and-operations)
 - [Return versus print](topics/recursion/call-stack.md#return-vs-print)
+- [Rolling window](topics/linear-structures/queues-and-deques.md#rolling-window)
 
 ### S
 
@@ -199,6 +235,7 @@ This index covers developed explanations in Topics 1, 2, 3, 4 and 6. Entries lin
 - [Set union](topics/maps-sets-hashing/sets.md#union-intersection-and-difference)
 - [Shallow copy](topics/foundations/mutation-and-copying.md#shallow-copy)
 - [Shifting in insertion sort](topics/sorting/insertion-sort.md#insertion-shifting)
+- [Singly linked list](topics/linear-structures/linked-structures.md#singly-linked-list)
 - [Sorting cost comparison](topics/sorting/comparing-strategies.md#sorting-cost-comparison)
 - [Sorting decision tree](topics/sorting/comparison-lower-bound.md#sorting-decision-tree)
 - [Sorting keys](topics/sorting/sorting-properties.md#sorting-key)
@@ -208,6 +245,9 @@ This index covers developed explanations in Topics 1, 2, 3, 4 and 6. Entries lin
 - [Space complexity](topics/analysis/code-and-space.md#space-complexity)
 - [Splitting and combining](topics/recursion/divide-and-conquer.md#split-and-combine)
 - [Stable sorting](topics/sorting/sorting-properties.md#stable-sorting)
+- [Stack and LIFO](topics/linear-structures/stacks.md#stack-adt)
+- [Stack applications](topics/linear-structures/stacks.md#stack-applications)
+- [Stack underflow](topics/linear-structures/stacks.md#stack-underflow)
 - [Strategy and representation costs](topics/recursion/implementation-costs.md#strategy-and-representation)
 
 ### T
@@ -355,6 +395,7 @@ This index covers developed explanations in Topics 1, 2, 3, 4 and 6. Entries lin
 - [Index-based merging](topics/recursion/implementation-costs.md#index-based-merge)
 - [List slicing costs](topics/recursion/implementation-costs.md#slicing-cost)
 - [Strategy and representation costs](topics/recursion/implementation-costs.md#strategy-and-representation)
+
 ### 4. Sorting
 
 - [Sorting properties](topics/sorting/sorting-properties.md)
@@ -364,6 +405,75 @@ This index covers developed explanations in Topics 1, 2, 3, 4 and 6. Entries lin
 - [Quicksort](topics/sorting/quicksort.md)
 - [Comparing strategies](topics/sorting/comparing-strategies.md)
 - [Comparison lower bound](topics/sorting/comparison-lower-bound.md)
+
+### 5. Abstract data types and linear structures
+
+**ADTs and contracts**
+
+- [Abstract data type (ADT)](topics/linear-structures/adts-and-contracts.md#abstract-data-type)
+- [ADT contracts](topics/linear-structures/adts-and-contracts.md#adt-contract)
+- [Observers and mutators](topics/linear-structures/adts-and-contracts.md#observers-and-mutators)
+- [ADTs and representations](topics/linear-structures/adts-and-contracts.md#adt-and-representation)
+- [Linear sequences and positional access](topics/linear-structures/adts-and-contracts.md#linear-sequence-adt)
+
+**Stacks: newest first**
+
+- [Stack and LIFO](topics/linear-structures/stacks.md#stack-adt)
+- [Stack underflow](topics/linear-structures/stacks.md#stack-underflow)
+- [Array-backed stack](topics/linear-structures/stacks.md#array-stack)
+- [Stack applications](topics/linear-structures/stacks.md#stack-applications)
+- [Bracket matching](topics/linear-structures/stacks.md#bracket-matching)
+
+**Queues and deques**
+
+- [Queue and FIFO](topics/linear-structures/queues-and-deques.md#queue-adt)
+- [Deque](topics/linear-structures/queues-and-deques.md#deque-adt)
+- [Rolling window](topics/linear-structures/queues-and-deques.md#rolling-window)
+- [Palindrome checking](topics/linear-structures/queues-and-deques.md#palindrome-deque)
+
+**Arrays and positional operations**
+
+- [Array representation and indexing](topics/linear-structures/arrays.md#array-representation)
+- [Array insertion](topics/linear-structures/arrays.md#array-insertion)
+- [Array removal](topics/linear-structures/arrays.md#array-removal)
+- [Array locality](topics/linear-structures/arrays.md#array-locality)
+
+**Dynamic arrays: length, capacity and resizing**
+
+- [Length and capacity](topics/linear-structures/dynamic-arrays.md#length-and-capacity)
+- [Dynamic-array resizing](topics/linear-structures/dynamic-arrays.md#dynamic-array-resize)
+- [Amortised array append](topics/linear-structures/dynamic-arrays.md#amortised-array-append)
+- [Dynamic-array storage](topics/linear-structures/dynamic-arrays.md#dynamic-array-space)
+
+**Linked structures and safe updates**
+
+- [Singly linked list](topics/linear-structures/linked-structures.md#singly-linked-list)
+- [Linked traversal](topics/linear-structures/linked-structures.md#linked-traversal)
+- [Linked insertion](topics/linear-structures/linked-structures.md#linked-insertion)
+- [Linked removal](topics/linear-structures/linked-structures.md#linked-removal)
+- [Linked-update costs](topics/linear-structures/linked-structures.md#linked-update-cost)
+- [Doubly linked list](topics/linear-structures/linked-structures.md#doubly-linked-list)
+
+**Circular-array queues**
+
+- [Circular-array queue](topics/linear-structures/circular-queues.md#circular-array-queue)
+- [Circular-queue invariant](topics/linear-structures/circular-queues.md#circular-queue-invariant)
+- [Bounded queue and overflow](topics/linear-structures/circular-queues.md#bounded-queue)
+- [Circular-queue costs](topics/linear-structures/circular-queues.md#circular-queue-cost)
+
+**Linked queues**
+
+- [Linked queue](topics/linear-structures/linked-queues.md#linked-queue)
+- [Head and tail invariant](topics/linear-structures/linked-queues.md#head-tail-invariant)
+- [Linked-queue implementation](topics/linear-structures/linked-queues.md#linked-queue-code)
+- [Linked-queue costs](topics/linear-structures/linked-queues.md#linked-queue-cost)
+
+**Choosing an ADT and representation**
+
+- [Choosing a linear ADT](topics/linear-structures/choosing-linear-structures.md#linear-adt-selection)
+- [Linear-representation costs](topics/linear-structures/choosing-linear-structures.md#linear-representation-costs)
+- [Browser history with stacks](topics/linear-structures/choosing-linear-structures.md#browser-history-stacks)
+- [ADT reasoning process](topics/linear-structures/choosing-linear-structures.md#adt-reasoning-process)
 
 ### 6. Maps, sets and hashing
 
