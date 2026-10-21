@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="890" height="385" viewBox="0 0 890 385" role="img" aria-labelledby="title desc">
+<title id="title">Call stack snapshots</title><desc id="desc">Three snapshots show four active sum_to frames at the base case, then three after the base case returns, then none after the outer call returns.</desc>
+<defs><marker id="blue" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8" fill="#2852a3"/></marker><marker id="green" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8" fill="#137c65"/></marker></defs>
+<rect width="890" height="385" rx="8" fill="white"/>
+<text x="25" y="34" font-family="DejaVu Sans, sans-serif" font-size="19" fill="#172438" text-anchor="start">At the base case</text>
+<text x="322" y="34" font-family="DejaVu Sans, sans-serif" font-size="19" fill="#172438" text-anchor="start">After returning 0</text>
+<text x="620" y="34" font-family="DejaVu Sans, sans-serif" font-size="19" fill="#172438" text-anchor="start">After returning 6</text>
+<rect x="25" y="75" width="245" height="48" rx="6" fill="#dcf3eb" stroke="#52708c" stroke-width="1.4"/>
+<text x="147.5" y="105.0" font-family="DejaVu Sans, sans-serif" font-size="16" fill="#172438" text-anchor="middle">n = 0: return 0</text>
+<rect x="25" y="137" width="245" height="48" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="147.5" y="167.0" font-family="DejaVu Sans, sans-serif" font-size="16" fill="#172438" text-anchor="middle">n = 1: waits to add 1</text>
+<rect x="25" y="199" width="245" height="48" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="147.5" y="229.0" font-family="DejaVu Sans, sans-serif" font-size="16" fill="#172438" text-anchor="middle">n = 2: waits to add 2</text>
+<rect x="25" y="261" width="245" height="48" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="147.5" y="291.0" font-family="DejaVu Sans, sans-serif" font-size="16" fill="#172438" text-anchor="middle">n = 3: waits to add 3</text>
+<text x="25" y="348" font-family="DejaVu Sans, sans-serif" font-size="16" fill="#172438" text-anchor="start">4 live sum_to frames</text>
+<rect x="322" y="137" width="245" height="48" rx="6" fill="#dcf3eb" stroke="#52708c" stroke-width="1.4"/>
+<text x="444.5" y="167.0" font-family="DejaVu Sans, sans-serif" font-size="16" fill="#172438" text-anchor="middle">n = 1: resume 1 + 0</text>
+<rect x="322" y="199" width="245" height="48" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="444.5" y="229.0" font-family="DejaVu Sans, sans-serif" font-size="16" fill="#172438" text-anchor="middle">n = 2: waits to add 2</text>
+<rect x="322" y="261" width="245" height="48" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="444.5" y="291.0" font-family="DejaVu Sans, sans-serif" font-size="16" fill="#172438" text-anchor="middle">n = 3: waits to add 3</text>
+<text x="322" y="348" font-family="DejaVu Sans, sans-serif" font-size="16" fill="#172438" text-anchor="start">3 live sum_to frames</text>
+<rect x="620" y="261" width="245" height="48" rx="6" fill="#f2f4f6" stroke="#52708c" stroke-width="1.4"/>
+<text x="742.5" y="291.0" font-family="DejaVu Sans, sans-serif" font-size="16" fill="#172438" text-anchor="middle">No sum_to frame</text>
+<text x="620" y="348" font-family="DejaVu Sans, sans-serif" font-size="16" fill="#172438" text-anchor="start">Caller receives 6</text>
+<text x="25" y="376" font-family="DejaVu Sans, sans-serif" font-size="16" fill="#172438" text-anchor="start">Each frame has its own local bindings. Top live frame resumes first.</text>
+</svg>

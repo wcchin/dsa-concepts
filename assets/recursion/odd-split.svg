@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="380" viewBox="0 0 940 380" role="img" aria-labelledby="title desc">
+<title id="title">Seven items split into nearly equal halves</title><desc id="desc">Size seven divides into three and four. Their children are one and two, and two and two. Six further singleton leaves occur at depth three; the existing singleton at depth two does not split.</desc>
+<defs><marker id="blue" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8" fill="#2852a3"/></marker><marker id="green" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8" fill="#137c65"/></marker></defs>
+<rect width="940" height="380" rx="8" fill="white"/>
+<text x="25" y="30" font-family="DejaVu Sans, sans-serif" font-size="20" fill="#172438" text-anchor="start">Odd size: 7 becomes 3 + 4, with a deepest path of 3 edges</text>
+<rect x="430" y="55" width="80" height="38" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="470.0" y="80.0" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="middle">7</text>
+<rect x="195" y="130" width="80" height="38" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="235.0" y="155.0" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="middle">3</text>
+<rect x="665" y="130" width="80" height="38" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="705.0" y="155.0" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="middle">4</text>
+<rect x="77.5" y="205" width="80" height="38" rx="6" fill="#dcf3eb" stroke="#52708c" stroke-width="1.4"/>
+<text x="117.5" y="230.0" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="middle">1</text>
+<rect x="312.5" y="205" width="80" height="38" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="352.5" y="230.0" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="middle">2</text>
+<rect x="547.5" y="205" width="80" height="38" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="587.5" y="230.0" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="middle">2</text>
+<rect x="782.5" y="205" width="80" height="38" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="822.5" y="230.0" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="middle">2</text>
+<rect x="253.75" y="280" width="80" height="38" rx="6" fill="#dcf3eb" stroke="#52708c" stroke-width="1.4"/>
+<text x="293.75" y="305.0" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="middle">1</text>
+<rect x="371.25" y="280" width="80" height="38" rx="6" fill="#dcf3eb" stroke="#52708c" stroke-width="1.4"/>
+<text x="411.25" y="305.0" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="middle">1</text>
+<rect x="488.75" y="280" width="80" height="38" rx="6" fill="#dcf3eb" stroke="#52708c" stroke-width="1.4"/>
+<text x="528.75" y="305.0" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="middle">1</text>
+<rect x="606.25" y="280" width="80" height="38" rx="6" fill="#dcf3eb" stroke="#52708c" stroke-width="1.4"/>
+<text x="646.25" y="305.0" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="middle">1</text>
+<rect x="723.75" y="280" width="80" height="38" rx="6" fill="#dcf3eb" stroke="#52708c" stroke-width="1.4"/>
+<text x="763.75" y="305.0" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="middle">1</text>
+<rect x="841.25" y="280" width="80" height="38" rx="6" fill="#dcf3eb" stroke="#52708c" stroke-width="1.4"/>
+<text x="881.25" y="305.0" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="middle">1</text>
+<path d="M470 93 L235 126" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<path d="M470 93 L705 126" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<path d="M235 168 L117.5 201" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<path d="M235 168 L352.5 201" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<path d="M705 168 L587.5 201" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<path d="M705 168 L822.5 201" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<path d="M352.5 243 L293.75 276" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<path d="M352.5 243 L411.25 276" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<path d="M587.5 243 L528.75 276" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<path d="M587.5 243 L646.25 276" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<path d="M822.5 243 L763.75 276" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<path d="M822.5 243 L881.25 276" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<text x="25" y="361" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="start">Seven leaves in total; the singleton at depth 2 stops immediately.</text>
+</svg>

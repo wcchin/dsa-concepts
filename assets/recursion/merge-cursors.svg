@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="790" height="375" viewBox="0 0 790 375" role="img" aria-labelledby="title desc">
+<title id="title">Merge cursors after appending five and eight</title><desc id="desc">The first values of each sorted half are consumed. Index i points to 12, j to 14. The result currently contains 5 and 8; 12 is selected next.</desc>
+<defs><marker id="blue" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8" fill="#2852a3"/></marker><marker id="green" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8" fill="#137c65"/></marker></defs>
+<rect width="790" height="375" rx="8" fill="white"/>
+<text x="22" y="30" font-family="DejaVu Sans, sans-serif" font-size="19" fill="#172438" text-anchor="start">After appending 5 and 8, compare the next unused values</text>
+<text x="25" y="125" font-family="DejaVu Sans, sans-serif" font-size="18" fill="#172438" text-anchor="start">left</text>
+<rect x="140" y="98" width="92" height="48" rx="6" fill="#eceff3" stroke="#52708c" stroke-width="1.4"/>
+<text x="186.0" y="128.0" font-family="DejaVu Sans, sans-serif" font-size="21" fill="#172438" text-anchor="middle">5</text>
+<rect x="250" y="98" width="92" height="48" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="296.0" y="128.0" font-family="DejaVu Sans, sans-serif" font-size="21" fill="#172438" text-anchor="middle">12</text>
+<rect x="360" y="98" width="92" height="48" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="406.0" y="128.0" font-family="DejaVu Sans, sans-serif" font-size="21" fill="#172438" text-anchor="middle">27</text>
+<rect x="470" y="98" width="92" height="48" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="516.0" y="128.0" font-family="DejaVu Sans, sans-serif" font-size="21" fill="#172438" text-anchor="middle">38</text>
+<text x="140" y="175" font-family="DejaVu Sans, sans-serif" font-size="15" fill="#65758c" text-anchor="start">consumed</text>
+<text x="296" y="73" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="middle">i = 1</text>
+<path d="M296 78 V93" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<text x="25" y="262" font-family="DejaVu Sans, sans-serif" font-size="18" fill="#172438" text-anchor="start">right</text>
+<rect x="140" y="235" width="92" height="48" rx="6" fill="#eceff3" stroke="#52708c" stroke-width="1.4"/>
+<text x="186.0" y="265.0" font-family="DejaVu Sans, sans-serif" font-size="21" fill="#172438" text-anchor="middle">8</text>
+<rect x="250" y="235" width="92" height="48" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="296.0" y="265.0" font-family="DejaVu Sans, sans-serif" font-size="21" fill="#172438" text-anchor="middle">14</text>
+<rect x="360" y="235" width="92" height="48" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="406.0" y="265.0" font-family="DejaVu Sans, sans-serif" font-size="21" fill="#172438" text-anchor="middle">19</text>
+<rect x="470" y="235" width="92" height="48" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="516.0" y="265.0" font-family="DejaVu Sans, sans-serif" font-size="21" fill="#172438" text-anchor="middle">31</text>
+<text x="140" y="312" font-family="DejaVu Sans, sans-serif" font-size="15" fill="#65758c" text-anchor="start">consumed</text>
+<text x="296" y="210" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="middle">j = 1</text>
+<path d="M296 215 V230" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<rect x="600" y="145" width="160" height="55" rx="6" fill="#dcf3eb" stroke="#52708c" stroke-width="1.4"/>
+<text x="680.0" y="178.5" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="middle">result: [5, 8]</text>
+<text x="140" y="352" font-family="DejaVu Sans, sans-serif" font-size="19" fill="#137c65" text-anchor="start">12 ≤ 14 → append 12, then increment i only</text>
+</svg>

@@ -2,7 +2,7 @@
 
 Find a concept by its name or browse concepts by topic.
 
-The wiki is being developed progressively. Topics 1 (Foundations), 2 (Analysing algorithms) and 6 (Maps, Sets and Hashing) have developed explanations. Other topics currently provide scope outlines.
+The wiki is being developed progressively. Topics 1 (Foundations), 2 (Analysing algorithms), 3 (Recursion) and 6 (Maps, Sets and Hashing) have developed explanations. Other topics currently provide scope outlines.
 
 ## Browse by topic
 
@@ -23,7 +23,7 @@ The wiki is being developed progressively. Topics 1 (Foundations), 2 (Analysing 
 
 ## Find a concept alphabetically
 
-This index covers developed explanations in Topics 1, 2 and 6. Entries link directly to the relevant section.
+This index covers developed explanations in Topics 1, 2, 3 and 6. Entries link directly to the relevant section.
 
 ### A
 
@@ -39,6 +39,8 @@ This index covers developed explanations in Topics 1, 2 and 6. Entries link dire
 - [Average-case analysis](topics/analysis/cases-and-bounds.md#average-case)
 ### B
 
+- [Balanced versus unbalanced recursion](topics/recursion/recursion-costs.md#balanced-vs-unbalanced)
+- [Base and recursive cases](topics/recursion/recursive-calls.md#base-and-recursive-cases)
 - [Basic operation](topics/analysis/counting-work.md#cost-model)
 - [Best and worst cases](topics/analysis/cases-and-bounds.md#best-and-worst-cases)
 - [Big-O (upper bound)](topics/analysis/cases-and-bounds.md#big-o)
@@ -49,6 +51,9 @@ This index covers developed explanations in Topics 1, 2 and 6. Entries link dire
 - [Built-in collections](topics/foundations/collections-and-classes.md#built-in-collections)
 ### C
 
+- [Call frames](topics/recursion/call-stack.md#stack-frames)
+- [Call stack](topics/recursion/call-stack.md#stack-frames)
+- [Calls and returns](topics/recursion/recursive-calls.md#calls-and-returns)
 - [Cases versus bounds](topics/analysis/cases-and-bounds.md#cases-versus-bounds)
 - [Classes and instances](topics/foundations/collections-and-classes.md#classes-and-instances)
 - [Collision](topics/maps-sets-hashing/hashing.md#hash-collisions-and-key-equality)
@@ -56,6 +61,7 @@ This index covers developed explanations in Topics 1, 2 and 6. Entries link dire
 - [Comprehensions](topics/foundations/collections-and-classes.md#unpacking-and-comprehensions)
 - [Consecutive loops](topics/analysis/code-and-space.md#consecutive-loops)
 - [Constant versus linear work](topics/analysis/counting-work.md#constant-vs-linear-work)
+- [Correctness of recursive solutions](topics/recursion/recursive-calls.md#recursive-correctness)
 - [Cost model](topics/analysis/counting-work.md#cost-model)
 ### D
 
@@ -63,6 +69,7 @@ This index covers developed explanations in Topics 1, 2 and 6. Entries link dire
 - [Deep copy](topics/foundations/mutation-and-copying.md#deep-copy)
 - [Deletion in open addressing](topics/maps-sets-hashing/open-addressing.md#deletion-and-tombstones)
 - [Dictionary (`dict`)](topics/maps-sets-hashing/maps.md#map-operations-in-python)
+- [Divide-and-conquer](topics/recursion/divide-and-conquer.md#divide-conquer-combine)
 - [Dominant term](topics/analysis/growth-rates.md#dominant-term)
 - [Doubling the input](topics/analysis/growth-rates.md#doubling-input)
 ### E
@@ -74,6 +81,7 @@ This index covers developed explanations in Topics 1, 2 and 6. Entries link dire
 - [Expected complexity](topics/maps-sets-hashing/performance.md#expected-and-amortised-complexity)
 ### F
 
+- [Front removal from a list](topics/recursion/implementation-costs.md#front-removal)
 - [Function arguments and shared objects](topics/foundations/mutation-and-copying.md#function-arguments)
 ### G
 
@@ -86,6 +94,7 @@ This index covers developed explanations in Topics 1, 2 and 6. Entries link dire
 ### I
 
 - [Immutable objects](topics/foundations/mutation-and-copying.md#mutability)
+- [Index-based merging](topics/recursion/implementation-costs.md#index-based-merge)
 - [Input size](topics/analysis/counting-work.md#input-size)
 - [Insertion order](topics/maps-sets-hashing/maps.md#dictionary-insertion-order)
 - [Invariants](topics/foundations/collections-and-classes.md#invariants)
@@ -96,11 +105,15 @@ This index covers developed explanations in Topics 1, 2 and 6. Entries link dire
 
 - [Linear probing](topics/maps-sets-hashing/open-addressing.md#linear-probing-and-wraparound)
 - [Linked objects](topics/foundations/collections-and-classes.md#linked-objects)
+- [List slicing costs](topics/recursion/implementation-costs.md#slicing-cost)
 - [Load factor](topics/maps-sets-hashing/performance.md#load-factor-and-collision-strategies)
 - [Logarithms and base](topics/analysis/growth-rates.md#logarithms-and-base)
 ### M
 
 - [Map ADT](topics/maps-sets-hashing/maps.md#map-adt-and-operations)
+- [Merge invariant](topics/recursion/divide-and-conquer.md#merge-invariant)
+- [Merge sort](topics/recursion/divide-and-conquer.md#merge-sort-code)
+- [Merging sorted sequences](topics/recursion/divide-and-conquer.md#merge-two-sorted-sequences)
 - [Methods](topics/foundations/collections-and-classes.md#classes-and-instances)
 - [Missing keys](topics/maps-sets-hashing/maps.md#missing-keys-and-none-values)
 - [Mutability](topics/foundations/mutation-and-copying.md#mutability)
@@ -113,18 +126,27 @@ This index covers developed explanations in Topics 1, 2 and 6. Entries link dire
 ### O
 
 - [Objects and references](topics/foundations/objects-and-references.md#objects-and-bindings)
+- [Odd-sized recursive splits](topics/recursion/recursion-costs.md#balanced-and-odd-splits)
 - [Open addressing](topics/maps-sets-hashing/open-addressing.md)
 - [Operation counts](topics/analysis/counting-work.md#operation-count)
 ### P
 
 - [Probing](topics/maps-sets-hashing/open-addressing.md#linear-probing-and-wraparound)
+- [Progress measure](topics/recursion/recursive-calls.md#recursive-termination)
+- [Python recursion limit](topics/recursion/call-stack.md#python-recursion-limit)
 ### R
 
 - [Rebinding](topics/foundations/mutation-and-copying.md#mutation-and-rebinding)
+- [Recurrences](topics/recursion/recursion-costs.md#recurrences)
+- [Recursion](topics/recursion/recursive-calls.md#recursive-definition)
+- [Recursion depth and total calls](topics/recursion/call-stack.md#depth-and-calls)
+- [Recursion-tree level work](topics/recursion/recursion-costs.md#recursion-level-work)
+- [Recursive space and peak allocation](topics/recursion/recursion-costs.md#recursive-space)
 - [Rehashing](topics/maps-sets-hashing/performance.md#why-changing-capacity-requires-rehashing)
 - [Repeated halving](topics/analysis/code-and-space.md#repeated-halving)
 - [Replacement in a Map](topics/maps-sets-hashing/maps.md#map-adt-and-operations)
 - [Representation and required operations](topics/foundations/data-and-algorithms.md#representation-and-operations)
+- [Return versus print](topics/recursion/call-stack.md#return-vs-print)
 ### S
 
 - [Self](topics/foundations/collections-and-classes.md#self)
@@ -136,11 +158,15 @@ This index covers developed explanations in Topics 1, 2 and 6. Entries link dire
 - [Set union](topics/maps-sets-hashing/sets.md#union-intersection-and-difference)
 - [Shallow copy](topics/foundations/mutation-and-copying.md#shallow-copy)
 - [Space complexity](topics/analysis/code-and-space.md#space-complexity)
+- [Splitting and combining](topics/recursion/divide-and-conquer.md#split-and-combine)
+- [Strategy and representation costs](topics/recursion/implementation-costs.md#strategy-and-representation)
 ### T
 
+- [Termination of recursion](topics/recursion/recursive-calls.md#recursive-termination)
 - [Tight and loose bounds](topics/analysis/cases-and-bounds.md#tight-and-loose-bounds)
 - [Timing and analysis](topics/analysis/counting-work.md#measurement-and-analysis)
 - [Tombstone](topics/maps-sets-hashing/open-addressing.md#deletion-and-tombstones)
+- [Total recursive calls](topics/recursion/recursion-costs.md#total-calls)
 - [Type hints](topics/foundations/collections-and-classes.md#encapsulation-and-hints)
 ### U
 
@@ -234,6 +260,48 @@ This index covers developed explanations in Topics 1, 2 and 6. Entries link dire
 - [Space complexity](topics/analysis/code-and-space.md#space-complexity)
 - [Auxiliary and output space](topics/analysis/code-and-space.md#auxiliary-and-output-space)
 - [Complete complexity claims](topics/analysis/code-and-space.md#complete-complexity-claim)
+### 3. Recursion and divide-and-conquer
+
+**Recursive calls and termination**
+
+- [Recursion](topics/recursion/recursive-calls.md#recursive-definition)
+- [Base and recursive cases](topics/recursion/recursive-calls.md#base-and-recursive-cases)
+- [Calls and returns](topics/recursion/recursive-calls.md#calls-and-returns)
+- [Termination of recursion](topics/recursion/recursive-calls.md#recursive-termination)
+- [Progress measure](topics/recursion/recursive-calls.md#recursive-termination)
+- [Correctness of recursive solutions](topics/recursion/recursive-calls.md#recursive-correctness)
+
+**The call stack**
+
+- [Call frames](topics/recursion/call-stack.md#stack-frames)
+- [Call stack](topics/recursion/call-stack.md#stack-frames)
+- [Return versus print](topics/recursion/call-stack.md#return-vs-print)
+- [Recursion depth and total calls](topics/recursion/call-stack.md#depth-and-calls)
+- [Python recursion limit](topics/recursion/call-stack.md#python-recursion-limit)
+
+**Divide, conquer and combine**
+
+- [Divide-and-conquer](topics/recursion/divide-and-conquer.md#divide-conquer-combine)
+- [Splitting and combining](topics/recursion/divide-and-conquer.md#split-and-combine)
+- [Merging sorted sequences](topics/recursion/divide-and-conquer.md#merge-two-sorted-sequences)
+- [Merge invariant](topics/recursion/divide-and-conquer.md#merge-invariant)
+- [Merge sort](topics/recursion/divide-and-conquer.md#merge-sort-code)
+
+**Recursion trees and costs**
+
+- [Odd-sized recursive splits](topics/recursion/recursion-costs.md#balanced-and-odd-splits)
+- [Balanced versus unbalanced recursion](topics/recursion/recursion-costs.md#balanced-vs-unbalanced)
+- [Recursion-tree level work](topics/recursion/recursion-costs.md#recursion-level-work)
+- [Recurrences](topics/recursion/recursion-costs.md#recurrences)
+- [Total recursive calls](topics/recursion/recursion-costs.md#total-calls)
+- [Recursive space and peak allocation](topics/recursion/recursion-costs.md#recursive-space)
+
+**Implementation costs**
+
+- [Front removal from a list](topics/recursion/implementation-costs.md#front-removal)
+- [Index-based merging](topics/recursion/implementation-costs.md#index-based-merge)
+- [List slicing costs](topics/recursion/implementation-costs.md#slicing-cost)
+- [Strategy and representation costs](topics/recursion/implementation-costs.md#strategy-and-representation)
 ### 6. Maps, sets and hashing
 
 **Maps**

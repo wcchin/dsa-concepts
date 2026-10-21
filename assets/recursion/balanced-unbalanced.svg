@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="620" viewBox="0 0 900 620" role="img" aria-labelledby="title desc">
+<title id="title">Balanced and unbalanced size-eight trees</title><desc id="desc">The balanced tree reaches size one in three edges. Repeatedly splitting off one item reaches a longest path of seven edges.</desc>
+<defs><marker id="blue" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8" fill="#2852a3"/></marker><marker id="green" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8" fill="#137c65"/></marker></defs>
+<rect width="900" height="620" rx="8" fill="white"/>
+<text x="25" y="30" font-family="DejaVu Sans, sans-serif" font-size="20" fill="#172438" text-anchor="start">Midpoint splitting: longest path has 3 edges</text>
+<rect x="375.0" y="48" width="150" height="34" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="450.0" y="71.0" font-family="DejaVu Sans, sans-serif" font-size="16" fill="#172438" text-anchor="middle">8</text>
+<rect x="177.5" y="107" width="150" height="34" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="252.5" y="130.0" font-family="DejaVu Sans, sans-serif" font-size="16" fill="#172438" text-anchor="middle">4</text>
+<path d="M450.0 82 L252.5 103" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<rect x="572.5" y="107" width="150" height="34" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="647.5" y="130.0" font-family="DejaVu Sans, sans-serif" font-size="16" fill="#172438" text-anchor="middle">4</text>
+<path d="M450.0 82 L647.5 103" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<rect x="78.75" y="166" width="150" height="34" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="153.75" y="189.0" font-family="DejaVu Sans, sans-serif" font-size="16" fill="#172438" text-anchor="middle">2</text>
+<path d="M252.5 141 L153.75 162" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<rect x="276.25" y="166" width="150" height="34" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="351.25" y="189.0" font-family="DejaVu Sans, sans-serif" font-size="16" fill="#172438" text-anchor="middle">2</text>
+<path d="M252.5 141 L351.25 162" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<rect x="473.75" y="166" width="150" height="34" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="548.75" y="189.0" font-family="DejaVu Sans, sans-serif" font-size="16" fill="#172438" text-anchor="middle">2</text>
+<path d="M647.5 141 L548.75 162" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<rect x="671.25" y="166" width="150" height="34" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="746.25" y="189.0" font-family="DejaVu Sans, sans-serif" font-size="16" fill="#172438" text-anchor="middle">2</text>
+<path d="M647.5 141 L746.25 162" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<rect x="61.0" y="225" width="86.75" height="34" rx="6" fill="#dcf3eb" stroke="#52708c" stroke-width="1.4"/>
+<text x="104.375" y="248.0" font-family="DejaVu Sans, sans-serif" font-size="16" fill="#172438" text-anchor="middle">1</text>
+<path d="M153.75 200 L104.375 221" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<rect x="159.75" y="225" width="86.75" height="34" rx="6" fill="#dcf3eb" stroke="#52708c" stroke-width="1.4"/>
+<text x="203.125" y="248.0" font-family="DejaVu Sans, sans-serif" font-size="16" fill="#172438" text-anchor="middle">1</text>
+<path d="M153.75 200 L203.125 221" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<rect x="258.5" y="225" width="86.75" height="34" rx="6" fill="#dcf3eb" stroke="#52708c" stroke-width="1.4"/>
+<text x="301.875" y="248.0" font-family="DejaVu Sans, sans-serif" font-size="16" fill="#172438" text-anchor="middle">1</text>
+<path d="M351.25 200 L301.875 221" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<rect x="357.25" y="225" width="86.75" height="34" rx="6" fill="#dcf3eb" stroke="#52708c" stroke-width="1.4"/>
+<text x="400.625" y="248.0" font-family="DejaVu Sans, sans-serif" font-size="16" fill="#172438" text-anchor="middle">1</text>
+<path d="M351.25 200 L400.625 221" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<rect x="456.0" y="225" width="86.75" height="34" rx="6" fill="#dcf3eb" stroke="#52708c" stroke-width="1.4"/>
+<text x="499.375" y="248.0" font-family="DejaVu Sans, sans-serif" font-size="16" fill="#172438" text-anchor="middle">1</text>
+<path d="M548.75 200 L499.375 221" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<rect x="554.75" y="225" width="86.75" height="34" rx="6" fill="#dcf3eb" stroke="#52708c" stroke-width="1.4"/>
+<text x="598.125" y="248.0" font-family="DejaVu Sans, sans-serif" font-size="16" fill="#172438" text-anchor="middle">1</text>
+<path d="M548.75 200 L598.125 221" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<rect x="653.5" y="225" width="86.75" height="34" rx="6" fill="#dcf3eb" stroke="#52708c" stroke-width="1.4"/>
+<text x="696.875" y="248.0" font-family="DejaVu Sans, sans-serif" font-size="16" fill="#172438" text-anchor="middle">1</text>
+<path d="M746.25 200 L696.875 221" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<rect x="752.25" y="225" width="86.75" height="34" rx="6" fill="#dcf3eb" stroke="#52708c" stroke-width="1.4"/>
+<text x="795.625" y="248.0" font-family="DejaVu Sans, sans-serif" font-size="16" fill="#172438" text-anchor="middle">1</text>
+<path d="M746.25 200 L795.625 221" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<text x="25" y="300" font-family="DejaVu Sans, sans-serif" font-size="20" fill="#172438" text-anchor="start">Split off one item: longest path has 7 edges</text>
+<rect x="90" y="328" width="65" height="31" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="122.5" y="349.5" font-family="DejaVu Sans, sans-serif" font-size="15" fill="#172438" text-anchor="middle">8</text>
+<path d="M155 350 L163 371" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<rect x="30" y="367" width="42" height="27" rx="6" fill="#dcf3eb" stroke="#52708c" stroke-width="1.4"/>
+<text x="51.0" y="386.5" font-family="DejaVu Sans, sans-serif" font-size="14" fill="#172438" text-anchor="middle">1</text>
+<path d="M100 359 L70 363" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<rect x="167" y="358" width="65" height="31" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="199.5" y="379.5" font-family="DejaVu Sans, sans-serif" font-size="15" fill="#172438" text-anchor="middle">7</text>
+<path d="M232 380 L240 401" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<rect x="107" y="397" width="42" height="27" rx="6" fill="#dcf3eb" stroke="#52708c" stroke-width="1.4"/>
+<text x="128.0" y="416.5" font-family="DejaVu Sans, sans-serif" font-size="14" fill="#172438" text-anchor="middle">1</text>
+<path d="M177 389 L147 393" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<rect x="244" y="388" width="65" height="31" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="276.5" y="409.5" font-family="DejaVu Sans, sans-serif" font-size="15" fill="#172438" text-anchor="middle">6</text>
+<path d="M309 410 L317 431" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<rect x="184" y="427" width="42" height="27" rx="6" fill="#dcf3eb" stroke="#52708c" stroke-width="1.4"/>
+<text x="205.0" y="446.5" font-family="DejaVu Sans, sans-serif" font-size="14" fill="#172438" text-anchor="middle">1</text>
+<path d="M254 419 L224 423" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<rect x="321" y="418" width="65" height="31" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="353.5" y="439.5" font-family="DejaVu Sans, sans-serif" font-size="15" fill="#172438" text-anchor="middle">5</text>
+<path d="M386 440 L394 461" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<rect x="261" y="457" width="42" height="27" rx="6" fill="#dcf3eb" stroke="#52708c" stroke-width="1.4"/>
+<text x="282.0" y="476.5" font-family="DejaVu Sans, sans-serif" font-size="14" fill="#172438" text-anchor="middle">1</text>
+<path d="M331 449 L301 453" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<rect x="398" y="448" width="65" height="31" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="430.5" y="469.5" font-family="DejaVu Sans, sans-serif" font-size="15" fill="#172438" text-anchor="middle">4</text>
+<path d="M463 470 L471 491" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<rect x="338" y="487" width="42" height="27" rx="6" fill="#dcf3eb" stroke="#52708c" stroke-width="1.4"/>
+<text x="359.0" y="506.5" font-family="DejaVu Sans, sans-serif" font-size="14" fill="#172438" text-anchor="middle">1</text>
+<path d="M408 479 L378 483" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<rect x="475" y="478" width="65" height="31" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="507.5" y="499.5" font-family="DejaVu Sans, sans-serif" font-size="15" fill="#172438" text-anchor="middle">3</text>
+<path d="M540 500 L548 521" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<rect x="415" y="517" width="42" height="27" rx="6" fill="#dcf3eb" stroke="#52708c" stroke-width="1.4"/>
+<text x="436.0" y="536.5" font-family="DejaVu Sans, sans-serif" font-size="14" fill="#172438" text-anchor="middle">1</text>
+<path d="M485 509 L455 513" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<rect x="552" y="508" width="65" height="31" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="584.5" y="529.5" font-family="DejaVu Sans, sans-serif" font-size="15" fill="#172438" text-anchor="middle">2</text>
+<path d="M617 530 L625 551" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<rect x="492" y="547" width="42" height="27" rx="6" fill="#dcf3eb" stroke="#52708c" stroke-width="1.4"/>
+<text x="513.0" y="566.5" font-family="DejaVu Sans, sans-serif" font-size="14" fill="#172438" text-anchor="middle">1</text>
+<path d="M562 539 L532 543" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<rect x="629" y="538" width="65" height="31" rx="6" fill="#dcf3eb" stroke="#52708c" stroke-width="1.4"/>
+<text x="661.5" y="559.5" font-family="DejaVu Sans, sans-serif" font-size="15" fill="#172438" text-anchor="middle">1</text>
+<text x="25" y="592" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="start">Both terminate. Their shapes imply different depth and local-work sums.</text>
+</svg>

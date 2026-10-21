@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="390" viewBox="0 0 840 390" role="img" aria-labelledby="title desc">
+<title id="title">Calls descend; results return</title><desc id="desc">Four calls descend from sum_to(3) to sum_to(0). Separate return arrows show the values 0, 1 and 3 returning to waiting additions; the outer result is 6.</desc>
+<defs><marker id="blue" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8" fill="#2852a3"/></marker><marker id="green" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8" fill="#137c65"/></marker></defs>
+<rect width="840" height="390" rx="8" fill="white"/>
+<text x="22" y="32" font-family="DejaVu Sans, sans-serif" font-size="20" fill="#172438" text-anchor="start">Calls descend; each caller keeps its pending addition</text>
+<rect x="35" y="58" width="230" height="45" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="150.0" y="86.5" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="middle">sum_to(3)</text>
+<path d="M63 103 V120 H163 V128" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<text x="285" y="85" font-family="DejaVu Sans, sans-serif" font-size="16" fill="#172438" text-anchor="start">waits to add 3</text>
+<rect x="135" y="132" width="230" height="45" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="250.0" y="160.5" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="middle">sum_to(2)</text>
+<path d="M163 177 V194 H263 V202" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<text x="385" y="159" font-family="DejaVu Sans, sans-serif" font-size="16" fill="#172438" text-anchor="start">waits to add 2</text>
+<rect x="235" y="206" width="230" height="45" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="350.0" y="234.5" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="middle">sum_to(1)</text>
+<path d="M263 251 V268 H363 V276" fill="none" stroke="#2852a3" stroke-width="2" marker-end="url(#blue)"/>
+<text x="485" y="233" font-family="DejaVu Sans, sans-serif" font-size="16" fill="#172438" text-anchor="start">waits to add 1</text>
+<rect x="335" y="280" width="230" height="45" rx="6" fill="#dcf3eb" stroke="#52708c" stroke-width="1.4"/>
+<text x="450.0" y="308.5" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="middle">sum_to(0)</text>
+<path d="M550 280 V260 H450 V252" fill="none" stroke="#137c65" stroke-width="2" marker-end="url(#green)"/>
+<text x="575" y="268" font-family="DejaVu Sans, sans-serif" font-size="16" fill="#137c65" text-anchor="start">return 0</text>
+<path d="M450 206 V186 H350 V178" fill="none" stroke="#137c65" stroke-width="2" marker-end="url(#green)"/>
+<text x="475" y="194" font-family="DejaVu Sans, sans-serif" font-size="16" fill="#137c65" text-anchor="start">return 1</text>
+<path d="M350 132 V112 H250 V104" fill="none" stroke="#137c65" stroke-width="2" marker-end="url(#green)"/>
+<text x="375" y="120" font-family="DejaVu Sans, sans-serif" font-size="16" fill="#137c65" text-anchor="start">return 3</text>
+<text x="35" y="368" font-family="DejaVu Sans, sans-serif" font-size="19" fill="#137c65" text-anchor="start">Finish: sum_to(3) returns 3 + 3 = 6</text>
+</svg>

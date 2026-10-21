@@ -22,6 +22,12 @@ project:
         - file: topics/analysis/cases-and-bounds.md
         - file: topics/analysis/code-and-space.md
     - file: topics/recursion/recursion.md
+      children:
+        - file: topics/recursion/recursive-calls.md
+        - file: topics/recursion/call-stack.md
+        - file: topics/recursion/divide-and-conquer.md
+        - file: topics/recursion/recursion-costs.md
+        - file: topics/recursion/implementation-costs.md
     - file: topics/sorting/sorting.md
     - file: topics/linear-structures/linear-structures.md
     - file: topics/maps-sets-hashing/maps-sets-hashing.md

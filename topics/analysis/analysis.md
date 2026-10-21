@@ -17,4 +17,4 @@ You should be able to read basic Python loops and functions. Familiarity with po
 
 By the end, you should be able to justify a cost expression, distinguish best/worst/average cases from O/Ω/Θ notation, and state time and space claims with their assumptions.
 
-Use the [concept index](../../concepts.md) for a particular term. Next is the planned [Recursion and divide-and-conquer](../recursion/recursion.md) topic. For a later application, see [hash-table performance](../maps-sets-hashing/performance.md).
+Use the [concept index](../../concepts.md) for a particular term. Continue with [Recursion and divide-and-conquer](../recursion/recursion.md) topic. For a later application, see [hash-table performance](../maps-sets-hashing/performance.md).

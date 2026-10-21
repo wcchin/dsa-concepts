@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="950" height="400" viewBox="0 0 950 400" role="img" aria-labelledby="title desc">
+<title id="title">Work per level in balanced merge sort</title><desc id="desc">For eight items the level sizes are eight; four plus four; four copies of two; eight singleton leaves. Each of three merge levels writes eight output items.</desc>
+<defs><marker id="blue" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8" fill="#2852a3"/></marker><marker id="green" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8" fill="#137c65"/></marker></defs>
+<rect width="950" height="400" rx="8" fill="white"/>
+<text x="24" y="30" font-family="DejaVu Sans, sans-serif" font-size="20" fill="#172438" text-anchor="start">Sizes add to 8 across each balanced level</text>
+<text x="25" y="91" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="start">level 0</text>
+<rect x="135.0" y="63" width="533.0" height="45" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="401.5" y="91.5" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="middle">8</text>
+<text x="705" y="82" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="start">1 × 8 = 8</text>
+<text x="705" y="106" font-family="DejaVu Sans, sans-serif" font-size="15" fill="#137c65" text-anchor="start">8 output writes</text>
+<text x="25" y="168" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="start">level 1</text>
+<rect x="135.0" y="140" width="263.0" height="45" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="266.5" y="168.5" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="middle">4</text>
+<rect x="405.0" y="140" width="263.0" height="45" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="536.5" y="168.5" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="middle">4</text>
+<text x="705" y="159" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="start">2 × 4 = 8</text>
+<text x="705" y="183" font-family="DejaVu Sans, sans-serif" font-size="15" fill="#137c65" text-anchor="start">8 output writes</text>
+<text x="25" y="245" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="start">level 2</text>
+<rect x="135.0" y="217" width="128.0" height="45" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="199.0" y="245.5" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="middle">2</text>
+<rect x="270.0" y="217" width="128.0" height="45" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="334.0" y="245.5" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="middle">2</text>
+<rect x="405.0" y="217" width="128.0" height="45" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="469.0" y="245.5" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="middle">2</text>
+<rect x="540.0" y="217" width="128.0" height="45" rx="6" fill="#eaf2fb" stroke="#52708c" stroke-width="1.4"/>
+<text x="604.0" y="245.5" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="middle">2</text>
+<text x="705" y="236" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="start">4 × 2 = 8</text>
+<text x="705" y="260" font-family="DejaVu Sans, sans-serif" font-size="15" fill="#137c65" text-anchor="start">8 output writes</text>
+<text x="25" y="322" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="start">level 3</text>
+<rect x="135.0" y="294" width="60.5" height="45" rx="6" fill="#dcf3eb" stroke="#52708c" stroke-width="1.4"/>
+<text x="165.25" y="322.5" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="middle">1</text>
+<rect x="202.5" y="294" width="60.5" height="45" rx="6" fill="#dcf3eb" stroke="#52708c" stroke-width="1.4"/>
+<text x="232.75" y="322.5" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="middle">1</text>
+<rect x="270.0" y="294" width="60.5" height="45" rx="6" fill="#dcf3eb" stroke="#52708c" stroke-width="1.4"/>
+<text x="300.25" y="322.5" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="middle">1</text>
+<rect x="337.5" y="294" width="60.5" height="45" rx="6" fill="#dcf3eb" stroke="#52708c" stroke-width="1.4"/>
+<text x="367.75" y="322.5" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="middle">1</text>
+<rect x="405.0" y="294" width="60.5" height="45" rx="6" fill="#dcf3eb" stroke="#52708c" stroke-width="1.4"/>
+<text x="435.25" y="322.5" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="middle">1</text>
+<rect x="472.5" y="294" width="60.5" height="45" rx="6" fill="#dcf3eb" stroke="#52708c" stroke-width="1.4"/>
+<text x="502.75" y="322.5" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="middle">1</text>
+<rect x="540.0" y="294" width="60.5" height="45" rx="6" fill="#dcf3eb" stroke="#52708c" stroke-width="1.4"/>
+<text x="570.25" y="322.5" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="middle">1</text>
+<rect x="607.5" y="294" width="60.5" height="45" rx="6" fill="#dcf3eb" stroke="#52708c" stroke-width="1.4"/>
+<text x="637.75" y="322.5" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="middle">1</text>
+<text x="705" y="313" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="start">8 × 1 = 8</text>
+<text x="705" y="337" font-family="DejaVu Sans, sans-serif" font-size="15" fill="#137c65" text-anchor="start">base cases</text>
+<text x="25" y="385" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#172438" text-anchor="start">3 merge levels × 8 writes = 24 merge-output writes (not a count of comparisons).</text>
+</svg>
