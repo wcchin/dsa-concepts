@@ -2,7 +2,7 @@
 
 Find a concept by its name or browse concepts by topic.
 
-The wiki is being developed progressively. Topics 1–8, 10 and 12 have developed explanations. Other topics currently provide scope outlines.
+The wiki is being developed progressively. Topics 1–10 and 12 have developed explanations. Other topics currently provide scope outlines.
 
 ## Browse by topic
 
@@ -23,7 +23,7 @@ The wiki is being developed progressively. Topics 1–8, 10 and 12 have develope
 
 ## Find a concept alphabetically
 
-This index covers developed explanations in Topics 1–8, 10 and 12. Entries link directly to the relevant section.
+This index covers developed explanations in Topics 1–10 and 12. Entries link directly to the relevant section.
 
 ### A
 
@@ -88,6 +88,7 @@ This index covers developed explanations in Topics 1–8, 10 and 12. Entries lin
 - [Binary-search correctness](topics/searching/binary-search.md#binary-search-correctness)
 - [Binary-search costs](topics/searching/binary-search.md#binary-search-cost)
 - [Binary-search interval invariant](topics/searching/binary-search.md#binary-search-invariant)
+- [Bottom-up heap construction](topics/heaps/heap-construction.md#heapify)
 - [Bounded queue and overflow](topics/linear-structures/circular-queues.md#bounded-queue)
 - [Bracket matching](topics/linear-structures/stacks.md#bracket-matching)
 - [Branch costs](topics/analysis/code-and-space.md#branch-costs)
@@ -117,6 +118,7 @@ This index covers developed explanations in Topics 1–8, 10 and 12. Entries lin
 - [Call stack](topics/recursion/call-stack.md#stack-frames)
 - [Calls and returns](topics/recursion/recursive-calls.md#calls-and-returns)
 - [Cases versus bounds](topics/analysis/cases-and-bounds.md#cases-versus-bounds)
+- [Changing heap priorities](topics/heaps/heap-applications.md#heap-changing-priorities)
 - [Choosing a linear ADT](topics/linear-structures/choosing-linear-structures.md#linear-adt-selection)
 - [Choosing a sorting strategy](topics/sorting/comparing-strategies.md#choosing-sorting-strategy)
 - [Circular-array queue](topics/linear-structures/circular-queues.md#circular-array-queue)
@@ -125,6 +127,7 @@ This index covers developed explanations in Topics 1–8, 10 and 12. Entries lin
 - [Classes and instances](topics/foundations/collections-and-classes.md#classes-and-instances)
 - [Collision](topics/maps-sets-hashing/hashing.md#hash-collisions-and-key-equality)
 - [Comparison sorting](topics/sorting/comparison-lower-bound.md#comparison-sorting)
+- [Complete binary tree](topics/heaps/heap-representation.md#complete-binary-tree)
 - [Complete complexity claims](topics/analysis/code-and-space.md#complete-complexity-claim)
 - [Comprehensions](topics/foundations/collections-and-classes.md#unpacking-and-comprehensions)
 - [Connected components](topics/graphs/graph-components.md#connected-components)
@@ -186,10 +189,25 @@ This index covers developed explanations in Topics 1–8, 10 and 12. Entries lin
 - [Hash function](topics/maps-sets-hashing/hashing.md#keys-hash-codes-and-table-indices)
 - [Hashability](topics/maps-sets-hashing/hashing.md#hashability-in-python)
 - [Head and tail invariant](topics/linear-structures/linked-queues.md#head-tail-invariant)
+- [Heap array indices](topics/heaps/heap-representation.md#heap-array-indices)
+- [Heap extraction sorting](topics/heaps/heap-sorting-costs.md#heap-extraction-sorting)
+- [Heap insertion](topics/heaps/heap-insertion.md#heap-insertion)
+- [Heap minimum inspection](topics/heaps/heap-removal.md#heap-minimum)
+- [Heap minimum removal](topics/heaps/heap-removal.md#heap-remove-min)
+- [Heap operation costs](topics/heaps/heap-sorting-costs.md#heap-operation-costs)
+- [Heap record priorities](topics/heaps/heap-applications.md#heap-record-priorities)
+- [Heap removal boundary cases](topics/heaps/heap-removal.md#heap-removal-boundaries)
+- [Heap shape and order](topics/heaps/heap-representation.md#heap-shape-order)
+- [Heap versus AVL choices](topics/heaps/heap-sorting-costs.md#heap-versus-avl)
+- [Heap versus BST ordering](topics/heaps/heap-representation.md#heap-versus-bst)
+- [Heapify invariant](topics/heaps/heap-construction.md#heapify-invariant)
+- [Heapify trace](topics/heaps/heap-construction.md#heapify-trace)
+- [Heapsort properties](topics/heaps/heap-sorting-costs.md#heapsort-properties)
 
 ### I
 
 - [Immutable objects](topics/foundations/mutation-and-copying.md#mutability)
+- [In-place heapsort](topics/heaps/heap-sorting-costs.md#in-place-heapsort)
 - [In-place sorting](topics/sorting/sorting-properties.md#in-place-sorting)
 - [Index-based merging](topics/recursion/implementation-costs.md#index-based-merge)
 - [Inorder successor](topics/searching/bst-traversal.md#bst-successor)
@@ -231,6 +249,7 @@ This index covers developed explanations in Topics 1–8, 10 and 12. Entries lin
 - [Linear search](topics/searching/binary-search.md#linear-search)
 - [Linear sequences and positional access](topics/linear-structures/adts-and-contracts.md#linear-sequence-adt)
 - [Linear-representation costs](topics/linear-structures/choosing-linear-structures.md#linear-representation-costs)
+- [Linear-time heapify](topics/heaps/heap-construction.md#heapify-linear-time)
 - [Linked insertion](topics/linear-structures/linked-structures.md#linked-insertion)
 - [Linked objects](topics/foundations/collections-and-classes.md#linked-objects)
 - [Linked queue](topics/linear-structures/linked-queues.md#linked-queue)
@@ -250,6 +269,7 @@ This index covers developed explanations in Topics 1–8, 10 and 12. Entries lin
 - [Merge sort](topics/recursion/divide-and-conquer.md#merge-sort-code)
 - [Merging sorted sequences](topics/recursion/divide-and-conquer.md#merge-two-sorted-sequences)
 - [Methods](topics/foundations/collections-and-classes.md#classes-and-instances)
+- [Min-heap invariant](topics/heaps/heap-representation.md#min-heap-invariant)
 - [Missing keys](topics/maps-sets-hashing/maps.md#missing-keys-and-none-values)
 - [Mutability](topics/foundations/mutation-and-copying.md#mutability)
 - [Mutable default arguments](topics/foundations/mutation-and-copying.md#mutable-defaults)
@@ -280,8 +300,14 @@ This index covers developed explanations in Topics 1–8, 10 and 12. Entries lin
 - [Partition cost](topics/sorting/partitioning.md#partition-cost)
 - [Partition invariant](topics/sorting/partitioning.md#partition-invariant)
 - [Partitioning](topics/sorting/partitioning.md#partitioning)
+- [Priority queue ADT](topics/heaps/priority-queues.md#priority-queue-adt)
+- [Priority versus FIFO selection](topics/heaps/priority-queues.md#priority-versus-fifo)
+- [Priority-queue contract](topics/heaps/priority-queues.md#priority-queue-contract)
+- [Priority-queue implementations](topics/heaps/priority-queues.md#priority-queue-implementations)
+- [Priority-queue stable ties](topics/heaps/heap-applications.md#priority-queue-stable-ties)
 - [Probing](topics/maps-sets-hashing/open-addressing.md#linear-probing-and-wraparound)
 - [Progress measure](topics/recursion/recursive-calls.md#recursive-termination)
+- [Python heapq](topics/heaps/heap-applications.md#python-heapq)
 - [Python recursion limit](topics/recursion/call-stack.md#python-recursion-limit)
 - [Python sorting interfaces](topics/sorting/sorting-properties.md#python-sorting)
 
@@ -324,6 +350,11 @@ This index covers developed explanations in Topics 1–8, 10 and 12. Entries lin
 - [Set union](topics/maps-sets-hashing/sets.md#union-intersection-and-difference)
 - [Shallow copy](topics/foundations/mutation-and-copying.md#shallow-copy)
 - [Shifting in insertion sort](topics/sorting/insertion-sort.md#insertion-shifting)
+- [Sift-down](topics/heaps/heap-removal.md#sift-down)
+- [Sift-down trace](topics/heaps/heap-removal.md#sift-down-trace)
+- [Sift-up](topics/heaps/heap-insertion.md#sift-up)
+- [Sift-up correctness and cost](topics/heaps/heap-insertion.md#sift-up-correctness-cost)
+- [Sift-up trace](topics/heaps/heap-insertion.md#sift-up-trace)
 - [Singly linked list](topics/linear-structures/linked-structures.md#singly-linked-list)
 - [Sorting cost comparison](topics/sorting/comparing-strategies.md#sorting-cost-comparison)
 - [Sorting decision tree](topics/sorting/comparison-lower-bound.md#sorting-decision-tree)
@@ -704,6 +735,60 @@ This index covers developed explanations in Topics 1–8, 10 and 12. Entries lin
 - [AVL deletion with zero child factor](topics/balanced-trees/avl-deletion.md#avl-deletion-zero-child-factor)
 - [AVL deletion cascade](topics/balanced-trees/avl-deletion.md#avl-deletion-cascade)
 - [AVL validation](topics/balanced-trees/avl-deletion.md#avl-validation)
+
+### 9. Priority queues and heaps
+
+**Priority queues: select by importance**
+
+- [Priority queue ADT](topics/heaps/priority-queues.md#priority-queue-adt)
+- [Priority versus FIFO selection](topics/heaps/priority-queues.md#priority-versus-fifo)
+- [Priority-queue contract](topics/heaps/priority-queues.md#priority-queue-contract)
+- [Priority-queue implementations](topics/heaps/priority-queues.md#priority-queue-implementations)
+
+**Heap order, complete shape and array indices**
+
+- [Complete binary tree](topics/heaps/heap-representation.md#complete-binary-tree)
+- [Min-heap invariant](topics/heaps/heap-representation.md#min-heap-invariant)
+- [Heap versus BST ordering](topics/heaps/heap-representation.md#heap-versus-bst)
+- [Heap array indices](topics/heaps/heap-representation.md#heap-array-indices)
+- [Heap shape and order](topics/heaps/heap-representation.md#heap-shape-order)
+
+**Insertion and sift-up**
+
+- [Heap insertion](topics/heaps/heap-insertion.md#heap-insertion)
+- [Sift-up](topics/heaps/heap-insertion.md#sift-up)
+- [Sift-up trace](topics/heaps/heap-insertion.md#sift-up-trace)
+- [Sift-up correctness and cost](topics/heaps/heap-insertion.md#sift-up-correctness-cost)
+
+**Root removal and sift-down**
+
+- [Heap minimum inspection](topics/heaps/heap-removal.md#heap-minimum)
+- [Sift-down](topics/heaps/heap-removal.md#sift-down)
+- [Heap minimum removal](topics/heaps/heap-removal.md#heap-remove-min)
+- [Sift-down trace](topics/heaps/heap-removal.md#sift-down-trace)
+- [Heap removal boundary cases](topics/heaps/heap-removal.md#heap-removal-boundaries)
+
+**Bottom-up heap construction**
+
+- [Bottom-up heap construction](topics/heaps/heap-construction.md#heapify)
+- [Heapify invariant](topics/heaps/heap-construction.md#heapify-invariant)
+- [Heapify trace](topics/heaps/heap-construction.md#heapify-trace)
+- [Linear-time heapify](topics/heaps/heap-construction.md#heapify-linear-time)
+
+**Python heaps, records and ties**
+
+- [Python heapq](topics/heaps/heap-applications.md#python-heapq)
+- [Heap record priorities](topics/heaps/heap-applications.md#heap-record-priorities)
+- [Priority-queue stable ties](topics/heaps/heap-applications.md#priority-queue-stable-ties)
+- [Changing heap priorities](topics/heaps/heap-applications.md#heap-changing-priorities)
+
+**Heapsort, operation costs and choices**
+
+- [Heap extraction sorting](topics/heaps/heap-sorting-costs.md#heap-extraction-sorting)
+- [In-place heapsort](topics/heaps/heap-sorting-costs.md#in-place-heapsort)
+- [Heapsort properties](topics/heaps/heap-sorting-costs.md#heapsort-properties)
+- [Heap operation costs](topics/heaps/heap-sorting-costs.md#heap-operation-costs)
+- [Heap versus AVL choices](topics/heaps/heap-sorting-costs.md#heap-versus-avl)
 
 ### 10. Graphs and traversal
 

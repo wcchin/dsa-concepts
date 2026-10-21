@@ -1,0 +1,53 @@
+# Bottom-up heap construction
+
+(heapify)=
+## Begin where every child is already a heap
+
+Given an unordered collection, repeated insertion is valid, but a bottom-up builder can do less work. Every leaf is already a one-item heap. Visit internal nodes from the last one back to the root, applying sift-down at each position.
+
+```python
+def build_min_heap(values):
+    heap = list(values)
+    for i in range(len(heap) // 2 - 1, -1, -1):
+        sift_down(heap, i)
+    return heap
+```
+
+This function reuses `sift_down` from the preceding page. It copies the input once, then modifies and returns that new list. Empty and singleton inputs need no repair iterations. An in-place version would omit the initial copy and operate on a supplied list.
+
+(heapify-invariant)=
+## Children are repaired before their parent
+
+Before processing index i, all subtrees rooted at larger indices are valid heaps. Its child indices are larger, so sift-down's precondition holds. Repairing i preserves the already valid descendant structure. When index 0 is repaired, the entire array is a heap.
+
+Notice the direction: a top-down scan of arbitrary input does not establish this precondition. Moving a small root into place before its descendants are repaired can leave a violation behind.
+
+(heapify-trace)=
+## Build from 9, 5, 6, 2, 3, 4
+
+![Bottom-up heap construction repairs internal indices 2, 1 and 0, ending with 2, 3, 4, 5, 9, 6.](../../assets/heaps/bottom-up-build.svg)
+
+| Internal index | Array after sift-down |
+|---|---|
+| 2 | `[9, 5, 4, 2, 3, 6]` |
+| 1 | `[9, 2, 4, 5, 3, 6]` |
+| 0 | `[2, 3, 4, 5, 9, 6]` |
+
+The final result satisfies every parent–child comparison, although the array is not sorted. Heap construction establishes enough order to select minima efficiently; it does not solve the full sorting problem.
+
+(heapify-linear-time)=
+## Most nodes cannot move far
+
+Multiplying n nodes by the maximum height gives a valid but loose $O(n\log n)$ upper bound. Most nodes are near the leaves and have a much smaller downward budget.
+
+One way to count tightly is to group possible downward steps by distance j from a node. A complete n-node tree has at most $\lfloor n/2^j\rfloor$ nodes with height at least j. Each can contribute at most one j-th downward step. Thus the total downward-step budget is bounded by
+
+$$\sum_{j\geq1}\left\lfloor\frac{n}{2^j}\right\rfloor < n.$$
+
+Each step makes only constant comparison work, and each internal node adds constant loop overhead. This gives $O(n)$ repair work; copying the n input items also takes $\Theta(n)$ time, so the shown builder is $\Theta(n)$ overall.
+
+![A fifteen-node complete tree has eight leaves, four height-one nodes, two height-two nodes and one height-three root, illustrating the small total downward budget.](../../assets/heaps/heapify-height-budget.svg)
+
+Repeated insertion has an $O(n\log n)$ bound and can take $\Theta(n\log n)$ comparisons for descending distinct priorities. Bottom-up construction is preferable when the whole batch is already available. The builder uses $\Theta(n)$ additional list storage; iterative in-place heapify uses $O(1)$ auxiliary storage beyond its existing array.
+
+Next: [Python heaps and application records](heap-applications.md).

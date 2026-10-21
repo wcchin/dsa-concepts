@@ -73,6 +73,14 @@ project:
         - file: topics/balanced-trees/avl-insertion.md
         - file: topics/balanced-trees/avl-deletion.md
     - file: topics/heaps/heaps.md
+      children:
+        - file: topics/heaps/priority-queues.md
+        - file: topics/heaps/heap-representation.md
+        - file: topics/heaps/heap-insertion.md
+        - file: topics/heaps/heap-removal.md
+        - file: topics/heaps/heap-construction.md
+        - file: topics/heaps/heap-applications.md
+        - file: topics/heaps/heap-sorting-costs.md
     - file: topics/graphs/graphs.md
       children:
         - file: topics/graphs/graph-concepts.md

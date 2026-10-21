@@ -40,3 +40,5 @@ Before choosing, ask: must ties retain their order? May the original list change
 **Check your understanding:** can a stable algorithm modify the original list? Yes: stability concerns the relative order of equal-key records, while mutation concerns which list object changes.
 
 Next: [The comparison lower bound](comparison-lower-bound.md).
+
+For another comparison-based strategy, see [heapsort and heap costs](../heaps/heap-sorting-costs.md). Its shrinking active heap gives an in-place sorting approach with a different stability trade-off.
