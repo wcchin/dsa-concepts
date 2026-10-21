@@ -2,7 +2,7 @@
 
 Let n be the number of live entries and m the capacity. The **load factor** is $\alpha=n/m$. It summarises occupancy; it does not describe how evenly keys are distributed.
 
-## Chaining and open addressing differ
+## Load factor and collision strategies
 
 In chaining, $\alpha$ is the average bucket length, including empty buckets, and may exceed 1. With suitable hash distribution, constant-cost hashing/equality and bucket access, expected lookup takes $O(1+\alpha)$. If all keys share a bucket, the worst case is $O(n)$.
 
@@ -17,7 +17,7 @@ In open addressing, each live entry needs a distinct slot. Lookup examines at mo
 
 For long strings or custom keys, hashing and equality may themselves require more than constant work. State the key-cost assumption when analysing table operations.
 
-## Tombstones count differently
+## Live load and used load
 
 If d slots are tombstones, distinguish live load $n/m$ from used load $(n+d)/m$. With m = 10, n = 3 and d = 6, live load is 0.3 but used load is 0.9. Only one slot is `EMPTY`, and a failed search may pass many tombstones.
 
@@ -29,10 +29,12 @@ An index depends on m. With $h(k)=k$, keys 8, 15 and 22 all select index 1 at ca
 
 A rebuild creates an empty table and reinserts live entries using the new capacity. For probing, specify the reinsertion order because it can affect final positions. Tombstones are not reinserted.
 
-## Expected versus amortised
+## Expected and amortised complexity
 
 **Expected** cost averages over a stated probabilistic model, such as suitable hash distribution. **Amortised** cost spreads work across an operation sequence. Neither term means that each individual operation is cheap.
 
 With geometric capacity growth, the entry counts processed across successive expansions form a geometric series. Under suitable distribution, bounded occupancy and the usual capacity policy, the total rebuilding work over n insertions is expected $O(n)$, giving expected amortised $O(1)$ insertion. A single insertion that triggers rebuilding may still cost $O(n)$ under those assumptions. Pathological collisions can invalidate the expected constant-time claim.
 
 These distinctions connect hash tables to [dynamic arrays](../linear-structures/linear-structures.md), where occasional resizing also motivates amortised analysis.
+
+**Browse:** [Maps, Sets and Hashing](maps-sets-hashing.md) · [Concept index](../../concepts.md)
