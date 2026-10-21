@@ -1,6 +1,6 @@
 # Book development status
 
-- Fourteen topic areas retained. Topics 1–8 and 12 now contain developed self-reading explanations; five topic areas remain outlines.
+- Fourteen topic areas retained. Topics 1–8, 10 and 12 now contain developed self-reading explanations; four topic areas remain outlines.
 - Topic 1: four pages covering problem requirements; objects and references; mutation and copying; collections, classes and invariants. Three original SVG diagrams illustrate aliasing/rebinding, shallow copying and linked objects.
 - Topic 1 uses explicit concept labels for stable indexed targets. The alphabetical and topic-grouped indexes include these concepts and retain the Topic 6 entries.
 - Source basis: Week 1 classroom and online lecture material; the general problem/representation framing also follows the course introduction. No notebook, rubric or solution file was used. The book text consolidates the slide explanations rather than reproducing presentation directives.
@@ -17,6 +17,8 @@
 - Topic 8: five reading pages and five original SVG figures, based on the AVL portions of Week 10 classroom and online lectures. Adds complete readable AVL insertion/deletion around cached heights, returned subtree roots and a shared child-factor rebalance helper. Covers nonempty middle transfer and deletion’s zero-child-factor and cascading repairs.
 - Topic 12: five reading pages and six original SVG figures, based on the additional Week 10 k-d-tree lecture. Preserves its shared seven points, strict-left/ties-right convention and inclusive range-query boundaries. A nearest-neighbour implementation extends the conceptual lesson; static median construction remains conceptual with explicit tie and construction-cost caveats.
 - Only lecture Markdown was consulted from the course repo for Topics 7, 8 and 12; no notebook, rubric or solution file was used. Supplementary concept references are Cornell AVL notes and Princeton’s k-d-tree specification. All precise diagrams are authored SVG assets.
+- Topic 10: six reading pages and eight accessible SVG figures, based on the Week 11 classroom and online lecture Markdown. Preserves the shared A–H graph, alphabetical neighbour order, isolated H, BFS queue states and DFS discovery/finish traces. Includes representation, BFS/path recovery, DFS and undirected-component code with explicit contracts. No notebook, rubric or solution file was used.
+- Topic 10 distinguishes discovery from expansion/completion, marks BFS at enqueue, keeps original edges separate from parent trees, qualifies Python hash-table complexity assumptions, and distinguishes directed reachability from weak/strong connectivity. Exact figure matrices and traces are checked against the shown graph and code.
 - Jupyter Book 2.1.7 remains pinned. Pushes to main build and publish automatically; pull requests build without publishing.
 
-Next: develop Topic 9 (Priority queues and heaps), then Topics 10–11 and 13. Topic 14 remains reserved for additional applications. Continue adding concept entries as explanations become available.
+Next: develop Topic 9 (Priority queues and heaps), then Topics 11 and 13. Topic 14 remains reserved for additional applications. Continue adding concept entries as explanations become available.

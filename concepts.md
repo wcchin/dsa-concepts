@@ -2,7 +2,7 @@
 
 Find a concept by its name or browse concepts by topic.
 
-The wiki is being developed progressively. Topics 1–8 and 12 have developed explanations. Other topics currently provide scope outlines.
+The wiki is being developed progressively. Topics 1–8, 10 and 12 have developed explanations. Other topics currently provide scope outlines.
 
 ## Browse by topic
 
@@ -23,12 +23,16 @@ The wiki is being developed progressively. Topics 1–8 and 12 have developed ex
 
 ## Find a concept alphabetically
 
-This index covers developed explanations in Topics 1–8 and 12. Entries link directly to the relevant section.
+This index covers developed explanations in Topics 1–8, 10 and 12. Entries link directly to the relevant section.
 
 ### A
 
 - [Abstract data type (ADT)](topics/linear-structures/adts-and-contracts.md#abstract-data-type)
 - [Adaptive sorting](topics/sorting/insertion-sort.md#adaptive-sorting)
+- [Adjacency list](topics/graphs/graph-representations.md#adjacency-list)
+- [Adjacency matrix](topics/graphs/graph-representations.md#adjacency-matrix)
+- [Adjacency-list traversal costs](topics/graphs/graph-traversal-costs.md#adjacency-list-traversal-cost)
+- [Adjacency-matrix traversal costs](topics/graphs/graph-traversal-costs.md#adjacency-matrix-traversal-cost)
 - [Adjacent swaps and stability](topics/sorting/bubble-sort.md#adjacent-swap-stability)
 - [ADT contracts](topics/linear-structures/adts-and-contracts.md#adt-contract)
 - [ADT reasoning process](topics/linear-structures/choosing-linear-structures.md#adt-reasoning-process)
@@ -71,6 +75,10 @@ This index covers developed explanations in Topics 1–8 and 12. Entries link di
 - [Base and recursive cases](topics/recursion/recursive-calls.md#base-and-recursive-cases)
 - [Basic operation](topics/analysis/counting-work.md#cost-model)
 - [Best and worst cases](topics/analysis/cases-and-bounds.md#best-and-worst-cases)
+- [BFS discovery marking](topics/graphs/breadth-first-search.md#bfs-discovery-marking)
+- [BFS implementation](topics/graphs/breadth-first-search.md#bfs-code)
+- [BFS shortest hop distances](topics/graphs/breadth-first-search.md#bfs-hop-distance)
+- [BFS versus DFS](topics/graphs/graph-traversal-costs.md#bfs-versus-dfs)
 - [Big-O (upper bound)](topics/analysis/cases-and-bounds.md#big-o)
 - [Big-Omega (lower bound)](topics/analysis/cases-and-bounds.md#big-omega)
 - [Big-Theta (tight bound)](topics/analysis/cases-and-bounds.md#big-theta)
@@ -83,6 +91,7 @@ This index covers developed explanations in Topics 1–8 and 12. Entries link di
 - [Bounded queue and overflow](topics/linear-structures/circular-queues.md#bounded-queue)
 - [Bracket matching](topics/linear-structures/stacks.md#bracket-matching)
 - [Branch costs](topics/analysis/code-and-space.md#branch-costs)
+- [Breadth-first search (BFS)](topics/graphs/breadth-first-search.md#breadth-first-search)
 - [Browser history with stacks](topics/linear-structures/choosing-linear-structures.md#browser-history-stacks)
 - [BST ancestor bounds](topics/searching/tree-basics.md#bst-ancestor-bounds)
 - [BST construction costs](topics/searching/search-costs.md#bst-building-cost)
@@ -118,6 +127,8 @@ This index covers developed explanations in Topics 1–8 and 12. Entries link di
 - [Comparison sorting](topics/sorting/comparison-lower-bound.md#comparison-sorting)
 - [Complete complexity claims](topics/analysis/code-and-space.md#complete-complexity-claim)
 - [Comprehensions](topics/foundations/collections-and-classes.md#unpacking-and-comprehensions)
+- [Connected components](topics/graphs/graph-components.md#connected-components)
+- [Connected-component implementation](topics/graphs/graph-components.md#connected-components-code)
 - [Consecutive loops](topics/analysis/code-and-space.md#consecutive-loops)
 - [Constant versus linear work](topics/analysis/counting-work.md#constant-vs-linear-work)
 - [Correctness of recursive solutions](topics/recursion/recursive-calls.md#recursive-correctness)
@@ -128,8 +139,14 @@ This index covers developed explanations in Topics 1–8 and 12. Entries link di
 - [Data structure](topics/foundations/data-and-algorithms.md#data-structure)
 - [Deep copy](topics/foundations/mutation-and-copying.md#deep-copy)
 - [Deletion in open addressing](topics/maps-sets-hashing/open-addressing.md#deletion-and-tombstones)
+- [Depth-first search (DFS)](topics/graphs/depth-first-search.md#depth-first-search)
 - [Deque](topics/linear-structures/queues-and-deques.md#deque-adt)
+- [DFS discovery and completion](topics/graphs/depth-first-search.md#dfs-discovery-completion)
+- [DFS implementation](topics/graphs/depth-first-search.md#dfs-code)
+- [DFS parent tree](topics/graphs/depth-first-search.md#dfs-parent-tree)
+- [DFS revisits and cycles](topics/graphs/depth-first-search.md#dfs-cycles)
 - [Dictionary (`dict`)](topics/maps-sets-hashing/maps.md#map-operations-in-python)
+- [Directed and undirected graphs](topics/graphs/graph-concepts.md#directed-undirected-graphs)
 - [Divide-and-conquer](topics/recursion/divide-and-conquer.md#divide-conquer-combine)
 - [Dominant term](topics/analysis/growth-rates.md#dominant-term)
 - [Doubling the input](topics/analysis/growth-rates.md#doubling-input)
@@ -153,6 +170,14 @@ This index covers developed explanations in Topics 1–8 and 12. Entries link di
 
 ### G
 
+- [Graph degree](topics/graphs/graph-concepts.md#graph-degree)
+- [Graph paths, cycles and walks](topics/graphs/graph-concepts.md#graph-paths-cycles)
+- [Graph reachability](topics/graphs/graph-components.md#graph-reachability)
+- [Graph representation contract](topics/graphs/graph-representations.md#graph-representation-contract)
+- [Graph representation costs](topics/graphs/graph-representations.md#graph-representation-costs)
+- [Graph traversal cost assumptions](topics/graphs/graph-traversal-costs.md#traversal-cost-assumptions)
+- [Graph traversal space](topics/graphs/graph-traversal-costs.md#traversal-space)
+- [Graph vertices and edges](topics/graphs/graph-concepts.md#graph-vertices-edges)
 - [Growth classes](topics/analysis/growth-rates.md#growth-classes)
 
 ### H
@@ -175,6 +200,7 @@ This index covers developed explanations in Topics 1–8 and 12. Entries link di
 - [Insertion-sort invariant](topics/sorting/insertion-sort.md#insertion-invariant)
 - [Invariants](topics/foundations/collections-and-classes.md#invariants)
 - [Inversions](topics/sorting/insertion-sort.md#inversions)
+- [Iterative DFS and suspended frames](topics/graphs/depth-first-search.md#iterative-dfs)
 
 ### K
 
@@ -306,6 +332,7 @@ This index covers developed explanations in Topics 1–8 and 12. Entries link di
 - [Sorting specification](topics/sorting/sorting-properties.md#sorting-specification)
 - [Sorting strategies](topics/sorting/comparing-strategies.md#sorting-strategies)
 - [Space complexity](topics/analysis/code-and-space.md#space-complexity)
+- [Sparse and dense graphs](topics/graphs/graph-representations.md#sparse-dense-graphs)
 - [Splitting and combining](topics/recursion/divide-and-conquer.md#split-and-combine)
 - [Stable sorting](topics/sorting/sorting-properties.md#stable-sorting)
 - [Stack and LIFO](topics/linear-structures/stacks.md#stack-adt)
@@ -321,6 +348,8 @@ This index covers developed explanations in Topics 1–8 and 12. Entries link di
 - [Timing and analysis](topics/analysis/counting-work.md#measurement-and-analysis)
 - [Tombstone](topics/maps-sets-hashing/open-addressing.md#deletion-and-tombstones)
 - [Total recursive calls](topics/recursion/recursion-costs.md#total-calls)
+- [Traversal forest](topics/graphs/graph-components.md#component-forest)
+- [Traversal parents and path recovery](topics/graphs/breadth-first-search.md#bfs-parent-path)
 - [Tree terminology, depth and height](topics/searching/tree-basics.md#tree-terminology)
 - [Tree traversals](topics/searching/bst-traversal.md#tree-traversals)
 - [Two-child deletion](topics/searching/bst-deletion.md#bst-two-child-deletion)
@@ -333,6 +362,8 @@ This index covers developed explanations in Topics 1–8 and 12. Entries link di
 
 ### W
 
+- [Weak and strong directed connectivity](topics/graphs/graph-components.md#directed-connectivity)
+- [Weighted graphs](topics/graphs/graph-concepts.md#weighted-graphs)
 - [Wraparound](topics/maps-sets-hashing/open-addressing.md#linear-probing-and-wraparound)
 
 ## Concepts grouped by topic
@@ -673,6 +704,57 @@ This index covers developed explanations in Topics 1–8 and 12. Entries link di
 - [AVL deletion with zero child factor](topics/balanced-trees/avl-deletion.md#avl-deletion-zero-child-factor)
 - [AVL deletion cascade](topics/balanced-trees/avl-deletion.md#avl-deletion-cascade)
 - [AVL validation](topics/balanced-trees/avl-deletion.md#avl-validation)
+
+### 10. Graphs and traversal
+
+**Graph concepts and modelling**
+
+- [Graph vertices and edges](topics/graphs/graph-concepts.md#graph-vertices-edges)
+- [Directed and undirected graphs](topics/graphs/graph-concepts.md#directed-undirected-graphs)
+- [Weighted graphs](topics/graphs/graph-concepts.md#weighted-graphs)
+- [Graph paths, cycles and walks](topics/graphs/graph-concepts.md#graph-paths-cycles)
+- [Graph degree](topics/graphs/graph-concepts.md#graph-degree)
+
+**Adjacency lists and matrices**
+
+- [Adjacency list](topics/graphs/graph-representations.md#adjacency-list)
+- [Graph representation contract](topics/graphs/graph-representations.md#graph-representation-contract)
+- [Adjacency matrix](topics/graphs/graph-representations.md#adjacency-matrix)
+- [Graph representation costs](topics/graphs/graph-representations.md#graph-representation-costs)
+- [Sparse and dense graphs](topics/graphs/graph-representations.md#sparse-dense-graphs)
+
+**Breadth-first search: layers and a FIFO frontier**
+
+- [Breadth-first search (BFS)](topics/graphs/breadth-first-search.md#breadth-first-search)
+- [BFS implementation](topics/graphs/breadth-first-search.md#bfs-code)
+- [BFS discovery marking](topics/graphs/breadth-first-search.md#bfs-discovery-marking)
+- [BFS shortest hop distances](topics/graphs/breadth-first-search.md#bfs-hop-distance)
+- [Traversal parents and path recovery](topics/graphs/breadth-first-search.md#bfs-parent-path)
+
+**Depth-first search: active paths and returns**
+
+- [Depth-first search (DFS)](topics/graphs/depth-first-search.md#depth-first-search)
+- [DFS implementation](topics/graphs/depth-first-search.md#dfs-code)
+- [DFS discovery and completion](topics/graphs/depth-first-search.md#dfs-discovery-completion)
+- [DFS parent tree](topics/graphs/depth-first-search.md#dfs-parent-tree)
+- [DFS revisits and cycles](topics/graphs/depth-first-search.md#dfs-cycles)
+- [Iterative DFS and suspended frames](topics/graphs/depth-first-search.md#iterative-dfs)
+
+**Reachability and connected components**
+
+- [Graph reachability](topics/graphs/graph-components.md#graph-reachability)
+- [Connected components](topics/graphs/graph-components.md#connected-components)
+- [Connected-component implementation](topics/graphs/graph-components.md#connected-components-code)
+- [Traversal forest](topics/graphs/graph-components.md#component-forest)
+- [Weak and strong directed connectivity](topics/graphs/graph-components.md#directed-connectivity)
+
+**Traversal costs and algorithm choice**
+
+- [Adjacency-list traversal costs](topics/graphs/graph-traversal-costs.md#adjacency-list-traversal-cost)
+- [Adjacency-matrix traversal costs](topics/graphs/graph-traversal-costs.md#adjacency-matrix-traversal-cost)
+- [Graph traversal space](topics/graphs/graph-traversal-costs.md#traversal-space)
+- [Graph traversal cost assumptions](topics/graphs/graph-traversal-costs.md#traversal-cost-assumptions)
+- [BFS versus DFS](topics/graphs/graph-traversal-costs.md#bfs-versus-dfs)
 
 ### 12. K-d trees
 

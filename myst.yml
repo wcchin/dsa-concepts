@@ -74,6 +74,13 @@ project:
         - file: topics/balanced-trees/avl-deletion.md
     - file: topics/heaps/heaps.md
     - file: topics/graphs/graphs.md
+      children:
+        - file: topics/graphs/graph-concepts.md
+        - file: topics/graphs/graph-representations.md
+        - file: topics/graphs/breadth-first-search.md
+        - file: topics/graphs/depth-first-search.md
+        - file: topics/graphs/graph-components.md
+        - file: topics/graphs/graph-traversal-costs.md
     - file: topics/graph-algorithms/graph-algorithms.md
     - file: topics/kd-trees/kd-trees.md
       children:
