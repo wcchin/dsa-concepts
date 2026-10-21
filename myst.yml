@@ -44,4 +44,6 @@ site:
     logo_dark: assets/brand/logo.svg
     favicon: assets/brand/favicon.ico
     style: assets/custom.css
+  parts:
+    primary_sidebar_footer: assets/sidebar-footer.md
 
