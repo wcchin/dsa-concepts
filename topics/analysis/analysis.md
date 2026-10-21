@@ -9,6 +9,8 @@ A search through three shuttle stops feels immediate. A search through a million
 3. [Cases and bounds](cases-and-bounds.md): separate input situations from upper, lower and tight bounds.
 4. [Analysing code and space](code-and-space.md): reason through loops, halving, branches and additional storage.
 
+5. [Correctness and proof habits](correctness.md): connect contracts, invariants, progress and counterexamples.
+
 The search examples extend [Topic 1](../foundations/foundations.md). They are small enough to trace manually, but the resulting functions describe entire families of input sizes.
 
 ## Before you start

@@ -27,6 +27,7 @@ For a station directory, a hash-based Map is a plausible choice when exact ident
 
 Revisit [hashing](hashing.md), [chaining](chaining.md), [open addressing](open-addressing.md) and [performance](performance.md) to connect each question to its invariant.
 
-Related planned topics: [ADTs and linear structures](../linear-structures/linear-structures.md), [BSTs](../searching/searching.md), [priority queues](../heaps/heaps.md), and [k-d trees](../kd-trees/kd-trees.md).
+Related topics: [ADTs and linear structures](../linear-structures/linear-structures.md), [BSTs](../searching/searching.md), [priority queues](../heaps/heaps.md), and [k-d trees](../kd-trees/kd-trees.md).
 
 **Browse:** [Maps, Sets and Hashing](maps-sets-hashing.md) · [Concept index](../../concepts.md)
+

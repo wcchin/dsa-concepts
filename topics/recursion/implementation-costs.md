@@ -53,6 +53,6 @@ An alternative implementation can sort ranges within one array and reuse an auxi
 
 Where is the reachable base case? What measure decreases? Which operations happen before and after child calls? How many calls are active simultaneously? What does the combine operation cost in the chosen representation?
 
-Use those questions when reading the planned [Sorting](../sorting/sorting.md), [search-tree](../searching/searching.md) and [graph traversal](../graphs/graphs.md) topics.
+Use those questions when reading [Sorting](../sorting/sorting.md), [search-tree](../searching/searching.md) and [graph traversal](../graphs/graphs.md) topics.
 
 **Browse:** [Recursion](recursion.md) · [Concept index](../../concepts.md)

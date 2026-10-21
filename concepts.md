@@ -2,7 +2,7 @@
 
 Find a concept by its name or browse concepts by topic.
 
-The wiki is being developed progressively. Topics 1–10 and 12 have developed explanations. Other topics currently provide scope outlines.
+The wiki is being developed progressively. Topics 1–13 and optional Topic 15 have developed explanations. Topic 14 remains an application plan.
 
 ## Browse by topic
 
@@ -19,11 +19,12 @@ The wiki is being developed progressively. Topics 1–10 and 12 have developed e
 - [11. Graph ordering, paths and spanning trees](topics/graph-algorithms/graph-algorithms.md)
 - [12. K-d trees](topics/kd-trees/kd-trees.md)
 - [13. Union–find](topics/union-find/union-find.md)
-- [14. Additional applications](topics/applications/applications.md)
+- [14. Additional applications — planned](topics/applications/applications.md)
+- [15. Algorithm design and sequence patterns](topics/strategies/strategies.md)
 
 ## Find a concept alphabetically
 
-This index covers developed explanations in Topics 1–10 and 12. Entries link directly to the relevant section.
+This index covers developed explanations in Topics 1–13 and 15. Entries link directly to the relevant section.
 
 ### A
 
@@ -38,6 +39,9 @@ This index covers developed explanations in Topics 1–10 and 12. Entries link d
 - [ADT reasoning process](topics/linear-structures/choosing-linear-structures.md#adt-reasoning-process)
 - [ADTs and representations](topics/linear-structures/adts-and-contracts.md#adt-and-representation)
 - [Algorithm](topics/foundations/data-and-algorithms.md#algorithm)
+- [Algorithm contract reasoning](topics/analysis/correctness.md#algorithm-contract-reasoning)
+- [Algorithm design strategies](topics/strategies/strategy-selection.md#algorithm-design-strategies)
+- [Algorithm reduction](topics/strategies/strategy-selection.md#algorithm-reduction)
 - [Algorithm specification and reasoning](topics/foundations/data-and-algorithms.md#algorithm-reasoning)
 - [Aliasing](topics/foundations/objects-and-references.md#aliasing)
 - [Amortised array append](topics/linear-structures/dynamic-arrays.md#amortised-array-append)
@@ -70,9 +74,13 @@ This index covers developed explanations in Topics 1–10 and 12. Entries link d
 
 ### B
 
+- [Backtracking](topics/strategies/backtracking.md#backtracking)
+- [Backtracking cost](topics/strategies/backtracking.md#backtracking-cost)
+- [Backtracking pruning](topics/strategies/backtracking.md#backtracking-pruning)
 - [Balanced quicksort](topics/sorting/quicksort.md#quicksort-balanced)
 - [Balanced versus unbalanced recursion](topics/recursion/recursion-costs.md#balanced-vs-unbalanced)
 - [Base and recursive cases](topics/recursion/recursive-calls.md#base-and-recursive-cases)
+- [Basic find](topics/union-find/parent-forests.md#basic-find)
 - [Basic operation](topics/analysis/counting-work.md#cost-model)
 - [Best and worst cases](topics/analysis/cases-and-bounds.md#best-and-worst-cases)
 - [BFS discovery marking](topics/graphs/breadth-first-search.md#bfs-discovery-marking)
@@ -106,6 +114,8 @@ This index covers developed explanations in Topics 1–10 and 12. Entries link d
 - [BST lookup](topics/searching/bst-lookup-insertion.md#bst-search)
 - [BST minimum and maximum](topics/searching/bst-traversal.md#bst-minimum-maximum)
 - [BST nodes](topics/searching/bst-lookup-insertion.md#bst-node)
+- [BST range pruning cost](topics/searching/bst-range-queries.md#bst-range-pruning-cost)
+- [BST range query](topics/searching/bst-range-queries.md#bst-range-query)
 - [BST rotations](topics/balanced-trees/avl-rotations.md#bst-rotation)
 - [Bubble sort](topics/sorting/bubble-sort.md#bubble-sort)
 - [Bubble-sort invariant](topics/sorting/bubble-sort.md#bubble-invariant)
@@ -136,10 +146,15 @@ This index covers developed explanations in Topics 1–10 and 12. Entries link d
 - [Constant versus linear work](topics/analysis/counting-work.md#constant-vs-linear-work)
 - [Correctness of recursive solutions](topics/recursion/recursive-calls.md#recursive-correctness)
 - [Cost model](topics/analysis/counting-work.md#cost-model)
+- [Counterexamples and tests](topics/analysis/correctness.md#counterexamples-and-tests)
 
 ### D
 
+- [DAG negative example](topics/graph-algorithms/dag-shortest-paths.md#dag-negative-example)
+- [DAG path cost](topics/graph-algorithms/dag-shortest-paths.md#dag-path-cost)
+- [DAG shortest paths](topics/graph-algorithms/dag-shortest-paths.md#dag-shortest-paths)
 - [Data structure](topics/foundations/data-and-algorithms.md#data-structure)
+- [Decision optimisation](topics/strategies/complexity-limits.md#decision-optimisation)
 - [Deep copy](topics/foundations/mutation-and-copying.md#deep-copy)
 - [Deletion in open addressing](topics/maps-sets-hashing/open-addressing.md#deletion-and-tombstones)
 - [Depth-first search (DFS)](topics/graphs/depth-first-search.md#depth-first-search)
@@ -149,11 +164,23 @@ This index covers developed explanations in Topics 1–10 and 12. Entries link d
 - [DFS parent tree](topics/graphs/depth-first-search.md#dfs-parent-tree)
 - [DFS revisits and cycles](topics/graphs/depth-first-search.md#dfs-cycles)
 - [Dictionary (`dict`)](topics/maps-sets-hashing/maps.md#map-operations-in-python)
+- [Dijkstra’s algorithm](topics/graph-algorithms/dijkstra.md#dijkstra)
+- [Dijkstra’s algorithm cost](topics/graph-algorithms/dijkstra.md#dijkstra-cost)
+- [Dijkstra’s algorithm negative weights](topics/graph-algorithms/dijkstra.md#dijkstra-negative-weights)
+- [Dijkstra’s algorithm stale entries](topics/graph-algorithms/dijkstra.md#dijkstra-stale-entries)
+- [Directed acyclic graph](topics/graph-algorithms/topological-order.md#directed-acyclic-graph)
 - [Directed and undirected graphs](topics/graphs/graph-concepts.md#directed-undirected-graphs)
+- [Disjoint set code](topics/union-find/union-compression.md#disjoint-set-code)
+- [Disjoint set partition](topics/union-find/disjoint-sets.md#disjoint-set-partition)
+- [Disjoint set representative](topics/union-find/disjoint-sets.md#disjoint-set-representative)
 - [Divide-and-conquer](topics/recursion/divide-and-conquer.md#divide-conquer-combine)
 - [Dominant term](topics/analysis/growth-rates.md#dominant-term)
 - [Doubling the input](topics/analysis/growth-rates.md#doubling-input)
 - [Doubly linked list](topics/linear-structures/linked-structures.md#doubly-linked-list)
+- [DP cost and model](topics/strategies/dynamic-programming.md#dp-cost-and-model)
+- [DP reconstruction](topics/strategies/dynamic-programming.md#dp-reconstruction)
+- [Duplicate run boundaries](topics/searching/search-boundaries.md#duplicate-run-boundaries)
+- [Dynamic programming](topics/strategies/dynamic-programming.md#dynamic-programming)
 - [Dynamic-array resizing](topics/linear-structures/dynamic-arrays.md#dynamic-array-resize)
 - [Dynamic-array storage](topics/linear-structures/dynamic-arrays.md#dynamic-array-space)
 
@@ -173,6 +200,8 @@ This index covers developed explanations in Topics 1–10 and 12. Entries link d
 
 ### G
 
+- [Graph algorithm boundaries](topics/graph-algorithms/graph-algorithm-choices.md#graph-algorithm-boundaries)
+- [Graph algorithm selection](topics/graph-algorithms/graph-algorithm-choices.md#graph-algorithm-selection)
 - [Graph degree](topics/graphs/graph-concepts.md#graph-degree)
 - [Graph paths, cycles and walks](topics/graphs/graph-concepts.md#graph-paths-cycles)
 - [Graph reachability](topics/graphs/graph-components.md#graph-reachability)
@@ -181,6 +210,9 @@ This index covers developed explanations in Topics 1–10 and 12. Entries link d
 - [Graph traversal cost assumptions](topics/graphs/graph-traversal-costs.md#traversal-cost-assumptions)
 - [Graph traversal space](topics/graphs/graph-traversal-costs.md#traversal-space)
 - [Graph vertices and edges](topics/graphs/graph-concepts.md#graph-vertices-edges)
+- [Greedy choice](topics/strategies/greedy.md#greedy-choice)
+- [Greedy exchange proof](topics/strategies/greedy.md#greedy-exchange-proof)
+- [Greedy limits](topics/strategies/greedy.md#greedy-limits)
 - [Growth classes](topics/analysis/growth-rates.md#growth-classes)
 
 ### H
@@ -209,14 +241,19 @@ This index covers developed explanations in Topics 1–10 and 12. Entries link d
 - [Immutable objects](topics/foundations/mutation-and-copying.md#mutability)
 - [In-place heapsort](topics/heaps/heap-sorting-costs.md#in-place-heapsort)
 - [In-place sorting](topics/sorting/sorting-properties.md#in-place-sorting)
+- [Incremental connectivity](topics/union-find/union-find-applications.md#incremental-connectivity)
+- [Indegree](topics/graph-algorithms/topological-order.md#kahn-algorithm)
 - [Index-based merging](topics/recursion/implementation-costs.md#index-based-merge)
+- [Inductive algorithm reasoning](topics/analysis/correctness.md#inductive-algorithm-reasoning)
 - [Inorder successor](topics/searching/bst-traversal.md#bst-successor)
 - [Inorder traversal](topics/searching/bst-traversal.md#bst-inorder)
 - [Input size](topics/analysis/counting-work.md#input-size)
 - [Insertion order](topics/maps-sets-hashing/maps.md#dictionary-insertion-order)
 - [Insertion sort](topics/sorting/insertion-sort.md#insertion-sort)
 - [Insertion-sort invariant](topics/sorting/insertion-sort.md#insertion-invariant)
+- [Interval scheduling](topics/strategies/greedy.md#interval-scheduling)
 - [Invariants](topics/foundations/collections-and-classes.md#invariants)
+- [Inverse Ackermann function](topics/union-find/union-compression.md#union-find-amortised-cost)
 - [Inversions](topics/sorting/insertion-sort.md#inversions)
 - [Iterative DFS and suspended frames](topics/graphs/depth-first-search.md#iterative-dfs)
 
@@ -238,11 +275,19 @@ This index covers developed explanations in Topics 1–10 and 12. Entries link d
 - [K-d-tree range-search implementation](topics/kd-trees/kd-range-search.md#kd-range-code)
 - [K-d-tree spatial regions](topics/kd-trees/kd-construction.md#kd-spatial-region)
 - [K-d-tree split invariant](topics/kd-trees/kd-construction.md#kd-split-invariant)
+- [Kahn invariant trace](topics/graph-algorithms/topological-order.md#kahn-invariant-trace)
+- [Kahn’s algorithm](topics/graph-algorithms/topological-order.md#kahn-algorithm)
 - [Key versus node identity](topics/searching/bst-deletion.md#bst-key-versus-node)
 - [Key-value association](topics/maps-sets-hashing/maps.md#map-adt-and-operations)
+- [Kruskal code](topics/graph-algorithms/kruskal.md#kruskal-code)
+- [Kruskal cost](topics/graph-algorithms/kruskal.md#kruskal-cost)
+- [Kruskal trace correctness](topics/graph-algorithms/kruskal.md#kruskal-trace-correctness)
+- [Kruskal’s algorithm](topics/graph-algorithms/kruskal.md#kruskal-algorithm)
 
 ### L
 
+- [Lazy dijkstra code](topics/graph-algorithms/dijkstra.md#lazy-dijkstra-code)
+- [Lazy prim code](topics/graph-algorithms/prim.md#lazy-prim-code)
 - [Leaf and one-child deletion](topics/searching/bst-deletion.md#bst-leaf-one-child-deletion)
 - [Length and capacity](topics/linear-structures/dynamic-arrays.md#length-and-capacity)
 - [Linear probing](topics/maps-sets-hashing/open-addressing.md#linear-probing-and-wraparound)
@@ -261,16 +306,25 @@ This index covers developed explanations in Topics 1–10 and 12. Entries link d
 - [List slicing costs](topics/recursion/implementation-costs.md#slicing-cost)
 - [Load factor](topics/maps-sets-hashing/performance.md#load-factor-and-collision-strategies)
 - [Logarithms and base](topics/analysis/growth-rates.md#logarithms-and-base)
+- [Loop invariant method](topics/analysis/correctness.md#loop-invariant-method)
+- [Lower bound search](topics/searching/search-boundaries.md#lower-bound-search)
 
 ### M
 
 - [Map ADT](topics/maps-sets-hashing/maps.md#map-adt-and-operations)
+- [Memoisation](topics/strategies/dynamic-programming.md#memoisation)
 - [Merge invariant](topics/recursion/divide-and-conquer.md#merge-invariant)
 - [Merge sort](topics/recursion/divide-and-conquer.md#merge-sort-code)
 - [Merging sorted sequences](topics/recursion/divide-and-conquer.md#merge-two-sorted-sequences)
 - [Methods](topics/foundations/collections-and-classes.md#classes-and-instances)
 - [Min-heap invariant](topics/heaps/heap-representation.md#min-heap-invariant)
+- [Minimum spanning forest](topics/graph-algorithms/spanning-trees.md#minimum-spanning-tree)
+- [Minimum spanning tree](topics/graph-algorithms/spanning-trees.md#minimum-spanning-tree)
 - [Missing keys](topics/maps-sets-hashing/maps.md#missing-keys-and-none-values)
+- [Monotone boundary search](topics/searching/search-boundaries.md#monotone-boundary-search)
+- [MST cut property](topics/graph-algorithms/spanning-trees.md#mst-cut-property)
+- [MST exchange argument](topics/graph-algorithms/spanning-trees.md#mst-exchange-argument)
+- [MST ties negative cycle property](topics/graph-algorithms/spanning-trees.md#mst-ties-negative-cycle-property)
 - [Mutability](topics/foundations/mutation-and-copying.md#mutability)
 - [Mutable default arguments](topics/foundations/mutation-and-copying.md#mutable-defaults)
 - [Mutation and rebinding](topics/foundations/mutation-and-copying.md#mutation-and-rebinding)
@@ -292,14 +346,23 @@ This index covers developed explanations in Topics 1–10 and 12. Entries link d
 - [Odd-sized recursive splits](topics/recursion/recursion-costs.md#balanced-and-odd-splits)
 - [Open addressing](topics/maps-sets-hashing/open-addressing.md)
 - [Operation counts](topics/analysis/counting-work.md#operation-count)
+- [Optimal substructure](topics/strategies/dynamic-programming.md#dynamic-programming)
+- [Output sensitive algorithms](topics/strategies/complexity-limits.md#output-sensitive-algorithms)
+- [Overlapping subproblems](topics/strategies/dynamic-programming.md#dynamic-programming)
 
 ### P
 
+- [P, NP and NP-completeness](topics/strategies/complexity-limits.md#complexity-p-np)
 - [Palindrome checking](topics/linear-structures/queues-and-deques.md#palindrome-deque)
 - [Partition contract](topics/sorting/partitioning.md#partition-contract)
 - [Partition cost](topics/sorting/partitioning.md#partition-cost)
 - [Partition invariant](topics/sorting/partitioning.md#partition-invariant)
 - [Partitioning](topics/sorting/partitioning.md#partitioning)
+- [Path compression](topics/union-find/union-compression.md#path-compression)
+- [Prefix sums](topics/strategies/sequence-patterns.md#prefix-sums)
+- [Prim forest cost](topics/graph-algorithms/prim.md#prim-forest-cost)
+- [Prim invariant trace](topics/graph-algorithms/prim.md#prim-invariant-trace)
+- [Prim’s algorithm](topics/graph-algorithms/prim.md#prim-algorithm)
 - [Priority queue ADT](topics/heaps/priority-queues.md#priority-queue-adt)
 - [Priority versus FIFO selection](topics/heaps/priority-queues.md#priority-versus-fifo)
 - [Priority-queue contract](topics/heaps/priority-queues.md#priority-queue-contract)
@@ -307,6 +370,7 @@ This index covers developed explanations in Topics 1–10 and 12. Entries link d
 - [Priority-queue stable ties](topics/heaps/heap-applications.md#priority-queue-stable-ties)
 - [Probing](topics/maps-sets-hashing/open-addressing.md#linear-probing-and-wraparound)
 - [Progress measure](topics/recursion/recursive-calls.md#recursive-termination)
+- [Pseudopolynomial time](topics/strategies/complexity-limits.md#pseudopolynomial-time)
 - [Python heapq](topics/heaps/heap-applications.md#python-heapq)
 - [Python recursion limit](topics/recursion/call-stack.md#python-recursion-limit)
 - [Python sorting interfaces](topics/sorting/sorting-properties.md#python-sorting)
@@ -328,6 +392,7 @@ This index covers developed explanations in Topics 1–10 and 12. Entries link d
 - [Recursion-tree level work](topics/recursion/recursion-costs.md#recursion-level-work)
 - [Recursive space and peak allocation](topics/recursion/recursion-costs.md#recursive-space)
 - [Rehashing](topics/maps-sets-hashing/performance.md#why-changing-capacity-requires-rehashing)
+- [Relaxation](topics/graph-algorithms/shortest-path-state.md#relaxation)
 - [Repeated halving](topics/analysis/code-and-space.md#repeated-halving)
 - [Replacement in a Map](topics/maps-sets-hashing/maps.md#map-adt-and-operations)
 - [Representation and required operations](topics/foundations/data-and-algorithms.md#representation-and-operations)
@@ -350,12 +415,15 @@ This index covers developed explanations in Topics 1–10 and 12. Entries link d
 - [Set union](topics/maps-sets-hashing/sets.md#union-intersection-and-difference)
 - [Shallow copy](topics/foundations/mutation-and-copying.md#shallow-copy)
 - [Shifting in insertion sort](topics/sorting/insertion-sort.md#insertion-shifting)
+- [Shortest path predecessors](topics/graph-algorithms/shortest-path-state.md#shortest-path-predecessors)
+- [Shortest path tree versus mst](topics/graph-algorithms/graph-algorithm-choices.md#shortest-path-tree-versus-mst)
 - [Sift-down](topics/heaps/heap-removal.md#sift-down)
 - [Sift-down trace](topics/heaps/heap-removal.md#sift-down-trace)
 - [Sift-up](topics/heaps/heap-insertion.md#sift-up)
 - [Sift-up correctness and cost](topics/heaps/heap-insertion.md#sift-up-correctness-cost)
 - [Sift-up trace](topics/heaps/heap-insertion.md#sift-up-trace)
 - [Singly linked list](topics/linear-structures/linked-structures.md#singly-linked-list)
+- [Sliding window sum](topics/strategies/sequence-patterns.md#sliding-window-sum)
 - [Sorting cost comparison](topics/sorting/comparing-strategies.md#sorting-cost-comparison)
 - [Sorting decision tree](topics/sorting/comparison-lower-bound.md#sorting-decision-tree)
 - [Sorting keys](topics/sorting/sorting-properties.md#sorting-key)
@@ -369,32 +437,53 @@ This index covers developed explanations in Topics 1–10 and 12. Entries link d
 - [Stack and LIFO](topics/linear-structures/stacks.md#stack-adt)
 - [Stack applications](topics/linear-structures/stacks.md#stack-applications)
 - [Stack underflow](topics/linear-structures/stacks.md#stack-underflow)
+- [State and subproblem](topics/strategies/strategy-selection.md#state-and-subproblem)
 - [Strategy and representation costs](topics/recursion/implementation-costs.md#strategy-and-representation)
 
 ### T
 
+- [Tabulation](topics/strategies/dynamic-programming.md#tabulation)
 - [Termination of recursion](topics/recursion/recursive-calls.md#recursive-termination)
+- [Termination variant](topics/analysis/correctness.md#termination-variant)
 - [Three-way partition](topics/sorting/quicksort.md#three-way-partition)
 - [Tight and loose bounds](topics/analysis/cases-and-bounds.md#tight-and-loose-bounds)
 - [Timing and analysis](topics/analysis/counting-work.md#measurement-and-analysis)
 - [Tombstone](topics/maps-sets-hashing/open-addressing.md#deletion-and-tombstones)
+- [Topological cycle detection](topics/graph-algorithms/topological-order.md#topological-cycle-detection)
 - [Total recursive calls](topics/recursion/recursion-costs.md#total-calls)
 - [Traversal forest](topics/graphs/graph-components.md#component-forest)
 - [Traversal parents and path recovery](topics/graphs/breadth-first-search.md#bfs-parent-path)
 - [Tree terminology, depth and height](topics/searching/tree-basics.md#tree-terminology)
 - [Tree traversals](topics/searching/bst-traversal.md#tree-traversals)
+- [Two pointer search](topics/strategies/sequence-patterns.md#two-pointer-search)
 - [Two-child deletion](topics/searching/bst-deletion.md#bst-two-child-deletion)
 - [Type hints](topics/foundations/collections-and-classes.md#encapsulation-and-hints)
 
 ### U
 
+- [Union by size](topics/union-find/union-compression.md#union-by-size)
+- [Union find adt](topics/union-find/disjoint-sets.md#union-find-adt)
+- [Union find amortised cost](topics/union-find/union-compression.md#union-find-amortised-cost)
+- [Union find cycle check](topics/union-find/union-find-applications.md#union-find-cycle-check)
+- [Union find deletion limit](topics/union-find/union-find-applications.md#union-find-deletion-limit)
+- [Union find directed limit](topics/union-find/union-find-applications.md#union-find-directed-limit)
+- [Union find links versus edges](topics/union-find/parent-forests.md#union-find-links-versus-edges)
+- [Union find parent forest](topics/union-find/parent-forests.md#union-find-parent-forest)
+- [Union find root linking](topics/union-find/parent-forests.md#union-find-root-linking)
+- [Union find shared trace](topics/union-find/union-compression.md#union-find-shared-trace)
+- [Union find versus sets](topics/union-find/disjoint-sets.md#union-find-versus-sets)
+- [Union find workload choice](topics/union-find/union-find-applications.md#union-find-workload-choice)
 - [Unpacking](topics/foundations/collections-and-classes.md#unpacking-and-comprehensions)
+- [Upper bound search](topics/searching/search-boundaries.md#upper-bound-search)
 - [Used load](topics/maps-sets-hashing/performance.md#live-load-and-used-load)
 
 ### W
 
 - [Weak and strong directed connectivity](topics/graphs/graph-components.md#directed-connectivity)
 - [Weighted graphs](topics/graphs/graph-concepts.md#weighted-graphs)
+- [Weighted route recovery](topics/graph-algorithms/shortest-path-state.md#weighted-route-recovery)
+- [Weighted shortest path](topics/graph-algorithms/shortest-path-state.md#weighted-shortest-path)
+- [Window monotonicity](topics/strategies/sequence-patterns.md#window-monotonicity)
 - [Wraparound](topics/maps-sets-hashing/open-addressing.md#linear-probing-and-wraparound)
 
 ## Concepts grouped by topic
@@ -877,4 +966,162 @@ This index covers developed explanations in Topics 1–10 and 12. Entries link d
 - [Nearest-neighbour distance bound](topics/kd-trees/kd-nearest.md#kd-nearest-bound)
 - [Nearest-neighbour implementation](topics/kd-trees/kd-nearest.md#kd-nearest-code)
 - [Nearest-neighbour correctness and costs](topics/kd-trees/kd-nearest.md#kd-nearest-correctness-cost)
+
+
+### Review additions to Topics 2 and 7
+
+**Correctness, termination and evidence**
+
+- [Algorithm contract reasoning](topics/analysis/correctness.md#algorithm-contract-reasoning)
+- [Loop invariant method](topics/analysis/correctness.md#loop-invariant-method)
+- [Termination variant](topics/analysis/correctness.md#termination-variant)
+- [Inductive algorithm reasoning](topics/analysis/correctness.md#inductive-algorithm-reasoning)
+- [Counterexamples and tests](topics/analysis/correctness.md#counterexamples-and-tests)
+
+**Binary-search boundaries and duplicate runs**
+
+- [Lower bound search](topics/searching/search-boundaries.md#lower-bound-search)
+- [Upper bound search](topics/searching/search-boundaries.md#upper-bound-search)
+- [Duplicate run boundaries](topics/searching/search-boundaries.md#duplicate-run-boundaries)
+- [Monotone boundary search](topics/searching/search-boundaries.md#monotone-boundary-search)
+
+**Ordered range queries in a BST**
+
+- [BST range query](topics/searching/bst-range-queries.md#bst-range-query)
+- [BST range pruning cost](topics/searching/bst-range-queries.md#bst-range-pruning-cost)
+
+
+### 11. Graph ordering, paths and spanning trees
+
+**DAGs and topological order**
+
+- [Directed acyclic graph](topics/graph-algorithms/topological-order.md#directed-acyclic-graph)
+- [Kahn’s algorithm](topics/graph-algorithms/topological-order.md#kahn-algorithm)
+- [Kahn invariant trace](topics/graph-algorithms/topological-order.md#kahn-invariant-trace)
+- [Topological cycle detection](topics/graph-algorithms/topological-order.md#topological-cycle-detection)
+
+**Shortest paths and relaxation**
+
+- [Weighted shortest path](topics/graph-algorithms/shortest-path-state.md#weighted-shortest-path)
+- [Relaxation](topics/graph-algorithms/shortest-path-state.md#relaxation)
+- [Shortest path predecessors](topics/graph-algorithms/shortest-path-state.md#shortest-path-predecessors)
+- [Weighted route recovery](topics/graph-algorithms/shortest-path-state.md#weighted-route-recovery)
+
+**Dijkstra's algorithm and lazy heap entries**
+
+- [Dijkstra’s algorithm](topics/graph-algorithms/dijkstra.md#dijkstra)
+- [Lazy dijkstra code](topics/graph-algorithms/dijkstra.md#lazy-dijkstra-code)
+- [Dijkstra’s algorithm stale entries](topics/graph-algorithms/dijkstra.md#dijkstra-stale-entries)
+- [Dijkstra’s algorithm cost](topics/graph-algorithms/dijkstra.md#dijkstra-cost)
+- [Dijkstra’s algorithm negative weights](topics/graph-algorithms/dijkstra.md#dijkstra-negative-weights)
+
+**Shortest paths in a DAG**
+
+- [DAG shortest paths](topics/graph-algorithms/dag-shortest-paths.md#dag-shortest-paths)
+- [DAG negative example](topics/graph-algorithms/dag-shortest-paths.md#dag-negative-example)
+- [DAG path cost](topics/graph-algorithms/dag-shortest-paths.md#dag-path-cost)
+
+**Spanning trees and safe edges**
+
+- [Minimum spanning tree](topics/graph-algorithms/spanning-trees.md#minimum-spanning-tree)
+- [MST cut property](topics/graph-algorithms/spanning-trees.md#mst-cut-property)
+- [MST exchange argument](topics/graph-algorithms/spanning-trees.md#mst-exchange-argument)
+- [MST ties negative cycle property](topics/graph-algorithms/spanning-trees.md#mst-ties-negative-cycle-property)
+
+**Prim: grow a tree across a cut**
+
+- [Prim’s algorithm](topics/graph-algorithms/prim.md#prim-algorithm)
+- [Lazy prim code](topics/graph-algorithms/prim.md#lazy-prim-code)
+- [Prim invariant trace](topics/graph-algorithms/prim.md#prim-invariant-trace)
+- [Prim forest cost](topics/graph-algorithms/prim.md#prim-forest-cost)
+
+**Kruskal: sort edges and merge components**
+
+- [Kruskal’s algorithm](topics/graph-algorithms/kruskal.md#kruskal-algorithm)
+- [Kruskal code](topics/graph-algorithms/kruskal.md#kruskal-code)
+- [Kruskal trace correctness](topics/graph-algorithms/kruskal.md#kruskal-trace-correctness)
+- [Kruskal cost](topics/graph-algorithms/kruskal.md#kruskal-cost)
+
+**Compare graph objectives before selecting an algorithm**
+
+- [Graph algorithm selection](topics/graph-algorithms/graph-algorithm-choices.md#graph-algorithm-selection)
+- [Shortest path tree versus mst](topics/graph-algorithms/graph-algorithm-choices.md#shortest-path-tree-versus-mst)
+- [Graph algorithm boundaries](topics/graph-algorithms/graph-algorithm-choices.md#graph-algorithm-boundaries)
+
+
+### 13. Union–find
+
+**Partitions and representatives**
+
+- [Disjoint set partition](topics/union-find/disjoint-sets.md#disjoint-set-partition)
+- [Union find adt](topics/union-find/disjoint-sets.md#union-find-adt)
+- [Disjoint set representative](topics/union-find/disjoint-sets.md#disjoint-set-representative)
+- [Union find versus sets](topics/union-find/disjoint-sets.md#union-find-versus-sets)
+
+**Parent forests and finding a root**
+
+- [Union find parent forest](topics/union-find/parent-forests.md#union-find-parent-forest)
+- [Basic find](topics/union-find/parent-forests.md#basic-find)
+- [Union find root linking](topics/union-find/parent-forests.md#union-find-root-linking)
+- [Union find links versus edges](topics/union-find/parent-forests.md#union-find-links-versus-edges)
+
+**Union by size and path compression**
+
+- [Union by size](topics/union-find/union-compression.md#union-by-size)
+- [Path compression](topics/union-find/union-compression.md#path-compression)
+- [Disjoint set code](topics/union-find/union-compression.md#disjoint-set-code)
+- [Union find shared trace](topics/union-find/union-compression.md#union-find-shared-trace)
+- [Union find amortised cost](topics/union-find/union-compression.md#union-find-amortised-cost)
+
+**Connectivity, cycle checks and limits**
+
+- [Incremental connectivity](topics/union-find/union-find-applications.md#incremental-connectivity)
+- [Union find cycle check](topics/union-find/union-find-applications.md#union-find-cycle-check)
+- [Union find directed limit](topics/union-find/union-find-applications.md#union-find-directed-limit)
+- [Union find deletion limit](topics/union-find/union-find-applications.md#union-find-deletion-limit)
+- [Union find workload choice](topics/union-find/union-find-applications.md#union-find-workload-choice)
+
+
+### 15. Algorithm design and sequence patterns
+
+**Choose a strategy from the problem**
+
+- [Algorithm design strategies](topics/strategies/strategy-selection.md#algorithm-design-strategies)
+- [State and subproblem](topics/strategies/strategy-selection.md#state-and-subproblem)
+- [Algorithm reduction](topics/strategies/strategy-selection.md#algorithm-reduction)
+
+**Greedy design and exchange reasoning**
+
+- [Greedy choice](topics/strategies/greedy.md#greedy-choice)
+- [Interval scheduling](topics/strategies/greedy.md#interval-scheduling)
+- [Greedy exchange proof](topics/strategies/greedy.md#greedy-exchange-proof)
+- [Greedy limits](topics/strategies/greedy.md#greedy-limits)
+
+**Dynamic programming: states, reuse and reconstruction**
+
+- [Dynamic programming](topics/strategies/dynamic-programming.md#dynamic-programming)
+- [Memoisation](topics/strategies/dynamic-programming.md#memoisation)
+- [Tabulation](topics/strategies/dynamic-programming.md#tabulation)
+- [DP reconstruction](topics/strategies/dynamic-programming.md#dp-reconstruction)
+- [DP cost and model](topics/strategies/dynamic-programming.md#dp-cost-and-model)
+
+**Backtracking and safe pruning**
+
+- [Backtracking](topics/strategies/backtracking.md#backtracking)
+- [Backtracking pruning](topics/strategies/backtracking.md#backtracking-pruning)
+- [Backtracking cost](topics/strategies/backtracking.md#backtracking-cost)
+
+**Prefix sums, two pointers and sliding windows**
+
+- [Prefix sums](topics/strategies/sequence-patterns.md#prefix-sums)
+- [Two pointer search](topics/strategies/sequence-patterns.md#two-pointer-search)
+- [Sliding window sum](topics/strategies/sequence-patterns.md#sliding-window-sum)
+- [Window monotonicity](topics/strategies/sequence-patterns.md#window-monotonicity)
+
+**Complexity, output size and practical limits**
+
+- [Output sensitive algorithms](topics/strategies/complexity-limits.md#output-sensitive-algorithms)
+- [Pseudopolynomial time](topics/strategies/complexity-limits.md#pseudopolynomial-time)
+- [Decision optimisation](topics/strategies/complexity-limits.md#decision-optimisation)
+- [P, NP and NP-completeness](topics/strategies/complexity-limits.md#complexity-p-np)
 

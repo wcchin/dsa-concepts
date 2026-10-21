@@ -1831,3 +1831,12 @@ Headings below omit fenced code. They provide an audit trail, including repeated
 - Closing
 - Prim and Kruskal in one comparison
 - Independent trace and explanation
+
+
+## Coverage review update
+
+The original fourteen-topic lecture map remains above. Topics 1–13 now have developed readings; Topic 14 remains reserved for integrated applications. The current reading order and remaining conceptual gaps are recorded in `../coverage-review.md` and `coverage-audit.md`.
+
+Topic 15, **Algorithm design and sequence patterns**, is an optional editorial extension beyond this lecture inventory: greedy reasoning, dynamic programming, backtracking, prefix sums, two pointers, sliding windows and complexity limits. Its worked examples are original, supported by general algorithm references linked in the reading. This does not change the course syllabus or assessment scope.
+
+The review also expands Topic 2 with correctness methods and Topic 7 with binary-search boundaries and BST range queries. Weeks 12–13 lecture Markdown and the union–find additional lecture supplied the source basis for Topics 11 and 13; notebooks, rubrics and solutions were excluded.

@@ -83,7 +83,7 @@ This version accepts lists of mutually comparable values and returns a new sorte
 
 The base case is correct because a sequence of zero or one items is sorted. Assuming both smaller results are correct, the merge argument establishes a sorted permutation of the original input. Termination follows because each larger input is divided into smaller parts.
 
-The [implementation page](implementation-costs.md) examines why slicing and indices matter. The planned [Sorting topic](../sorting/sorting.md) will compare this strategy with insertion, bubble and quicksort.
+The [implementation page](implementation-costs.md) examines why slicing and indices matter. The [Sorting topic](../sorting/sorting.md) compares this strategy with insertion, bubble and quicksort.
 
 Next: [Recursion trees and costs](recursion-costs.md).
 

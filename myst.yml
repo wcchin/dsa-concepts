@@ -5,100 +5,127 @@ project:
   github: wcchin/dsa-concepts
   description: A searchable guide to concepts, representations and algorithmic reasoning.
   authors:
-    - name: Benny Chin
+  - name: Benny Chin
   toc:
-    - file: index.md
-    - file: concepts.md
-    - file: topics/foundations/foundations.md
-      children:
-        - file: topics/foundations/data-and-algorithms.md
-        - file: topics/foundations/objects-and-references.md
-        - file: topics/foundations/mutation-and-copying.md
-        - file: topics/foundations/collections-and-classes.md
-    - file: topics/analysis/analysis.md
-      children:
-        - file: topics/analysis/counting-work.md
-        - file: topics/analysis/growth-rates.md
-        - file: topics/analysis/cases-and-bounds.md
-        - file: topics/analysis/code-and-space.md
-    - file: topics/recursion/recursion.md
-      children:
-        - file: topics/recursion/recursive-calls.md
-        - file: topics/recursion/call-stack.md
-        - file: topics/recursion/divide-and-conquer.md
-        - file: topics/recursion/recursion-costs.md
-        - file: topics/recursion/implementation-costs.md
-    - file: topics/sorting/sorting.md
-      children:
-        - file: topics/sorting/sorting-properties.md
-        - file: topics/sorting/insertion-sort.md
-        - file: topics/sorting/bubble-sort.md
-        - file: topics/sorting/partitioning.md
-        - file: topics/sorting/quicksort.md
-        - file: topics/sorting/comparing-strategies.md
-        - file: topics/sorting/comparison-lower-bound.md
-    - file: topics/linear-structures/linear-structures.md
-      children:
-        - file: topics/linear-structures/adts-and-contracts.md
-        - file: topics/linear-structures/stacks.md
-        - file: topics/linear-structures/queues-and-deques.md
-        - file: topics/linear-structures/arrays.md
-        - file: topics/linear-structures/dynamic-arrays.md
-        - file: topics/linear-structures/linked-structures.md
-        - file: topics/linear-structures/circular-queues.md
-        - file: topics/linear-structures/linked-queues.md
-        - file: topics/linear-structures/choosing-linear-structures.md
-    - file: topics/maps-sets-hashing/maps-sets-hashing.md
-      children:
-        - file: topics/maps-sets-hashing/maps.md
-        - file: topics/maps-sets-hashing/sets.md
-        - file: topics/maps-sets-hashing/hashing.md
-        - file: topics/maps-sets-hashing/chaining.md
-        - file: topics/maps-sets-hashing/open-addressing.md
-        - file: topics/maps-sets-hashing/performance.md
-        - file: topics/maps-sets-hashing/choosing.md
-    - file: topics/searching/searching.md
-      children:
-        - file: topics/searching/binary-search.md
-        - file: topics/searching/tree-basics.md
-        - file: topics/searching/bst-lookup-insertion.md
-        - file: topics/searching/bst-traversal.md
-        - file: topics/searching/bst-deletion.md
-        - file: topics/searching/search-costs.md
-    - file: topics/balanced-trees/balanced-trees.md
-      children:
-        - file: topics/balanced-trees/avl-invariants.md
-        - file: topics/balanced-trees/avl-rotations.md
-        - file: topics/balanced-trees/avl-cases.md
-        - file: topics/balanced-trees/avl-insertion.md
-        - file: topics/balanced-trees/avl-deletion.md
-    - file: topics/heaps/heaps.md
-      children:
-        - file: topics/heaps/priority-queues.md
-        - file: topics/heaps/heap-representation.md
-        - file: topics/heaps/heap-insertion.md
-        - file: topics/heaps/heap-removal.md
-        - file: topics/heaps/heap-construction.md
-        - file: topics/heaps/heap-applications.md
-        - file: topics/heaps/heap-sorting-costs.md
-    - file: topics/graphs/graphs.md
-      children:
-        - file: topics/graphs/graph-concepts.md
-        - file: topics/graphs/graph-representations.md
-        - file: topics/graphs/breadth-first-search.md
-        - file: topics/graphs/depth-first-search.md
-        - file: topics/graphs/graph-components.md
-        - file: topics/graphs/graph-traversal-costs.md
-    - file: topics/graph-algorithms/graph-algorithms.md
-    - file: topics/kd-trees/kd-trees.md
-      children:
-        - file: topics/kd-trees/kd-construction.md
-        - file: topics/kd-trees/kd-exact-search.md
-        - file: topics/kd-trees/kd-range-search.md
-        - file: topics/kd-trees/kd-shape.md
-        - file: topics/kd-trees/kd-nearest.md
-    - file: topics/union-find/union-find.md
-    - file: topics/applications/applications.md
+  - file: index.md
+  - file: concepts.md
+  - file: reading-guide.md
+  - file: coverage-review.md
+  - file: topics/foundations/foundations.md
+    children:
+    - file: topics/foundations/data-and-algorithms.md
+    - file: topics/foundations/objects-and-references.md
+    - file: topics/foundations/mutation-and-copying.md
+    - file: topics/foundations/collections-and-classes.md
+  - file: topics/analysis/analysis.md
+    children:
+    - file: topics/analysis/counting-work.md
+    - file: topics/analysis/growth-rates.md
+    - file: topics/analysis/cases-and-bounds.md
+    - file: topics/analysis/code-and-space.md
+    - file: topics/analysis/correctness.md
+  - file: topics/recursion/recursion.md
+    children:
+    - file: topics/recursion/recursive-calls.md
+    - file: topics/recursion/call-stack.md
+    - file: topics/recursion/divide-and-conquer.md
+    - file: topics/recursion/recursion-costs.md
+    - file: topics/recursion/implementation-costs.md
+  - file: topics/sorting/sorting.md
+    children:
+    - file: topics/sorting/sorting-properties.md
+    - file: topics/sorting/insertion-sort.md
+    - file: topics/sorting/bubble-sort.md
+    - file: topics/sorting/partitioning.md
+    - file: topics/sorting/quicksort.md
+    - file: topics/sorting/comparing-strategies.md
+    - file: topics/sorting/comparison-lower-bound.md
+  - file: topics/linear-structures/linear-structures.md
+    children:
+    - file: topics/linear-structures/adts-and-contracts.md
+    - file: topics/linear-structures/stacks.md
+    - file: topics/linear-structures/queues-and-deques.md
+    - file: topics/linear-structures/arrays.md
+    - file: topics/linear-structures/dynamic-arrays.md
+    - file: topics/linear-structures/linked-structures.md
+    - file: topics/linear-structures/circular-queues.md
+    - file: topics/linear-structures/linked-queues.md
+    - file: topics/linear-structures/choosing-linear-structures.md
+  - file: topics/maps-sets-hashing/maps-sets-hashing.md
+    children:
+    - file: topics/maps-sets-hashing/maps.md
+    - file: topics/maps-sets-hashing/sets.md
+    - file: topics/maps-sets-hashing/hashing.md
+    - file: topics/maps-sets-hashing/chaining.md
+    - file: topics/maps-sets-hashing/open-addressing.md
+    - file: topics/maps-sets-hashing/performance.md
+    - file: topics/maps-sets-hashing/choosing.md
+  - file: topics/searching/searching.md
+    children:
+    - file: topics/searching/binary-search.md
+    - file: topics/searching/search-boundaries.md
+    - file: topics/searching/tree-basics.md
+    - file: topics/searching/bst-lookup-insertion.md
+    - file: topics/searching/bst-traversal.md
+    - file: topics/searching/bst-range-queries.md
+    - file: topics/searching/bst-deletion.md
+    - file: topics/searching/search-costs.md
+  - file: topics/balanced-trees/balanced-trees.md
+    children:
+    - file: topics/balanced-trees/avl-invariants.md
+    - file: topics/balanced-trees/avl-rotations.md
+    - file: topics/balanced-trees/avl-cases.md
+    - file: topics/balanced-trees/avl-insertion.md
+    - file: topics/balanced-trees/avl-deletion.md
+  - file: topics/heaps/heaps.md
+    children:
+    - file: topics/heaps/priority-queues.md
+    - file: topics/heaps/heap-representation.md
+    - file: topics/heaps/heap-insertion.md
+    - file: topics/heaps/heap-removal.md
+    - file: topics/heaps/heap-construction.md
+    - file: topics/heaps/heap-applications.md
+    - file: topics/heaps/heap-sorting-costs.md
+  - file: topics/graphs/graphs.md
+    children:
+    - file: topics/graphs/graph-concepts.md
+    - file: topics/graphs/graph-representations.md
+    - file: topics/graphs/breadth-first-search.md
+    - file: topics/graphs/depth-first-search.md
+    - file: topics/graphs/graph-components.md
+    - file: topics/graphs/graph-traversal-costs.md
+  - file: topics/graph-algorithms/graph-algorithms.md
+    children:
+    - file: topics/graph-algorithms/topological-order.md
+    - file: topics/graph-algorithms/shortest-path-state.md
+    - file: topics/graph-algorithms/dijkstra.md
+    - file: topics/graph-algorithms/dag-shortest-paths.md
+    - file: topics/graph-algorithms/spanning-trees.md
+    - file: topics/graph-algorithms/prim.md
+    - file: topics/graph-algorithms/kruskal.md
+    - file: topics/graph-algorithms/graph-algorithm-choices.md
+  - file: topics/kd-trees/kd-trees.md
+    children:
+    - file: topics/kd-trees/kd-construction.md
+    - file: topics/kd-trees/kd-exact-search.md
+    - file: topics/kd-trees/kd-range-search.md
+    - file: topics/kd-trees/kd-shape.md
+    - file: topics/kd-trees/kd-nearest.md
+  - file: topics/union-find/union-find.md
+    children:
+    - file: topics/union-find/disjoint-sets.md
+    - file: topics/union-find/parent-forests.md
+    - file: topics/union-find/union-compression.md
+    - file: topics/union-find/union-find-applications.md
+  - file: topics/applications/applications.md
+  - file: topics/strategies/strategies.md
+    children:
+    - file: topics/strategies/strategy-selection.md
+    - file: topics/strategies/greedy.md
+    - file: topics/strategies/dynamic-programming.md
+    - file: topics/strategies/backtracking.md
+    - file: topics/strategies/sequence-patterns.md
+    - file: topics/strategies/complexity-limits.md
 site:
   template: book-theme
   options:
@@ -109,4 +136,3 @@ site:
     style: assets/custom.css
   parts:
     primary_sidebar_footer: assets/sidebar-footer.md
-

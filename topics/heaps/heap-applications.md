@@ -66,4 +66,4 @@ The stored priority is a snapshot used for ordering. Editing a field inside the 
 
 One design maintains an item-to-index map and repairs the affected path, updating the map during swaps. Another adds a revised entry and skips obsolete entries when they are removed. That lazy design needs an explicit way to recognise obsolete entries and may store more entries than active items. These are additional algorithms, not features of the small class above.
 
-Scheduled events, repeated next-job selection and maintaining a small set of best candidates are common uses. [Topic 11](../graph-algorithms/graph-algorithms.md) will use priorities in graph algorithms. Interface reference: [Python's heapq documentation](https://docs.python.org/3/library/heapq.html).
+Scheduled events, repeated next-job selection and maintaining a small set of best candidates are common uses. [Topic 11](../graph-algorithms/graph-algorithms.md) uses priorities in graph algorithms. Interface reference: [Python's heapq documentation](https://docs.python.org/3/library/heapq.html).

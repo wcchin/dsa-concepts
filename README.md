@@ -4,23 +4,27 @@ A standalone Jupyter Book 2 project for a searchable, self-reading course resour
 
 ## Contents
 
-- Fourteen topic areas, with alphabetical and topic-based concept indexes.
+- Fifteen topic areas, with alphabetical and topic-based concept indexes.
 - A developed Foundations topic: four reading pages, an overview and three object diagrams.
-- A developed Algorithm Analysis topic: four reading pages, an overview and three original mathematical figures.
+- A developed Algorithm Analysis topic: five reading pages, an overview and three original mathematical figures.
 - A developed Recursion topic: five reading pages, an overview and eight original SVG explanations.
 - A developed Sorting topic: seven reading pages, an overview and seven original SVG explanations.
 - A developed Linear Structures topic: nine reading pages, an overview and twelve original SVG explanations.
 - A developed Maps, Sets and Hashing pilot: seven concept pages and an overview.
-- Searching and BSTs: six reading pages and eight original SVG figures.
+- Searching and BSTs: eight reading pages and nine original SVG figures.
 - Balanced search trees: five reading pages and five original SVG figures.
 - K-d trees: five reading pages and six original SVG figures.
 - Graphs and traversal: six reading pages, an overview and eight original SVG explanations.
 - Priority queues and heaps: seven reading pages, an overview and nine original SVG explanations.
+- Graph ordering, shortest paths and spanning trees: eight reading pages and nine original SVG figures.
+- Union–find: four reading pages and five original SVG figures.
+- Optional algorithm design: six reading pages and four original SVG figures.
+- A prerequisite reading guide and public coverage review.
 - An original probing-deletion diagram.
 - An author-facing source inventory under `planning/`.
 - A build-check workflow and automatic publishing on pushes to `main`.
 
-No notebooks, rubric files, solution files, slide files or Git history are included. Three topics remain scope outlines, not finished chapters.
+No notebooks, rubric files, solution files, slide files or Git history are included. Topic 14 remains a plan for integrated applications.
 
 ## Repository
 
@@ -56,7 +60,7 @@ Every push to `main` builds and publishes the site. Pull requests run the build 
 
 ## Editorial work
 
-Read `planning/topic-inventory.md` for the fourteen topics, page boundaries, lecture-source mapping and gaps. The inventory records the private course-source provenance but the source files themselves are not bundled. Do not place assessment solutions in this book project.
+Read `planning/topic-inventory.md` for the source-based topics, page boundaries, lecture-source mapping and gaps. The inventory records the private course-source provenance but the source files themselves are not bundled. Do not place assessment solutions in this book project.
 
-Topics 1–10 and 12 contain developed reading material. Continue with Topic 11 (Graph ordering, paths and spanning trees). No content licence has been selected yet.
+Topics 1–13 and optional Topic 15 contain developed reading material. See `coverage-review.md` for remaining gaps and `planning/coverage-audit.md` for the editorial review. No content licence has been selected yet.
 

@@ -1,11 +1,18 @@
 # 11. Graph ordering, paths and spanning trees
 
-This topic is planned. The sections below define its scope; the full self-reading explanations are still to be developed.
+Three graph questions require different evidence: which task may happen next, which route is cheapest from a source, and which connections join a network at minimum total cost? A traversal alone does not answer all three.
 
-## Planned concept pages
+## Reading route
 
-- **DAGs, indegrees, Kahn’s algorithm and cycle detection**
-- **Relaxation, Dijkstra, lazy heaps and DAG shortest paths**
-- **Spanning trees, forests, cut property and exchange reasoning**
-- **Prim, Kruskal, union–find and complexity**
-- **Shortest-path trees versus minimum spanning trees**
+1. [DAGs and topological order](topological-order.md): remove satisfied dependencies with Kahn's algorithm.
+2. [Shortest paths and relaxation](shortest-path-state.md): distinguish tentative distances from final answers.
+3. [Dijkstra and lazy heaps](dijkstra.md): settle vertices under nonnegative edge weights.
+4. [Shortest paths in a DAG](dag-shortest-paths.md): relax in dependency order, including negative weights.
+5. [Spanning trees and safe edges](spanning-trees.md): define the objective and justify greedy choices.
+6. [Prim's algorithm](prim.md): grow one component at a time with a frontier of edges.
+7. [Kruskal's algorithm](kruskal.md): scan globally sorted edges and reject cycles.
+8. [Compare the graph objectives](graph-algorithm-choices.md): select an algorithm by the required result.
+
+Read [graph representations, BFS and DFS](../graphs/graphs.md) and [priority queues](../heaps/heaps.md) first. Before the Kruskal code, read [Topic 13: union–find](../union-find/union-find.md); its full implementation is kept there rather than duplicated here. Topic 12 is a separate spatial-search branch and is not a prerequisite.
+
+The examples follow the Week 12–13 lecture graphs. All graph keys include sinks and isolated vertices. Weighted code assumes finite numeric edge weights, consistent adjacency lists and bounded-cost arithmetic; Dijkstra additionally checks for negative weights. String labels are used in the traces, and `None` denotes a missing predecessor.

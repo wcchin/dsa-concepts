@@ -2,19 +2,26 @@
 
 *Concepts, Python Examples, and Algorithmic Reasoning*
 
-Developed from the CS2040HS teaching materials at the National University of Singapore, this guide explains how data representations, operation rules and algorithmic strategies fit together. Read by topic to build an understanding, or use search and the [concept index](concepts.md) to revisit a particular idea.
+Developed from the CS2040HS teaching materials at the National University of Singapore, this guide explains how representations, operation rules and algorithmic strategies fit together. Read by topic to build understanding, or use search and the [concept index](concepts.md) to revisit a specific idea.
 
-**Work in progress:** Topics 1–10 and 12 contain developed reading material. Topics 11, 13 and 14 currently describe planned coverage.
+**Current coverage:** Topics 1–13 have developed reading material. Topic 14 is reserved for integrated applications. Topic 15 adds optional DSA concepts beyond the lecture inventory. See the [coverage review](coverage-review.md) for additions, limitations and priorities.
 
-## Start with the question
+## Choose a reading route
 
-When choosing a structure or reading an algorithm, ask: what must the operations do, what representation supports them, what remains true after each step, and how does the work grow?
+Start with [Foundations](topics/foundations/foundations.md), [Algorithm analysis](topics/analysis/analysis.md) and [Recursion](topics/recursion/recursion.md). These establish the language, cost models and proof habits used throughout the book.
 
-Begin with [Foundations and Python’s object model](topics/foundations/foundations.md). Then read [Analysing algorithms](topics/analysis/analysis.md) to reason about costs. Continue with [Recursion and divide-and-conquer](topics/recursion/recursion.md) for recursive calls and their costs. Continue with [Sorting](topics/sorting/sorting.md) to compare ordering strategies. Continue with [Abstract data types and linear structures](topics/linear-structures/linear-structures.md) for access policies and storage choices. For another developed application, see [Maps, Sets and Hashing](topics/maps-sets-hashing/maps-sets-hashing.md).
+Then choose the question you want to answer:
 
+- **How should data be stored and accessed?** Read [linear structures](topics/linear-structures/linear-structures.md), [maps, sets and hashing](topics/maps-sets-hashing/maps-sets-hashing.md), [search trees](topics/searching/searching.md) and [balanced trees](topics/balanced-trees/balanced-trees.md).
+- **How can ordering reduce work?** Read [sorting](topics/sorting/sorting.md), [search boundaries](topics/searching/search-boundaries.md) and [heaps](topics/heaps/heaps.md).
+- **How do networks connect and support routes?** Read [graph traversal](topics/graphs/graphs.md), [union–find](topics/union-find/union-find.md), then [ordering, paths and spanning trees](topics/graph-algorithms/graph-algorithms.md). This prerequisite route visits Topic 13 before Kruskal in Topic 11.
+- **How can spatial regions exclude candidates?** Read [k-d trees](topics/kd-trees/kd-trees.md) after binary search trees.
+- **How do we design new algorithms?** Read [Algorithm design and sequence patterns](topics/strategies/strategies.md) for greedy proofs, dynamic programming, backtracking and reusable array techniques.
 
-For ordered lookup, continue to [Searching and binary search trees](topics/searching/searching.md) and [Balanced search trees](topics/balanced-trees/balanced-trees.md). For spatial queries, read [K-d trees](topics/kd-trees/kd-trees.md).
+The [reading guide](reading-guide.md) gives prerequisites and shorter routes. Topic numbers are stable reference labels; you need not read every topic in numerical order.
 
-For networks with cycles and alternative routes, read [Graphs and traversal](topics/graphs/graphs.md), including visual BFS and DFS traces.
+## Questions to carry through the book
 
-For repeated selection by priority, read [Priority queues and heaps](topics/heaps/heaps.md), with array/tree traces and a stable tie policy for application records.
+What must the operation return? Which representation supports it? What remains true after each step? Why does it terminate? How does the work grow, and under which assumptions?
+
+Figures and Python examples make these questions concrete. The examples are ordinary code listings: no notebook or course-repository access is required to read the book.
