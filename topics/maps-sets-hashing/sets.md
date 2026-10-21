@@ -2,7 +2,7 @@
 
 A **Set** stores distinct elements and answers membership questions. Unlike a [Map](maps.md), it does not associate a separate value with each element. Adding an equal element again leaves the size unchanged.
 
-## Operations and a trace
+## Set operations and membership
 
 ```python
 visited = set()             # {} would create an empty dictionary
@@ -31,8 +31,10 @@ for station in observations:
 
 The resulting associations are S01 → 2 and S02 → 1. This illustrates a question to ask before choosing a collection: do we need distinctness, frequency, order, or associated records?
 
-## Set combinations
+## Union, intersection and difference
 
 For sets A and B, the union contains elements in either, the intersection contains elements in both, and the difference A − B contains elements in A but not B. Python spells these operations `A | B`, `A & B`, and `A - B`.
 
 A Set ADT can be implemented in several ways. Python’s hash-based `set` requires hashable elements. A general Set concept does not by itself impose that implementation requirement. Continue with [hashability and equality](hashing.md).
+
+**Browse:** [Maps, Sets and Hashing](maps-sets-hashing.md) · [Concept index](../../concepts.md)
