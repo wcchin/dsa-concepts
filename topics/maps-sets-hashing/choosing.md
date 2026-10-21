@@ -11,7 +11,7 @@ Choose the behaviour a problem needs before choosing a representation. Maps and 
 | Which pending task has highest priority? | Priority Queue | Priority determines removal |
 | Which station is nearest to this coordinate? | Spatial search structure | Exact-key hashing does not directly organise proximity |
 
-## Connect behaviour, representation and cost
+## Choosing by operations and complexity
 
 A complete design explanation states the required operations, their meaning, the chosen representation, the invariant it preserves and the cost assumptions. “Use hashing because it is O(1)” leaves out whether the query is exact-key lookup and what keeps the table efficient.
 
@@ -28,3 +28,5 @@ For a station directory, a hash-based Map is a plausible choice when exact ident
 Revisit [hashing](hashing.md), [chaining](chaining.md), [open addressing](open-addressing.md) and [performance](performance.md) to connect each question to its invariant.
 
 Related planned topics: [ADTs and linear structures](../linear-structures/linear-structures.md), [BSTs](../searching/searching.md), [priority queues](../heaps/heaps.md), and [k-d trees](../kd-trees/kd-trees.md).
+
+**Browse:** [Maps, Sets and Hashing](maps-sets-hashing.md) · [Concept index](../../concepts.md)
