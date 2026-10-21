@@ -2,7 +2,7 @@
 
 Find a concept by its name or browse concepts by topic.
 
-The wiki is being developed progressively. Topics 1–6 (Foundations through Maps, Sets and Hashing) have developed explanations. Other topics currently provide scope outlines.
+The wiki is being developed progressively. Topics 1–8 and 12 have developed explanations. Other topics currently provide scope outlines.
 
 ## Browse by topic
 
@@ -23,7 +23,7 @@ The wiki is being developed progressively. Topics 1–6 (Foundations through Map
 
 ## Find a concept alphabetically
 
-This index covers developed explanations in Topics 1–6. Entries link directly to the relevant section.
+This index covers developed explanations in Topics 1–8 and 12. Entries link directly to the relevant section.
 
 ### A
 
@@ -49,6 +49,20 @@ This index covers developed explanations in Topics 1–6. Entries link directly 
 - [Attributes](topics/foundations/collections-and-classes.md#classes-and-instances)
 - [Auxiliary and output space](topics/analysis/code-and-space.md#auxiliary-and-output-space)
 - [Average-case analysis](topics/analysis/cases-and-bounds.md#average-case)
+- [AVL balance factor](topics/balanced-trees/avl-invariants.md#avl-balance-factor)
+- [AVL bottom-up repair](topics/balanced-trees/avl-insertion.md#avl-bottom-up-repair)
+- [AVL deletion](topics/balanced-trees/avl-deletion.md#avl-deletion)
+- [AVL deletion cascade](topics/balanced-trees/avl-deletion.md#avl-deletion-cascade)
+- [AVL deletion with zero child factor](topics/balanced-trees/avl-deletion.md#avl-deletion-zero-child-factor)
+- [AVL double rotations](topics/balanced-trees/avl-cases.md#avl-double-rotation)
+- [AVL height bound](topics/balanced-trees/avl-invariants.md#avl-height-bound)
+- [AVL height convention](topics/balanced-trees/avl-invariants.md#avl-height-convention)
+- [AVL insertion](topics/balanced-trees/avl-insertion.md#avl-insertion)
+- [AVL insertion costs](topics/balanced-trees/avl-insertion.md#avl-insertion-cost)
+- [AVL invariant](topics/balanced-trees/avl-invariants.md#avl-invariant)
+- [AVL LL, RR, LR and RL cases](topics/balanced-trees/avl-cases.md#avl-four-cases)
+- [AVL rebalance helper](topics/balanced-trees/avl-cases.md#avl-rebalance)
+- [AVL validation](topics/balanced-trees/avl-deletion.md#avl-validation)
 
 ### B
 
@@ -60,10 +74,29 @@ This index covers developed explanations in Topics 1–6. Entries link directly 
 - [Big-O (upper bound)](topics/analysis/cases-and-bounds.md#big-o)
 - [Big-Omega (lower bound)](topics/analysis/cases-and-bounds.md#big-omega)
 - [Big-Theta (tight bound)](topics/analysis/cases-and-bounds.md#big-theta)
+- [Binary search](topics/searching/binary-search.md#binary-search)
+- [Binary search with duplicates](topics/searching/binary-search.md#binary-search-duplicates)
+- [Binary tree](topics/searching/tree-basics.md#binary-tree)
+- [Binary-search correctness](topics/searching/binary-search.md#binary-search-correctness)
+- [Binary-search costs](topics/searching/binary-search.md#binary-search-cost)
+- [Binary-search interval invariant](topics/searching/binary-search.md#binary-search-invariant)
 - [Bounded queue and overflow](topics/linear-structures/circular-queues.md#bounded-queue)
 - [Bracket matching](topics/linear-structures/stacks.md#bracket-matching)
 - [Branch costs](topics/analysis/code-and-space.md#branch-costs)
 - [Browser history with stacks](topics/linear-structures/choosing-linear-structures.md#browser-history-stacks)
+- [BST ancestor bounds](topics/searching/tree-basics.md#bst-ancestor-bounds)
+- [BST construction costs](topics/searching/search-costs.md#bst-building-cost)
+- [BST deletion cases](topics/searching/bst-deletion.md#bst-deletion-cases)
+- [BST deletion implementation](topics/searching/bst-deletion.md#bst-delete-code)
+- [BST duplicate policy](topics/searching/tree-basics.md#bst-duplicate-policy)
+- [BST height-dependent costs](topics/searching/search-costs.md#bst-height-cost)
+- [BST insertion](topics/searching/bst-lookup-insertion.md#bst-insertion)
+- [BST insertion correctness](topics/searching/bst-lookup-insertion.md#bst-insertion-correctness)
+- [BST invariant](topics/searching/tree-basics.md#bst-invariant)
+- [BST lookup](topics/searching/bst-lookup-insertion.md#bst-search)
+- [BST minimum and maximum](topics/searching/bst-traversal.md#bst-minimum-maximum)
+- [BST nodes](topics/searching/bst-lookup-insertion.md#bst-node)
+- [BST rotations](topics/balanced-trees/avl-rotations.md#bst-rotation)
 - [Bubble sort](topics/sorting/bubble-sort.md#bubble-sort)
 - [Bubble-sort invariant](topics/sorting/bubble-sort.md#bubble-invariant)
 - [Buckets](topics/maps-sets-hashing/chaining.md#buckets-and-lookup-in-separate-chaining)
@@ -134,6 +167,8 @@ This index covers developed explanations in Topics 1–6. Entries link directly 
 - [Immutable objects](topics/foundations/mutation-and-copying.md#mutability)
 - [In-place sorting](topics/sorting/sorting-properties.md#in-place-sorting)
 - [Index-based merging](topics/recursion/implementation-costs.md#index-based-merge)
+- [Inorder successor](topics/searching/bst-traversal.md#bst-successor)
+- [Inorder traversal](topics/searching/bst-traversal.md#bst-inorder)
 - [Input size](topics/analysis/counting-work.md#input-size)
 - [Insertion order](topics/maps-sets-hashing/maps.md#dictionary-insertion-order)
 - [Insertion sort](topics/sorting/insertion-sort.md#insertion-sort)
@@ -143,12 +178,31 @@ This index covers developed explanations in Topics 1–6. Entries link directly 
 
 ### K
 
+- [K-d tree](topics/kd-trees/kd-construction.md#kd-tree)
+- [K-d trees and AVL rotations](topics/kd-trees/kd-shape.md#kd-rotations)
+- [K-d-tree boundary pruning](topics/kd-trees/kd-range-search.md#kd-pruning-boundaries)
+- [K-d-tree exact search](topics/kd-trees/kd-exact-search.md#kd-exact-search)
+- [K-d-tree exact-search correctness](topics/kd-trees/kd-exact-search.md#kd-search-correctness)
+- [K-d-tree exact-search traces](topics/kd-trees/kd-exact-search.md#kd-exact-traces)
+- [K-d-tree height and cost](topics/kd-trees/kd-shape.md#kd-height-cost)
+- [K-d-tree insertion](topics/kd-trees/kd-construction.md#kd-construction)
+- [K-d-tree limitations](topics/kd-trees/kd-shape.md#kd-query-limitations)
+- [K-d-tree median construction](topics/kd-trees/kd-shape.md#kd-median-construction)
+- [K-d-tree median ties](topics/kd-trees/kd-shape.md#kd-median-ties)
+- [K-d-tree range query](topics/kd-trees/kd-range-search.md#kd-range-query)
+- [K-d-tree range-search costs](topics/kd-trees/kd-range-search.md#kd-range-trace)
+- [K-d-tree range-search implementation](topics/kd-trees/kd-range-search.md#kd-range-code)
+- [K-d-tree spatial regions](topics/kd-trees/kd-construction.md#kd-spatial-region)
+- [K-d-tree split invariant](topics/kd-trees/kd-construction.md#kd-split-invariant)
+- [Key versus node identity](topics/searching/bst-deletion.md#bst-key-versus-node)
 - [Key-value association](topics/maps-sets-hashing/maps.md#map-adt-and-operations)
 
 ### L
 
+- [Leaf and one-child deletion](topics/searching/bst-deletion.md#bst-leaf-one-child-deletion)
 - [Length and capacity](topics/linear-structures/dynamic-arrays.md#length-and-capacity)
 - [Linear probing](topics/maps-sets-hashing/open-addressing.md#linear-probing-and-wraparound)
+- [Linear search](topics/searching/binary-search.md#linear-search)
 - [Linear sequences and positional access](topics/linear-structures/adts-and-contracts.md#linear-sequence-adt)
 - [Linear-representation costs](topics/linear-structures/choosing-linear-structures.md#linear-representation-costs)
 - [Linked insertion](topics/linear-structures/linked-structures.md#linked-insertion)
@@ -177,6 +231,10 @@ This index covers developed explanations in Topics 1–6. Entries link directly 
 
 ### N
 
+- [Nearest-neighbour correctness and costs](topics/kd-trees/kd-nearest.md#kd-nearest-correctness-cost)
+- [Nearest-neighbour distance bound](topics/kd-trees/kd-nearest.md#kd-nearest-bound)
+- [Nearest-neighbour implementation](topics/kd-trees/kd-nearest.md#kd-nearest-code)
+- [Nearest-neighbour search](topics/kd-trees/kd-nearest.md#kd-nearest-neighbour)
 - [Nested and triangular loops](topics/analysis/code-and-space.md#nested-and-triangular-loops)
 - [Non-comparison sorting](topics/sorting/comparison-lower-bound.md#non-comparison-sorting)
 - [None](topics/foundations/objects-and-references.md#none-sentinel)
@@ -223,9 +281,14 @@ This index covers developed explanations in Topics 1–6. Entries link directly 
 - [Representation and required operations](topics/foundations/data-and-algorithms.md#representation-and-operations)
 - [Return versus print](topics/recursion/call-stack.md#return-vs-print)
 - [Rolling window](topics/linear-structures/queues-and-deques.md#rolling-window)
+- [Rotation height updates](topics/balanced-trees/avl-rotations.md#rotation-height-updates)
+- [Rotation implementation](topics/balanced-trees/avl-rotations.md#rotation-code)
+- [Rotation middle subtree](topics/balanced-trees/avl-rotations.md#rotation-middle-subtree)
+- [Rotation reconnection](topics/balanced-trees/avl-rotations.md#rotation-reconnection)
 
 ### S
 
+- [Search representation comparison](topics/searching/search-costs.md#search-representation-comparison)
 - [Self](topics/foundations/collections-and-classes.md#self)
 - [Separate chaining](topics/maps-sets-hashing/chaining.md)
 - [Set ADT](topics/maps-sets-hashing/sets.md)
@@ -258,6 +321,9 @@ This index covers developed explanations in Topics 1–6. Entries link directly 
 - [Timing and analysis](topics/analysis/counting-work.md#measurement-and-analysis)
 - [Tombstone](topics/maps-sets-hashing/open-addressing.md#deletion-and-tombstones)
 - [Total recursive calls](topics/recursion/recursion-costs.md#total-calls)
+- [Tree terminology, depth and height](topics/searching/tree-basics.md#tree-terminology)
+- [Tree traversals](topics/searching/bst-traversal.md#tree-traversals)
+- [Two-child deletion](topics/searching/bst-deletion.md#bst-two-child-deletion)
 - [Type hints](topics/foundations/collections-and-classes.md#encapsulation-and-hints)
 
 ### U
@@ -524,4 +590,124 @@ This index covers developed explanations in Topics 1–6. Entries link directly 
 
 - [Choosing by operations and complexity](topics/maps-sets-hashing/choosing.md#choosing-by-operations-and-complexity)
 - [Questions to revisit](topics/maps-sets-hashing/choosing.md#questions-to-revisit)
+
+### 7. Searching and binary search trees
+
+**Binary search and candidate intervals**
+
+- [Linear search](topics/searching/binary-search.md#linear-search)
+- [Binary search](topics/searching/binary-search.md#binary-search)
+- [Binary-search interval invariant](topics/searching/binary-search.md#binary-search-invariant)
+- [Binary-search correctness](topics/searching/binary-search.md#binary-search-correctness)
+- [Binary search with duplicates](topics/searching/binary-search.md#binary-search-duplicates)
+- [Binary-search costs](topics/searching/binary-search.md#binary-search-cost)
+
+**Trees and whole-subtree ordering**
+
+- [Tree terminology, depth and height](topics/searching/tree-basics.md#tree-terminology)
+- [Binary tree](topics/searching/tree-basics.md#binary-tree)
+- [BST invariant](topics/searching/tree-basics.md#bst-invariant)
+- [BST ancestor bounds](topics/searching/tree-basics.md#bst-ancestor-bounds)
+- [BST duplicate policy](topics/searching/tree-basics.md#bst-duplicate-policy)
+
+**BST lookup and insertion**
+
+- [BST nodes](topics/searching/bst-lookup-insertion.md#bst-node)
+- [BST lookup](topics/searching/bst-lookup-insertion.md#bst-search)
+- [BST insertion](topics/searching/bst-lookup-insertion.md#bst-insertion)
+- [BST insertion correctness](topics/searching/bst-lookup-insertion.md#bst-insertion-correctness)
+
+**Traversal and ordered operations**
+
+- [Tree traversals](topics/searching/bst-traversal.md#tree-traversals)
+- [Inorder traversal](topics/searching/bst-traversal.md#bst-inorder)
+- [BST minimum and maximum](topics/searching/bst-traversal.md#bst-minimum-maximum)
+- [Inorder successor](topics/searching/bst-traversal.md#bst-successor)
+
+**BST deletion without losing subtrees**
+
+- [BST deletion cases](topics/searching/bst-deletion.md#bst-deletion-cases)
+- [Leaf and one-child deletion](topics/searching/bst-deletion.md#bst-leaf-one-child-deletion)
+- [Two-child deletion](topics/searching/bst-deletion.md#bst-two-child-deletion)
+- [BST deletion implementation](topics/searching/bst-deletion.md#bst-delete-code)
+- [Key versus node identity](topics/searching/bst-deletion.md#bst-key-versus-node)
+
+**Search costs and representation choices**
+
+- [BST height-dependent costs](topics/searching/search-costs.md#bst-height-cost)
+- [Search representation comparison](topics/searching/search-costs.md#search-representation-comparison)
+- [BST construction costs](topics/searching/search-costs.md#bst-building-cost)
+
+### 8. Balanced search trees
+
+**Heights, balance factors and AVL invariants**
+
+- [AVL invariant](topics/balanced-trees/avl-invariants.md#avl-invariant)
+- [AVL height convention](topics/balanced-trees/avl-invariants.md#avl-height-convention)
+- [AVL balance factor](topics/balanced-trees/avl-invariants.md#avl-balance-factor)
+- [AVL height bound](topics/balanced-trees/avl-invariants.md#avl-height-bound)
+
+**Rotations and subtree transfer**
+
+- [BST rotations](topics/balanced-trees/avl-rotations.md#bst-rotation)
+- [Rotation middle subtree](topics/balanced-trees/avl-rotations.md#rotation-middle-subtree)
+- [Rotation implementation](topics/balanced-trees/avl-rotations.md#rotation-code)
+- [Rotation height updates](topics/balanced-trees/avl-rotations.md#rotation-height-updates)
+- [Rotation reconnection](topics/balanced-trees/avl-rotations.md#rotation-reconnection)
+
+**LL, RR, LR and RL cases**
+
+- [AVL LL, RR, LR and RL cases](topics/balanced-trees/avl-cases.md#avl-four-cases)
+- [AVL double rotations](topics/balanced-trees/avl-cases.md#avl-double-rotation)
+- [AVL rebalance helper](topics/balanced-trees/avl-cases.md#avl-rebalance)
+
+**AVL insertion**
+
+- [AVL insertion](topics/balanced-trees/avl-insertion.md#avl-insertion)
+- [AVL bottom-up repair](topics/balanced-trees/avl-insertion.md#avl-bottom-up-repair)
+- [AVL insertion costs](topics/balanced-trees/avl-insertion.md#avl-insertion-cost)
+
+**AVL deletion and upward repair**
+
+- [AVL deletion](topics/balanced-trees/avl-deletion.md#avl-deletion)
+- [AVL deletion with zero child factor](topics/balanced-trees/avl-deletion.md#avl-deletion-zero-child-factor)
+- [AVL deletion cascade](topics/balanced-trees/avl-deletion.md#avl-deletion-cascade)
+- [AVL validation](topics/balanced-trees/avl-deletion.md#avl-validation)
+
+### 12. K-d trees
+
+**Split rules and k-d-tree construction**
+
+- [K-d tree](topics/kd-trees/kd-construction.md#kd-tree)
+- [K-d-tree split invariant](topics/kd-trees/kd-construction.md#kd-split-invariant)
+- [K-d-tree insertion](topics/kd-trees/kd-construction.md#kd-construction)
+- [K-d-tree spatial regions](topics/kd-trees/kd-construction.md#kd-spatial-region)
+
+**Exact-point search and coordinate ties**
+
+- [K-d-tree exact search](topics/kd-trees/kd-exact-search.md#kd-exact-search)
+- [K-d-tree exact-search traces](topics/kd-trees/kd-exact-search.md#kd-exact-traces)
+- [K-d-tree exact-search correctness](topics/kd-trees/kd-exact-search.md#kd-search-correctness)
+
+**Range search and safe pruning**
+
+- [K-d-tree range query](topics/kd-trees/kd-range-search.md#kd-range-query)
+- [K-d-tree boundary pruning](topics/kd-trees/kd-range-search.md#kd-pruning-boundaries)
+- [K-d-tree range-search implementation](topics/kd-trees/kd-range-search.md#kd-range-code)
+- [K-d-tree range-search costs](topics/kd-trees/kd-range-search.md#kd-range-trace)
+
+**Shape, median construction and limitations**
+
+- [K-d-tree height and cost](topics/kd-trees/kd-shape.md#kd-height-cost)
+- [K-d-tree median construction](topics/kd-trees/kd-shape.md#kd-median-construction)
+- [K-d-tree median ties](topics/kd-trees/kd-shape.md#kd-median-ties)
+- [K-d trees and AVL rotations](topics/kd-trees/kd-shape.md#kd-rotations)
+- [K-d-tree limitations](topics/kd-trees/kd-shape.md#kd-query-limitations)
+
+**Nearest-neighbour search and backtracking**
+
+- [Nearest-neighbour search](topics/kd-trees/kd-nearest.md#kd-nearest-neighbour)
+- [Nearest-neighbour distance bound](topics/kd-trees/kd-nearest.md#kd-nearest-bound)
+- [Nearest-neighbour implementation](topics/kd-trees/kd-nearest.md#kd-nearest-code)
+- [Nearest-neighbour correctness and costs](topics/kd-trees/kd-nearest.md#kd-nearest-correctness-cost)
 

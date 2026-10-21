@@ -1,6 +1,6 @@
 # Book development status
 
-- Fourteen topic areas retained. Topics 1–6 now contain developed self-reading explanations; eight topic areas remain outlines.
+- Fourteen topic areas retained. Topics 1–8 and 12 now contain developed self-reading explanations; five topic areas remain outlines.
 - Topic 1: four pages covering problem requirements; objects and references; mutation and copying; collections, classes and invariants. Three original SVG diagrams illustrate aliasing/rebinding, shallow copying and linked objects.
 - Topic 1 uses explicit concept labels for stable indexed targets. The alphabetical and topic-grouped indexes include these concepts and retain the Topic 6 entries.
 - Source basis: Week 1 classroom and online lecture material; the general problem/representation framing also follows the course introduction. No notebook, rubric or solution file was used. The book text consolidates the slide explanations rather than reproducing presentation directives.
@@ -13,6 +13,10 @@
 - Topic 4 keeps the lecture’s <= partition tie rule, states inclusive code bounds, qualifies random-pivot expected time for distinct keys, accounts for recursion space, and supplies the required lower-bound inequality for log(n!). The index links to each labelled concept.
 - Topic 5: nine reading pages and twelve original accessible SVG figures, based on Week 5 classroom and online lectures. Covers contracts, positional sequences, stacks, bracket matching, FIFO, deques, rolling windows, arrays, geometric growth, linked updates, circular queues, linked queues and selection trade-offs. No notebooks, rubrics or solution files were used.
 - Topic 5 refinements: distinguishes array reference slots from payload objects; uses explicit fixed-capacity overflow and empty-underflow contracts; permits None as queue data; includes singleton head/tail transitions; separates local link updates from finding a predecessor; qualifies dynamic-array and allocation cost assumptions; keeps browser current state separate from both history stacks.
+- Topic 7: six reading pages and eight original accessible SVG figures, based on Week 9 classroom and online lecture Markdown. Uses the shared BST with successor 60 and child 65; includes full insertion, traversal and deletion code, interval and ancestor-bound invariants, duplicate policy and height-qualified costs.
+- Topic 8: five reading pages and five original SVG figures, based on the AVL portions of Week 10 classroom and online lectures. Adds complete readable AVL insertion/deletion around cached heights, returned subtree roots and a shared child-factor rebalance helper. Covers nonempty middle transfer and deletion’s zero-child-factor and cascading repairs.
+- Topic 12: five reading pages and six original SVG figures, based on the additional Week 10 k-d-tree lecture. Preserves its shared seven points, strict-left/ties-right convention and inclusive range-query boundaries. A nearest-neighbour implementation extends the conceptual lesson; static median construction remains conceptual with explicit tie and construction-cost caveats.
+- Only lecture Markdown was consulted from the course repo for Topics 7, 8 and 12; no notebook, rubric or solution file was used. Supplementary concept references are Cornell AVL notes and Princeton’s k-d-tree specification. All precise diagrams are authored SVG assets.
 - Jupyter Book 2.1.7 remains pinned. Pushes to main build and publish automatically; pull requests build without publishing.
 
-Next: develop Topic 7 (Searching and binary search trees); Topic 6 is already developed. Continue adding concept entries as explanations become available.
+Next: develop Topic 9 (Priority queues and heaps), then Topics 10–11 and 13. Topic 14 remains reserved for additional applications. Continue adding concept entries as explanations become available.

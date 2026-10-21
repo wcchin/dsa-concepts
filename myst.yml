@@ -58,11 +58,30 @@ project:
         - file: topics/maps-sets-hashing/performance.md
         - file: topics/maps-sets-hashing/choosing.md
     - file: topics/searching/searching.md
+      children:
+        - file: topics/searching/binary-search.md
+        - file: topics/searching/tree-basics.md
+        - file: topics/searching/bst-lookup-insertion.md
+        - file: topics/searching/bst-traversal.md
+        - file: topics/searching/bst-deletion.md
+        - file: topics/searching/search-costs.md
     - file: topics/balanced-trees/balanced-trees.md
+      children:
+        - file: topics/balanced-trees/avl-invariants.md
+        - file: topics/balanced-trees/avl-rotations.md
+        - file: topics/balanced-trees/avl-cases.md
+        - file: topics/balanced-trees/avl-insertion.md
+        - file: topics/balanced-trees/avl-deletion.md
     - file: topics/heaps/heaps.md
     - file: topics/graphs/graphs.md
     - file: topics/graph-algorithms/graph-algorithms.md
     - file: topics/kd-trees/kd-trees.md
+      children:
+        - file: topics/kd-trees/kd-construction.md
+        - file: topics/kd-trees/kd-exact-search.md
+        - file: topics/kd-trees/kd-range-search.md
+        - file: topics/kd-trees/kd-shape.md
+        - file: topics/kd-trees/kd-nearest.md
     - file: topics/union-find/union-find.md
     - file: topics/applications/applications.md
 site:
