@@ -1,5 +1,16 @@
 # Arrays and positional operations
 
+**After this page, you should be able to:**
+
+- Trace indexed access, replacement, insertion and removal in an array.
+- Separate shifting cost from resizing, locality and value lookup.
+
+**Builds on:** [Sequence contracts](sequence-adt.md) define positional operations; this page explains their storage movements.
+
+## Operation mapping
+
+The [sequence interface](sequence-adt.md) calls indexed observation `get`, replacement `set`, insertion `insert`, and removal-and-return `remove_at`. The wrapper maps them to `a[i]`, indexed assignment, `list.insert` and `list.pop(i)` after checking its stricter index policy. This page explains the movements behind that code; a raw array alone does not automatically grow.
+
 (array-representation)=
 ## Equal-sized slots give direct access
 
@@ -48,3 +59,24 @@ Sequential array slots favour memory locality: nearby references can be fetched 
 Direct indexing also does not mean a value can be found instantly. If only a value is given and its position is unknown, searching an unsorted array may still require a linear scan. The operation and information available determine the cost.
 
 Representation reference: [How lists are implemented in CPython](https://docs.python.org/3/faq/design.html#how-are-lists-implemented-in-cpython). Next: [Dynamic arrays](dynamic-arrays.md).
+
+:::{tip} Common misconception
+**Constant-time indexed access gives constant-time search by value.** Without an index, finding a value can still require a scan.
+:::
+
+(linear-arrays-checks)=
+## Check your understanding
+
+Predict the operation result and the resulting state before opening the explanation.
+
+**1. Insert X at position 1 in A,B,C,D with spare capacity. Which direction must shifts proceed?**
+
+:::{dropdown} Show explanation
+Move D, then C, then B right. Starting at B without saving later values would overwrite them.
+:::
+
+**2. Does set(1,X) increase length?**
+
+:::{dropdown} Show explanation
+No. It replaces the existing item; insert(1,X) is the operation that increases length.
+:::

@@ -54,3 +54,7 @@ Nine readings now connect contracts, visual traces, code, correctness, implement
 ## Foundations ADT introduction
 
 Topic 1 now has five reading pages. A brief ADT introduction follows collections/classes, uses a shuttle-code LIFO trace, separates behaviour/representation/code, and states empty-operation policy. Topic 5 retains the fuller contracts and implementation comparisons, with a backlink. No algorithm or assessment material changed.
+
+## Topic 5 operation alignment
+
+Eleven readings now separate sequence, stack, queue and deque contracts from array, growth, linked and circular implementations. Added strict-index ArraySequence, Queue and Deque adapters, consistent size/len/empty queries, explicit return/error/full policies, operation costs and 22 collapsed-feedback checks. Existing URLs, concept labels and twelve diagrams are retained; historical deque anchors link to the dedicated page. Linked low-level helpers are not presented as a complete positional List class, and underlying library storage is explicitly delegated. No notebooks or assessment materials were used.

@@ -9,7 +9,7 @@ A standalone Jupyter Book 2 project for a searchable, self-reading course resour
 - A developed Algorithm Analysis topic: five reading pages, an overview and three original mathematical figures.
 - A developed Recursion topic: five reading pages, an overview and eight original SVG explanations.
 - A developed Sorting topic: nine reading pages, an overview and eight original SVG explanations. Algorithm readings align choices, stability, mutation, time/space and self-checks; includes a conceptual Timsort/Powersort overview.
-- A developed Linear Structures topic: nine reading pages, an overview and twelve original SVG explanations.
+- A developed Linear Structures topic: eleven reading pages, an overview and twelve original SVG explanations. Explicit sequence, stack, queue and deque contracts connect returns, boundaries, traces, implementation choices and costs; includes 22 self-reading checks.
 - A developed Maps, Sets and Hashing pilot: seven concept pages and an overview.
 - Searching and BSTs: eight reading pages and nine original SVG figures.
 - Balanced search trees: five reading pages and five original SVG figures.

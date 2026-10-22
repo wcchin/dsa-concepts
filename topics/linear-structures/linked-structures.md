@@ -1,5 +1,16 @@
 # Linked structures and safe updates
 
+**After this page, you should be able to:**
+
+- Trace traversal and safe link updates without losing a suffix.
+- Separate locating a position from constant-link changes at a known node.
+
+**Builds on:** [Object references](../foundations/objects-and-references.md) and the [sequence contract](sequence-adt.md).
+
+## Operation contracts and representation invariant
+
+A finite acyclic chain represents records in link order. `linked_values(head)` returns a new list without changing the chain. The insertion trace adds after a **known node**, while `remove_after(node)` removes and returns its successor's value, raising `IndexError` if none exists. These are low-level known-node operations, not a complete positional List class. A positional `insert(i,x)` must locate the predecessor first; compare the [sequence contract](sequence-adt.md).
+
 (singly-linked-list)=
 ## The links establish the sequence
 
@@ -86,5 +97,32 @@ A **doubly linked** node also stores `prev`. For adjacent nodes, `u.next is v` m
 ![A doubly linked sequence maintains next and prev in opposite directions, with head.prev and tail.next both None.](../../assets/linear-structures/doubly-linked.svg)
 
 The benefit costs one extra link per node and more updates. The first and last nodes need endpoint handling; the only node requires changing both head and tail to `None`. Extra metadata makes more operations cheap only when its invariants are maintained.
+
+## Implementation choices, space and suitability
+
+A singly linked node stores one successor; a doubly linked node also stores a predecessor. Maintaining tail and size fields can speed append and size queries, but every update must preserve them. A traversal with only a cursor uses O(1) workspace; collecting its n outputs uses O(n) result storage. An insertion allocates one node; removal updates O(1) links after the predecessor is known. Persistent storage is O(n+1), with per-node overhead.
+
+Use links when endpoint or known-node updates matter. Prefer arrays when frequent indexed access and locality dominate. The code here deliberately illustrates reference updates; the [linked queue](linked-queues.md) adds complete endpoint and size maintenance.
+
+:::{tip} Common misconception
+**Deleting a known singly linked node always takes constant time.** The operation may still need its predecessor; our helper receives that predecessor.
+:::
+
+(linear-linked-checks)=
+## Check your understanding
+
+Predict the operation result and the resulting state before opening the explanation.
+
+**1. Why assign new.next before replacing b.next in the insertion trace?**
+
+:::{dropdown} Show explanation
+It preserves the old successor C before overwriting B’s outgoing link.
+:::
+
+**2. Does holding tail make removal of a singly linked tail O(1)?**
+
+:::{dropdown} Show explanation
+No. Its predecessor is still needed to repair the new tail link.
+:::
 
 Next: [Circular-array queues](circular-queues.md).

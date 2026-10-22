@@ -1,77 +1,127 @@
-# Queues and deques
+# Queues: earliest waiting item first
+
+**After this page, you should be able to:**
+
+- Trace FIFO additions, observations and removals with explicit return values.
+- Compare a restricted deque-backed interface with circular-array and linked queues.
+
+**Builds on:** [Stacks](stacks.md) shows newest-first removal; a queue selects by arrival order.
 
 (queue-adt)=
-## FIFO and the two ends
+## Purpose and operation contracts
 
-A **queue** inserts at the **back** and removes from the **front**. Its **first in, first out (FIFO)** rule selects the earliest inserted item still waiting.
+A **queue** inserts at the back and removes from the front. Its **first in, first out (FIFO)** rule selects the earliest inserted item still waiting. A name such as `jobs` does not enforce FIFO: adding and removing at the back gives LIFO instead.
 
-`enqueue(x)` adds at the back; `dequeue()` removes and returns the front; `front()` observes it. As with the stack, the empty case belongs to the contract. A name such as `jobs` or `queue` cannot establish FIFO: adding at the back and popping from the back implements LIFO.
+| Operation | Returned result | State change or empty/full policy |
+|---|---|---|
+| `enqueue(x)` | `None` | Add x after all waiting items |
+| `front()` | Earliest waiting item | Observe only; empty raises `IndexError` |
+| `dequeue()` | Earliest waiting item | Remove exactly that item; empty raises `IndexError` |
+| `size()` / `len(q)` | Number of waiting items | Observe only |
+| `is_empty()` | Boolean | Observe whether size is zero |
+
+The queue below grows without a configured capacity. The later [fixed circular queue](circular-queues.md) instead rejects a full enqueue with `OverflowError`, preserving every waiting item. It never silently evicts one. Duplicates and `None` are valid data in all these examples; a valid result of `None` is different from an empty-operation exception.
+
+## Representation, invariant and visual trace
+
+In this adapter, the underlying deque's left end is the front and its right end is the back. Its elements remain in arrival order, and its length is the queue size.
 
 ![Identical additions and one removal leave different results: a stack removes C and a queue removes A.](../../assets/linear-structures/queue-versus-stack.svg)
 
-FIFO expresses a policy, such as first-come, first-served print jobs. Emergency triage requires additional priority rules, so a simple queue alone cannot represent it. Later, [graph traversal](../graphs/graphs.md) will use a queue to explore vertices in discovery order.
+| Call, starting empty | Return | Queue afterwards, front to back |
+|---|---|---|
+| `enqueue("A")` | `None` | A |
+| `enqueue("B")` | `None` | A, B |
+| `front()` | A | A, B |
+| `dequeue()` | A | B |
+| `enqueue("C")` | `None` | B, C |
 
-(deque-adt)=
-## A deque exposes both ends
-
-A **deque** (double-ended queue) allows insertion and removal at both ends. Distinguish the container name *deque* from the queue operation *dequeue*.
-
-| Abstract operation | Python `collections.deque` method |
-|---|---|
-| Add at back | `append(x)` |
-| Add at front | `appendleft(x)` |
-| Remove at back | `pop()` |
-| Remove at front | `popleft()` |
-| Inspect front / back | `d[0]` / `d[-1]` |
+(queue-adapter-code)=
+## Python implementation
 
 ```python
 from collections import deque
 
-items = deque()
-items.append("B")
-items.appendleft("A")
-items.append("C")
-assert items.pop() == "C"
-items.appendleft("X")
-assert items.popleft() == "X"
-assert list(items) == ["A", "B"]
+class Queue:
+    def __init__(self):
+        self._items = deque()
+
+    def __len__(self):
+        return len(self._items)
+
+    def size(self):
+        return len(self)
+
+    def is_empty(self):
+        return len(self) == 0
+
+    def enqueue(self, item):
+        self._items.append(item)
+
+    def front(self):
+        if self.is_empty():
+            raise IndexError("front of empty queue")
+        return self._items[0]
+
+    def dequeue(self):
+        if self.is_empty():
+            raise IndexError("dequeue from empty queue")
+        return self._items.popleft()
 ```
 
-Python's deque supports approximately constant-time additions and removals at either end. Indexed access near the middle is linear, so a deque is not a replacement for an array when arbitrary indexed access dominates. Empty endpoint removal or inspection raises `IndexError`.
+## Implementation choices and correctness
 
-A deque can implement stack behaviour by using only one end, or queue behaviour by adding at one end and removing at the other. A restricted stack or queue interface can still communicate the intended policy more clearly.
+Appending at the right preserves the arrival order of all waiting items. Removing at the left selects exactly the oldest one and preserves the survivors' order. Empty checks happen before removal, so a rejected request leaves the state unchanged. The wrapper exposes only queue operations even though its underlying deque supports more.
+
+Using a Python list with `pop(0)` would also give correct FIFO results, but shift remaining references. The [circular-array](circular-queues.md) and [head/tail linked](linked-queues.md) readings show how endpoint operations work without delegating them to a library deque. This adapter is complete queue code, not an implementation of the deque's internal storage.
+
+(queue-operation-costs)=
+## Time and space costs
+
+The underlying deque provides approximately O(1) endpoint additions/removals and O(1) endpoint access. Thus each exposed operation takes O(1) under the ordinary container-operation model, with O(1) wrapper workspace. Queue storage is O(n+1) for n live items. Real allocation and payload destruction can add costs outside that model.
+
+Fixed circular storage instead uses Θ(c) allocated slots even when empty; a linked queue stores O(n+1) nodes. These are representation costs, not guarantees attached to the word “queue.” See [Python's deque reference](https://docs.python.org/3/library/collections.html#collections.deque).
+
+## When to use it
+
+FIFO suits print jobs and [breadth-first graph traversal](../graphs/breadth-first-search.md). Urgency requires a [priority queue](../heaps/priority-queues.md), which follows a different selection rule.
+
+:::{tip} Common misconception
+**Inspecting the front also removes it.** `front()` observes; only `dequeue()` changes the waiting sequence.
+:::
+
+(linear-queue-checks)=
+## Check your understanding
+
+Predict the operation result and the resulting state before opening the explanation.
+
+**1. Enqueue A and B, call `front()` twice, then dequeue. What is returned?**
+
+:::{dropdown} Show explanation
+A, A, then A. Both observations leave the queue unchanged; B remains after the removal.
+:::
+
+**2. A capacity-two circular queue contains A,B. What happens on enqueue C?**
+
+:::{dropdown} Show explanation
+It raises OverflowError and still contains A,B. This bounded-queue policy differs from rolling-window eviction.
+:::
+
+## Continue to both-end access
+
+(deque-adt)=
+### Deque operations
+
+A deque adds/removes at both ends. Its separate [contract, implementation and costs](deques.md#deque-operation-contract) follow next.
 
 (rolling-window)=
-## Keep the latest readings
+### Rolling windows
 
-To retain the latest four readings, add each new reading at the back and discard the oldest at the front when the window exceeds four items.
-
-```python
-window = deque([12, 15, 14, 18])
-window.append(20)
-if len(window) > 4:
-    window.popleft()
-assert list(window) == [15, 14, 18, 20]
-```
-
-![A rolling window discards the oldest reading 12 and adds 20, retaining 15, 14, 18, 20.](../../assets/linear-structures/rolling-window.svg)
-
-The invariant after each update is: the window contains the most recent at most four readings, in arrival order. This policy intentionally discards old data. A bounded `deque(maxlen=4)` can perform that eviction automatically on append, while a bounded queue may instead reject an insertion when full. These are different contracts.
+The [latest-readings trace](deques.md#deque-rolling-window) explains intentional eviction as a different contract from rejecting a full queue.
 
 (palindrome-deque)=
-## Compare the front and back
+### Palindromes
 
-A palindrome reads the same in both directions. A deque can hold its characters: repeatedly remove and compare both ends until fewer than two remain. `RACECAR` gives matching pairs R/R, A/A and C/C, with E left in the middle.
+The [two-end comparison example](deques.md#deque-palindrome) uses a deque to remove matching endpoint characters.
 
-```python
-def is_palindrome(sequence):
-    remaining = deque(sequence)
-    while len(remaining) > 1:
-        if remaining.popleft() != remaining.pop():
-            return False
-    return True
-```
-
-This checks exact element equality: it does not remove spaces or normalise case. Building and scanning the deque takes $O(n)$ time and $O(n)$ additional space for $n$ input elements. Two indices into an existing sequence can avoid that extra copy; the deque version illustrates the access policy.
-
-Further reading: [Python's deque documentation](https://docs.python.org/3/library/collections.html#collections.deque). Next: [Arrays](arrays.md).
+Next: [Deques](deques.md).

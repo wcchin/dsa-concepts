@@ -1,5 +1,16 @@
 # Linked queues
 
+**After this page, you should be able to:**
+
+- Preserve head/tail/size invariants through first insertion and last removal.
+- Compare node-based queue costs with fixed circular storage.
+
+**Builds on:** [Queue contracts](queues-and-deques.md) and the [Node class](linked-structures.md).
+
+## Operation contract for this implementation
+
+Use the same [FIFO operation table](queues-and-deques.md#queue-adt). Enqueue returns `None`; front observes; dequeue removes and returns the earliest waiting record. `size()` and `len(q)` return the stored count. Empty front/dequeue raise `IndexError` before mutation. This version has no configured capacity or full-state rejection. Duplicates and `None` are allowed.
+
 (linked-queue)=
 ## Head removes; tail appends
 
@@ -33,6 +44,9 @@ class LinkedQueue:
 
     def __len__(self):
         return self._size
+
+    def size(self):
+        return len(self)
 
     def is_empty(self):
         return self._size == 0
@@ -74,6 +88,29 @@ Each operation touches a constant number of nodes and fields, giving $O(1)$ time
 
 Without tail, enqueue must find the final node and can take $\Theta(n)$ time. Conversely, holding tail does not make **removing the tail** constant time in this singly linked representation: finding its predecessor may still require traversal. That distinction explains why a singly linked queue is not automatically an efficient deque.
 
-**Check your understanding:** after enqueueing A, dequeueing it, then enqueueing B, which references must point to B? Both head and tail; B's successor must be `None`.
+## Implementation choices and suitability
+
+Cached head, tail and size make every exposed operation O(1) under the fixed-size-node allocation model. Updates use O(1) working storage, including a new node on enqueue; persistent storage is O(n+1). Nodes avoid copying the whole queue on growth but require per-item allocation and links. Choose this representation for changing queue size when indexed access is unnecessary.
+
+:::{tip} Common misconception
+**After removing the last node, an old tail is harmless metadata.** Both endpoints must represent the empty state.
+:::
+
+(linear-linked-queue-checks)=
+## Check your understanding
+
+Predict the operation result and the resulting state before opening the explanation.
+
+**1. Enqueue A, dequeue it, then enqueue B. Which endpoints refer to B?**
+
+:::{dropdown} Show explanation
+Both head and tail; B.next is None and size is one.
+:::
+
+**2. Which queue operation becomes linear if tail is not maintained?**
+
+:::{dropdown} Show explanation
+Appending at the back: the final node must be found by traversal.
+:::
 
 Next: [Choosing an ADT and representation](choosing-linear-structures.md).

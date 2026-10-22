@@ -1,5 +1,16 @@
 # Circular-array queues
 
+**After this page, you should be able to:**
+
+- Trace FIFO operations when logical order wraps around physical slots.
+- Explain full/empty policies, invariants and fixed-capacity costs.
+
+**Builds on:** [Queue contracts](queues-and-deques.md) and [array indexing](arrays.md).
+
+## Operation contract for this implementation
+
+Use the [queue operation table](queues-and-deques.md#queue-adt): enqueue returns `None`; front observes; dequeue removes and returns the front record. `size()` and `len(q)` agree. Empty front/dequeue raise `IndexError`; a full enqueue raises `OverflowError` before mutation. Capacity must be a positive exact integer or construction raises `ValueError`. `None` is a valid record.
+
 (circular-array-queue)=
 ## Reuse space instead of shifting
 
@@ -32,6 +43,9 @@ class CircularQueue:
 
     def __len__(self):
         return self._size
+
+    def size(self):
+        return len(self)
 
     def is_empty(self):
         return self._size == 0
@@ -66,5 +80,30 @@ Enqueue writes after the existing logical items and increases size. Both methods
 Each successful endpoint operation takes $O(1)$ time under constant-time indexing and arithmetic. Initialisation takes $\Theta(c)$ time and storage. The backing array still occupies $\Theta(c)$ space when the queue is empty.
 
 A growing circular queue can obtain more space when full, but it must copy items in **logical** order, starting at the old front. Typically it resets the new front to zero. Geometric resizing gives amortised constant-time enqueue; an individual resizing enqueue remains linear. The fixed-capacity code above has no resize step.
+
+## Implementation choices and suitability
+
+Storing a size makes full and empty distinguishable without reserving an unused slot. Clearing a removed slot releases its reference; testing slot contents would confuse a stored `None` with emptiness. Each operation uses O(1) workspace, while allocated storage remains Θ(c), independent of current size. Choose a fixed buffer when a known capacity and no resizing copies are desired; a full buffer rejects new arrivals under this contract.
+
+:::{tip} Common misconception
+**Matching endpoint indices alone distinguish empty from full.** Our stored size separates those states.
+:::
+
+(linear-circular-checks)=
+## Check your understanding
+
+Predict the operation result and the resulting state before opening the explanation.
+
+**1. For capacity 5, front=2 and size=4, where does the next enqueue go?**
+
+:::{dropdown} Show explanation
+Physical slot (2+4) mod 5 = 1. Logical order can wrap across the end of storage.
+:::
+
+**2. Can a stored None be dequeued successfully?**
+
+:::{dropdown} Show explanation
+Yes. Size and indices track occupancy. A stored None is returned normally; only size zero means empty.
+:::
 
 Next: [Linked queues](linked-queues.md).

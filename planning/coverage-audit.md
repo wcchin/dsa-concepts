@@ -91,3 +91,7 @@ Topic 12 now groups readings under k-d, point-quadtree, PR-quadtree and R-tree m
 ## Sorting editorial alignment
 
 Nine readings now connect contracts, visual traces, code, correctness, implementation choices, stability, mutation versus auxiliary space, time costs, suitability and open self-checks. Added a merge-sort page reusing the Topic 3 functions and a conceptual Timsort/Powersort page with an original run diagram. Version-specific CPython notes cite its 3.14 design document; Powersort scheduling has an original abstract merge-cost example. Existing routes and labels are retained. Eighteen collapsed-feedback questions cover the readings. No notebooks or assessment materials were used.
+
+## Topic 5 operation alignment
+
+Eleven readings now separate sequence, stack, queue and deque contracts from array, growth, linked and circular implementations. Added strict-index ArraySequence, Queue and Deque adapters, consistent size/len/empty queries, explicit return/error/full policies, operation costs and 22 collapsed-feedback checks. Existing URLs, concept labels and twelve diagrams are retained; historical deque anchors link to the dedicated page. Linked low-level helpers are not presented as a complete positional List class, and underlying library storage is explicitly delegated. No notebooks or assessment materials were used.

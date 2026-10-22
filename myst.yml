@@ -46,8 +46,10 @@ project:
   - file: topics/linear-structures/linear-structures.md
     children:
     - file: topics/linear-structures/adts-and-contracts.md
+    - file: topics/linear-structures/sequence-adt.md
     - file: topics/linear-structures/stacks.md
     - file: topics/linear-structures/queues-and-deques.md
+    - file: topics/linear-structures/deques.md
     - file: topics/linear-structures/arrays.md
     - file: topics/linear-structures/dynamic-arrays.md
     - file: topics/linear-structures/linked-structures.md

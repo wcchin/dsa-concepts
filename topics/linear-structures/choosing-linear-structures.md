@@ -1,5 +1,12 @@
 # Choosing an ADT and representation
 
+**After this page, you should be able to:**
+
+- Choose an access policy before selecting its implementation.
+- Justify costs using known positions, metadata and capacity assumptions.
+
+**Builds on:** The sequence, stack, queue and deque contracts and their implementation readings in this topic.
+
 (linear-adt-selection)=
 ## Begin with the next-item rule
 
@@ -56,5 +63,28 @@ Back pushes the current page onto Forward and pops Back into current. Forward do
 State the required behaviour, identify its ADT, choose a representation for the frequent operations, and explain which invariant makes the implementation correct. Then give operation costs with their assumptions, including empty/full transitions and resizing.
 
 For a printer: arrival-order service requires a Queue ADT; a linked head/tail representation removes at the head and appends at the tail; both endpoints are cleared when empty; each successful endpoint operation takes constant work under the stated allocation model. This is a complete argument, whereas “use a linked list because it is fast” omits the required policy and conditions.
+
+
+
+:::{tip} Common misconception
+**A fast representation can compensate for the wrong access policy.** LIFO, FIFO, positions and priority select different records.
+:::
+
+(linear-choices-checks)=
+## Check your understanding
+
+Predict the operation result and the resulting state before opening the explanation.
+
+**1. Can replacing a print-job queue with a stack preserve arrival-order service?**
+
+:::{dropdown} Show explanation
+No. A stack selects the newest waiting job, changing the required policy.
+:::
+
+**2. When a linked insertion is O(1), what information must already be available?**
+
+:::{dropdown} Show explanation
+The relevant node or predecessor must be known. A search by index or value adds its own cost.
+:::
 
 Return to the [topic overview](linear-structures.md), look up a term in the [concept index](../../concepts.md), or continue to [Maps, Sets and Hashing](../maps-sets-hashing/maps-sets-hashing.md).

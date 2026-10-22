@@ -1856,3 +1856,7 @@ The five k-d-tree readings remain intact within a broader spatial-search topic. 
 ## Spatial operation completion (supersedes earlier extension boundaries)
 
 Topic 12 now groups readings under k-d, point-quadtree, PR-quadtree and R-tree methods, preserving existing URLs. Five new readings add complete point-tree deletion and nearest operations, exact/nearest R-tree queries, per-operation time/space tables and self-reading checks. Dynamic R-tree construction/splitting/condensation are worked conceptual algorithms, not implemented updates. No notebook, rubric, solution or assessment source was used.
+
+## Topic 5 operation alignment
+
+Eleven readings now separate sequence, stack, queue and deque contracts from array, growth, linked and circular implementations. Added strict-index ArraySequence, Queue and Deque adapters, consistent size/len/empty queries, explicit return/error/full policies, operation costs and 22 collapsed-feedback checks. Existing URLs, concept labels and twelve diagrams are retained; historical deque anchors link to the dedicated page. Linked low-level helpers are not presented as a complete positional List class, and underlying library storage is explicitly delegated. No notebooks or assessment materials were used.

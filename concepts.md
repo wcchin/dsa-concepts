@@ -154,6 +154,7 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 
 ### D
 
+- [Deque endpoint contracts](topics/linear-structures/deques.md#deque-operation-contract)
 - [DAG negative example](topics/graph-algorithms/dag-shortest-paths.md#dag-negative-example)
 - [DAG path cost](topics/graph-algorithms/dag-shortest-paths.md#dag-path-cost)
 - [DAG shortest paths](topics/graph-algorithms/dag-shortest-paths.md#dag-shortest-paths)
@@ -447,6 +448,7 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 
 ### S
 
+- [Sequence operation contracts](topics/linear-structures/sequence-adt.md#sequence-operation-contract)
 - [Search representation comparison](topics/searching/search-costs.md#search-representation-comparison)
 - [Self](topics/foundations/collections-and-classes.md#self)
 - [Separate chaining](topics/maps-sets-hashing/chaining.md)
@@ -747,7 +749,12 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 - [Comparing strategies](topics/sorting/comparing-strategies.md)
 - [Comparison lower bound](topics/sorting/comparison-lower-bound.md)
 
-### 5. Abstract data types and linear structures
+### 5. Sequences, stacks, queues and deques
+
+- [Add, inspect, remove and extract](topics/linear-structures/adts-and-contracts.md#linear-operation-vocabulary)
+- [Sequence operations and costs](topics/linear-structures/sequence-adt.md)
+- [Deque operations and costs](topics/linear-structures/deques.md)
+
 
 **ADTs and contracts**
 
