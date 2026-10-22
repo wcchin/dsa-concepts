@@ -1,5 +1,12 @@
 # Trees and whole-subtree ordering
 
+**After this page, you should be able to:**
+
+- Distinguish tree structure, BST order and height balance.
+- Track strict ancestor bounds and a consistent distinct-key policy.
+
+**Builds on:** [Object references](../foundations/objects-and-references.md) and [ADT and sequence contracts](../linear-structures/adts-and-contracts.md).
+
 (tree-terminology)=
 ## Read the structure before the keys
 
@@ -39,4 +46,31 @@ In the invalid example, `15 < 30` is locally plausible, but the node is in 20's 
 
 This chapter stores one node per key: inserting an existing key is a no-op. A map can instead replace its associated value; a multiset can store an occurrence count. Whichever policy is chosen, insertion, lookup, traversal and deletion must agree.
 
-Moving equal keys arbitrarily between subtrees changes the invariant and can invalidate search assumptions. Our strict left/right inequalities keep the core reasoning clear. Next: [BST lookup and insertion](bst-lookup-insertion.md).
+## Representation choices and use
+
+These nodes represent an ordered set, not a key–value map or a frequency-preserving multiset. The [common operation contract](ordered-set-operations.md#ordered-set-contract) makes those distinctions concrete. The logical tree uses O(n+1) node storage; child links alone provide neither a cached size nor constant-time height. Searching uses the ordering, while AVL adds height metadata in Topic 8.
+
+Moving equal keys arbitrarily between subtrees changes the invariant and can invalidate search assumptions. Our strict left/right inequalities keep the core reasoning clear.
+
+:::{tip} Common misconception
+**Checking parent-child comparisons validates an entire BST.** Every ancestor bound must hold for every descendant.
+:::
+
+(tree-basics-checks)=
+## Check your understanding
+
+Predict the returned result, links or invariant before opening the explanation.
+
+**1. Why is 15 invalid below 30 in the right subtree of 20, despite 15<30?**
+
+:::{dropdown} Show explanation
+The earlier right turn also requires 15>20. Its immediate parent comparison alone misses that bound.
+:::
+
+**2. Does a binary tree automatically have logarithmic height?**
+
+:::{dropdown} Show explanation
+No. Binary only limits child positions to two; a chain is still binary.
+:::
+
+Next: [BST lookup and insertion](bst-lookup-insertion.md).

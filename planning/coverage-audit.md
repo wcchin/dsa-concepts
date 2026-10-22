@@ -99,3 +99,7 @@ Eleven readings now separate sequence, stack, queue and deque contracts from arr
 ## Topic 6 operation alignment
 
 Seven readings align Map/Set contracts, exact results/errors, state invariants, traces, implementation choices, time/space and fourteen collapsed-feedback checks. Added dict/set-backed public adapters, chained deletion, bounded probing insertion/deletion and rebuild helpers. Public put returns None; helper put returns a new-key Boolean; Map removal returns its value while Set removal returns None. Snapshot outputs are shallow, and set combinations create new membership containers. Automatic resize/count policies remain explicit scope boundaries. Existing headings, URLs and the probing-deletion diagram are preserved. No assessment materials were used.
+
+## Topics 7–8 operation alignment
+
+Topic 7 has nine readings; Topic 8 has six. Both align operation/helper contracts, results and errors, representation invariants, preserved traces, code choices, costs and thirty open self-checks. Added complete preorder/postorder, maximum and root-based strict-neighbour queries, a key-only OrderedSet adapter, and an AVL operation route reusing the same readers. Public set removal returns None; extreme extraction returns its key; raw update helpers return roots and raw absent deletion is a no-op. Global count is distinct from subtree rank/select augmentation. All existing pages, labels, algorithms and fourteen figures are retained. No notebooks or assessment sources were used.

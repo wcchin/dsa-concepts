@@ -1,5 +1,16 @@
 # AVL insertion
 
+**After this page, you should be able to:**
+
+- Trace BST insertion followed by bottom-up height and balance repair.
+- Separate constant local rotation work from logarithmic update paths.
+
+**Builds on:** [Node/height definitions](avl-invariants.md), [rotations](avl-rotations.md) and [rebalance](avl-cases.md).
+
+## Operation contract
+
+`avl_insert(root,key)` returns a new subtree root, preserving all existing distinct keys and adding key only if absent. Empty input creates an AVL leaf; duplicates are no-ops. It requires a valid AVL input and stable total-order comparisons. This helper returns a root, not the public add result; [the adapter](avl-operations.md) handles count and interface results.
+
 (avl-insertion)=
 ## Use the BST path, then repair on return
 
@@ -43,3 +54,30 @@ Inserting into an AVL tree takes $O(\log(n+1))$ time: a logarithmic search path,
 For a single insertion into a valid AVL tree, repairing the lowest unbalanced ancestor restores that subtree to its height before insertion. Higher ancestors therefore need no further rotations. The code still returns through them and recomputes their metadata, which is simple and preserves the same asymptotic bound. This fact differs from [deletion](avl-deletion.md), where height loss can continue upward.
 
 An ascending input sequence remains a useful test: the ordinary BST becomes a chain, while this insertion function rotates as needed. Random input is not required for the AVL height guarantee.
+
+## Implementation choices and suitability
+
+Recursion remembers the ancestor path. Child-root assignment happens before rebalance reads child heights, and the top-level caller must save the returned root. Reusing a single repair helper avoids inconsistent insertion/deletion case conventions. Each successful insertion stores one new node; persistent tree storage is O(n+1), while the path uses logarithmic workspace. AVL balancing is useful when sorted or adversarial insertion order would otherwise produce long paths.
+
+:::{tip} Common misconception
+**Each rotation is logarithmic work.** A rotation is constant local work; the ancestor path supplies the logarithmic factor.
+:::
+
+(tree-avl-insert-checks)=
+## Check your understanding
+
+Predict the returned result, links or invariant before opening the explanation.
+
+**1. Insert 30,10,20. What is the repaired root?**
+
+:::{dropdown} Show explanation
+20, with left child 10 and right child 30. The LR repair preserves all three keys.
+:::
+
+**2. Must a valid single insertion cause rotations at every ancestor?**
+
+:::{dropdown} Show explanation
+No. Repair at the lowest unbalanced ancestor restores its pre-insertion height. Higher ancestors are still visited for metadata, but need no further rotations.
+:::
+
+Next: [AVL deletion](avl-deletion.md).

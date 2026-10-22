@@ -1,5 +1,16 @@
 # AVL deletion and upward repair
 
+**After this page, you should be able to:**
+
+- Retain child subtrees and repair all affected ancestors after deletion.
+- Check ordered keys, cached heights, balance and empty transitions.
+
+**Builds on:** [BST deletion](../searching/bst-deletion.md) and the [shared rebalance helper](avl-cases.md).
+
+## Operation contract
+
+`avl_delete(root,key)` returns the surviving subtree root, deleting a present key once and treating an absent key as a no-op. An empty tree returns `None`; deleting a singleton returns `None` as the new root. All remaining nodes must preserve strict key order, cached heights and AVL balance. Public strict removal, tolerant discard and returned-key extraction are supplied by [the common adapter](avl-operations.md).
+
 (avl-deletion)=
 ## Remove as in a BST, then restore balance
 
@@ -53,4 +64,31 @@ A convincing check verifies the key set and strict ancestor bounds, recomputes a
 
 Useful transitions include deleting the root, deleting an absent key, removing a successor with a right child, repeated deletion until empty, and inserting again afterwards. These are structural checks, not just examples of ordinary lookup.
 
+## Implementation choices and suitability
+
+Successor copying preserves the target node object while changing its key; the same node-identity caveat as ordinary BST deletion applies. Current child factors, not the deleted key, choose the repair. Recursive returns retain the path without parent pointers, using O(log(n+2)) stack space. No new tree nodes are allocated during removal; local repairs use constant additional workspace.
+
+:::{tip} Common misconception
+**Deletion stops after the first repaired ancestor just like insertion.** Height loss can propagate and require more repairs.
+:::
+
+(tree-avl-delete-checks)=
+## Check your understanding
+
+Predict the returned result, links or invariant before opening the explanation.
+
+**1. In root 4 with left child 2 (children 1,3) and right child 5, what follows deleting 5?**
+
+:::{dropdown} Show explanation
+A single right rotation promotes 2; 3 transfers to 4.left. The zero-factor child case must retain the middle subtree.
+:::
+
+**2. After deleting the last key, what root should be retained?**
+
+:::{dropdown} Show explanation
+None. The returned empty root is the correct result; an owning adapter also changes its count to zero.
+:::
+
 Further reading: [Cornell's AVL notes](https://courses.cs.cornell.edu/cs2112/2017fa/lectures/lec_avl/index.html). Return to the [topic overview](balanced-trees.md) or compare the different split rules in [k-d trees](../kd-trees/kd-trees.md).
+
+Next: [The complete AVL operation route](avl-operations.md).

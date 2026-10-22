@@ -22,7 +22,7 @@ Topics **1–14** now contain developed core reading material. [Topic 15](topics
 |---|---|
 | Hash tables | Chaining/probing lookup, insertion, replacement, deletion and rebuilding have code. The public Map/Set adapters delegate storage management to Python; a custom resizable map class with automatic counts and thresholds remains an extension. |
 | Linear structures | Doubly linked updates are explained; a full doubly linked deque class is not supplied. |
-| Trees | Preorder/postorder orders and successor rules are described; the complete traversal code focuses on inorder. Rank/select augmentation is not implemented. |
+| Trees | All three traversals, extremes, strict successor/predecessor, closed ranges and a shared BST/AVL ordered-set adapter have code. Rank/select augmentation, a key–value ordered map and a static middle-key builder are not implemented. |
 | Heaps | Stable queues and lazy graph candidates have code; indexed decrease-key and arbitrary-item removal remain conceptual. |
 | Spatial search | K-d, point-quadtree and PR construction/exact/range/nearest/deletion have code; R-tree exact/range/nearest queries operate on a given tree. Dynamic R-tree insertion/splitting and deletion condensation have worked algorithm traces, not update code. Static k-d median construction and R-tree packing remain conceptual. |
 | Algorithm design | DP has one complete optimisation problem; weighted interval scheduling, knapsack and sequence DP remain further examples to add. |

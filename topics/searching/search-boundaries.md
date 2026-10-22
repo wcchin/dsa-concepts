@@ -1,5 +1,21 @@
 # Binary-search boundaries and duplicate runs
 
+**After this page, you should be able to:**
+
+- Find lower/upper boundaries and derive duplicate counts.
+- Keep half-open interval rules separate from exact-search rules.
+
+**Builds on:** [Exact binary search](binary-search.md) returns one match rather than the whole duplicate run.
+
+## Operation contracts
+
+| Query on an ascending sequence | Return | Empty input |
+|---|---|---|
+| `lower_bound(a,t)` | First index with key≥t; n if none | 0 |
+| `upper_bound(a,t)` | First index with key>t; n if none | 0 |
+
+Both observe without mutation. The returned position n is a valid boundary but not a valid element index. Insertion at that boundary is a separate mutating operation.
+
 (lower-bound-search)=
 ## Find the first position at least the target
 
@@ -49,5 +65,30 @@ For absent target 3, both functions return 4. These searches take $O(\log(n+1))$
 ## Generalise only after proving monotonicity
 
 Lower bound finds the first true value of the predicate `a[i] >= target`: it is false on an initial prefix and true thereafter. Similar boundary searches can locate a minimum feasible capacity or time when feasibility has that same false-to-true structure. Prove that monotonicity before discarding an interval; arbitrary predicates cannot safely be searched by halving.
+
+## Implementation choices, costs and use
+
+Equality stays on the candidate side for lower bound and is excluded for upper bound. Both loops use half-open bounds and must strictly shrink their candidate interval. Time is O(log(n+2)) and workspace O(1) with constant-time comparisons/indexing. Calculating the two boundaries does not copy the matching records; slicing out r results would add O(r) output work and space. Use boundaries for duplicate runs, insertion positions and monotone feasibility questions.
+
+:::{tip} Common misconception
+**A returned boundary n is an element index.** It marks the end position; check i<n before reading a[i].
+:::
+
+(tree-boundaries-checks)=
+## Check your understanding
+
+Predict the returned result, links or invariant before opening the explanation.
+
+**1. For [1,2,2,2,4], what are the lower/upper bounds of 2?**
+
+:::{dropdown} Show explanation
+1 and 4. The half-open run [1,4) has three occurrences.
+:::
+
+**2. Does finding an insertion boundary make sorted-array insertion logarithmic?**
+
+:::{dropdown} Show explanation
+No. Finding the position is logarithmic; moving later elements can still be linear.
+:::
 
 Return to [binary search](binary-search.md) or continue to [tree terminology](tree-basics.md).

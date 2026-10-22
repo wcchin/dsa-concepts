@@ -1,5 +1,12 @@
 # Heights, balance factors and AVL invariants
 
+**After this page, you should be able to:**
+
+- Check strict BST order, stored heights and local AVL balance separately.
+- Explain why local balance bounds the global path length.
+
+**Builds on:** [BST whole-subtree order](../searching/tree-basics.md) and [height-dependent costs](../searching/search-costs.md).
+
 (avl-invariant)=
 ## Add balance to BST order
 
@@ -8,6 +15,10 @@ An **AVL tree** satisfies both the strict BST ordering rule and this local heigh
 $$ |h(v.left)-h(v.right)|\leq1. $$
 
 A small height difference only at the root is insufficient. A descendant can be unbalanced while the root's two subtrees happen to have equal heights. Likewise, a short unordered binary tree is not an AVL search tree.
+
+## Representation and helper contracts
+
+`AVLNode(key)` creates a leaf. `height(None)` returns −1; `height(node)` observes a cached integer. `update_height(node)` mutates one nonempty node's metadata and returns None, assuming its child heights are current. `balance_factor(node)` observes a nonempty node and returns left height minus right height. These are internal helpers, not public ordered-set operations.
 
 (avl-height-convention)=
 ## Store heights consistently
@@ -52,4 +63,31 @@ $$N(-1)=0,\quad N(0)=1,\quad N(h)=1+N(h-1)+N(h-2).$$
 
 For heights 0, 1, 2, 3 and 4, the minimum node counts are 1, 2, 4, 7 and 12. This Fibonacci-like growth is exponential in height, so height is $O(\log(n+1))$ in the number of nodes. That is the reason path-based lookup and updates can have logarithmic worst-case bounds.
 
-AVL balance does **not** require a perfect or complete binary tree, equal child sizes, or the smallest possible height. It permits enough shape flexibility to support local repair. Next: [Rotations](avl-rotations.md).
+## Implementation choices and costs
+
+Caching one height per node makes height, update-height and factor computation O(1), using O(1) workspace. Persistent storage remains O(n+1). Height is not the node count; a separate global count in the [adapter](../searching/ordered-set-operations.md) supports size. A balance-factor-only design or parent links would require different metadata maintenance; this book uses cached heights and recursive return paths.
+
+AVL balance does **not** require a perfect or complete binary tree, equal child sizes, or the smallest possible height. It permits enough shape flexibility to support local repair.
+
+:::{tip} Common misconception
+**A balanced root proves the entire tree AVL-valid.** Every descendant must satisfy the balance and metadata conditions.
+:::
+
+(tree-avl-invariant-checks)=
+## Check your understanding
+
+Predict the returned result, links or invariant before opening the explanation.
+
+**1. Under this convention, what are empty and leaf heights?**
+
+:::{dropdown} Show explanation
+−1 and 0. Mixing conventions without adjusting formulas corrupts balance decisions.
+:::
+
+**2. Can sorted inorder output prove cached heights correct?**
+
+:::{dropdown} Show explanation
+No. Recompute actual heights from links and compare metadata at every node.
+:::
+
+Next: [Rotations](avl-rotations.md).

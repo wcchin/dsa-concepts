@@ -1,5 +1,21 @@
 # BST lookup and insertion
 
+**After this page, you should be able to:**
+
+- Trace a one-path lookup and insertion under whole-subtree bounds.
+- Distinguish node/absence results from returned roots after an update.
+
+**Builds on:** [BST terminology and bounds](tree-basics.md).
+
+## Operation contracts and representation choices
+
+| Helper | Return | Duplicate / absent policy |
+|---|---|---|
+| `bst_search(root,key)` | Matching node or `None` | Absence returns `None`; no mutation |
+| `bst_insert(root,key)` | Resulting subtree root | Existing key is unchanged; empty root creates one leaf |
+
+Keys use a stable consistent total order, and each appears at most once. Nodes store keys and two child references, with no parent pointer, cached height or count. The [public ordered-set adapter](ordered-set-operations.md) later owns a count and translates these helpers into add/contains contracts. A node return is not a copied key; a root return is not a success flag.
+
 (bst-node)=
 ## Represent the two possible continuations
 
@@ -30,7 +46,7 @@ def bst_search(node, target):
 
 The return value is the matching **node**, or `None`. If a target is below the current key, the entire right subtree is impossible by the BST invariant. Otherwise an unequal larger target excludes the left subtree. Reaching an empty child proves absence within the remaining candidate subtree.
 
-In the reference tree, finding 60 follows `50 → 70 → 60`. Searching for 65 follows those same comparisons and then reaches the missing right child of 60. These are sequential decisions, not simultaneous searches of both sides.
+Before inserting 65, in the seven-node reference tree, finding 60 follows `50 → 70 → 60`. Searching for 65 follows those same comparisons and then reaches the missing right child of 60. These are sequential decisions, not simultaneous searches of both sides.
 
 (bst-insertion)=
 ## Insert where unsuccessful search stops
@@ -62,4 +78,25 @@ The path to the new leaf consists of comparisons with all relevant ancestors. Ch
 
 Both lookup and insertion follow a path of length at most the tree height plus one. Their time is $O(h+1)$; for nonempty growing trees this is usually written $O(h)$. Iterative lookup uses $O(1)$ auxiliary space; the recursive insertion uses $O(h+1)$ stack space. An ordinary BST does not maintain a height bound: ascending insertions can form a chain.
 
-**Check your understanding:** does adding 65 change where 80 belongs? No. Only the formerly empty child of 60 changes; the ancestor comparisons already establish `50 < 65 < 70`. Next: [Traversal](bst-traversal.md).
+:::{tip} Common misconception
+**The inserted key is returned by bst_insert.** It returns the resulting subtree root, which the caller must retain.
+:::
+
+(tree-bst-insert-checks)=
+## Check your understanding
+
+Predict the returned result, links or invariant before opening the explanation.
+
+**1. After adding 65 to the reference tree, which child link changes?**
+
+:::{dropdown} Show explanation
+The previously empty right child of node 60 becomes node 65; the other existing branches are retained.
+:::
+
+**2. What does raw bst_insert do when 30 is already present?**
+
+:::{dropdown} Show explanation
+It retains one node for 30 and returns the existing subtree root. The distinct-key set does not grow.
+:::
+
+Next: [Traversal and ordered queries](bst-traversal.md).

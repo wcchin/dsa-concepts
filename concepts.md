@@ -358,6 +358,7 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 
 ### O
 
+- [Ordered set: BST and AVL contracts](topics/searching/ordered-set-operations.md#ordered-set-contract)
 - [Objects and references](topics/foundations/objects-and-references.md#objects-and-bindings)
 - [Observers and mutators](topics/linear-structures/adts-and-contracts.md#observers-and-mutators)
 - [Odd-sized recursive splits](topics/recursion/recursion-costs.md#balanced-and-odd-splits)
@@ -881,6 +882,9 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 
 ### 7. Searching and binary search trees
 
+- [Ordered-set contracts and public adapter](topics/searching/ordered-set-operations.md#ordered-set-contract)
+- [Successor/predecessor and extremes](topics/searching/bst-traversal.md#bst-successor)
+
 **Binary search and candidate intervals**
 
 - [Linear search](topics/searching/binary-search.md#linear-search)
@@ -927,6 +931,8 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 - [BST construction costs](topics/searching/search-costs.md#bst-building-cost)
 
 ### 8. Balanced search trees
+
+- [AVL shared operations and cost table](topics/balanced-trees/avl-operations.md#avl-all-operation-costs)
 
 **Heights, balance factors and AVL invariants**
 

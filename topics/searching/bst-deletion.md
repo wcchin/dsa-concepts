@@ -1,5 +1,16 @@
 # BST deletion without losing subtrees
 
+**After this page, you should be able to:**
+
+- Reconnect leaf, one-child and successor-removal cases without losing keys.
+- Separate key contents, node identity and returned-root semantics.
+
+**Builds on:** [BST insertion](bst-lookup-insertion.md) and [minimum/successor](bst-traversal.md).
+
+## Operation contract and representation invariant
+
+`bst_delete(root,key)` returns the resulting root, removes at most one matching key and leaves absence as a no-op. An empty tree returns `None`. Every other key must remain once under strict ancestor bounds. The function does not return the removed key or maintain a total count. The [ordered-set adapter](ordered-set-operations.md) supplies strict `remove`, tolerant `discard`, extraction and size bookkeeping.
+
 (bst-deletion-cases)=
 ## Search, then identify the structural case
 
@@ -64,4 +75,29 @@ Call it as `root = bst_delete(root, key)`. Returning and reconnecting subtree ro
 
 Copying a successor key changes the contents of the target node; it does not move that object. Any external reference to that node now observes the replacement key. In a key–value map, copy the associated value too. If clients require stable record or node identities, choose a deletion design that explicitly supports that requirement.
 
-Next: [Search costs and choices](search-costs.md).
+## Implementation choices and costs
+
+Copying the successor avoids storing parent pointers or moving entire node objects. Using the predecessor instead is a valid mirrored choice. The recursive implementation takes O(h+1) time and stack space, allocates no new tree nodes, and preserves the successor's possible right subtree. An iterative version needs its own reconnection bookkeeping. Neither choice automatically balances an ordinary BST.
+
+:::{tip} Common misconception
+**A successor has no children.** It has no left child, but its right subtree must be retained.
+:::
+
+(tree-bst-delete-checks)=
+## Check your understanding
+
+Predict the returned result, links or invariant before opening the explanation.
+
+**1. When deleting 50 after adding 65, where does 65 end up?**
+
+:::{dropdown} Show explanation
+The original successor 60 is removed, and 70.left reconnects to its right child 65. The old root node now stores key 60.
+:::
+
+**2. Does raw deletion of an absent key raise KeyError?**
+
+:::{dropdown} Show explanation
+No. It leaves the stored key set unchanged. The public adapter’s strict remove checks membership and raises separately.
+:::
+
+Next: [The common ordered-set interface](ordered-set-operations.md).

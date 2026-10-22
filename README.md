@@ -11,8 +11,8 @@ A standalone Jupyter Book 2 project for a searchable, self-reading course resour
 - A developed Sorting topic: nine reading pages, an overview and eight original SVG explanations. Algorithm readings align choices, stability, mutation, time/space and self-checks; includes a conceptual Timsort/Powersort overview.
 - A developed Linear Structures topic: eleven reading pages, an overview and twelve original SVG explanations. Explicit sequence, stack, queue and deque contracts connect returns, boundaries, traces, implementation choices and costs; includes 22 self-reading checks.
 - Maps, Sets and Hashing: seven aligned readings and an overview, with explicit Map/Set contracts, chaining/probing insert-update-delete helpers, rebuild examples, cost qualifications and fourteen self-checks.
-- Searching and BSTs: eight reading pages and nine original SVG figures.
-- Balanced search trees: five reading pages and five original SVG figures.
+- Searching and BSTs: nine aligned readings and nine original SVG figures, with ordered-set contracts, complete ordered queries and eighteen self-checks.
+- Balanced search trees: six aligned readings and five original SVG figures, with shared ordered-set operations, qualified costs and twelve self-checks.
 - Spatial search and indexing: seventeen reading pages grouped under four methods, with seventeen original SVG figures. Each method covers construction/insertion, exact lookup, range, nearest and deletion with time/space costs. Point-tree operations and given-tree R-tree queries have runnable code; general R-tree updates have worked algorithm traces.
 - Graphs and traversal: six reading pages, an overview and eight original SVG explanations.
 - Priority queues and heaps: seven reading pages, an overview and nine original SVG explanations.
