@@ -20,7 +20,7 @@ Topics **1–14** now contain developed core reading material. [Topic 15](topics
 
 | Existing topic | Current boundary |
 |---|---|
-| Hash tables | Probing lookup has code; tombstone insertion and rebuilding are explained by rules and traces. A complete resizable probing-map class is still an extension. |
+| Hash tables | Chaining/probing lookup, insertion, replacement, deletion and rebuilding have code. The public Map/Set adapters delegate storage management to Python; a custom resizable map class with automatic counts and thresholds remains an extension. |
 | Linear structures | Doubly linked updates are explained; a full doubly linked deque class is not supplied. |
 | Trees | Preorder/postorder orders and successor rules are described; the complete traversal code focuses on inorder. Rank/select augmentation is not implemented. |
 | Heaps | Stable queues and lazy graph candidates have code; indexed decrease-key and arbitrary-item removal remain conceptual. |
@@ -52,3 +52,5 @@ The extension choices were cross-checked against the [MIT 6.006 course descripti
 Sorting now has a dedicated merge-sort reading and a short Timsort/Powersort explanation. Elementary listings remain complete direct-comparison algorithms; general `key`/`reverse` options belong to the built-in interface examples. Full Timsort, Powersort power calculations and galloping implementations remain outside this introductory treatment.
 
 Topic 5 now aligns eleven readings around explicit operation contracts, representation invariants, traces, implementation choices, time/space and self-checks. Sequence and deque adapters have complete interfaces; queue implementations share FIFO operations and size queries. Linked positional List classes and custom circular/doubly linked Deque classes remain conceptual alternatives to the included adapters.
+
+Topic 6 now aligns Map/Set contracts, returns, absent-key policies, snapshots, set combinations, hashing invariants, complete chaining/probing update helpers and table rebuilding. Python adapters delegate storage management; low-level helpers do not implement automatic count tracking or resize thresholds. Fourteen original open self-checks support the readings.

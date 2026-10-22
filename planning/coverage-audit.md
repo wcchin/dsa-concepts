@@ -95,3 +95,7 @@ Nine readings now connect contracts, visual traces, code, correctness, implement
 ## Topic 5 operation alignment
 
 Eleven readings now separate sequence, stack, queue and deque contracts from array, growth, linked and circular implementations. Added strict-index ArraySequence, Queue and Deque adapters, consistent size/len/empty queries, explicit return/error/full policies, operation costs and 22 collapsed-feedback checks. Existing URLs, concept labels and twelve diagrams are retained; historical deque anchors link to the dedicated page. Linked low-level helpers are not presented as a complete positional List class, and underlying library storage is explicitly delegated. No notebooks or assessment materials were used.
+
+## Topic 6 operation alignment
+
+Seven readings align Map/Set contracts, exact results/errors, state invariants, traces, implementation choices, time/space and fourteen collapsed-feedback checks. Added dict/set-backed public adapters, chained deletion, bounded probing insertion/deletion and rebuild helpers. Public put returns None; helper put returns a new-key Boolean; Map removal returns its value while Set removal returns None. Snapshot outputs are shallow, and set combinations create new membership containers. Automatic resize/count policies remain explicit scope boundaries. Existing headings, URLs and the probing-deletion diagram are preserved. No assessment materials were used.

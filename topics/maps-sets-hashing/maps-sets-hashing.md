@@ -22,3 +22,17 @@ You should be able to read Python lists, loops, tuples and functions, and distin
 
 By the end, you should be able to trace lookup, insertion, replacement and deletion, explain why collisions do not imply equal keys, and state the assumptions behind a constant-time claim.
 
+## A common reading structure
+
+The Map and Set readings follow **purpose → operation contracts → representation/invariant → trace → implementation → choices/correctness → time/space → suitability → self-checks**. Hashing, chaining, probing and performance explain how those promises are maintained. Each reading has two goals, prerequisites, a misconception reminder and two open prediction checks.
+
+| Code | What is complete | What remains delegated or conceptual |
+|---|---|---|
+| `HashMap` / `HashSet` | Public operation interfaces, strict absence policies, snapshots and set combinations | Python's dict/set storage management |
+| Chaining helpers | Get, put/update and remove with list-backed buckets | Cached count and automatic outer-table growth policy |
+| Linear-probing helpers | Bounded get, put/update, tombstone deletion and full-table error | Cached counts and automatic rebuild thresholds |
+| Rebuild helpers | Return a new table using all live entries | Choice of growth/shrink/cleanup policy |
+
+For a public Map, put returns None; the storage helpers return a new-key Boolean to support size bookkeeping. A Map removal returns its value; Set removal deletes a specified member and returns None. Do not infer one contract from a similarly named operation in another ADT.
+
+Ordinary Python and standard-library features suffice. These examples do not reproduce the internal layout of CPython dict/set, require notebooks or include assessment material. All existing page URLs and concept headings remain available.

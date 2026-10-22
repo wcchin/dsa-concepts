@@ -825,6 +825,12 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 
 ### 6. Maps, sets and hashing
 
+- [Map interface, returns and snapshots](topics/maps-sets-hashing/maps.md#map-interface-code)
+- [Set operation contracts](topics/maps-sets-hashing/sets.md#set-operation-contract)
+- [Chaining deletion](topics/maps-sets-hashing/chaining.md#chained-deletion-code)
+- [Probing insertion and deletion](topics/maps-sets-hashing/open-addressing.md#probed-update-code)
+- [Hash operation costs and rebuilds](topics/maps-sets-hashing/performance.md#hash-operation-costs)
+
 **Maps**
 
 - [Map ADT and operations](topics/maps-sets-hashing/maps.md#map-adt-and-operations)

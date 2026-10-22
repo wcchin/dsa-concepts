@@ -1,18 +1,83 @@
 # Maps: keys, values and operations
 
+**After this page, you should be able to:**
+
+- Trace map insertion, replacement, strict lookup and removal with explicit results.
+- Separate the map contract from hash-table storage and insertion-order guarantees.
+
+**Builds on:** [ADTs and contracts](../linear-structures/adts-and-contracts.md) distinguishes behaviour, mutation and implementation.
+
 A **Map** associates each distinct key with one value. A key identifies an entry; the value carries its associated information. Different keys may have equal values. A key may also be associated with a collection, such as a list of readings, without changing the one-key/one-value rule.
 
 ## Map ADT and operations
 
-| Operation | Meaning | Changes the size? |
+| Operation | Returned result | State change / absence policy |
 |---|---|---|
-| `put(key, value)` | Add a new association or replace an existing key’s value | Only for a new key |
-| `get(key)` | Retrieve the associated value | No |
-| `remove(key)` | Remove the association | Yes, if present |
-| `contains_key(key)` | Test key membership | No |
-| `size()` | Count distinct stored keys | No |
+| `put(key, value)` | `None` | Add a new key or replace its value; size grows only for a new key |
+| `get(key)` | Associated value | Observe; missing key raises `KeyError` |
+| `remove(key)` | Removed value | Delete the association; missing key raises `KeyError` |
+| `contains_key(key)` | Boolean | Observe key membership |
+| `size()` / `len(m)` | Distinct-key count | Observe only |
+| `is_empty()` | Boolean | Observe whether size is zero |
+| `keys()` / `items()` | Tuple snapshot of keys / key-value pairs | Observe; no order required by this ADT |
+
+This contract's `get` is strict, unlike Python's default-returning `dict.get`. Removal returns the value because the key is already supplied. Values may be repeated, mutable or `None`; keys in the hash-backed versions must be hashable. Key operations must maintain consistent equality and hashing. Snapshot containers are new, but their payload objects are shared, not deep-copied.
 
 The Map ADT does not specify that keys occupy any particular array position. It also does not require hashing: other implementations are possible.
+
+## Representation, invariant and operation trace
+
+The representation below wraps a Python dictionary. Each distinct key has exactly one associated value, and logical size equals the number of associations. Updating an equal key replaces its value rather than creating a duplicate.
+
+| Call, starting empty | Return | Associations afterwards |
+|---|---|---|
+| `put("S01", "Central")` | `None` | S01 → Central |
+| `put("S02", None)` | `None` | S01 → Central; S02 → None |
+| `put("S01", "Downtown")` | `None` | S01 → Downtown; S02 → None |
+| `get("S02")` | `None` | Unchanged; S02 is present |
+| `remove("S01")` | Downtown | S02 → None |
+
+(map-interface-code)=
+## Python implementation of the stated interface
+
+```python
+class HashMap:
+    def __init__(self):
+        self._entries = {}
+
+    def __len__(self):
+        return len(self._entries)
+
+    def size(self):
+        return len(self)
+
+    def is_empty(self):
+        return len(self) == 0
+
+    def put(self, key, value):
+        self._entries[key] = value
+
+    def get(self, key):
+        return self._entries[key]
+
+    def remove(self, key):
+        return self._entries.pop(key)
+
+    def contains_key(self, key):
+        return key in self._entries
+
+    def keys(self):
+        return tuple(self._entries)
+
+    def items(self):
+        return tuple(self._entries.items())
+```
+
+## Implementation choices and correctness
+
+The wrapper delegates hashing, collision handling and resizing to `dict`. Assignment preserves one association per key; indexing observes it; `pop` removes and returns its value. Failed strict lookup/removal leaves the associations unchanged. Clients use these methods rather than modifying `_entries` directly.
+
+The [chaining](chaining.md) and [probing](open-addressing.md) readings expose storage mechanics explicitly. Their `put_*` helpers return a Boolean indicating a new key, useful for updating size metadata; that is an **internal helper result**, not this public `put` contract. A tree-based map can offer the same exact-key behaviour with different cost and ordering properties.
 
 ## Map operations in Python
 
@@ -47,5 +112,36 @@ The sentinel is compared by identity because it represents one particular marker
 Python dictionaries preserve insertion order. That is a property of Python’s dictionary, not a requirement of every Map, and it is not sorted-key order. Replacing a value does not make the key numerically or alphabetically sorted.
 
 If you only need to know which identifiers occur, read [Sets](sets.md). To see how a key can guide retrieval, continue to [Hashing](hashing.md).
+
+## Time, space and suitability
+
+Under suitable distribution, controlled occupancy and constant-cost hashing/equality, hash-map get, membership and removal are expected O(1), and insertion is expected amortised O(1). Worst-case collisions can make an operation linear; a resize also makes an individual update expensive. Size/empty are O(1). Snapshots visit storage and return n records: for table capacity m, allow O(n+m+1) scan time and O(n) result storage rather than assuming every table is dense.
+
+Persistent hash-table storage is O(n+m+1); ordinary exact-key operations use O(1) working space, while a rebuild can need linear additional storage. The dictionary adapter does not expose its capacity or implement its own resize policy. See [the qualified operation comparison](performance.md#hash-operation-costs).
+
+Use a map for station directories, counts and associated records. Insertion order is not sorted-key order and does not supply range queries.
+
+:::{tip} Common misconception
+**A None lookup result proves absence.** None may be stored; strict get raises on absence, while a default-returning API needs membership or a sentinel.
+:::
+
+(hash-maps-checks)=
+## Check your understanding
+
+Predict the result and resulting state before opening the explanation.
+
+**1. Put S01 twice with different values. What is the size and which value is retrieved?**
+
+:::{dropdown} Show explanation
+Size is one; the most recent value replaces the earlier association.
+:::
+
+**2. After put("S02", None), does remove("S02") return an error?**
+
+:::{dropdown} Show explanation
+No. It returns the stored None and removes the key. Removing it again raises KeyError.
+:::
+
+Next: [Sets](sets.md).
 
 **Browse:** [Maps, Sets and Hashing](maps-sets-hashing.md) · [Concept index](../../concepts.md)
