@@ -1,5 +1,12 @@
 # Bubble sort
 
+**After this page, you should be able to:**
+
+- Trace adjacent swaps and the growth of a completed suffix.
+- Distinguish early stopping, stability and inversion counts from total comparisons.
+
+**Builds on:** [Insertion sort](insertion-sort.md) introduces invariants and inversions.
+
 (bubble-sort)=
 ## Repair neighbouring pairs
 
@@ -7,10 +14,7 @@ Scan left to right, comparing adjacent values and swapping a pair when the left 
 
 ![Four adjacent comparisons move 7 to the end of 7, 2, 6, 3, 5.](../../assets/sorting/bubble-pass.svg)
 
-(bubble-invariant)=
-## The sorted suffix invariant
-
-At the start of each pass, the suffix beyond `end` is sorted and already in its final positions; every suffix value is at least every value in the active prefix. The pass places a largest remaining value at `end`, so the suffix can grow by one.
+## Python implementation
 
 ```python
 def bubble_sort(a):
@@ -24,7 +28,28 @@ def bubble_sort(a):
             break
 ```
 
+(bubble-invariant)=
+## The sorted suffix invariant
+
+At the start of each pass, the suffix beyond `end` is sorted and already in its final positions; every suffix value is at least every value in the active prefix. The pass places a largest remaining value at `end`, so the suffix can grow by one.
+
 `range(end)` stops at `end - 1`, so the last pair examined is `(end - 1, end)`. The completed suffix is not scanned again. This function modifies the list and returns `None`.
+
+## Implementation choices
+
+| Choice here | Consequence or alternative |
+|---|---|
+| Left-to-right adjacent comparisons | Large keys can travel far right in one pass; small keys move left only one place per pass |
+| Shorten `end` after each pass | Avoids revisiting the completed suffix |
+| Track a full pass with no swaps | Makes the sorted-input case linear; omitting it leaves quadratic comparisons |
+| Swap only when strictly greater | Preserves equal-key order |
+
+(adjacent-swap-stability)=
+## Stability and in-place behaviour
+
+An adjacent swap of a strictly inverted pair removes exactly one inversion, so the number of swaps equals the input inversion count. Equal-key records are never swapped across one another, making this implementation stable.
+
+However, few inversions do not guarantee few comparisons. In `[2, 3, 4, 5, 1]`, the smallest value moves left only one position per pass. Generalising this pattern to $n$ items gives $n-1$ inversions but quadratic comparisons for the left-to-right algorithm above. Insertion sort handles that pattern in linear time because its cost follows $n+I$.
 
 (bubble-early-stopping)=
 ## Why a pass with no swaps is enough
@@ -33,13 +58,29 @@ If a complete pass makes no swaps, every adjacent pair in the active prefix is a
 
 With this flag, already sorted input takes $\Theta(n)$ time. Without it, the fixed sequence of passes still performs $n(n-1)/2$ comparisons even on sorted input. Reverse-sorted distinct input needs all passes and takes $\Theta(n^2)$ time. Working space is $\Theta(1)$.
 
-(adjacent-swap-stability)=
-## Movement and stability
+## When to use it
 
-An adjacent swap of a strictly inverted pair removes exactly one inversion, so the number of swaps equals the input inversion count. Equal-key records are never swapped across one another, making this implementation stable.
+Useful for learning adjacent exchanges and a suffix invariant. Insertion sort is usually the more useful elementary method for nearly sorted lists. Under uniformly random distinct-key permutations, the expected number of inversions, hence swaps, is Θ(n²); total average time is therefore Θ(n²). Empty and singleton lists do no passes and return `None`. The loop uses O(1) storage, so this is strictly in place as well as mutating.
 
-However, few inversions do not guarantee few comparisons. In `[2, 3, 4, 5, 1]`, the smallest value moves left only one position per pass. Generalising this pattern to $n$ items gives $n-1$ inversions but quadratic comparisons for the left-to-right algorithm above. Insertion sort handles that pattern in linear time because its cost follows $n+I$.
+:::{tip} Common misconception
+**One comparison without a swap proves the list sorted.** Early stopping requires a complete active pass without swaps.
+:::
 
-**Check your understanding:** after the first illustrated pass, `[2, 6, 3, 5]` remains unsorted. The guarantee concerns the final `7`, not the entire prefix.
+(sorting-bubble-checks)=
+## Check your understanding
 
-Next: [Partitioning](partitioning.md).
+Predict the answer before opening the explanation.
+
+**1. After one full pass on [7,2,6,3,5], which item is guaranteed final?**
+
+:::{dropdown} Show explanation
+7 is final at the right end. The remaining prefix [2,6,3,5] is not yet sorted.
+:::
+
+**2. Does a linear number of inversions guarantee linear comparisons here?**
+
+:::{dropdown} Show explanation
+No. In [2,3,…,n,1], 1 moves left one step per pass. There are n−1 inversions but quadratic comparisons.
+:::
+
+Next: [Merge sort](merge-sort.md).

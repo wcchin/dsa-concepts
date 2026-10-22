@@ -87,3 +87,7 @@ The examples teach exact code-point matching, prefix reporting and one-pattern s
 ## Spatial operation completion (supersedes earlier extension boundaries)
 
 Topic 12 now groups readings under k-d, point-quadtree, PR-quadtree and R-tree methods, preserving existing URLs. Five new readings add complete point-tree deletion and nearest operations, exact/nearest R-tree queries, per-operation time/space tables and self-reading checks. Dynamic R-tree construction/splitting/condensation are worked conceptual algorithms, not implemented updates. No notebook, rubric, solution or assessment source was used.
+
+## Sorting editorial alignment
+
+Nine readings now connect contracts, visual traces, code, correctness, implementation choices, stability, mutation versus auxiliary space, time costs, suitability and open self-checks. Added a merge-sort page reusing the Topic 3 functions and a conceptual Timsort/Powersort page with an original run diagram. Version-specific CPython notes cite its 3.14 design document; Powersort scheduling has an original abstract merge-cost example. Existing routes and labels are retained. Eighteen collapsed-feedback questions cover the readings. No notebooks or assessment materials were used.

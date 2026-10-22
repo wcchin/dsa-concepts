@@ -48,3 +48,5 @@ The priorities below are editorial recommendations for this book's audience, rat
 Union–find remains Topic 13. Unrelated additions should not be collected under that title; substantial families receive their own topic, while smaller variants stay beside their prerequisite concepts.
 
 The extension choices were cross-checked against the [MIT 6.006 course description](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/pages/syllabus/) and [Princeton's strings chapter](https://algs4.cs.princeton.edu/50strings/). These references inform breadth, not this course's assessment requirements.
+
+Sorting now has a dedicated merge-sort reading and a short Timsort/Powersort explanation. Elementary listings remain complete direct-comparison algorithms; general `key`/`reverse` options belong to the built-in interface examples. Full Timsort, Powersort power calculations and galloping implementations remain outside this introductory treatment.

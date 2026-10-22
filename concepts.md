@@ -325,7 +325,7 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 - [Map ADT](topics/maps-sets-hashing/maps.md#map-adt-and-operations)
 - [Memoisation](topics/strategies/dynamic-programming.md#memoisation)
 - [Merge invariant](topics/recursion/divide-and-conquer.md#merge-invariant)
-- [Merge sort](topics/recursion/divide-and-conquer.md#merge-sort-code)
+- [Merge sort](topics/sorting/merge-sort.md)
 - [Merging sorted sequences](topics/recursion/divide-and-conquer.md#merge-two-sorted-sequences)
 - [Methods](topics/foundations/collections-and-classes.md#classes-and-instances)
 - [Min-heap invariant](topics/heaps/heap-representation.md#min-heap-invariant)
@@ -343,6 +343,7 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 
 ### N
 
+- [Natural runs](topics/sorting/timsort.md#timsort)
 - [Naive substring cost](topics/strings/substring-baseline.md#naive-substring-cost)
 - [Naive substring search](topics/strings/substring-baseline.md#naive-substring-search)
 - [Nearest-neighbour correctness and costs](topics/kd-trees/kd-nearest.md#kd-nearest-correctness-cost)
@@ -367,6 +368,7 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 
 ### P
 
+- [Powersort](topics/sorting/timsort.md#powersort)
 - [P, NP and NP-completeness](topics/strategies/complexity-limits.md#complexity-p-np)
 - [Palindrome checking](topics/linear-structures/queues-and-deques.md#palindrome-deque)
 - [Partition contract](topics/sorting/partitioning.md#partition-contract)
@@ -501,6 +503,7 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 
 ### T
 
+- [Timsort](topics/sorting/timsort.md#timsort)
 - [Tabulation](topics/strategies/dynamic-programming.md#tabulation)
 - [Termination of recursion](topics/recursion/recursive-calls.md#recursive-termination)
 - [Termination variant](topics/analysis/correctness.md#termination-variant)
@@ -589,6 +592,16 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 | R-tree exact geometry lookup | [Object equality after filtering](topics/kd-trees/r-tree-operations.md#rtree-exact-lookup) |
 | R-tree nearest search | [Exact distance after MBR bounds](topics/kd-trees/r-tree-operations.md#rtree-nearest) |
 | R-tree CondenseTree | [Underflow and reinsertion](topics/kd-trees/r-tree-operations.md#rtree-deletion) |
+
+## Sorting implementation choices
+
+| Concept | Explanation |
+|---|---|
+| Merge sort | [Sorting contract, choices and costs](topics/sorting/merge-sort.md) |
+| Natural run / Timsort | [Reuse ordered stretches](topics/sorting/timsort.md#timsort) |
+| Powersort | [Run lengths and merge scheduling](topics/sorting/timsort.md#powersort) |
+| Mutation versus in-place space | [Separate interface and storage guarantees](topics/sorting/sorting-properties.md#in-place-sorting) |
+| Sorting implementation comparison | [Version-specific costs and guarantees](topics/sorting/comparing-strategies.md#sorting-cost-comparison) |
 
 ## Concepts grouped by topic
 
@@ -722,8 +735,11 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 - [Sorting properties](topics/sorting/sorting-properties.md)
 - [Insertion sort](topics/sorting/insertion-sort.md)
 - [Bubble sort](topics/sorting/bubble-sort.md)
+- [Merge sort](topics/sorting/merge-sort.md)
 - [Partitioning](topics/sorting/partitioning.md)
 - [Quicksort](topics/sorting/quicksort.md)
+- [Timsort and natural runs](topics/sorting/timsort.md)
+- [Powersort merge scheduling](topics/sorting/timsort.md#powersort)
 - [Comparing strategies](topics/sorting/comparing-strategies.md)
 - [Comparison lower bound](topics/sorting/comparison-lower-bound.md)
 

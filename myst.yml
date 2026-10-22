@@ -36,8 +36,10 @@ project:
     - file: topics/sorting/sorting-properties.md
     - file: topics/sorting/insertion-sort.md
     - file: topics/sorting/bubble-sort.md
+    - file: topics/sorting/merge-sort.md
     - file: topics/sorting/partitioning.md
     - file: topics/sorting/quicksort.md
+    - file: topics/sorting/timsort.md
     - file: topics/sorting/comparing-strategies.md
     - file: topics/sorting/comparison-lower-bound.md
   - file: topics/linear-structures/linear-structures.md

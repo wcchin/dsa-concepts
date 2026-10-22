@@ -1,11 +1,22 @@
 # Quicksort
 
+**After this page, you should be able to:**
+
+- Connect the partition contract to correct shrinking recursive ranges.
+- Explain how pivot, duplicate and recursion choices affect costs and stability.
+
+**Builds on:** [Partitioning](partitioning.md) supplies the exact helper used below.
+
 (quicksort)=
 ## Partition, then recurse
 
 Merge sort first splits by position and later combines sorted results. Quicksort first partitions by key and then sorts the resulting ranges. Because the pivot separates the ranges, no merge step is needed.
 
 The following code uses exactly the `partition` function from [the preceding page](partitioning.md), including its inclusive bounds and `<=` tie rule.
+
+![Quicksort partitions 7, 2, 6, 3, 5 around 5, then sorts the two remaining ranges.](../../assets/sorting/quicksort-tree.svg)
+
+## Python implementation
 
 ```python
 def quicksort(a):
@@ -28,7 +39,20 @@ The pivot must be excluded from both recursive ranges. Each nontrivial call fixe
 
 Assume both recursive calls correctly sort their smaller ranges. Every left key is at most the pivot, every right key is larger, and each side is now internally sorted. Together they form a sorted range containing the original records. These are the inductive steps behind correctness.
 
-![Quicksort partitions 7, 2, 6, 3, 5 around 5, then sorts the two remaining ranges.](../../assets/sorting/quicksort-tree.svg)
+## Implementation choices
+
+| Choice here | Consequence or alternative |
+|---|---|
+| Last element as pivot | Simple reproducible traces; sorted distinct inputs can be worst cases |
+| Lomuto-style two-way partition with `<=` | Equal keys collect on the left; all-equal input gives one-sided recursion |
+| Inclusive index bounds, no slices | Partitions the existing array instead of allocating sublists |
+| Two recursive calls | Can use linear stack depth; recursing only on the smaller side and looping over the larger can bound stack depth by O(log n) |
+
+The smaller-side technique controls stack space, not worst-case comparison time. Random pivots and three-way partitioning are separate changes, described below; they are not features of the listing.
+
+## Stability and in-place behaviour
+
+The [partition counterexample](partitioning.md#partition-cost) shows that distant swaps can reverse equal-key records. This implementation is **not stable**. It mutates the list and returns `None`, but constant-space partitioning does not remove the recursion stack: balanced paths need O(log n) space and worst paths O(n). It is not O(1)-space sorting under this book's strict definition.
 
 (quicksort-balanced)=
 ## Balanced partitions
@@ -54,4 +78,29 @@ Choosing a uniformly random pivot in each range, then swapping it to `hi` before
 
 Random selection cannot improve an all-equal input with our two-way partition: every possible pivot has the same key. A **three-way partition** groups keys as less than, equal to, and greater than the pivot, then recurses only on the less-than and greater-than groups. This avoids repeatedly processing a large equal-key group. It is a different algorithmic variant, not a property of the code shown above.
 
-Next: [Comparing strategies](comparing-strategies.md).
+## When to use it
+
+Useful for understanding partition-based sorting and the influence of pivot quality. Production variants often combine randomisation, duplicate handling, small-range insertion sorting or a worst-case fallback. None of those should be attributed to this small teaching function. For ordinary Python application code, use the built-in stable sort.
+
+:::{tip} Common misconception
+**Random pivots fix every duplicate-heavy input.** In this two-way scheme, all-equal input gives the same one-sided split for every pivot.
+:::
+
+(sorting-quick-checks)=
+## Check your understanding
+
+Predict the answer before opening the explanation.
+
+**1. Partition returns p=2 on [2,3,5,7,6]. Which inclusive ranges are recursively sorted?**
+
+:::{dropdown} Show explanation
+0..1 and 3..4. Index 2 is the fixed pivot and must be excluded from both.
+:::
+
+**2. Does constant-space partitioning prove constant-space quicksort?**
+
+:::{dropdown} Show explanation
+No. The recursive call stack can grow to Θ(n) on one-sided splits in this listing.
+:::
+
+Next: [Timsort and Powersort](timsort.md).

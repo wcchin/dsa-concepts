@@ -1,5 +1,12 @@
 # Partitioning around a pivot
 
+**After this page, you should be able to:**
+
+- Trace the four regions in the inclusive-range partition contract.
+- Explain why a correct partition need not be stable or fully sorted.
+
+**Builds on:** [Sorting contracts](sorting-properties.md) and list indexing from Topic 1.
+
 (partitioning)=
 ## Classification before sorting
 
@@ -16,6 +23,8 @@ The code uses an inclusive range `lo..hi`. It selects `a[hi]` as pivot and retur
 - `a[p]` is the selected pivot;
 - `a[p+1:hi+1]` contains keys greater than the pivot;
 - the range contains the same records, and positions outside it are unchanged.
+
+## Python implementation
 
 ```python
 def partition(a, lo, hi):
@@ -48,5 +57,30 @@ Once no unknown values remain, swap the pivot with the first larger key. For `[7
 On a range of $m$ items, the scan makes exactly $m-1$ pivot comparisons and uses constant additional space. Its time is $\Theta(m)$. This is a Lomuto-style partition.
 
 Equal keys go left in this version. If all keys equal the pivot, `boundary` reaches `hi` and the pivot stays at the right end. That is a valid partition but creates a very uneven recursive split. The swaps can also reorder equal-key records: partitioning `[2_A, 2_B, 1]` produces `[1, 2_B, 2_A]` when comparisons use the numeric key.
+
+## Implementation choices and use
+
+The last-element pivot makes traces deterministic. Inclusive bounds must match the recursive caller; substituting a Hoare-style boundary without changing that caller is unsafe. This helper returns an index and mutates only its selected range; it is not a complete sorting function. Its O(1) workspace and lack of stability are properties of this scheme.
+
+:::{tip} Common misconception
+**A correct partition is fully sorted.** It establishes relationships to the pivot; each side can still be unordered.
+:::
+
+(sorting-partition-checks)=
+## Check your understanding
+
+Predict the answer before opening the explanation.
+
+**1. Why is [2,3,5,7,6] a valid result around pivot 5?**
+
+:::{dropdown} Show explanation
+Everything before 5 is at most 5; everything after is greater. The right side need not be sorted.
+:::
+
+**2. How many pivot comparisons does partition make for m items?**
+
+:::{dropdown} Show explanation
+Exactly m−1: every nonpivot record is examined once. The final swap does not compare keys.
+:::
 
 Next: [Quicksort](quicksort.md), which recursively sorts the two sides.

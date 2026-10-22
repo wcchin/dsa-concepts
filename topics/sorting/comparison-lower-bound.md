@@ -1,5 +1,12 @@
 # The comparison lower bound
 
+**After this page, you should be able to:**
+
+- Connect decision-tree leaves to a worst-case comparison lower bound.
+- Explain why restricted keys and favourable inputs need separate reasoning.
+
+**Builds on:** [Sorting comparisons](comparing-strategies.md) and [asymptotic bounds](../analysis/growth-rates.md).
+
 (comparison-sorting)=
 ## Specify the model first
 
@@ -21,8 +28,7 @@ Here `ABC` means A has the smallest key, followed by B and C; the letters name r
 
 A binary tree of height $h$ has at most $2^h$ leaves. Distinguishing all $n!$ orders therefore requires
 
-$$ 2^h \geq n!, \qquad h \geq \lceil\log_2(n!)
-ceil. $$
+$$ 2^h \geq n!, \qquad h \geq \lceil\log_2(n!)\rceil. $$
 
 To turn this into a lower bound in terms of $n$, use the large factors of the factorial. For $n\geq4$, at least $n/2$ factors are at least $n/2$, so
 
@@ -40,6 +46,28 @@ Suppose keys are integers in `0..k-1`. Counting sort can use a key as an array i
 
 That speed comes with assumptions and storage costs. A count array needs $\Theta(k)$ entries; a common stable record-sorting implementation also uses $\Theta(n)$ output space. If $k$ is huge relative to $n$, counting may be unattractive. Numeric-looking data alone does not guarantee a useful small key range.
 
-**Check your understanding:** does a measured linear-time run contradict the lower bound? No. One favourable input, or a method using restricted-key operations, is compatible with a worst-case comparison bound.
+
+
+
+:::{tip} Common misconception
+**Every input requires n log n comparisons.** The decision-tree argument constrains the worst case over arbitrary distinct-key inputs.
+:::
+
+(sorting-lower-bound-checks)=
+## Check your understanding
+
+Predict the answer before opening the explanation.
+
+**1. Why does returning an ordered empty list fail to avoid the lower bound?**
+
+:::{dropdown} Show explanation
+It fails the sorting contract: the input records must be preserved.
+:::
+
+**2. Does linear time on one sorted input contradict the worst-case lower bound?**
+
+:::{dropdown} Show explanation
+No. A particular favourable input can be easy while some other inputs require Ω(n log n) comparisons.
+:::
 
 Return to the [sorting overview](sorting.md) or find a term in the [concept index](../../concepts.md).
