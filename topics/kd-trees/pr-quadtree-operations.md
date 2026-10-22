@@ -133,7 +133,7 @@ For height H and terminal bucket occupancy k, lookup costs $O(H+k+1)$ with const
 
 For bucket target b and s new splits during one insertion, redistribution work is $O((b+1)s)$, in addition to an existing descent of at most $O(H+1)$. A splitting bucket has b old records; an overflow bucket at a stopping limit simply appends. Duplicate-set operations are expected constant-time and bucket append is amortised constant-time. The pending redistribution stack has a conservative $O((b+1)(H+1))$ upper bound.
 
-With n distinct points and I internal nodes, the explicit four-child representation has 4I+1 total nodes and $O(n+I+1)$ persistent storage, including the duplicate set. Maximum depth bounds paths, not occupied buckets; empty children still use memory. This implementation covers insertion, exact membership and ranges, not deletion, merging or nearest-neighbour traversal.
+With n distinct points and I internal nodes, the explicit four-child representation has 4I+1 total nodes and $O(n+I+1)$ persistent storage, including the duplicate set. Maximum depth bounds paths, not occupied buckets; empty children still use memory. Continue with the complete [nearest and deletion/merge functions](pr-quadtree-updates.md), including their costs.
 
 :::{tip} Common misconception
 **Capacity is an unconditional maximum bucket size.** At a depth or numerical stopping limit, a bucket can retain more records than the splitting target.
@@ -156,4 +156,4 @@ Only E=(3,6). Its leaf is [3,6) × [6,9), whose lower boundaries are included. A
 The first two insertions return True and both points remain in the root overflow bucket; depth zero forbids subdivision. The third insertion returns False because the duplicate set already contains that tuple. No record is discarded merely to satisfy capacity.
 :::
 
-Next: [R-tree representation](r-tree-representation.md).
+Next: [PR nearest search and deletion](pr-quadtree-updates.md).

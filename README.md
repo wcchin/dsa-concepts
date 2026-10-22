@@ -13,7 +13,7 @@ A standalone Jupyter Book 2 project for a searchable, self-reading course resour
 - A developed Maps, Sets and Hashing pilot: seven concept pages and an overview.
 - Searching and BSTs: eight reading pages and nine original SVG figures.
 - Balanced search trees: five reading pages and five original SVG figures.
-- Spatial search and indexing: twelve reading pages and fourteen original SVG figures. Retains five k-d-tree readings and adds spatial-query foundations, separate point/PR-quadtree readings, complete quadtree operations, given-tree R-tree filtering/refinement and a runnable comparison.
+- Spatial search and indexing: seventeen reading pages grouped under four methods, with seventeen original SVG figures. Each method covers construction/insertion, exact lookup, range, nearest and deletion with time/space costs. Point-tree operations and given-tree R-tree queries have runnable code; general R-tree updates have worked algorithm traces.
 - Graphs and traversal: six reading pages, an overview and eight original SVG explanations.
 - Priority queues and heaps: seven reading pages, an overview and nine original SVG explanations.
 - Graph ordering, shortest paths and spanning trees: eight reading pages and nine original SVG figures.
@@ -21,7 +21,7 @@ A standalone Jupyter Book 2 project for a searchable, self-reading course resour
 - Optional algorithm design: six reading pages and four original SVG figures.
 - Optional strings and tries: eight reading pages and nine accessible SVG figures, with trie updates/prefix queries, naive substring search, KMP and verified rolling hashes.
 - Integrated transport application: six reading pages, five accessible SVG figures and a standalone standard-library Python example.
-- A Topic 12 self-reading pilot: page goals, prerequisite links, misconception reminders and 24 prediction questions with collapsed explanations.
+- A Topic 12 self-reading pilot: page goals, prerequisite links, misconception reminders and 34 prediction questions with collapsed explanations.
 - A prerequisite reading guide and public coverage review.
 - An original probing-deletion diagram.
 - An author-facing source inventory under `planning/`.

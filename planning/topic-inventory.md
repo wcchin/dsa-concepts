@@ -1852,3 +1852,7 @@ Six reading pages now develop one original fictional transport network, with sep
 ## Topic 12 spatial-search expansion — 22 October 2026
 
 The five k-d-tree readings remain intact within a broader spatial-search topic. Seven original extension readings add query foundations, a separate point-quadtree page before the PR-quadtree page, PR insertion/query operations, R-tree representation and query/refinement, and comparisons. Eight new SVGs supplement the six k-d figures; a standalone standard-library Python file runs the examples together. Extensions use OpenDSA/Guttman/PostGIS primary references and original code/figures rather than additional lecture, notebook or assessment materials.
+
+## Spatial operation completion (supersedes earlier extension boundaries)
+
+Topic 12 now groups readings under k-d, point-quadtree, PR-quadtree and R-tree methods, preserving existing URLs. Five new readings add complete point-tree deletion and nearest operations, exact/nearest R-tree queries, per-operation time/space tables and self-reading checks. Dynamic R-tree construction/splitting/condensation are worked conceptual algorithms, not implemented updates. No notebook, rubric, solution or assessment source was used.

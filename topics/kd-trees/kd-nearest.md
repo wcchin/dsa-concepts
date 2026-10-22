@@ -87,4 +87,4 @@ Yes. The best squared distance from the left point is 3.9²=15.21, while the spl
 No. Use the updated best value: 4>1 certifies that the far region cannot improve the answer. Using the old value 9 would make the region look plausible and cause unnecessary work. This is why the code tests the far side after near-side recursion.
 :::
 
-Concept reference: [Princeton's description of region-based range and nearest-neighbour pruning](https://www.cs.princeton.edu/courses/archive/spr13/cos226/assignments/kdtree.html). Continue to [point quadtrees](point-quadtrees.md) to split through a stored point along both axes, or return to the [spatial-search overview](kd-trees.md).
+Concept reference: [Princeton's description of region-based range and nearest-neighbour pruning](https://www.cs.princeton.edu/courses/archive/spr13/cos226/assignments/kdtree.html). Continue to [k-d deletion and operation costs](kd-updates-costs.md) before moving to point quadtrees, or return to the [spatial-search overview](kd-trees.md).

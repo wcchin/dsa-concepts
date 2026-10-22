@@ -7,6 +7,17 @@
 
 **Builds on:** [K-d construction](kd-construction.md) splits through a stored point; here both axes are used at each node.
 
+## Follow the five operations
+
+| Operation | Read here |
+|---|---|
+| Construction and insertion | [Pivot and insertion rules](#point-quadtree-ties); build by repeated insertion |
+| Exact point lookup | `point_quad_contains` in the same listing |
+| Range search | [Closed-range pruning](#point-quadtree-range) |
+| Nearest neighbour | [Inherited-cell lower bounds](point-quadtree-updates.md#point-quadtree-nearest) |
+| Deletion and costs | [Subtree rebuilding and operation summary](point-quadtree-updates.md#point-quadtree-deletion) |
+
+
 (point-quadtree-split)=
 ## Extend the familiar point-based split to both axes
 
@@ -120,4 +131,4 @@ SE. Equal x goes east; y=3 is strictly below 4 and goes south. The point differs
 The partition need not stay the same: the root cuts would pass through B=(2,7). The answer set must still be B,D,E once the same points are stored. Insertion order can change the search structure without changing the query’s meaning.
 :::
 
-Next: [Point-region quadtrees](point-region-quadtrees.md), where the split positions change.
+Next: [Point-quadtree nearest search, deletion and costs](point-quadtree-updates.md).

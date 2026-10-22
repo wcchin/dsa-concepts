@@ -83,3 +83,7 @@ The examples teach exact code-point matching, prefix reporting and one-pattern s
 - Built all 127 navigation pages with Jupyter Book 2.1.7. Checked 1,558 local links including 951 section links with no broken destinations. Inspected generated HTML for all 24 visible prompts and 24 default-closed native details/summary controls with complete feedback.
 - All 130 book Python listings compile. This pass does not repeat the earlier full algorithm test suite because executable code is unchanged.
 - Pilot review remains the next editorial step before a book-wide rollout. `self-reading-pilot.md` records the reusable pattern and its scope.
+
+## Spatial operation completion (supersedes earlier extension boundaries)
+
+Topic 12 now groups readings under k-d, point-quadtree, PR-quadtree and R-tree methods, preserving existing URLs. Five new readings add complete point-tree deletion and nearest operations, exact/nearest R-tree queries, per-operation time/space tables and self-reading checks. Dynamic R-tree construction/splitting/condensation are worked conceptual algorithms, not implemented updates. No notebook, rubric, solution or assessment source was used.

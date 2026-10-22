@@ -42,3 +42,7 @@
 - The pilot format and editorial checklist are recorded in `self-reading-pilot.md`. Review this implementation before applying it across other topics; a book-wide rollout has not been made.
 
 Next: review the Topic 12 self-reading pilot, then apply the agreed format across other topics. Subsequent content priorities are negative-weight graph algorithms, selection/non-comparison sorting, and further DP problems.
+
+## Spatial operation completion (supersedes earlier extension boundaries)
+
+Topic 12 now groups readings under k-d, point-quadtree, PR-quadtree and R-tree methods, preserving existing URLs. Five new readings add complete point-tree deletion and nearest operations, exact/nearest R-tree queries, per-operation time/space tables and self-reading checks. Dynamic R-tree construction/splitting/condensation are worked conceptual algorithms, not implemented updates. No notebook, rubric, solution or assessment source was used.

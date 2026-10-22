@@ -7,6 +7,17 @@
 
 **Builds on:** A [PR tree](point-region-quadtrees.md) partitions cells; an R-tree groups object bounds instead.
 
+## Follow the five operations
+
+| Operation | Read here |
+|---|---|
+| Construction and insertion | Representation below, then [least enlargement and splitting](r-tree-operations.md#rtree-insertion) |
+| Exact object lookup | [Endpoint equality after candidate filtering](r-tree-operations.md#rtree-exact-lookup) |
+| Range search | [MBR candidates and exact intersection](r-tree-queries.md) |
+| Nearest neighbour | [Bound ordering and exact segment distance](r-tree-operations.md#rtree-nearest) |
+| Deletion and costs | [Condensation, reinsertion and operation summary](r-tree-operations.md#rtree-deletion) |
+
+
 (r-tree-enclosing-invariant)=
 ## A parent bound encloses every descendant object
 
@@ -94,4 +105,4 @@ No. Its box (0,0,10,10) overlaps the query, so L1 is a candidate. On L1, y=x; fo
 No. U’s box (0,0,10,10) and V’s box (3,0,10,9) both meet the query. Equal leaf depth does not make their bounds disjoint or establish a single search path.
 :::
 
-Next: [R-tree query and exact refinement](r-tree-queries.md).
+Next: [Construction and exact lookup](r-tree-operations.md#rtree-insertion), then [range refinement](r-tree-queries.md), nearest search and deletion.

@@ -91,4 +91,4 @@ At A=(5,4), the x tie goes right. At C=(8,1), compare y: 7≥1 goes right to F. 
 The root would be B and its x split would be 2. The shape and later cuts could change, but the geometric answer set remains B,D,E after all seven distinct points are stored correctly. Representation and result contract are different things.
 :::
 
-Next: [Exact search](kd-exact-search.md).
+Next: [Shape and construction costs](kd-shape.md), then [exact search](kd-exact-search.md).

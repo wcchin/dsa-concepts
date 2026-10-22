@@ -23,3 +23,7 @@ The overview explains how to use the checks, maps code dependencies by route, an
 ## Review before wider adoption
 
 Check whether two goals and two questions are useful at the existing page lengths, whether the prerequisite cues are enough for direct search arrivals, and whether the feedback explains why rather than only naming an answer. Keep any later rollout sensitive to topic scope; do not add boxes mechanically when a shorter page needs less scaffolding.
+
+## Spatial operation completion (supersedes earlier extension boundaries)
+
+Topic 12 now groups readings under k-d, point-quadtree, PR-quadtree and R-tree methods, preserving existing URLs. Five new readings add complete point-tree deletion and nearest operations, exact/nearest R-tree queries, per-operation time/space tables and self-reading checks. Dynamic R-tree construction/splitting/condensation are worked conceptual algorithms, not implemented updates. No notebook, rubric, solution or assessment source was used.

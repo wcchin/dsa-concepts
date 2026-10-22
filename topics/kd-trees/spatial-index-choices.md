@@ -39,14 +39,25 @@ An explicit empty PR cell is not equivalent to an absent point-tree child. There
 
 A scan is attractive for small or infrequently queried collections. K-d trees are a natural point-search example, including the nearest-neighbour traversal already developed here. PR quadtrees make regular region ownership and adaptive occupancy visible. Point quadtrees provide a close conceptual bridge from data-point splits, but may develop long paths. R-trees organise bounds of extended objects and are widely used in spatial indexing; query selectivity depends on grouping, overlap and geometry.
 
-For nearest queries, a containing box provides a lower bound rather than an exact object distance. A nearest rectangle need not identify the nearest line or polygon without refinement. Full nearest traversals for the new structures are outside this pass, as are R-tree insertion/splitting, PR deletion/merging and compressed spatial-tree variants.
+All four methods now cover construction/insertion, exact lookup, ranges, nearest search and deletion. The boundary invariants explain why their implementations differ:
+
+| Method | Nearest pruning | Deletion strategy here | Persistent space |
+|---|---|---|---|
+| K-d tree | Active split-plane lower bound | Axis-minimum replacement, preserving depths | O(n) |
+| Point quadtree | Distance to inherited cell | Collect and rebuild affected subtree | O(n) |
+| PR quadtree | Distance to fixed midpoint cell | Remove from bucket; merge eligible siblings | O(n+I+1), I internal cells |
+| R-tree | MBR lower bound plus exact segment distance | Conceptual CondenseTree and reinsertion | O(n+1), fixed fanout and valid occupancy |
+
+See the complete cost tables for [k-d trees](kd-updates-costs.md#kd-operation-cost-summary), [point quadtrees](point-quadtree-updates.md#point-quadtree-operation-costs), [PR quadtrees](pr-quadtree-updates.md#pr-quadtree-all-costs) and [R-trees](r-tree-operations.md#rtree-operation-costs). None promises distribution-independent logarithmic nearest search. For lines, a containing box provides a lower bound rather than exact object distance.
+
+General R-tree updates and static packing remain conceptual; compressed spatial trees and approximate/high-dimensional nearest indexing are beyond this chapter.
 
 (spatial-executable-example)=
 ## Run the examples together
 
-[Download the standard-library spatial-search example](../../examples/spatial_search.py), save it as `spatial_search.py`, and run `python spatial_search.py`. It includes the point and PR quadtrees, the given R-tree query, exact segment refinement and the reused k-d-tree insert/range code. No notebook, package installation or private course repository is required.
+[Download the standard-library spatial-search example](../../examples/spatial_search.py), save it as `spatial_search.py`, and run `python spatial_search.py`. It includes k-d, point-quadtree and PR construction/exact/range/nearest/deletion operations, plus given-tree R-tree exact/range/nearest queries and exact segment refinement. No notebook, package installation or private course repository is required.
 
-To execute these pages as listings, read them in order in one Python session: the spatial-query helpers, point quadtree, PR operations, then R-tree representation and query. The k-d-tree code remains on its existing pages with its original names and contracts.
+To execute these pages as listings, read them in order in one Python session: the spatial-query helpers, point quadtree, PR operations, then the new nearest/update companions, R-tree representation/query and R-tree operations. The downloadable script supplies the correct dependency order.
 
 :::{tip} Common misconception
 **A larger visit count in one illustration proves one index is always worse.** Empty-cell tests, point tests, output size, data distribution and implementation choices are different costs.

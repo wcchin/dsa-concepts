@@ -1,24 +1,13 @@
-# Topic 12 expansion: spatial search and indexing
+# Spatial-search chapter plan and implementation status
 
-Implemented on 22 October 2026. The overview title is broadened while its file and all existing k-d-tree URLs are retained.
+The sidebar now groups the four methods after shared query contracts. Existing URLs are retained; numbering adjusts to nesting.
 
-## Reading sequence and delivered scope
+1. K-d trees: construction, shape, exact, range, nearest, deletion and costs.
+2. Point quadtrees: point-based cuts, insertion/exact/range, then nearest and subtree-rebuild deletion.
+3. PR quadtrees: midpoint/bucket concepts, insertion/exact/range, then nearest and deletion/merge.
+4. R-trees: representation; operation route links incremental construction, exact object lookup, ranges, nearest and condensation.
+5. Comparison: invariants, workload and costs; runnable standard-library script.
 
-1. Spatial query contracts, planar units, reference scanning, grid baseline and pruning bounds.
-2. Five retained k-d-tree readings: construction, exact search, range search, shape and nearest search.
-3. Separate point-quadtree page: two-axis splits through stored points, tie ownership, iterative insertion/exact/range code, paired partition/tree diagram.
-4. Separate point-region-quadtree page: fixed region midpoints, leaf buckets, half-open cells, closed queries, duplicate handling and stopping limits.
-5. PR operations page: full iterative insertion, exact membership and ranges; redistribution and overflow accounting.
-6. R-tree representation and query pages: given two-leaf tree, overlapping enclosures, candidate traversal, exact segment/rectangle refinement. This is not a general R-tree insertion/splitting implementation.
-7. Comparison page and a standalone standard-library Python example.
+Each method covers the same five operations. All point operations and static-tree R-tree queries have code. General R-tree update algorithms, static packing and median k-d construction remain conceptual and explicitly identified. Costs distinguish persistent nodes, traversal workspace, geometry checks, output and update maintenance.
 
-The k-d, point-quadtree and PR examples reuse the same seven points, insertion order and closed query. R-trees use five line segments and a separate query to expose a real bounding-box false positive. New precise diagrams are original SVGs; no course notebook, rubric or solution file was used.
-
-## Remaining extensions
-
-- Point/PR deletion and nearest traversal, compressed PR variants and record buckets for coincident observations.
-- R-tree insertion, splitting, packing, updates and nearest traversal.
-- Complete region-quadtree/raster implementation, beyond the terminology distinction supplied here.
-- Deeper coordinate-system instruction or production geometry robustness belongs in linked geographic material rather than silently changing the teaching contracts.
-
-Primary references are linked on the reading pages: OpenDSA PR/other spatial structures, Guttman's R-tree paper and the PostGIS spatial-index workshop.
+Five new readings retain the self-reading pattern: two goals, prerequisite link, visible misconception and two collapsed-feedback checks. Three new SVGs explain deletion and exact-distance refinement. Primary references are linked on the operation pages. Compressed trees, approximate/high-dimensional nearest indexing and production geometry kernels remain outside this pass.

@@ -24,7 +24,7 @@ Topics **1–14** now contain developed core reading material. [Topic 15](topics
 | Linear structures | Doubly linked updates are explained; a full doubly linked deque class is not supplied. |
 | Trees | Preorder/postorder orders and successor rules are described; the complete traversal code focuses on inorder. Rank/select augmentation is not implemented. |
 | Heaps | Stable queues and lazy graph candidates have code; indexed decrease-key and arbitrary-item removal remain conceptual. |
-| Spatial search | K-d insert/exact/range/nearest, point-quadtree insert/exact/range, bounded bucket PR operations, and a given-tree R-tree query with exact segment refinement have code. K-d rebuilding/deletion, quadtree deletion/merging/nearest, and R-tree insertion/splitting remain extensions. |
+| Spatial search | K-d, point-quadtree and PR construction/exact/range/nearest/deletion have code; R-tree exact/range/nearest queries operate on a given tree. Dynamic R-tree insertion/splitting and deletion condensation have worked algorithm traces, not update code. Static k-d median construction and R-tree packing remain conceptual. |
 | Algorithm design | DP has one complete optimisation problem; weighted interval scheduling, knapsack and sequence DP remain further examples to add. |
 | Strings | Trie updates/prefix queries and three all-match substring algorithms have code. Ranked autocomplete, compressed tries, approximate matches, Aho–Corasick and suffix indexes remain extensions. |
 

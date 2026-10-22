@@ -85,4 +85,4 @@ Skip left: its points have x<5, and the query’s lower x bound is 5. Explore ri
 The query’s x interval [1,4] lies in A’s left region. It contains B,D,E even though A itself fails the point test. Testing a node’s record and testing the possibility of child-region answers serve different purposes.
 :::
 
-Next: [Shape and limitations](kd-shape.md).
+Next: [Nearest-neighbour search](kd-nearest.md).

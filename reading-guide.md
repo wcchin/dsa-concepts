@@ -25,3 +25,5 @@ For current scope, conceptual-only coverage and future additions, see [Coverage 
 ## Check your reasoning as you read
 
 [Topic 12](topics/kd-trees/kd-trees.md#where-to-check-your-understanding) pilots a self-reading format: two learning goals and prerequisite links at the start of each reading, then a misconception reminder and two prediction questions with expandable explanations. Predict a branch or result before opening the panel; use a mismatch to identify which boundary or invariant to revisit. These are ungraded, original examples.
+
+The spatial sidebar now groups k-d trees, point quadtrees, PR quadtrees and R-trees. Follow each method’s five-operation route from construction through deletion. Compare the cost summaries only after checking which code, occupancy assumptions, node visits and geometry tests each bound describes.

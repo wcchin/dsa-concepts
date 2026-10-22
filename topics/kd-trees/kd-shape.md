@@ -42,7 +42,7 @@ Height control requires a k-d-tree construction or maintenance method designed f
 
 Useful pruning depends on the distribution of points, the query shape, dimension, and the chosen distance. In higher dimensions or poorly separated data, many regions may remain plausible. A balanced tree does not guarantee logarithmic nearest-neighbour or range-query time for arbitrary inputs.
 
-For geographical data, Euclidean distance in the given coordinates must have the intended meaning. Longitude and latitude in degrees are not a uniform metre grid. Choose a suitable projected coordinate system or a method supporting the intended metric before interpreting “nearest” as a geographical distance. The following page illustrates only ordinary planar Euclidean distance.
+For geographical data, Euclidean distance in the given coordinates must have the intended meaning. Longitude and latitude in degrees are not a uniform metre grid. Choose a suitable projected coordinate system or a method supporting the intended metric before interpreting “nearest” as a geographical distance. The [nearest-neighbour page](kd-nearest.md) illustrates only ordinary planar Euclidean distance.
 
 :::{tip} Common misconception
 **A balanced tree guarantees logarithmic time for every spatial query.** A range can report every point, and a nearest query can leave many branches plausible.
@@ -65,4 +65,4 @@ Every comparison goes right, producing a four-node chain of edge height 3. Exact
 No. Its x equals 5, so the unequal point is routed right, although the builder placed it left. The builder and search must share a tie rule. Sending every x tie right preserves the stated invariant but does not by itself guarantee balanced subsets.
 :::
 
-Next: [Nearest-neighbour search](kd-nearest.md).
+Next: [Exact-point search](kd-exact-search.md), then ranges and nearest neighbours.

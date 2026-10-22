@@ -576,6 +576,20 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 - [Window monotonicity](topics/strategies/sequence-patterns.md#window-monotonicity)
 - [Wraparound](topics/maps-sets-hashing/open-addressing.md#linear-probing-and-wraparound)
 
+## Spatial operation extensions
+
+| Concept | Explanation |
+|---|---|
+| K-d deletion / axis minimum | [Replacement without changing depth](topics/kd-trees/kd-updates-costs.md#kd-deletion) |
+| Point-quadtree deletion | [Rebuild an affected subtree](topics/kd-trees/point-quadtree-updates.md#point-quadtree-deletion) |
+| Cell distance lower bound | [Point-to-box squared distance](topics/kd-trees/point-quadtree-updates.md#spatial-box-distance) |
+| PR nearest search | [Bounds and bucket tests](topics/kd-trees/pr-quadtree-updates.md#pr-quadtree-nearest) |
+| PR deletion and merging | [Remove and coalesce siblings](topics/kd-trees/pr-quadtree-updates.md#pr-quadtree-deletion) |
+| R-tree insertion / splitting | [Least enlargement and overflow](topics/kd-trees/r-tree-operations.md#rtree-insertion) |
+| R-tree exact geometry lookup | [Object equality after filtering](topics/kd-trees/r-tree-operations.md#rtree-exact-lookup) |
+| R-tree nearest search | [Exact distance after MBR bounds](topics/kd-trees/r-tree-operations.md#rtree-nearest) |
+| R-tree CondenseTree | [Underflow and reinsertion](topics/kd-trees/r-tree-operations.md#rtree-deletion) |
+
 ## Concepts grouped by topic
 
 ### 1. Foundations and Python’s object model

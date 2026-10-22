@@ -7,6 +7,17 @@
 
 **Builds on:** [Point quadtrees](point-quadtrees.md) supply the four-way idea; PR trees change where cuts come from.
 
+## Follow the five operations
+
+| Operation | Read here |
+|---|---|
+| Construction and insertion | Midpoint rules below, then [bucket redistribution](pr-quadtree-operations.md#pr-quadtree-insertion) |
+| Exact point lookup | `contains` in the [implementation](pr-quadtree-operations.md) |
+| Range search | [Cell filtering and point tests](pr-quadtree-operations.md#pr-quadtree-range-trace) |
+| Nearest neighbour | [Cell lower bounds and bucket distances](pr-quadtree-updates.md#pr-quadtree-nearest) |
+| Deletion and costs | [Remove, merge upwards and count work](pr-quadtree-updates.md#pr-quadtree-deletion) |
+
+
 (pr-quadtree-midpoints)=
 ## The cell determines where a split occurs
 
