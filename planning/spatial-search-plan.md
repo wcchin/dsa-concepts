@@ -1,16 +1,24 @@
-# Proposed Topic 12 expansion: spatial search and indexing
+# Topic 12 expansion: spatial search and indexing
 
-Status: proposal discussed on 22 October 2026; the extension is not yet implemented. Retain existing topic numbering and k-d-tree URLs. Broaden the overview title when the new readings are ready.
+Implemented on 22 October 2026. The overview title is broadened while its file and all existing k-d-tree URLs are retained.
 
-## Proposed reading groups
+## Reading sequence and delivered scope
 
-1. Spatial query contracts: points versus extended objects; exact, range and nearest queries; brute-force reference search; distance units; safe exclusion rules.
-2. K-d trees: retain the current five developed readings and diagrams, including split/tie rules, exact/range/nearest search and shape limitations.
-3. Quadtrees: distinguish point quadtrees (splits through stored points), point-region (PR) quadtrees (fixed midpoint region subdivision for points), and region quadtrees (homogeneous raster regions). Develop a bucket PR quadtree as the main implementation rather than treating these terms as synonyms.
-4. PR-quadtree operations: bounded extent, child boundary ownership, insertion, range reporting, maximum depth/minimum cell size and duplicate-coordinate handling. Prevent infinite subdivision when coincident or very close points exceed bucket capacity.
-5. R-trees: bounding rectangles enclosing child groups, overlapping sibling rectangles, points and extended geometries, candidate filtering and exact refinement. Start with a small given tree and a complete query trace; insertion/splitting algorithms can be a later extension.
-6. Comparison: shared point set and query rectangle across k-d and PR trees; a second line/polygon example for R-tree false positives. Compare visited regions and returned records, rather than claiming every query is logarithmic.
+1. Spatial query contracts, planar units, reference scanning, grid baseline and pruning bounds.
+2. Five retained k-d-tree readings: construction, exact search, range search, shape and nearest search.
+3. Separate point-quadtree page: two-axis splits through stored points, tie ownership, iterative insertion/exact/range code, paired partition/tree diagram.
+4. Separate point-region-quadtree page: fixed region midpoints, leaf buckets, half-open cells, closed queries, duplicate handling and stopping limits.
+5. PR operations page: full iterative insertion, exact membership and ranges; redistribution and overflow accounting.
+6. R-tree representation and query pages: given two-leaf tree, overlapping enclosures, candidate traversal, exact segment/rectangle refinement. This is not a general R-tree insertion/splitting implementation.
+7. Comparison page and a standalone standard-library Python example.
 
-Grid indexing can supply a simple baseline. Keep advanced spatial databases and coordinate-reference-system instruction proportional to this DSA book; link to geographic applications for fuller context.
+The k-d, point-quadtree and PR examples reuse the same seven points, insertion order and closed query. R-trees use five line segments and a separate query to expose a real bounding-box false positive. New precise diagrams are original SVGs; no course notebook, rubric or solution file was used.
 
-Primary references: [OpenDSA PR quadtree](https://opendsax.cs.vt.edu/OpenDSA/Books/Everything/html/PRquadtree.html), [OpenDSA other spatial structures](https://opendsa.cs.vt.edu/ODSA/Books/ewu/cscd320/spring-2019/01/html/OtherSpatial.html), and [PostGIS spatial indexing workshop](https://postgis.net/workshops/en/postgis-intro/indexing.html). These inform the proposal, not the current assessment scope.
+## Remaining extensions
+
+- Point/PR deletion and nearest traversal, compressed PR variants and record buckets for coincident observations.
+- R-tree insertion, splitting, packing, updates and nearest traversal.
+- Complete region-quadtree/raster implementation, beyond the terminology distinction supplied here.
+- Deeper coordinate-system instruction or production geometry robustness belongs in linked geographic material rather than silently changing the teaching contracts.
+
+Primary references are linked on the reading pages: OpenDSA PR/other spatial structures, Guttman's R-tree paper and the PostGIS spatial-index workshop.

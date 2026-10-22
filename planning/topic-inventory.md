@@ -19,7 +19,7 @@ This is an editorial map of source coverage, not a claim that all chapters have 
 | 9. Priority queues and heaps | Priority Queue behaviour and heap invariants; Array indices, sift-up, sift-down and root removal; Bottom-up construction and operation costs | `cs2040hs_week10_classroom.md`, `cs2040hs_week10_online.md` |
 | 10. Graphs and traversal | Graph terminology, directedness, degree and modelling; Adjacency matrices, lists and representation costs; BFS: discovery, queues, parents and hop distance; DFS: recursion, discovery, completion and components | `cs2040hs_week11_classroom.md`, `cs2040hs_week11_online.md` |
 | 11. Graph ordering, paths and spanning trees | DAGs, indegrees, Kahn’s algorithm and cycle detection; Relaxation, Dijkstra, lazy heaps and DAG shortest paths; Spanning trees, forests, cut property and exchange reasoning; Prim, Kruskal, union–find and complexity; Shortest-path trees versus minimum spanning trees | `cs2040hs_week12_classroom.md`, `cs2040hs_week12_online.md`, `cs2040hs_week13_classroom.md`, `cs2040hs_week13_online.md` |
-| 12. K-d trees | Active dimensions, split rules, ties and construction; Spatial partitions, exact search, range search and boundary pruning; Tree shape, median construction and nearest-neighbour concepts | `cs2040hs_week10_kd_tree_additional.md` |
+| 12. Spatial search and indexing | K-d-tree core; original extensions for point quadtrees, bounded bucket PR quadtrees, R-tree filtering/refinement and spatial-query comparison | `cs2040hs_week10_kd_tree_additional.md` |
 | 13. Union–find | Partitions, representatives and connectivity; Parent forests, find and union by size; Path compression, amortised cost and cycle checks | `cs2040hs_week12_union_find_additional.md`, `cs2040hs_week13_online.md` |
 | 14. Integrated applications | Fictional transport network: data models, hop/time routes, connectivity and construction | Original case using the developed graph and union–find topics |
 
@@ -1848,3 +1848,7 @@ Strings, tries and pattern matching are now developed in eight reading pages plu
 ## Topic 14 application — 22 October 2026
 
 Six reading pages now develop one original fictional transport network, with separate travel-time and construction weights, five exact SVG diagrams and a standalone standard-library Python example. It integrates existing book algorithms without adding course or assessment source material. Dependency scheduling and a spatial directory remain future application candidates.
+
+## Topic 12 spatial-search expansion — 22 October 2026
+
+The five k-d-tree readings remain intact within a broader spatial-search topic. Seven original extension readings add query foundations, a separate point-quadtree page before the PR-quadtree page, PR insertion/query operations, R-tree representation and query/refinement, and comparisons. Eight new SVGs supplement the six k-d figures; a standalone standard-library Python file runs the examples together. Extensions use OpenDSA/Guttman/PostGIS primary references and original code/figures rather than additional lecture, notebook or assessment materials.

@@ -17,7 +17,7 @@ The wiki is being developed progressively. Topics 1–14 and optional Topics 15�
 - [9. Priority queues and heaps](topics/heaps/heaps.md)
 - [10. Graphs and traversal](topics/graphs/graphs.md)
 - [11. Graph ordering, paths and spanning trees](topics/graph-algorithms/graph-algorithms.md)
-- [12. K-d trees](topics/kd-trees/kd-trees.md)
+- [12. Spatial search and indexing](topics/kd-trees/kd-trees.md)
 - [13. Union–find](topics/union-find/union-find.md)
 - [14. Integrated applications](topics/applications/applications.md)
 - [15. Algorithm design and sequence patterns](topics/strategies/strategies.md)
@@ -194,6 +194,7 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 - [Encapsulation conventions](topics/foundations/collections-and-classes.md#encapsulation-and-hints)
 - [Equality and hashing](topics/maps-sets-hashing/hashing.md#hash-collisions-and-key-equality)
 - [Equality and identity](topics/foundations/objects-and-references.md#identity-and-equality)
+- [Exact segment–rectangle intersection](topics/kd-trees/r-tree-queries.md#segment-rectangle-refinement)
 - [Expected comparisons in search](topics/analysis/cases-and-bounds.md#average-case)
 - [Expected complexity](topics/maps-sets-hashing/performance.md#expected-and-amortised-complexity)
 
@@ -221,6 +222,7 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 
 ### H
 
+- [Half-open spatial cells](topics/kd-trees/point-region-quadtrees.md#pr-quadtree-boundary-ownership)
 - [Hash code](topics/maps-sets-hashing/hashing.md#keys-hash-codes-and-table-indices)
 - [Hash function](topics/maps-sets-hashing/hashing.md#keys-hash-codes-and-table-indices)
 - [Hashability](topics/maps-sets-hashing/hashing.md#hashability-in-python)
@@ -327,6 +329,7 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 - [Merging sorted sequences](topics/recursion/divide-and-conquer.md#merge-two-sorted-sequences)
 - [Methods](topics/foundations/collections-and-classes.md#classes-and-instances)
 - [Min-heap invariant](topics/heaps/heap-representation.md#min-heap-invariant)
+- [Minimum bounding rectangle (MBR)](topics/kd-trees/r-tree-representation.md#r-tree-enclosing-invariant)
 - [Minimum spanning forest](topics/graph-algorithms/spanning-trees.md#minimum-spanning-tree)
 - [Minimum spanning tree](topics/graph-algorithms/spanning-trees.md#minimum-spanning-tree)
 - [Missing keys](topics/maps-sets-hashing/maps.md#missing-keys-and-none-values)
@@ -372,7 +375,19 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 - [Partitioning](topics/sorting/partitioning.md#partitioning)
 - [Path compression](topics/union-find/union-compression.md#path-compression)
 - [Pattern borders](topics/strings/kmp-matching.md#pattern-border)
+- [Point quadtree](topics/kd-trees/point-quadtrees.md#point-quadtree-split)
+- [Point quadtree range](topics/kd-trees/point-quadtrees.md#point-quadtree-range)
+- [Point quadtree shared trace](topics/kd-trees/point-quadtrees.md#point-quadtree-shared-trace)
+- [Point quadtree ties](topics/kd-trees/point-quadtrees.md#point-quadtree-ties)
+- [Point-region (PR) quadtree](topics/kd-trees/point-region-quadtrees.md#pr-quadtree-midpoints)
 - [Polynomial string hash](topics/strings/rolling-hash-search.md#polynomial-string-hash)
+- [PR quadtree boundary ownership](topics/kd-trees/point-region-quadtrees.md#pr-quadtree-boundary-ownership)
+- [PR quadtree cell helpers](topics/kd-trees/pr-quadtree-operations.md#pr-quadtree-cell-helpers)
+- [PR quadtree insertion](topics/kd-trees/pr-quadtree-operations.md#pr-quadtree-insertion)
+- [PR quadtree operation costs](topics/kd-trees/pr-quadtree-operations.md#pr-quadtree-operation-costs)
+- [PR quadtree range trace](topics/kd-trees/pr-quadtree-operations.md#pr-quadtree-range-trace)
+- [PR quadtree shared trace](topics/kd-trees/point-region-quadtrees.md#pr-quadtree-shared-trace)
+- [PR quadtree stopping rules](topics/kd-trees/point-region-quadtrees.md#pr-quadtree-stopping-rules)
 - [Prefix sums](topics/strategies/sequence-patterns.md#prefix-sums)
 - [Prim forest cost](topics/graph-algorithms/prim.md#prim-forest-cost)
 - [Prim invariant trace](topics/graph-algorithms/prim.md#prim-invariant-trace)
@@ -398,6 +413,12 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 
 ### R
 
+- [R-tree and enclosing rectangles](topics/kd-trees/r-tree-representation.md#r-tree-enclosing-invariant)
+- [R-tree candidate query](topics/kd-trees/r-tree-queries.md#r-tree-candidate-query)
+- [R-tree filter refine](topics/kd-trees/r-tree-representation.md#r-tree-filter-refine)
+- [R-tree given example](topics/kd-trees/r-tree-representation.md#r-tree-given-example)
+- [R-tree overlapping groups](topics/kd-trees/r-tree-representation.md#r-tree-overlapping-groups)
+- [R-tree query costs](topics/kd-trees/r-tree-queries.md#r-tree-query-costs)
 - [Rabin–Karp with exact verification](topics/strings/rolling-hash-search.md#rabin-karp-verified)
 - [Randomised quicksort](topics/sorting/quicksort.md#randomised-quicksort)
 - [Rebinding](topics/foundations/mutation-and-copying.md#mutation-and-rebinding)
@@ -406,6 +427,7 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 - [Recursion depth and total calls](topics/recursion/call-stack.md#depth-and-calls)
 - [Recursion-tree level work](topics/recursion/recursion-costs.md#recursion-level-work)
 - [Recursive space and peak allocation](topics/recursion/recursion-costs.md#recursive-space)
+- [Region quadtree versus PR quadtree](topics/kd-trees/point-region-quadtrees.md#quadtree-variant-terminology)
 - [Rehashing](topics/maps-sets-hashing/performance.md#why-changing-capacity-requires-rehashing)
 - [Relaxation](topics/graph-algorithms/shortest-path-state.md#relaxation)
 - [Repeated halving](topics/analysis/code-and-space.md#repeated-halving)
@@ -431,6 +453,7 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 - [Set membership](topics/maps-sets-hashing/sets.md#set-operations-and-membership)
 - [Set union](topics/maps-sets-hashing/sets.md#union-intersection-and-difference)
 - [Shallow copy](topics/foundations/mutation-and-copying.md#shallow-copy)
+- [Shared spatial point/query example](topics/kd-trees/spatial-queries.md#shared-spatial-dataset)
 - [Shifting in insertion sort](topics/sorting/insertion-sort.md#insertion-shifting)
 - [Shortest path predecessors](topics/graph-algorithms/shortest-path-state.md#shortest-path-predecessors)
 - [Shortest path tree versus mst](topics/graph-algorithms/graph-algorithm-choices.md#shortest-path-tree-versus-mst)
@@ -449,6 +472,16 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 - [Sorting strategies](topics/sorting/comparing-strategies.md#sorting-strategies)
 - [Space complexity](topics/analysis/code-and-space.md#space-complexity)
 - [Sparse and dense graphs](topics/graphs/graph-representations.md#sparse-dense-graphs)
+- [Spatial distance units](topics/kd-trees/spatial-queries.md#spatial-distance-units)
+- [Spatial executable example](topics/kd-trees/spatial-index-choices.md#spatial-executable-example)
+- [Spatial filter and refinement](topics/kd-trees/r-tree-representation.md#r-tree-filter-refine)
+- [Spatial index workload](topics/kd-trees/spatial-index-choices.md#spatial-index-workload)
+- [Spatial overflow buckets](topics/kd-trees/point-region-quadtrees.md#pr-quadtree-stopping-rules)
+- [Spatial pruning certificates](topics/kd-trees/spatial-queries.md#spatial-pruning-certificates)
+- [Spatial query contracts](topics/kd-trees/spatial-queries.md#spatial-query-contracts)
+- [Spatial reference scan](topics/kd-trees/spatial-queries.md#spatial-reference-scan)
+- [Spatial shared query comparison](topics/kd-trees/spatial-index-choices.md#spatial-shared-query-comparison)
+- [Spatial split comparison](topics/kd-trees/spatial-index-choices.md#spatial-split-comparison)
 - [Splitting and combining](topics/recursion/divide-and-conquer.md#split-and-combine)
 - [Stable sorting](topics/sorting/sorting-properties.md#stable-sorting)
 - [Stack and LIFO](topics/linear-structures/stacks.md#stack-adt)
@@ -517,6 +550,7 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 ### U
 
 - [Unicode code-point positions](topics/strings/string-model.md#unicode-string-positions)
+- [Uniform grid indexing](topics/kd-trees/spatial-queries.md#spatial-reference-scan)
 - [Union by size](topics/union-find/union-compression.md#union-by-size)
 - [Union find adt](topics/union-find/disjoint-sets.md#union-find-adt)
 - [Union find amortised cost](topics/union-find/union-compression.md#union-find-amortised-cost)
@@ -986,7 +1020,7 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 - [Graph traversal cost assumptions](topics/graphs/graph-traversal-costs.md#traversal-cost-assumptions)
 - [BFS versus DFS](topics/graphs/graph-traversal-costs.md#bfs-versus-dfs)
 
-### 12. K-d trees
+### 12. Spatial search and indexing
 
 **Split rules and k-d-tree construction**
 
@@ -1022,6 +1056,57 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 - [Nearest-neighbour distance bound](topics/kd-trees/kd-nearest.md#kd-nearest-bound)
 - [Nearest-neighbour implementation](topics/kd-trees/kd-nearest.md#kd-nearest-code)
 - [Nearest-neighbour correctness and costs](topics/kd-trees/kd-nearest.md#kd-nearest-correctness-cost)
+
+
+**Spatial queries, bounds and a reference scan**
+
+- [Spatial query contracts](topics/kd-trees/spatial-queries.md#spatial-query-contracts)
+- [Shared spatial point/query example](topics/kd-trees/spatial-queries.md#shared-spatial-dataset)
+- [Spatial reference scan](topics/kd-trees/spatial-queries.md#spatial-reference-scan)
+- [Spatial pruning certificates](topics/kd-trees/spatial-queries.md#spatial-pruning-certificates)
+- [Spatial distance units](topics/kd-trees/spatial-queries.md#spatial-distance-units)
+
+**Point quadtrees: split through a stored point**
+
+- [Point quadtree](topics/kd-trees/point-quadtrees.md#point-quadtree-split)
+- [Point quadtree ties](topics/kd-trees/point-quadtrees.md#point-quadtree-ties)
+- [Point quadtree shared trace](topics/kd-trees/point-quadtrees.md#point-quadtree-shared-trace)
+- [Point quadtree range](topics/kd-trees/point-quadtrees.md#point-quadtree-range)
+
+**Point-region quadtrees: split the region at its midpoint**
+
+- [Point-region (PR) quadtree](topics/kd-trees/point-region-quadtrees.md#pr-quadtree-midpoints)
+- [PR quadtree boundary ownership](topics/kd-trees/point-region-quadtrees.md#pr-quadtree-boundary-ownership)
+- [PR quadtree shared trace](topics/kd-trees/point-region-quadtrees.md#pr-quadtree-shared-trace)
+- [PR quadtree stopping rules](topics/kd-trees/point-region-quadtrees.md#pr-quadtree-stopping-rules)
+- [Region quadtree versus PR quadtree](topics/kd-trees/point-region-quadtrees.md#quadtree-variant-terminology)
+
+**PR-quadtree insertion, lookup and range reporting**
+
+- [PR quadtree cell helpers](topics/kd-trees/pr-quadtree-operations.md#pr-quadtree-cell-helpers)
+- [PR quadtree insertion](topics/kd-trees/pr-quadtree-operations.md#pr-quadtree-insertion)
+- [PR quadtree range trace](topics/kd-trees/pr-quadtree-operations.md#pr-quadtree-range-trace)
+- [PR quadtree operation costs](topics/kd-trees/pr-quadtree-operations.md#pr-quadtree-operation-costs)
+
+**R-trees: group objects inside enclosing rectangles**
+
+- [R-tree and enclosing rectangles](topics/kd-trees/r-tree-representation.md#r-tree-enclosing-invariant)
+- [R-tree overlapping groups](topics/kd-trees/r-tree-representation.md#r-tree-overlapping-groups)
+- [R-tree given example](topics/kd-trees/r-tree-representation.md#r-tree-given-example)
+- [R-tree filter refine](topics/kd-trees/r-tree-representation.md#r-tree-filter-refine)
+
+**Query an R-tree, then refine the candidates**
+
+- [R-tree candidate query](topics/kd-trees/r-tree-queries.md#r-tree-candidate-query)
+- [Exact segment–rectangle intersection](topics/kd-trees/r-tree-queries.md#segment-rectangle-refinement)
+- [R-tree query costs](topics/kd-trees/r-tree-queries.md#r-tree-query-costs)
+
+**Compare spatial-search representations**
+
+- [Spatial split comparison](topics/kd-trees/spatial-index-choices.md#spatial-split-comparison)
+- [Spatial shared query comparison](topics/kd-trees/spatial-index-choices.md#spatial-shared-query-comparison)
+- [Spatial index workload](topics/kd-trees/spatial-index-choices.md#spatial-index-workload)
+- [Spatial executable example](topics/kd-trees/spatial-index-choices.md#spatial-executable-example)
 
 
 ### Review additions to Topics 2 and 7

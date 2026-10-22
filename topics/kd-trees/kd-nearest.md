@@ -59,4 +59,4 @@ Every visited point can improve the candidate. Every skipped far region has a va
 
 The split-plane bound is safe but may be loose. Distance to the whole inherited bounding rectangle can provide a stronger bound when those rectangles are maintained. Good pruning can reduce visits substantially, but the worst case still visits $O(n)$ nodes, with $O(h+1)$ recursive stack space. Exact search's one path does not establish the nearest-neighbour result.
 
-Concept reference: [Princeton's description of region-based range and nearest-neighbour pruning](https://www.cs.princeton.edu/courses/archive/spr13/cos226/assignments/kdtree.html). Return to the [k-d-tree overview](kd-trees.md) or the [concept index](../../concepts.md).
+Concept reference: [Princeton's description of region-based range and nearest-neighbour pruning](https://www.cs.princeton.edu/courses/archive/spr13/cos226/assignments/kdtree.html). Continue to [point quadtrees](point-quadtrees.md) to split through a stored point along both axes, or return to the [spatial-search overview](kd-trees.md).

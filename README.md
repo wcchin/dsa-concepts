@@ -13,7 +13,7 @@ A standalone Jupyter Book 2 project for a searchable, self-reading course resour
 - A developed Maps, Sets and Hashing pilot: seven concept pages and an overview.
 - Searching and BSTs: eight reading pages and nine original SVG figures.
 - Balanced search trees: five reading pages and five original SVG figures.
-- K-d trees: five reading pages and six original SVG figures.
+- Spatial search and indexing: twelve reading pages and fourteen original SVG figures. Retains five k-d-tree readings and adds spatial-query foundations, separate point/PR-quadtree readings, complete quadtree operations, given-tree R-tree filtering/refinement and a runnable comparison.
 - Graphs and traversal: six reading pages, an overview and eight original SVG explanations.
 - Priority queues and heaps: seven reading pages, an overview and nine original SVG explanations.
 - Graph ordering, shortest paths and spanning trees: eight reading pages and nine original SVG figures.

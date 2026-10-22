@@ -106,11 +106,18 @@ project:
     - file: topics/graph-algorithms/graph-algorithm-choices.md
   - file: topics/kd-trees/kd-trees.md
     children:
+    - file: topics/kd-trees/spatial-queries.md
     - file: topics/kd-trees/kd-construction.md
     - file: topics/kd-trees/kd-exact-search.md
     - file: topics/kd-trees/kd-range-search.md
     - file: topics/kd-trees/kd-shape.md
     - file: topics/kd-trees/kd-nearest.md
+    - file: topics/kd-trees/point-quadtrees.md
+    - file: topics/kd-trees/point-region-quadtrees.md
+    - file: topics/kd-trees/pr-quadtree-operations.md
+    - file: topics/kd-trees/r-tree-representation.md
+    - file: topics/kd-trees/r-tree-queries.md
+    - file: topics/kd-trees/spatial-index-choices.md
   - file: topics/union-find/union-find.md
     children:
     - file: topics/union-find/disjoint-sets.md

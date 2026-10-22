@@ -15,7 +15,7 @@ Then choose the question you want to answer:
 - **How should data be stored and accessed?** Read [linear structures](topics/linear-structures/linear-structures.md), [maps, sets and hashing](topics/maps-sets-hashing/maps-sets-hashing.md), [search trees](topics/searching/searching.md) and [balanced trees](topics/balanced-trees/balanced-trees.md).
 - **How can ordering reduce work?** Read [sorting](topics/sorting/sorting.md), [search boundaries](topics/searching/search-boundaries.md) and [heaps](topics/heaps/heaps.md).
 - **How do networks connect and support routes?** Read [graph traversal](topics/graphs/graphs.md), [union–find](topics/union-find/union-find.md), then [ordering, paths and spanning trees](topics/graph-algorithms/graph-algorithms.md). This prerequisite route visits Topic 13 before Kruskal in Topic 11.
-- **How can spatial regions exclude candidates?** Read [k-d trees](topics/kd-trees/kd-trees.md) after binary search trees.
+- **How can spatial regions exclude candidates?** Read [spatial search and indexing](topics/kd-trees/kd-trees.md) after binary search trees: k-d trees, point quadtrees, PR quadtrees and R-tree filtering.
 - **How do the structures work together?** Follow the [transport-network application](topics/applications/applications.md) from a data model through routes, connectivity and construction choices.
 - **How should text be indexed and searched?** Read [Strings, tries and pattern matching](topics/strings/strings.md) for exact keys, prefix reporting, KMP and verified rolling hashes.
 - **How do we design new algorithms?** Read [Algorithm design and sequence patterns](topics/strategies/strategies.md) for greedy proofs, dynamic programming, backtracking and reusable array techniques.

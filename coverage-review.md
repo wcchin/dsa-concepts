@@ -12,6 +12,7 @@ Topics **1–14** now contain developed core reading material. [Topic 15](topics
 | Graph algorithm names could obscure their objectives | [Shortest-path trees versus MSTs](topics/graph-algorithms/graph-algorithm-choices.md) |
 | Kruskal appeared before its union–find prerequisite | [Explicit graph reading route](reading-guide.md) and cross-links |
 | String-specific keys and pattern matching were missing | [Trie operations, prefix queries, substring baselines, KMP and verified rolling hashes](topics/strings/strings.md) |
+| Spatial search covered only k-d trees | [Point quadtrees, PR quadtrees and R-tree filtering](topics/kd-trees/kd-trees.md) reuse shared points and explicit boundary contracts |
 | Core algorithms lacked one integrated worked case | [Transport data, hop/time routes, connectivity and construction](topics/applications/applications.md) |
 | Broader design strategies were absent | [Greedy choice, DP, backtracking, sequence patterns and complexity limits](topics/strategies/strategies.md) |
 
@@ -23,7 +24,7 @@ Topics **1–14** now contain developed core reading material. [Topic 15](topics
 | Linear structures | Doubly linked updates are explained; a full doubly linked deque class is not supplied. |
 | Trees | Preorder/postorder orders and successor rules are described; the complete traversal code focuses on inorder. Rank/select augmentation is not implemented. |
 | Heaps | Stable queues and lazy graph candidates have code; indexed decrease-key and arbitrary-item removal remain conceptual. |
-| K-d trees | Sequential insertion, exact, range and nearest queries have code. Median construction, rebuilding and deletion do not have full implementations. |
+| Spatial search | K-d insert/exact/range/nearest, point-quadtree insert/exact/range, bounded bucket PR operations, and a given-tree R-tree query with exact segment refinement have code. K-d rebuilding/deletion, quadtree deletion/merging/nearest, and R-tree insertion/splitting remain extensions. |
 | Algorithm design | DP has one complete optimisation problem; weighted interval scheduling, knapsack and sequence DP remain further examples to add. |
 | Strings | Trie updates/prefix queries and three all-match substring algorithms have code. Ranked autocomplete, compressed tries, approximate matches, Aho–Corasick and suffix indexes remain extensions. |
 

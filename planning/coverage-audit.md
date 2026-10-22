@@ -17,7 +17,7 @@ Scope: all topic overviews and reading pages, concept destinations, shared contr
 | 9 Heaps | Complete shape, heap order, indices, repairs, linear build, ties, heapsort | Provides the heap prerequisite for Topic 11. Indexed updates remain an extension; lazy candidates now have a full graph example. |
 | 10 Graphs | Model, representations, BFS, DFS, components, trace order and cost assumptions | Maintains directed/undirected distinction. Directed cycle and SCC implementations are still absent and are listed as high-priority extensions. |
 | 11 Graph algorithms | Kahn, relaxation, Dijkstra, DAG routes, MST proofs, Prim/Kruskal and forests | Newly completed; separates the three objectives, handles isolated vertices, and links to Topic 13 before Kruskal. |
-| 12 K-d trees | Axis/tie rules, inherited regions, exact/range/nearest queries and limitations | A side branch from Topic 7. Median ties and AVL-rotation incompatibility are explicit; static builder/deletion remain conceptual. |
+| 12 Spatial search | K-d core; point quadtrees; PR midpoints/buckets; R-tree enclosures and exact refinement | Expanded in the agreed sequence with shared point queries, explicit boundary ownership, stopping limits, given-tree R-tree scope and a runnable example. Existing k-d-tree URLs are retained. |
 | 13 Union–find | Partitions, parent forests, weighted union, compression, amortisation and connectivity limits | Newly completed. Parent links are not graph edges; ordinary deletion and directed reachability are not supported. |
 | 14 Applications | Developed fictional transport network integrating data representations, BFS, Dijkstra, union–find and MSTs | Separates travel from construction weights, keeps isolated vertices, compares objectives and includes a runnable script. Other applications remain future candidates. |
 | 15 Strategies | Greedy proof, DP state/reconstruction, backtracking, prefix sums, two pointers, windows and tractability | Added as a clearly marked extension beyond the lecture inventory, rather than overloading union–find. |
@@ -65,3 +65,12 @@ The examples teach exact code-point matching, prefix reporting and one-pattern s
 - Compiled all 122 Python listings across the expanded book. Rendered and visually inspected all five new accessible SVG figures.
 - Built all 120 navigation pages with Jupyter Book 2.1.7. Checked 1,429 local links including 872 section links, with no broken destinations. The published downloadable Python asset is byte-identical to the runnable source.
 - Recorded a proposed spatial-search expansion in `spatial-search-plan.md`. The current Topic 12 content and its URLs are preserved; quadtrees/R-trees are not yet described as implemented.
+
+## Spatial-search expansion validation — 22 October 2026
+
+- Executed every new listing in reading order and the standalone spatial example. Copied k-d insert/range definitions match the original teaching-source ASTs.
+- Ran 200,215 semantic checks: random exact/range comparisons with scans; all 5,040 insertion orders of the shared points; PR record/cell/shape invariants; half-open storage and closed boundary queries; close-point overflow and non-advancing midpoint cases; R-tree enclosures and candidate completeness.
+- Independently compared 18,225 segment/rectangle cases with exact rational slab clipping, covering crossings, collinearity, touching and degenerate geometry.
+- Compiled all 130 Python listings. Rendered and visually checked all eight new accessible SVG figures, including non-overlapping line labels and paired partition/tree views.
+- Built all 127 navigation pages with Jupyter Book 2.1.7. Checked 1,521 local links including 935 section links, with no broken destinations. Both published Python downloads match their source files byte for byte.
+- Retained the k-d-tree files, route names and labelled sections. General R-tree insertion/splitting, new-structure nearest traversal, PR deletion/merging and full raster quadtrees remain explicitly outside the implemented scope.
