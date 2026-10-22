@@ -128,4 +128,6 @@ Rebinding `current` advances the traversal without changing `first` or any nodeâ
 
 Insertion, removal and safe reference-update order belong to [linear structures](../linear-structures/linear-structures.md). This introduction supplies the object model needed to read those operations.
 
+Next: [Abstract data types: behaviour before representation](adt-basics.md).
+
 **Browse:** [Foundations](foundations.md) Â· [Concept index](../../concepts.md)

@@ -50,3 +50,7 @@ Topic 12 now groups readings under k-d, point-quadtree, PR-quadtree and R-tree m
 ## Sorting editorial alignment
 
 Nine readings now connect contracts, visual traces, code, correctness, implementation choices, stability, mutation versus auxiliary space, time costs, suitability and open self-checks. Added a merge-sort page reusing the Topic 3 functions and a conceptual Timsort/Powersort page with an original run diagram. Version-specific CPython notes cite its 3.14 design document; Powersort scheduling has an original abstract merge-cost example. Existing routes and labels are retained. Eighteen collapsed-feedback questions cover the readings. No notebooks or assessment materials were used.
+
+## Foundations ADT introduction
+
+Topic 1 now has five reading pages. A brief ADT introduction follows collections/classes, uses a shuttle-code LIFO trace, separates behaviour/representation/code, and states empty-operation policy. Topic 5 retains the fuller contracts and implementation comparisons, with a backlink. No algorithm or assessment material changed.

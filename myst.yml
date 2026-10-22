@@ -17,6 +17,7 @@ project:
     - file: topics/foundations/objects-and-references.md
     - file: topics/foundations/mutation-and-copying.md
     - file: topics/foundations/collections-and-classes.md
+    - file: topics/foundations/adt-basics.md
   - file: topics/analysis/analysis.md
     children:
     - file: topics/analysis/counting-work.md

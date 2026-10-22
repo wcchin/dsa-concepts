@@ -1,5 +1,7 @@
 # ADTs and contracts
 
+The [brief introduction in Topic 1](../foundations/adt-basics.md) separates behaviour from representation using a stack. Here we make operation contracts precise and connect them to the implementations in this topic.
+
 (abstract-data-type)=
 ## Specify operations and behaviour
 

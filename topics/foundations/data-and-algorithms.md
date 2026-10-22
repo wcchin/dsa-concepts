@@ -63,7 +63,7 @@ The loop above may inspect one item or every item. [Analysing algorithms](../ana
 
 A Set would lose route order and repeated visits. A list can store directory entries, but key lookup would need a search unless additional organisation is provided. “Can it store the data?” is therefore only the first question. Ask which operations recur and what their meaning must be.
 
-We will later separate an **abstract data type**, which specifies behaviour, from an implementation that supplies it. [Maps and Sets](../maps-sets-hashing/maps-sets-hashing.md) illustrate why a requirement such as key lookup does not itself prescribe hashing.
+The [ADT introduction later in this topic](adt-basics.md) separates an **abstract data type**, which specifies behaviour, from an implementation that supplies it. [Maps and Sets](../maps-sets-hashing/maps-sets-hashing.md) illustrate why a requirement such as key lookup does not itself prescribe hashing.
 
 ## Questions to revisit
 

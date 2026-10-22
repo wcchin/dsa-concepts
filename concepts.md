@@ -30,6 +30,7 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 
 ### A
 
+- [Abstract data types: first introduction](topics/foundations/adt-basics.md#adt-introduction)
 - [Abstract data type (ADT)](topics/linear-structures/adts-and-contracts.md#abstract-data-type)
 - [Adaptive sorting](topics/sorting/insertion-sort.md#adaptive-sorting)
 - [Adjacency list](topics/graphs/graph-representations.md#adjacency-list)
@@ -606,6 +607,9 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 ## Concepts grouped by topic
 
 ### 1. Foundations and Python’s object model
+
+- [ADT behaviour, representation and implementation](topics/foundations/adt-basics.md#adt-introduction)
+- [Stack operation contracts: first example](topics/foundations/adt-basics.md#adt-intro-contract)
 
 **Data structures and algorithms**
 
