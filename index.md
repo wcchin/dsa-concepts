@@ -4,7 +4,7 @@
 
 Developed from the CS2040HS teaching materials at the National University of Singapore, this guide explains how representations, operation rules and algorithmic strategies fit together. Read by topic to build understanding, or use search and the [concept index](concepts.md) to revisit a specific idea.
 
-**Current coverage:** Topics 1–13 have developed reading material. Topic 14 is reserved for integrated applications. Topics 15–16 add optional DSA concepts beyond the lecture inventory. See the [coverage review](coverage-review.md) for additions, limitations and priorities.
+**Current coverage:** Topics 1–14 have developed reading material, including a complete transport-network application. Topics 15–16 add optional DSA concepts beyond the lecture inventory. See the [coverage review](coverage-review.md) for additions, limitations and priorities.
 
 ## Choose a reading route
 
@@ -16,6 +16,7 @@ Then choose the question you want to answer:
 - **How can ordering reduce work?** Read [sorting](topics/sorting/sorting.md), [search boundaries](topics/searching/search-boundaries.md) and [heaps](topics/heaps/heaps.md).
 - **How do networks connect and support routes?** Read [graph traversal](topics/graphs/graphs.md), [union–find](topics/union-find/union-find.md), then [ordering, paths and spanning trees](topics/graph-algorithms/graph-algorithms.md). This prerequisite route visits Topic 13 before Kruskal in Topic 11.
 - **How can spatial regions exclude candidates?** Read [k-d trees](topics/kd-trees/kd-trees.md) after binary search trees.
+- **How do the structures work together?** Follow the [transport-network application](topics/applications/applications.md) from a data model through routes, connectivity and construction choices.
 - **How should text be indexed and searched?** Read [Strings, tries and pattern matching](topics/strings/strings.md) for exact keys, prefix reporting, KMP and verified rolling hashes.
 - **How do we design new algorithms?** Read [Algorithm design and sequence patterns](topics/strategies/strategies.md) for greedy proofs, dynamic programming, backtracking and reusable array techniques.
 

@@ -10,6 +10,7 @@ Topic numbers organise the wiki; they do not require one uninterrupted reading s
 | Spatial branch | [7. BST bounds](topics/searching/tree-basics.md) → [12. K-d trees](topics/kd-trees/kd-trees.md) | Replace a single key interval with inherited multidimensional regions |
 | Optional design extension | [15. Strategies](topics/strategies/strategies.md), after Topics 1–4; graph examples are useful additional context | Greedy proofs, DP state reuse, backtracking and sequence patterns |
 | Optional strings extension | [6. Hashing](topics/maps-sets-hashing/maps-sets-hashing.md) and [7. Tree traversal](topics/searching/bst-traversal.md), then [16. Strings and tries](topics/strings/strings.md) | Key length, shared prefixes and reusable pattern information |
+| Integrated transport case | [10. Traversal](topics/graphs/graphs.md), [13. Union–find](topics/union-find/union-find.md) and [11. Graph algorithms](topics/graph-algorithms/graph-algorithms.md) → [14. Applications](topics/applications/applications.md) | Choose the objective and weight model before combining structures |
 
 For Topic 11, topological ordering and shortest paths can be read before union–find. Only the Kruskal implementation requires the disjoint-set class. Topic 12 does not depend on minimum spanning trees, and k-d-tree construction should not reuse ordinary AVL rotations.
 
@@ -19,4 +20,4 @@ Each topic asks what the input means, which operations are required, what the re
 
 Tie rules and boundary conventions are local contracts. Binary search can use inclusive or half-open intervals if its updates match. BSTs here keep distinct keys; k-d trees send coordinate ties right; priority queues use arrival counters when stable ties are wanted. Follow the stated convention rather than transferring a rule by name alone.
 
-For current scope, conceptual-only coverage and future additions, see [Coverage and extensions](coverage-review.md). [Topic 14](topics/applications/applications.md) remains an application plan.
+For current scope, conceptual-only coverage and future additions, see [Coverage and extensions](coverage-review.md). [Topic 14](topics/applications/applications.md) now brings these ideas together through a complete fictional transport-network case.

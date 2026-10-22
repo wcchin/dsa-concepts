@@ -21,7 +21,7 @@ This is an editorial map of source coverage, not a claim that all chapters have 
 | 11. Graph ordering, paths and spanning trees | DAGs, indegrees, Kahn’s algorithm and cycle detection; Relaxation, Dijkstra, lazy heaps and DAG shortest paths; Spanning trees, forests, cut property and exchange reasoning; Prim, Kruskal, union–find and complexity; Shortest-path trees versus minimum spanning trees | `cs2040hs_week12_classroom.md`, `cs2040hs_week12_online.md`, `cs2040hs_week13_classroom.md`, `cs2040hs_week13_online.md` |
 | 12. K-d trees | Active dimensions, split rules, ties and construction; Spatial partitions, exact search, range search and boundary pruning; Tree shape, median construction and nearest-neighbour concepts | `cs2040hs_week10_kd_tree_additional.md` |
 | 13. Union–find | Partitions, representatives and connectivity; Parent forests, find and union by size; Path compression, amortised cost and cycle checks | `cs2040hs_week12_union_find_additional.md`, `cs2040hs_week13_online.md` |
-| 14. Additional applications | Future integrated applications beyond the existing topic inventory |  |
+| 14. Integrated applications | Fictional transport network: data models, hop/time routes, connectivity and construction | Original case using the developed graph and union–find topics |
 
 ## Conversion decisions and gaps
 
@@ -32,7 +32,7 @@ This is an editorial map of source coverage, not a claim that all chapters have 
 - Merge-sort mechanism belongs to Topic 4; the general recursion strategy belongs to Topic 3.
 - Union–find belongs to Topic 13 and is linked from Kruskal in Topic 11.
 - The k-d source includes range search and a conceptual nearest-neighbour extension. Do not silently promote the latter into a complete algorithm chapter.
-- Topic 14 has no confirmed new material yet. Candidate contexts already in slides (undo, consultation queues, rolling windows, station counts and network connections) should first illustrate their parent topics.
+- Topic 14 now contains an original transport-network case. Contexts already in slides (undo, consultation queues, rolling windows and station counts) continue to illustrate their parent topics.
 - Each page needs definitions, prerequisites, a continuous explanation, a worked example, boundary cases, qualified costs and related-concept links.
 - Slide reveal sequences require consolidation. Speaker timing notes, presentation directives and repeated navigation headings do not belong in student chapters.
 - Diagrams must be checked at reading-page width; no slide stylesheet is reused.
@@ -1835,7 +1835,7 @@ Headings below omit fenced code. They provide an audit trail, including repeated
 
 ## Coverage review update
 
-The original fourteen-topic lecture map remains above. Topics 1–13 now have developed readings; Topic 14 remains reserved for integrated applications. The current reading order and remaining conceptual gaps are recorded in `../coverage-review.md` and `coverage-audit.md`.
+The original fourteen-topic lecture map remains above. Topics 1–14 now have developed readings, including the integrated transport case. The current reading order and remaining conceptual gaps are recorded in `../coverage-review.md` and `coverage-audit.md`.
 
 Topic 15, **Algorithm design and sequence patterns**, is an optional editorial extension beyond this lecture inventory: greedy reasoning, dynamic programming, backtracking, prefix sums, two pointers, sliding windows and complexity limits. Its worked examples are original, supported by general algorithm references linked in the reading. This does not change the course syllabus or assessment scope.
 
@@ -1843,4 +1843,8 @@ The review also expands Topic 2 with correctness methods and Topic 7 with binary
 
 ## Topic 16 extension — 22 October 2026
 
-Strings, tries and pattern matching are now developed in eight reading pages plus an overview, with nine original SVG figures. This editorial extension adds string-cost/Unicode models, sparse trie operations and queries, naive substring search, prefix-function KMP and verified rolling hashes. It draws on general references linked in the reading rather than additional course or assessment materials. Topic 14 remains reserved for integrated applications; no existing topic was renumbered.
+Strings, tries and pattern matching are now developed in eight reading pages plus an overview, with nine original SVG figures. This editorial extension adds string-cost/Unicode models, sparse trie operations and queries, naive substring search, prefix-function KMP and verified rolling hashes. It draws on general references linked in the reading rather than additional course or assessment materials. Topic 14 now has an integrated transport case; no existing topic was renumbered.
+
+## Topic 14 application — 22 October 2026
+
+Six reading pages now develop one original fictional transport network, with separate travel-time and construction weights, five exact SVG diagrams and a standalone standard-library Python example. It integrates existing book algorithms without adding course or assessment source material. Dependency scheduling and a spatial directory remain future application candidates.

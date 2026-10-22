@@ -19,7 +19,7 @@ Scope: all topic overviews and reading pages, concept destinations, shared contr
 | 11 Graph algorithms | Kahn, relaxation, Dijkstra, DAG routes, MST proofs, Prim/Kruskal and forests | Newly completed; separates the three objectives, handles isolated vertices, and links to Topic 13 before Kruskal. |
 | 12 K-d trees | Axis/tie rules, inherited regions, exact/range/nearest queries and limitations | A side branch from Topic 7. Median ties and AVL-rotation incompatibility are explicit; static builder/deletion remain conceptual. |
 | 13 Union–find | Partitions, parent forests, weighted union, compression, amortisation and connectivity limits | Newly completed. Parent links are not graph edges; ordinary deletion and directed reachability are not supported. |
-| 14 Applications | Reserved integrated application space | Still a plan, explicitly labelled. Candidate cases link to developed concepts without pretending to be completed case studies. |
+| 14 Applications | Developed fictional transport network integrating data representations, BFS, Dijkstra, union–find and MSTs | Separates travel from construction weights, keeps isolated vertices, compares objectives and includes a runnable script. Other applications remain future candidates. |
 | 15 Strategies | Greedy proof, DP state/reconstruction, backtracking, prefix sums, two pointers, windows and tractability | Added as a clearly marked extension beyond the lecture inventory, rather than overloading union–find. |
 | 16 Strings | String units and contracts, trie updates/prefix queries, naive/KMP/rolling search | Added optional extension with exact verification, empty/overlap cases and output-sensitive accounting. Ranking, approximate and multi-pattern/suffix indexes remain extensions. |
 
@@ -27,14 +27,14 @@ Scope: all topic overviews and reading pages, concept destinations, shared contr
 
 - Retained existing topic numbers and URLs. Added a reading guide instead of silently renumbering the book.
 - Graph route explicitly reads union–find before Kruskal; k-d trees remain independent of the graph optimisation sequence.
-- New small gaps are filled in their existing topics. Larger design material has its own Topic 15; Topic 14 retains its application purpose.
+- New small gaps are filled in their existing topics. Larger design material has its own Topic 15; Topic 14 retains its application purpose and now has a complete transport case.
 - Public coverage review lists remaining conceptual-only material and a prioritised beyond-syllabus roadmap. No unfinished extension is described as implemented.
 - Per-function conventions remain explicit: BST distinct keys; coordinate ties right in k-d trees; stable heap ties via counters; edge-height −1 for empty binary subtrees; output and recursion storage stated separately where useful.
 
 ## Follow-up priorities
 
 1. Review the new explanations for teaching emphasis, especially the optional Topic 15.
-2. Strings/tries are developed in Topic 16. Consider an integrated application before further advanced string indexing.
+2. Strings/tries are developed in Topic 16. The integrated application is developed in Topic 14; advanced string indexing remains optional.
 3. Add Bellman–Ford and directed SCC/cycle pages, then selection/non-comparison sorting.
 4. Expand DP with contrasting state models before adding specialised range trees or advanced graph algorithms.
 
@@ -57,3 +57,11 @@ These checks complement the reasoning in each reading; they do not establish cor
 - Built 114 navigation pages with Jupyter Book 2.1.7. Checked 1,359 local links, including 833 section links, against the built HTML with no broken destinations.
 
 The examples teach exact code-point matching, prefix reporting and one-pattern search. Ranked autocomplete, edit distance, multi-pattern automata and suffix indexes remain explicit extensions rather than completed coverage.
+
+## Topic 14 validation — 22 October 2026
+
+- Executed the standalone standard-library example and all seven code listings in page order. Its reused algorithm definitions match their source-page ASTs.
+- Ran 253 case checks, including all-source/target comparisons with independently enumerated simple paths, every incremental connectivity snapshot, reciprocal adjacency checks and neighbour-order changes. Exhaustive candidate-edge subsets identify 55 valid spanning forests; the minimum construction cost is 11.
+- Compiled all 122 Python listings across the expanded book. Rendered and visually inspected all five new accessible SVG figures.
+- Built all 120 navigation pages with Jupyter Book 2.1.7. Checked 1,429 local links including 872 section links, with no broken destinations. The published downloadable Python asset is byte-identical to the runnable source.
+- Recorded a proposed spatial-search expansion in `spatial-search-plan.md`. The current Topic 12 content and its URLs are preserved; quadtrees/R-trees are not yet described as implemented.

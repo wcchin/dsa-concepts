@@ -2,7 +2,7 @@
 
 Find a concept by its name or browse concepts by topic.
 
-The wiki is being developed progressively. Topics 1–13 and optional Topics 15–16 have developed explanations. Topic 14 remains an application plan.
+The wiki is being developed progressively. Topics 1–14 and optional Topics 15–16 have developed explanations.
 
 ## Browse by topic
 
@@ -19,14 +19,14 @@ The wiki is being developed progressively. Topics 1–13 and optional Topics 15�
 - [11. Graph ordering, paths and spanning trees](topics/graph-algorithms/graph-algorithms.md)
 - [12. K-d trees](topics/kd-trees/kd-trees.md)
 - [13. Union–find](topics/union-find/union-find.md)
-- [14. Additional applications — planned](topics/applications/applications.md)
+- [14. Integrated applications](topics/applications/applications.md)
 - [15. Algorithm design and sequence patterns](topics/strategies/strategies.md)
 
 - [16. Strings, tries and pattern matching](topics/strings/strings.md)
 
 ## Find a concept alphabetically
 
-This index covers developed explanations in Topics 1–13 and 15–16. Entries link directly to the relevant section.
+This index covers developed explanations in Topics 1–16. Entries link directly to the relevant section.
 
 ### A
 
@@ -477,6 +477,25 @@ This index covers developed explanations in Topics 1–13 and 15–16. Entries l
 - [Tombstone](topics/maps-sets-hashing/open-addressing.md#deletion-and-tombstones)
 - [Topological cycle detection](topics/graph-algorithms/topological-order.md#topological-cycle-detection)
 - [Total recursive calls](topics/recursion/recursion-costs.md#total-calls)
+- [Transport BFS boundaries](topics/applications/transport-hops.md#transport-bfs-boundaries)
+- [Transport BFS question](topics/applications/transport-hops.md#transport-bfs-question)
+- [Transport BFS result](topics/applications/transport-hops.md#transport-bfs-result)
+- [Transport case model](topics/applications/transport-model.md#transport-case-model)
+- [Transport connectivity trace](topics/applications/transport-connectivity.md#transport-connectivity-trace)
+- [Transport connectivity versus routes](topics/applications/transport-connectivity.md#transport-connectivity-versus-routes)
+- [Transport construction objective](topics/applications/transport-design.md#transport-construction-objective)
+- [Transport data representations](topics/applications/transport-model.md#transport-data-representations)
+- [Transport design route tradeoff](topics/applications/transport-design.md#transport-design-route-tradeoff)
+- [Transport Dijkstra question](topics/applications/transport-times.md#transport-dijkstra-question)
+- [Transport Dijkstra trace](topics/applications/transport-times.md#transport-dijkstra-trace)
+- [Transport end to end costs](topics/applications/transport-decisions.md#transport-end-to-end-costs)
+- [Transport incremental connectivity](topics/applications/transport-connectivity.md#transport-incremental-connectivity)
+- [Transport independent checks](topics/applications/transport-decisions.md#transport-independent-checks)
+- [Transport model revisions](topics/applications/transport-decisions.md#transport-model-revisions)
+- [Transport MST result](topics/applications/transport-design.md#transport-mst-result)
+- [Transport objective comparison](topics/applications/transport-decisions.md#transport-objective-comparison)
+- [Transport route measurement](topics/applications/transport-model.md#transport-route-measurement)
+- [Transport travel assumptions](topics/applications/transport-times.md#transport-travel-assumptions)
 - [Traversal forest](topics/graphs/graph-components.md#component-forest)
 - [Traversal parents and path recovery](topics/graphs/breadth-first-search.md#bfs-parent-path)
 - [Tree terminology, depth and height](topics/searching/tree-basics.md#tree-terminology)
@@ -1117,6 +1136,46 @@ This index covers developed explanations in Topics 1–13 and 15–16. Entries l
 - [Union find directed limit](topics/union-find/union-find-applications.md#union-find-directed-limit)
 - [Union find deletion limit](topics/union-find/union-find-applications.md#union-find-deletion-limit)
 - [Union find workload choice](topics/union-find/union-find-applications.md#union-find-workload-choice)
+
+
+### 14. Integrated applications
+
+**Model places, links and two kinds of cost**
+
+- [Transport case model](topics/applications/transport-model.md#transport-case-model)
+- [Transport data representations](topics/applications/transport-model.md#transport-data-representations)
+- [Transport route measurement](topics/applications/transport-model.md#transport-route-measurement)
+
+**A visitor asks for the fewest links**
+
+- [Transport BFS question](topics/applications/transport-hops.md#transport-bfs-question)
+- [Transport BFS result](topics/applications/transport-hops.md#transport-bfs-result)
+- [Transport BFS boundaries](topics/applications/transport-hops.md#transport-bfs-boundaries)
+
+**A visitor asks for the least travel time**
+
+- [Transport Dijkstra question](topics/applications/transport-times.md#transport-dijkstra-question)
+- [Transport Dijkstra trace](topics/applications/transport-times.md#transport-dijkstra-trace)
+- [Transport travel assumptions](topics/applications/transport-times.md#transport-travel-assumptions)
+
+**An operator asks whether places are connected**
+
+- [Transport incremental connectivity](topics/applications/transport-connectivity.md#transport-incremental-connectivity)
+- [Transport connectivity trace](topics/applications/transport-connectivity.md#transport-connectivity-trace)
+- [Transport connectivity versus routes](topics/applications/transport-connectivity.md#transport-connectivity-versus-routes)
+
+**A planner asks for the cheapest connecting network**
+
+- [Transport construction objective](topics/applications/transport-design.md#transport-construction-objective)
+- [Transport MST result](topics/applications/transport-design.md#transport-mst-result)
+- [Transport design route tradeoff](topics/applications/transport-design.md#transport-design-route-tradeoff)
+
+**Compare the answers before making a decision**
+
+- [Transport objective comparison](topics/applications/transport-decisions.md#transport-objective-comparison)
+- [Transport end to end costs](topics/applications/transport-decisions.md#transport-end-to-end-costs)
+- [Transport model revisions](topics/applications/transport-decisions.md#transport-model-revisions)
+- [Transport independent checks](topics/applications/transport-decisions.md#transport-independent-checks)
 
 
 ### 15. Algorithm design and sequence patterns

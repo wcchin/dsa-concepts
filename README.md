@@ -20,12 +20,13 @@ A standalone Jupyter Book 2 project for a searchable, self-reading course resour
 - Union–find: four reading pages and five original SVG figures.
 - Optional algorithm design: six reading pages and four original SVG figures.
 - Optional strings and tries: eight reading pages and nine accessible SVG figures, with trie updates/prefix queries, naive substring search, KMP and verified rolling hashes.
+- Integrated transport application: six reading pages, five accessible SVG figures and a standalone standard-library Python example.
 - A prerequisite reading guide and public coverage review.
 - An original probing-deletion diagram.
 - An author-facing source inventory under `planning/`.
 - A build-check workflow and automatic publishing on pushes to `main`.
 
-No notebooks, rubric files, solution files, slide files or Git history are included. Topic 14 remains a plan for integrated applications.
+No notebooks, rubric files, solution files, slide files or Git history are included. Topic 14 develops one complete transport-network application; dependency scheduling and a spatial directory remain possible future cases.
 
 ## Repository
 
@@ -63,5 +64,5 @@ Every push to `main` builds and publishes the site. Pull requests run the build 
 
 Read `planning/topic-inventory.md` for the source-based topics, page boundaries, lecture-source mapping and gaps. The inventory records the private course-source provenance but the source files themselves are not bundled. Do not place assessment solutions in this book project.
 
-Topics 1–13 and optional Topics 15–16 contain developed reading material. See `coverage-review.md` for remaining gaps and `planning/coverage-audit.md` for the editorial review. No content licence has been selected yet.
+Topics 1–14 and optional Topics 15–16 contain developed reading material. See `coverage-review.md` for remaining gaps and `planning/coverage-audit.md` for the editorial review. No content licence has been selected yet.
 

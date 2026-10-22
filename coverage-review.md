@@ -1,6 +1,6 @@
 # Coverage and extensions
 
-Topics **1–13** now contain developed core reading material. [Topic 15](topics/strategies/strategies.md) and [Topic 16](topics/strings/strings.md) add optional algorithm-design and string-search material beyond the lecture inventory. [Topic 14](topics/applications/applications.md) remains reserved for integrated applications. “Developed” means explanatory reading and worked examples, not exhaustive coverage of every variant.
+Topics **1–14** now contain developed core reading material. [Topic 15](topics/strategies/strategies.md) and [Topic 16](topics/strings/strings.md) add optional algorithm-design and string-search material beyond the lecture inventory. [Topic 14](topics/applications/applications.md) supplies a developed transport-network application. “Developed” means explanatory reading and worked examples, not exhaustive coverage of every variant.
 
 ## Gaps addressed in the coherence review
 
@@ -12,6 +12,7 @@ Topics **1–13** now contain developed core reading material. [Topic 15](topics
 | Graph algorithm names could obscure their objectives | [Shortest-path trees versus MSTs](topics/graph-algorithms/graph-algorithm-choices.md) |
 | Kruskal appeared before its union–find prerequisite | [Explicit graph reading route](reading-guide.md) and cross-links |
 | String-specific keys and pattern matching were missing | [Trie operations, prefix queries, substring baselines, KMP and verified rolling hashes](topics/strings/strings.md) |
+| Core algorithms lacked one integrated worked case | [Transport data, hop/time routes, connectivity and construction](topics/applications/applications.md) |
 | Broader design strategies were absent | [Greedy choice, DP, backtracking, sequence patterns and complexity limits](topics/strategies/strategies.md) |
 
 ## Material still covered conceptually rather than as full implementations

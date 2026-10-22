@@ -118,6 +118,13 @@ project:
     - file: topics/union-find/union-compression.md
     - file: topics/union-find/union-find-applications.md
   - file: topics/applications/applications.md
+    children:
+    - file: topics/applications/transport-model.md
+    - file: topics/applications/transport-hops.md
+    - file: topics/applications/transport-times.md
+    - file: topics/applications/transport-connectivity.md
+    - file: topics/applications/transport-design.md
+    - file: topics/applications/transport-decisions.md
   - file: topics/strategies/strategies.md
     children:
     - file: topics/strategies/strategy-selection.md

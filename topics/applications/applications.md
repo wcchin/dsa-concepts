@@ -1,13 +1,22 @@
-# 14. Additional applications
+# 14. Integrated applications: a transport network
 
-This topic remains a plan for worked applications that combine several developed ideas. The examples below are proposed case studies, not completed lessons.
+A visitor wants to reach the park. An operator wants to know which places are connected. A planner wants to connect facilities at minimum construction cost. They can use the same candidate links, but they need different answers.
 
-## Planned application routes
+This worked example follows one small fictional network through those questions. The data are deliberately small enough to trace by hand. Place names and weights are invented; they are not observations of a real transport system.
 
-| Case study | Concepts to combine | Main design question |
-|---|---|---|
-| A dependency-aware task planner | Maps, queues, heaps, topological ordering | Which tasks are eligible, and how should eligible tasks be prioritised? |
-| A transport-network comparison | BFS, Dijkstra, spanning trees, union–find | How do fewest hops, cheapest routes and cheapest connecting networks differ? |
-| A spatial service directory | Maps, BST range queries, k-d trees | Which index supports exact lookup, bounded regions and nearest services? |
+## Reading route
 
-For now, follow the [graph algorithm choices](../graph-algorithms/graph-algorithm-choices.md) and [reading guide](../../reading-guide.md) to connect existing examples. General design techniques have their own developed [Topic 15](../strategies/strategies.md), so this topic can stay focused on end-to-end applications.
+1. [Model the network](transport-model.md): identify records, links, units and assumptions before choosing an algorithm.
+2. [Find a route with fewest links](transport-hops.md): use a map, FIFO queue, BFS and parents.
+3. [Find a route with least travel time](transport-times.md): use relaxation and a heap through Dijkstra.
+4. [Maintain connectivity as links arrive](transport-connectivity.md): use union–find without confusing its parents with routes.
+5. [Design a minimum-cost connecting network](transport-design.md): compare Kruskal and Prim, including an isolated place.
+6. [Compare answers and revise the model](transport-decisions.md): distinguish objectives, account for preparation costs and inspect limitations.
+
+Review [graph traversal](../graphs/graphs.md), [heaps](../heaps/heaps.md), [graph optimisation](../graph-algorithms/graph-algorithms.md) and [union–find](../union-find/union-find.md) as needed. The examples reuse those implementations and link back to their invariants.
+
+## Run the listings together
+
+[Download the standalone Python example](../../examples/transport_network.py). It includes the reused algorithms, shared data and all case-study calculations. Save the downloaded file as `transport_network.py`, then run `python transport_network.py` with Python 3; no external package, notebook or private course repository is required. To follow the page listings, keep the downloaded module in the working directory and read them in route order in one Python session.
+
+The first integrated case is developed here. Dependency scheduling and a spatial service directory remain possible future applications, rather than completed lessons. This material is independent of course assessments.
