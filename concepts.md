@@ -2,7 +2,7 @@
 
 Find a concept by its name or browse concepts by topic.
 
-The wiki is being developed progressively. Topics 1–13 and optional Topic 15 have developed explanations. Topic 14 remains an application plan.
+The wiki is being developed progressively. Topics 1–13 and optional Topics 15–16 have developed explanations. Topic 14 remains an application plan.
 
 ## Browse by topic
 
@@ -22,9 +22,11 @@ The wiki is being developed progressively. Topics 1–13 and optional Topic 15 h
 - [14. Additional applications — planned](topics/applications/applications.md)
 - [15. Algorithm design and sequence patterns](topics/strategies/strategies.md)
 
+- [16. Strings, tries and pattern matching](topics/strings/strings.md)
+
 ## Find a concept alphabetically
 
-This index covers developed explanations in Topics 1–13 and 15. Entries link directly to the relevant section.
+This index covers developed explanations in Topics 1–13 and 15–16. Entries link directly to the relevant section.
 
 ### A
 
@@ -55,6 +57,7 @@ This index covers developed explanations in Topics 1–13 and 15. Entries link d
 - [Asymptotic bounds](topics/analysis/cases-and-bounds.md#asymptotic-bounds)
 - [Asymptotic growth](topics/analysis/growth-rates.md#asymptotic-growth)
 - [Attributes](topics/foundations/collections-and-classes.md#classes-and-instances)
+- [Autocomplete and trie prefix reporting](topics/strings/trie-prefix-queries.md#trie-autocomplete)
 - [Auxiliary and output space](topics/analysis/code-and-space.md#auxiliary-and-output-space)
 - [Average-case analysis](topics/analysis/cases-and-bounds.md#average-case)
 - [AVL balance factor](topics/balanced-trees/avl-invariants.md#avl-balance-factor)
@@ -187,6 +190,7 @@ This index covers developed explanations in Topics 1–13 and 15. Entries link d
 ### E
 
 - [Early stopping in bubble sort](topics/sorting/bubble-sort.md#bubble-early-stopping)
+- [Empty-pattern matches](topics/strings/substring-baseline.md#substring-match-contract)
 - [Encapsulation conventions](topics/foundations/collections-and-classes.md#encapsulation-and-hints)
 - [Equality and hashing](topics/maps-sets-hashing/hashing.md#hash-collisions-and-key-equality)
 - [Equality and identity](topics/foundations/objects-and-references.md#identity-and-equality)
@@ -279,6 +283,10 @@ This index covers developed explanations in Topics 1–13 and 15. Entries link d
 - [Kahn’s algorithm](topics/graph-algorithms/topological-order.md#kahn-algorithm)
 - [Key versus node identity](topics/searching/bst-deletion.md#bst-key-versus-node)
 - [Key-value association](topics/maps-sets-hashing/maps.md#map-adt-and-operations)
+- [KMP linear cost](topics/strings/kmp-matching.md#kmp-linear-cost)
+- [KMP prefix function](topics/strings/kmp-matching.md#kmp-prefix-function)
+- [KMP substring search](topics/strings/kmp-matching.md#kmp-find-all)
+- [KMP trace overlaps](topics/strings/kmp-matching.md#kmp-trace-overlaps)
 - [Kruskal code](topics/graph-algorithms/kruskal.md#kruskal-code)
 - [Kruskal cost](topics/graph-algorithms/kruskal.md#kruskal-cost)
 - [Kruskal trace correctness](topics/graph-algorithms/kruskal.md#kruskal-trace-correctness)
@@ -306,6 +314,7 @@ This index covers developed explanations in Topics 1–13 and 15. Entries link d
 - [List slicing costs](topics/recursion/implementation-costs.md#slicing-cost)
 - [Load factor](topics/maps-sets-hashing/performance.md#load-factor-and-collision-strategies)
 - [Logarithms and base](topics/analysis/growth-rates.md#logarithms-and-base)
+- [Longest stored prefix](topics/strings/trie-prefix-queries.md#trie-longest-stored-prefix)
 - [Loop invariant method](topics/analysis/correctness.md#loop-invariant-method)
 - [Lower bound search](topics/searching/search-boundaries.md#lower-bound-search)
 
@@ -331,6 +340,8 @@ This index covers developed explanations in Topics 1–13 and 15. Entries link d
 
 ### N
 
+- [Naive substring cost](topics/strings/substring-baseline.md#naive-substring-cost)
+- [Naive substring search](topics/strings/substring-baseline.md#naive-substring-search)
 - [Nearest-neighbour correctness and costs](topics/kd-trees/kd-nearest.md#kd-nearest-correctness-cost)
 - [Nearest-neighbour distance bound](topics/kd-trees/kd-nearest.md#kd-nearest-bound)
 - [Nearest-neighbour implementation](topics/kd-trees/kd-nearest.md#kd-nearest-code)
@@ -348,6 +359,7 @@ This index covers developed explanations in Topics 1–13 and 15. Entries link d
 - [Operation counts](topics/analysis/counting-work.md#operation-count)
 - [Optimal substructure](topics/strategies/dynamic-programming.md#dynamic-programming)
 - [Output sensitive algorithms](topics/strategies/complexity-limits.md#output-sensitive-algorithms)
+- [Overlapping string matches](topics/strings/kmp-matching.md#kmp-trace-overlaps)
 - [Overlapping subproblems](topics/strategies/dynamic-programming.md#dynamic-programming)
 
 ### P
@@ -359,6 +371,8 @@ This index covers developed explanations in Topics 1–13 and 15. Entries link d
 - [Partition invariant](topics/sorting/partitioning.md#partition-invariant)
 - [Partitioning](topics/sorting/partitioning.md#partitioning)
 - [Path compression](topics/union-find/union-compression.md#path-compression)
+- [Pattern borders](topics/strings/kmp-matching.md#pattern-border)
+- [Polynomial string hash](topics/strings/rolling-hash-search.md#polynomial-string-hash)
 - [Prefix sums](topics/strategies/sequence-patterns.md#prefix-sums)
 - [Prim forest cost](topics/graph-algorithms/prim.md#prim-forest-cost)
 - [Prim invariant trace](topics/graph-algorithms/prim.md#prim-invariant-trace)
@@ -384,6 +398,7 @@ This index covers developed explanations in Topics 1–13 and 15. Entries link d
 
 ### R
 
+- [Rabin–Karp with exact verification](topics/strings/rolling-hash-search.md#rabin-karp-verified)
 - [Randomised quicksort](topics/sorting/quicksort.md#randomised-quicksort)
 - [Rebinding](topics/foundations/mutation-and-copying.md#mutation-and-rebinding)
 - [Recurrences](topics/recursion/recursion-costs.md#recurrences)
@@ -397,6 +412,8 @@ This index covers developed explanations in Topics 1–13 and 15. Entries link d
 - [Replacement in a Map](topics/maps-sets-hashing/maps.md#map-adt-and-operations)
 - [Representation and required operations](topics/foundations/data-and-algorithms.md#representation-and-operations)
 - [Return versus print](topics/recursion/call-stack.md#return-vs-print)
+- [Rolling hash collisions](topics/strings/rolling-hash-search.md#rolling-hash-collisions)
+- [Rolling hash cost](topics/strings/rolling-hash-search.md#rolling-hash-cost)
 - [Rolling window](topics/linear-structures/queues-and-deques.md#rolling-window)
 - [Rotation height updates](topics/balanced-trees/avl-rotations.md#rotation-height-updates)
 - [Rotation implementation](topics/balanced-trees/avl-rotations.md#rotation-code)
@@ -439,6 +456,15 @@ This index covers developed explanations in Topics 1–13 and 15. Entries link d
 - [Stack underflow](topics/linear-structures/stacks.md#stack-underflow)
 - [State and subproblem](topics/strategies/strategy-selection.md#state-and-subproblem)
 - [Strategy and representation costs](topics/recursion/implementation-costs.md#strategy-and-representation)
+- [String cost model](topics/strings/string-model.md#string-cost-model)
+- [String hashing costs](topics/strings/string-model.md#string-cost-model)
+- [String indexing extensions](topics/strings/string-choices.md#string-indexing-extensions)
+- [String matching boundaries](topics/strings/string-choices.md#string-matching-boundaries)
+- [String method selection](topics/strings/string-choices.md#string-method-selection)
+- [String normalisation and case folding](topics/strings/string-model.md#string-normalisation-policy)
+- [String query contracts](topics/strings/string-model.md#string-query-contracts)
+- [Substring match contract](topics/strings/substring-baseline.md#substring-match-contract)
+- [Substrings and subsequences](topics/strings/string-model.md#string-query-contracts)
 
 ### T
 
@@ -455,12 +481,23 @@ This index covers developed explanations in Topics 1–13 and 15. Entries link d
 - [Traversal parents and path recovery](topics/graphs/breadth-first-search.md#bfs-parent-path)
 - [Tree terminology, depth and height](topics/searching/tree-basics.md#tree-terminology)
 - [Tree traversals](topics/searching/bst-traversal.md#tree-traversals)
+- [Trie and shared prefixes](topics/strings/trie-representation.md#trie-prefix-invariant)
+- [Trie deletion invariant](topics/strings/trie-operations.md#trie-deletion-invariant)
+- [Trie operation costs](topics/strings/trie-operations.md#trie-operation-costs)
+- [Trie prefix output cost](topics/strings/trie-prefix-queries.md#trie-prefix-output-cost)
+- [Trie reporting state](topics/strings/trie-prefix-queries.md#trie-reporting-state)
+- [Trie set contract](topics/strings/trie-operations.md#trie-set-contract)
+- [Trie set implementation](topics/strings/trie-operations.md#trie-set-implementation)
+- [Trie sparse children](topics/strings/trie-representation.md#trie-sparse-children)
+- [Trie storage bound](topics/strings/trie-representation.md#trie-storage-bound)
+- [Trie terminal marker](topics/strings/trie-representation.md#trie-terminal-marker)
 - [Two pointer search](topics/strategies/sequence-patterns.md#two-pointer-search)
 - [Two-child deletion](topics/searching/bst-deletion.md#bst-two-child-deletion)
 - [Type hints](topics/foundations/collections-and-classes.md#encapsulation-and-hints)
 
 ### U
 
+- [Unicode code-point positions](topics/strings/string-model.md#unicode-string-positions)
 - [Union by size](topics/union-find/union-compression.md#union-by-size)
 - [Union find adt](topics/union-find/disjoint-sets.md#union-find-adt)
 - [Union find amortised cost](topics/union-find/union-compression.md#union-find-amortised-cost)
@@ -1124,4 +1161,62 @@ This index covers developed explanations in Topics 1–13 and 15. Entries link d
 - [Pseudopolynomial time](topics/strategies/complexity-limits.md#pseudopolynomial-time)
 - [Decision optimisation](topics/strategies/complexity-limits.md#decision-optimisation)
 - [P, NP and NP-completeness](topics/strategies/complexity-limits.md#complexity-p-np)
+
+
+### 16. Strings, tries and pattern matching
+
+**String models and query contracts**
+
+- [String query contracts](topics/strings/string-model.md#string-query-contracts)
+- [Unicode code-point positions](topics/strings/string-model.md#unicode-string-positions)
+- [String normalisation and case folding](topics/strings/string-model.md#string-normalisation-policy)
+- [String cost model](topics/strings/string-model.md#string-cost-model)
+
+**Trie representation and complete keys**
+
+- [Trie and shared prefixes](topics/strings/trie-representation.md#trie-prefix-invariant)
+- [Trie terminal marker](topics/strings/trie-representation.md#trie-terminal-marker)
+- [Trie sparse children](topics/strings/trie-representation.md#trie-sparse-children)
+- [Trie storage bound](topics/strings/trie-representation.md#trie-storage-bound)
+
+**Maintaining a trie string set**
+
+- [Trie set contract](topics/strings/trie-operations.md#trie-set-contract)
+- [Trie set implementation](topics/strings/trie-operations.md#trie-set-implementation)
+- [Trie deletion invariant](topics/strings/trie-operations.md#trie-deletion-invariant)
+- [Trie operation costs](topics/strings/trie-operations.md#trie-operation-costs)
+
+**Prefix reporting and longest stored prefixes**
+
+- [Autocomplete and trie prefix reporting](topics/strings/trie-prefix-queries.md#trie-autocomplete)
+- [Trie reporting state](topics/strings/trie-prefix-queries.md#trie-reporting-state)
+- [Trie prefix output cost](topics/strings/trie-prefix-queries.md#trie-prefix-output-cost)
+- [Longest stored prefix](topics/strings/trie-prefix-queries.md#trie-longest-stored-prefix)
+
+**A substring-search baseline**
+
+- [Substring match contract](topics/strings/substring-baseline.md#substring-match-contract)
+- [Naive substring search](topics/strings/substring-baseline.md#naive-substring-search)
+- [Naive substring cost](topics/strings/substring-baseline.md#naive-substring-cost)
+
+**KMP: reuse information after a mismatch**
+
+- [Pattern borders](topics/strings/kmp-matching.md#pattern-border)
+- [KMP prefix function](topics/strings/kmp-matching.md#kmp-prefix-function)
+- [KMP substring search](topics/strings/kmp-matching.md#kmp-find-all)
+- [KMP trace overlaps](topics/strings/kmp-matching.md#kmp-trace-overlaps)
+- [KMP linear cost](topics/strings/kmp-matching.md#kmp-linear-cost)
+
+**Rolling hashes: filter, then verify**
+
+- [Polynomial string hash](topics/strings/rolling-hash-search.md#polynomial-string-hash)
+- [Rabin–Karp with exact verification](topics/strings/rolling-hash-search.md#rabin-karp-verified)
+- [Rolling hash collisions](topics/strings/rolling-hash-search.md#rolling-hash-collisions)
+- [Rolling hash cost](topics/strings/rolling-hash-search.md#rolling-hash-cost)
+
+**Choosing a string method**
+
+- [String method selection](topics/strings/string-choices.md#string-method-selection)
+- [String matching boundaries](topics/strings/string-choices.md#string-matching-boundaries)
+- [String indexing extensions](topics/strings/string-choices.md#string-indexing-extensions)
 

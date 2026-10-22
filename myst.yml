@@ -126,6 +126,16 @@ project:
     - file: topics/strategies/backtracking.md
     - file: topics/strategies/sequence-patterns.md
     - file: topics/strategies/complexity-limits.md
+  - file: topics/strings/strings.md
+    children:
+    - file: topics/strings/string-model.md
+    - file: topics/strings/trie-representation.md
+    - file: topics/strings/trie-operations.md
+    - file: topics/strings/trie-prefix-queries.md
+    - file: topics/strings/substring-baseline.md
+    - file: topics/strings/kmp-matching.md
+    - file: topics/strings/rolling-hash-search.md
+    - file: topics/strings/string-choices.md
 site:
   template: book-theme
   options:

@@ -1,0 +1,49 @@
+# String models and query contracts
+
+(string-query-contracts)=
+## Ask what must match
+
+| Query | Example | Required relation |
+|---|---|---|
+| Exact key | Is `"bus"` stored? | A complete key equals the query |
+| Prefix reporting | Which keys start with `"bu"`? | The query is an initial segment of each returned key |
+| Longest stored prefix | Which stored key most specifically prefixes `"buses"`? | Return the longest stored initial segment |
+| Substring search | Where does `"bus"` appear in `"minibus route"`? | Contiguous text positions equal the pattern |
+
+A prefix is a substring beginning at index zero. A substring need not begin there. A **subsequence** can skip intervening positions: `"bs"` is a subsequence of `"bus"`, but is not its substring. These are different contracts.
+
+![In minibus, bus is a substring starting at index four; mini is a prefix; bs skips a position and is only a subsequence.](../../assets/strings/query-relations.svg)
+
+(unicode-string-positions)=
+## Specify what one position means
+
+Python `str` is an immutable sequence of Unicode code points. An index counts code points, not UTF-8 bytes and not necessarily displayed characters. For example, `"é"` has length one, while `"e\u0301"` has length two: the latter combines e with a combining accent. They can look alike but compare unequal.
+
+```python
+import unicodedata
+
+composed = "é"
+decomposed = "e\u0301"
+assert composed != decomposed
+assert unicodedata.normalize("NFC", composed) == unicodedata.normalize("NFC", decomposed)
+```
+
+These examples use the same units for text, pattern, trie edges and returned indices. They do not split displayed grapheme clusters or decode byte sequences automatically. Reference: [Python's Unicode HOWTO](https://docs.python.org/3/howto/unicode.html).
+
+(string-normalisation-policy)=
+## Apply the same comparison policy to stored data and queries
+
+Case-insensitive lookup may use `casefold()`; canonical-equivalence lookup may require Unicode normalisation. Decide the policy before building an index and apply it consistently. Our trie stores the exact strings supplied: `"Bus"` and `"bus"` are distinct.
+
+Python's default lexicographic ordering compares code points; it is not locale-aware dictionary collation.
+
+Transformations can change lengths: `"Straße".casefold()` is `"strasse"`. An index in transformed text does not automatically identify the corresponding span in the original display text. A user-facing search system may need an explicit position mapping and preserved display labels.
+
+(string-cost-model)=
+## Count inspected code points, not just container operations
+
+Let L be key length, n text length and m pattern length. Lexicographic string comparison may inspect a long common prefix. Computing a string hash can inspect the whole string; cached hashes may improve repeated operations in a particular runtime. Topic 6's expected constant-time table probe does not imply that processing an arbitrary new L-code-point key is independent of L.
+
+We assume constant-time code-point indexing/comparison and bounded-cost arithmetic where stated. Proper slices generally allocate new strings; the search algorithms below compare by index so their stated working-space bounds do not hide candidate copies.
+
+Next: [Trie representation](trie-representation.md).

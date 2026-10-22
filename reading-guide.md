@@ -9,6 +9,7 @@ Topic numbers organise the wiki; they do not require one uninterrupted reading s
 | Graph algorithms | [9. Priority queues](topics/heaps/heaps.md) and [10. Traversal](topics/graphs/graphs.md), then [13. Union–find](topics/union-find/union-find.md) before Kruskal in [11. Graph algorithms](topics/graph-algorithms/graph-algorithms.md) | Queues, heaps and partitions become algorithm components |
 | Spatial branch | [7. BST bounds](topics/searching/tree-basics.md) → [12. K-d trees](topics/kd-trees/kd-trees.md) | Replace a single key interval with inherited multidimensional regions |
 | Optional design extension | [15. Strategies](topics/strategies/strategies.md), after Topics 1–4; graph examples are useful additional context | Greedy proofs, DP state reuse, backtracking and sequence patterns |
+| Optional strings extension | [6. Hashing](topics/maps-sets-hashing/maps-sets-hashing.md) and [7. Tree traversal](topics/searching/bst-traversal.md), then [16. Strings and tries](topics/strings/strings.md) | Key length, shared prefixes and reusable pattern information |
 
 For Topic 11, topological ordering and shortest paths can be read before union–find. Only the Kruskal implementation requires the disjoint-set class. Topic 12 does not depend on minimum spanning trees, and k-d-tree construction should not reuse ordinary AVL rotations.
 

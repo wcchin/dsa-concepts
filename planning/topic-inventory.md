@@ -1840,3 +1840,7 @@ The original fourteen-topic lecture map remains above. Topics 1–13 now have de
 Topic 15, **Algorithm design and sequence patterns**, is an optional editorial extension beyond this lecture inventory: greedy reasoning, dynamic programming, backtracking, prefix sums, two pointers, sliding windows and complexity limits. Its worked examples are original, supported by general algorithm references linked in the reading. This does not change the course syllabus or assessment scope.
 
 The review also expands Topic 2 with correctness methods and Topic 7 with binary-search boundaries and BST range queries. Weeks 12–13 lecture Markdown and the union–find additional lecture supplied the source basis for Topics 11 and 13; notebooks, rubrics and solutions were excluded.
+
+## Topic 16 extension — 22 October 2026
+
+Strings, tries and pattern matching are now developed in eight reading pages plus an overview, with nine original SVG figures. This editorial extension adds string-cost/Unicode models, sparse trie operations and queries, naive substring search, prefix-function KMP and verified rolling hashes. It draws on general references linked in the reading rather than additional course or assessment materials. Topic 14 remains reserved for integrated applications; no existing topic was renumbered.

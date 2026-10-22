@@ -1,6 +1,6 @@
 # Book development status
 
-- Fifteen topic areas: Topics 1–13 and optional Topic 15 contain developed self-reading explanations; Topic 14 remains an integrated-application plan.
+- Sixteen topic areas: Topics 1–13 and optional Topics 15–16 contain developed self-reading explanations; Topic 14 remains an integrated-application plan.
 - Topic 1: four pages covering problem requirements; objects and references; mutation and copying; collections, classes and invariants. Three original SVG diagrams illustrate aliasing/rebinding, shallow copying and linked objects.
 - Topic 1 uses explicit concept labels for stable indexed targets. The alphabetical and topic-grouped indexes include these concepts and retain the Topic 6 entries.
 - Source basis: Week 1 classroom and online lecture material; the general problem/representation framing also follows the course introduction. No notebook, rubric or solution file was used. The book text consolidates the slide explanations rather than reproducing presentation directives.
@@ -29,4 +29,7 @@
 - Optional Topic 15: six reading pages and four SVG figures. Adds strategy selection, greedy exchange arguments, memoised/tabulated coin change with recovery, backtracking, prefix sums, two pointers, sliding windows and complexity limits. This editorial extension is not a claim about assessment scope.
 - Review outcome and remaining priorities: see `coverage-review.md` and `planning/coverage-audit.md`. Topic 14 is explicitly a plan, and no textbook-completeness claim is made. No notebook, rubric or solution file was consulted for this pass.
 
-Next: choose an integrated case study for Topic 14, then prioritise strings and tries, negative-weight graph algorithms, selection/non-comparison sorting, and further DP problems.
+- Topic 16: eight reading pages and nine accessible SVG figures, added as an optional extension. Covers string/Unicode query contracts; sparse trie nodes; insertion, complete-key lookup, prefix existence and safe deletion; iterative completion reporting and longest stored prefixes; naive all-match search; prefix-function KMP; and verified rolling hashes with deliberate collision examples. Inputs are case-sensitive Python strings, empty and overlapping cases are explicit, and output/working-space costs are separated.
+- Topic 16 sources: Python's Unicode HOWTO and Princeton's trie/pattern-matching references. Code and diagrams are original; no course notebook, rubric, solution or assessment file was used. Advanced string indexes and ranking remain explicitly out of scope.
+
+Next: choose an integrated case study for Topic 14, then prioritise negative-weight graph algorithms, selection/non-comparison sorting, and further DP problems.

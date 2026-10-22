@@ -1,4 +1,4 @@
-# Coherence and coverage audit — 21 October 2026
+# Coherence and coverage audit — updated 22 October 2026
 
 Scope: all topic overviews and reading pages, concept destinations, shared contracts, code dependencies, examples and complexity conventions. Core lecture basis remains the original lecture Markdown; no notebook, rubric, solution or assessment file was consulted.
 
@@ -21,6 +21,7 @@ Scope: all topic overviews and reading pages, concept destinations, shared contr
 | 13 Union–find | Partitions, parent forests, weighted union, compression, amortisation and connectivity limits | Newly completed. Parent links are not graph edges; ordinary deletion and directed reachability are not supported. |
 | 14 Applications | Reserved integrated application space | Still a plan, explicitly labelled. Candidate cases link to developed concepts without pretending to be completed case studies. |
 | 15 Strategies | Greedy proof, DP state/reconstruction, backtracking, prefix sums, two pointers, windows and tractability | Added as a clearly marked extension beyond the lecture inventory, rather than overloading union–find. |
+| 16 Strings | String units and contracts, trie updates/prefix queries, naive/KMP/rolling search | Added optional extension with exact verification, empty/overlap cases and output-sensitive accounting. Ranking, approximate and multi-pattern/suffix indexes remain extensions. |
 
 ## Structural changes
 
@@ -33,13 +34,13 @@ Scope: all topic overviews and reading pages, concept destinations, shared contr
 ## Follow-up priorities
 
 1. Review the new explanations for teaching emphasis, especially the optional Topic 15.
-2. Develop a separate strings/tries topic next if broadening the DSA wiki further.
+2. Strings/tries are developed in Topic 16. Consider an integrated application before further advanced string indexing.
 3. Add Bellman–Ford and directed SCC/cycle pages, then selection/non-comparison sorting.
 4. Expand DP with contrasting state models before adding specialised range trees or advanced graph algorithms.
 
 The public [coverage review](../coverage-review.md) contains the detailed missing-item list. This audit records editorial judgement; it is not a claim of exhaustive coverage of the DSA field.
 
-## Validation for this pass
+## Validation for the Topics 11/13/15 review
 
 - Compiled all 105 Python listings across the book.
 - Ran 32,363 semantic and structural checks for the new and expanded examples, including exhaustive tiny digraphs, independent shortest-path answers, brute-force minimum forests/schedules/subsets, partition invariants, DP answers, range queries and sequence patterns.
@@ -47,3 +48,12 @@ The public [coverage review](../coverage-review.md) contains the detailed missin
 - Built all 105 navigation pages with Jupyter Book 2.1.7; checked 1,251 local links, including 766 section links, against generated HTML with no broken destinations.
 
 These checks complement the reasoning in each reading; they do not establish correctness for every possible input. Earlier topics' Python listings were syntax-checked in this pass; the semantic checks above focus on the newly added algorithms.
+
+## Topic 16 validation — 22 October 2026
+
+- Compiled all 115 Python listings in the expanded book and executed every Topic 16 listing in reading order.
+- Ran 54,695 semantic checks: exhaustive small substring cases against direct matching, independently computed pattern borders and rolling residues, Unicode cases, deliberate collisions, and random trie operations against a reference set. Long 5,000-symbol keys also exercise iterative traversal and deletion.
+- Rendered and visually inspected all nine accessible SVG figures; every new figure is linked from its reading page.
+- Built 114 navigation pages with Jupyter Book 2.1.7. Checked 1,359 local links, including 833 section links, against the built HTML with no broken destinations.
+
+The examples teach exact code-point matching, prefix reporting and one-pattern search. Ranked autocomplete, edit distance, multi-pattern automata and suffix indexes remain explicit extensions rather than completed coverage.
