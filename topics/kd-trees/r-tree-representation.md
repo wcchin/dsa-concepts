@@ -1,5 +1,12 @@
 # R-trees: group objects inside enclosing rectangles
 
+**After this page, you should be able to:**
+
+- Explain the enclosing-bound invariant and why sibling rectangles can overlap.
+- Distinguish a bounding-box candidate from an exact geometry match.
+
+**Builds on:** A [PR tree](point-region-quadtrees.md) partitions cells; an R-tree groups object bounds instead.
+
 (r-tree-enclosing-invariant)=
 ## A parent bound encloses every descendant object
 
@@ -64,4 +71,27 @@ L1's diagonal has box `(0,0,10,10)`, which overlaps the query, but the line itse
 
 The index produces **candidates**, followed by a predicate on the actual geometry. For axis-aligned rectangular objects and a rectangle-intersection question, box overlap can itself be exact. For general geometry, enclosure is sufficient to reject a disjoint box but insufficient to confirm intersection.
 
-Reference: [Guttman's original R-tree paper](https://postgis.net/docs/support/rtree.pdf). The [PostGIS spatial-index workshop](https://postgis.net/workshops/en/postgis-intro/indexing.html) explains the same filter/refine principle in an application setting. Next: [R-tree query and exact refinement](r-tree-queries.md).
+Reference: [Guttman's original R-tree paper](https://postgis.net/docs/support/rtree.pdf). The [PostGIS spatial-index workshop](https://postgis.net/workshops/en/postgis-intro/indexing.html) explains the same filter/refine principle in an application setting.
+
+:::{tip} Common misconception
+**R-tree siblings divide the plane into disjoint regions.** They enclose groups of objects and can overlap, so a query may need several child branches.
+:::
+
+(pilot-r-tree-representation-checks)=
+## Check your understanding
+
+Predict the answer before opening the explanation.
+
+**1. Does diagonal L1 intersect the query `(2,6,4,8)` just because its box does?**
+
+:::{dropdown} Show explanation
+No. Its box (0,0,10,10) overlaps the query, so L1 is a candidate. On L1, y=x; for x in [2,4], y is in [2,4], below [6,8]. Exact refinement rejects L1.
+:::
+
+**2. The example’s leaves are at the same depth. Can the query choose only one of groups U and V?**
+
+:::{dropdown} Show explanation
+No. U’s box (0,0,10,10) and V’s box (3,0,10,9) both meet the query. Equal leaf depth does not make their bounds disjoint or establish a single search path.
+:::
+
+Next: [R-tree query and exact refinement](r-tree-queries.md).

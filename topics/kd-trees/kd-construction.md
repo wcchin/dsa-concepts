@@ -1,5 +1,12 @@
 # Split rules and k-d-tree construction
 
+**After this page, you should be able to:**
+
+- Trace insertion by the active axis while keeping the strict-left/ties-right rule.
+- Describe the inherited region of a descendant rather than extending every cut across the whole plot.
+
+**Builds on:** Use the [shared points and query contracts](spatial-queries.md); depth zero compares x.
+
 (kd-tree)=
 ## A coordinate determines the next branch
 
@@ -61,4 +68,27 @@ The root divides the plane at x = 5. B splits only the region x < 5 at y = 7; C 
 
 ![The shared points and their clipped spatial cuts show how inherited regions constrain each split.](../../assets/kd-trees/kd-spatial-cuts.svg)
 
-For example, the region below D's right branch satisfies `1 <= x < 5` and `y < 7`, not merely `x >= 1`. Ancestor constraints accumulate just as BST key bounds do, but across different coordinates. Next: [Exact search](kd-exact-search.md).
+For example, the region below D's right branch satisfies `1 <= x < 5` and `y < 7`, not merely `x >= 1`. Ancestor constraints accumulate just as BST key bounds do, but across different coordinates.
+
+:::{tip} Common misconception
+**Alternating axes automatically balances the tree.** It changes the comparison at each depth, but an insertion order can still produce a chain.
+:::
+
+(pilot-kd-construction-checks)=
+## Check your understanding
+
+Predict the answer before opening the explanation.
+
+**1. Starting from the shared tree, predict where a new point H=(5,7) would be inserted.**
+
+:::{dropdown} Show explanation
+At A=(5,4), the x tie goes right. At C=(8,1), compare y: 7≥1 goes right to F. At F=(7,5), compare x: 5<7 goes to its empty left child. H would become F’s left child; matching A’s x did not make H a duplicate.
+:::
+
+**2. If B=(2,7) were inserted first instead of A, would the root split still be x=5? Would that change which points satisfy the shared range query?**
+
+:::{dropdown} Show explanation
+The root would be B and its x split would be 2. The shape and later cuts could change, but the geometric answer set remains B,D,E after all seven distinct points are stored correctly. Representation and result contract are different things.
+:::
+
+Next: [Exact search](kd-exact-search.md).

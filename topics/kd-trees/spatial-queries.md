@@ -1,5 +1,12 @@
 # Spatial queries, bounds and a reference scan
 
+**After this page, you should be able to:**
+
+- Distinguish exact, range and nearest questions, including their boundary and distance contracts.
+- Explain why a region bound can justify pruning while a single outside point cannot.
+
+**Builds on:** [BST range reporting](../searching/bst-range-queries.md) already uses ordering to exclude subtrees.
+
 (spatial-query-contracts)=
 ## Specify the objects and the question
 
@@ -57,5 +64,26 @@ For nearest search, a rectangle supplies a lower bound. With query `(qx,qy)`, le
 ## Coordinates need an interpretation
 
 The shared coordinates are invented planar units, not longitude and latitude. Euclidean distance in longitude/latitude degrees is not automatically ground distance in metres. Select a distance model and compatible coordinates before interpreting nearest results. The schematic placement of a point and the chosen index cannot supply missing geographic meaning.
+
+:::{tip} Common misconception
+**An index determines the meaning of distance.** It does not: coordinates, units and a distance model must be chosen before a nearest result can be interpreted.
+:::
+
+(pilot-spatial-queries-checks)=
+## Check your understanding
+
+Predict the answer before opening the explanation.
+
+**1. Which shared points belong to the closed rectangle `[1,4] × [2,7]`? Explain the two boundary cases.**
+
+:::{dropdown} Show explanation
+B=(2,7), D=(1,3) and E=(3,6). B is on the included upper y edge; D is on the included lower x edge. E is in the interior. A=(5,4) lies outside even though descendants of A in a point tree can be answers.
+:::
+
+**2. Could `(12,6)` satisfy the closed query rectangle `(11,5,12,7)` yet be rejected by a PR tree whose storage extent is `[0,12) × [0,12)`?**
+
+:::{dropdown} Show explanation
+Yes. The query includes its maximum x edge, so its predicate accepts `(12,6)`. The storage extent excludes x=12, so that PR tree rejects insertion. A query boundary defines what to report; a storage boundary defines which tree cell owns a record.
+:::
 
 Next: [K-d-tree construction](kd-construction.md), followed by the existing exact, range, shape and nearest readings. Then continue to [point quadtrees](point-quadtrees.md).

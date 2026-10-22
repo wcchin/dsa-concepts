@@ -1,5 +1,12 @@
 # Compare spatial-search representations
 
+**After this page, you should be able to:**
+
+- Compare structures using the same query and a consistent definition of work.
+- Choose a point or object index without mistaking candidate filtering for final geometry evaluation.
+
+**Builds on:** Bring together [point-based splits](point-quadtrees.md), [midpoint cells](point-region-quadtrees.md) and [R-tree enclosures](r-tree-representation.md).
+
 (spatial-split-comparison)=
 ## Ask what the boundaries mean
 
@@ -40,5 +47,26 @@ For nearest queries, a containing box provides a lower bound rather than an exac
 [Download the standard-library spatial-search example](../../examples/spatial_search.py), save it as `spatial_search.py`, and run `python spatial_search.py`. It includes the point and PR quadtrees, the given R-tree query, exact segment refinement and the reused k-d-tree insert/range code. No notebook, package installation or private course repository is required.
 
 To execute these pages as listings, read them in order in one Python session: the spatial-query helpers, point quadtree, PR operations, then R-tree representation and query. The k-d-tree code remains on its existing pages with its original names and contracts.
+
+:::{tip} Common misconception
+**A larger visit count in one illustration proves one index is always worse.** Empty-cell tests, point tests, output size, data distribution and implementation choices are different costs.
+:::
+
+(pilot-spatial-index-choices-checks)=
+## Check your understanding
+
+Predict the answer before opening the explanation.
+
+**1. The PR query examines 13 node bounds while the k-d query visits 4 nonempty point nodes. Does that prove PR trees are always slower?**
+
+:::{dropdown} Show explanation
+No. The counters measure different work. This PR representation includes explicit empty cells; it accepts nine cells and tests four point records. One small instance and different counting conventions cannot establish a universal performance ranking.
+:::
+
+**2. To find lines crossing a rectangle, could we index only line endpoints as points and return lines with an endpoint inside? Use L2 as a check.**
+
+:::{dropdown} Show explanation
+That would miss valid crossings. L2 runs from (0,7) to (6,7); neither endpoint is inside [2,4] × [6,8], but the segment crosses it. Object bounds plus an exact segment predicate preserve that case; a point-endpoint query answers a different question.
+:::
 
 Return to the [spatial-search overview](kd-trees.md), [concept index](../../concepts.md) or [coverage review](../../coverage-review.md).

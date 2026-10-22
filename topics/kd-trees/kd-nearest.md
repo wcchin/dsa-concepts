@@ -1,5 +1,12 @@
 # Nearest-neighbour search and backtracking
 
+**After this page, you should be able to:**
+
+- Trace the best-so-far candidate and decide whether a far region can still improve it.
+- Use the updated distance after near-side search rather than treating the first candidate as final.
+
+**Builds on:** [Spatial bounds](spatial-queries.md#spatial-pruning-certificates) justify exclusion; they are not exact object distances.
+
 (kd-nearest-neighbour)=
 ## A nearby path is only a starting point
 
@@ -58,5 +65,26 @@ The far-side test uses the **updated** best distance after the near-side recursi
 Every visited point can improve the candidate. Every skipped far region has a valid distance lower bound larger than the current best distance, so it cannot contain a better answer. These two facts justify returning the final candidate.
 
 The split-plane bound is safe but may be loose. Distance to the whole inherited bounding rectangle can provide a stronger bound when those rectangles are maintained. Good pruning can reduce visits substantially, but the worst case still visits $O(n)$ nodes, with $O(h+1)$ recursive stack space. Exact search's one path does not establish the nearest-neighbour result.
+
+:::{tip} Common misconception
+**The side containing the query must contain its nearest point.** It is a useful first search, but a nearby point can lie just across a split.
+:::
+
+(pilot-kd-nearest-checks)=
+## Check your understanding
+
+Predict the answer before opening the explanation.
+
+**1. In the illustrated example, Q=(4.9,5) has visited left point (1,5). Should it cross the x=5 split? Which shown point is actually nearest?**
+
+:::{dropdown} Show explanation
+Yes. The best squared distance from the left point is 3.9²=15.21, while the split lower bound is 0.1²=0.01. The far side remains possible. Point (5.1,5) has squared distance 0.2²=0.04 and is nearer.
+:::
+
+**2. A far-region squared lower bound is 4. Before searching near, the best squared distance is 9; afterward it is 1. Should that far region still be searched?**
+
+:::{dropdown} Show explanation
+No. Use the updated best value: 4>1 certifies that the far region cannot improve the answer. Using the old value 9 would make the region look plausible and cause unnecessary work. This is why the code tests the far side after near-side recursion.
+:::
 
 Concept reference: [Princeton's description of region-based range and nearest-neighbour pruning](https://www.cs.princeton.edu/courses/archive/spr13/cos226/assignments/kdtree.html). Continue to [point quadtrees](point-quadtrees.md) to split through a stored point along both axes, or return to the [spatial-search overview](kd-trees.md).

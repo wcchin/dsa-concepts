@@ -1,5 +1,12 @@
 # Query an R-tree, then refine the candidates
 
+**After this page, you should be able to:**
+
+- Trace candidate traversal and the separate exact-refinement pass.
+- Account for boundary contacts and examined entries instead of inferring cost from height alone.
+
+**Builds on:** Use the [given R-tree and line records](r-tree-representation.md); the query helpers also reuse the closed-rectangle predicate from [spatial queries](spatial-queries.md).
+
 (r-tree-candidate-query)=
 ## Test each intersecting entry and continue through its child
 
@@ -79,6 +86,25 @@ Here the traversal examines seven entries in three nodes: two root entries and f
 
 The candidate list stores $O(c)$ identifiers, final results $O(r)$, and the traversal stack can use $O(V+1)$ space for V visited nodes. Overlapping groups or a broad query may visit the whole index. Balanced height alone does not justify an $O(\log n)$ range-query claim.
 
-**Think first:** can we return all box candidates as line intersections to save work? **Reasoning:** not for this contract: L1 is the counterexample. Return candidates only when the caller explicitly requests candidates.
+:::{tip} Common misconception
+**A positive intersection needs positive area.** Here intersection means sharing any point, including an endpoint or edge; the query can even be degenerate.
+:::
+
+(pilot-r-tree-queries-checks)=
+## Check your understanding
+
+Predict the answer before opening the explanation.
+
+**1. The candidate list is `L4,L1,L2`. Predict the exact result list in this traversal order, and identify why one candidate disappears.**
+
+:::{dropdown} Show explanation
+The result is L4,L2. Both actual segments meet the closed query rectangle. L1’s envelope passes but its diagonal misses, so it is filtered out. A false positive is expected at the candidate stage, not an incorrect final answer.
+:::
+
+**2. Does L2 count as intersecting the point-sized closed query `(6,7,6,7)`?**
+
+:::{dropdown} Show explanation
+Yes. L2 ends at (6,7), so the segment and query share that point. The endpoint-inside test accepts it. Requiring positive-length or positive-area overlap would silently change the contract.
+:::
 
 Next: [Compare spatial indexes](spatial-index-choices.md).

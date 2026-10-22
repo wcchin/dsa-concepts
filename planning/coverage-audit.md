@@ -74,3 +74,12 @@ The examples teach exact code-point matching, prefix reporting and one-pattern s
 - Compiled all 130 Python listings. Rendered and visually checked all eight new accessible SVG figures, including non-overlapping line labels and paired partition/tree views.
 - Built all 127 navigation pages with Jupyter Book 2.1.7. Checked 1,521 local links including 935 section links, with no broken destinations. Both published Python downloads match their source files byte for byte.
 - Retained the k-d-tree files, route names and labelled sections. General R-tree insertion/splitting, new-structure nearest traversal, PR deletion/merging and full raster quadtrees remain explicitly outside the implemented scope.
+
+## Topic 12 self-reading pilot — 22 October 2026
+
+- Reviewed all twelve spatial-search readings and added two learning goals, linked prerequisite cues, one misconception reminder and two original prediction/reasoning checks per reading.
+- The overview now explains the reading/check sequence, supplies a code-context table and links to the checks by concept. Main conceptual explanations remain visible; only feedback on the checks is collapsed.
+- Ran 117 content/structure/example checks, including concrete feedback predictions evaluated against the existing algorithms. Confirmed every Topic 12 Python listing and original explicit concept label is retained; figures and downloadable implementations were not edited.
+- Built all 127 navigation pages with Jupyter Book 2.1.7. Checked 1,558 local links including 951 section links with no broken destinations. Inspected generated HTML for all 24 visible prompts and 24 default-closed native details/summary controls with complete feedback.
+- All 130 book Python listings compile. This pass does not repeat the earlier full algorithm test suite because executable code is unchanged.
+- Pilot review remains the next editorial step before a book-wide rollout. `self-reading-pilot.md` records the reusable pattern and its scope.

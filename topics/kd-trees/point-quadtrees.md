@@ -1,5 +1,12 @@
 # Point quadtrees: split through a stored point
 
+**After this page, you should be able to:**
+
+- Extend a point-based split from one active axis to four two-axis quadrants.
+- Trace insertion and range pruning with explicit east/north tie ownership.
+
+**Builds on:** [K-d construction](kd-construction.md) splits through a stored point; here both axes are used at each node.
+
 (point-quadtree-split)=
 ## Extend the familiar point-based split to both axes
 
@@ -88,6 +95,29 @@ The shared rectangle visits A, D, B and E, reporting **D, B, E** in this travers
 
 Each visited nonempty node performs a constant amount of work, so time is $O(v+1)$ for v visits, up to $O(n)$. A depth-first stack has $O(h+1)$ pending nodes because branching is bounded by four, plus $O(r)$ result storage. The split tests may explore more than an exact inherited-cell intersection test, but never exclude a valid answer.
 
-**Think first:** if a point lies on the vertical split but below the horizontal split, which child owns it? **Reasoning:** SE. Equality goes east, while the smaller y goes south.
 
-The point-quadtree idea is also described in [OpenDSA's spatial-structure comparison](https://opendsa-server.cs.vt.edu/OpenDSA/Books/Catalog/html/OtherSpatial.html). Next: [Point-region quadtrees](point-region-quadtrees.md), where the split positions change.
+
+The point-quadtree idea is also described in [OpenDSA's spatial-structure comparison](https://opendsa-server.cs.vt.edu/OpenDSA/Books/Catalog/html/OtherSpatial.html).
+
+:::{tip} Common misconception
+**Four children mean four equal-sized regions.** A point quadtree splits through its stored pivot, which need not be the midpoint of its inherited region.
+:::
+
+(pilot-point-quadtrees-checks)=
+## Check your understanding
+
+Predict the answer before opening the explanation.
+
+**1. At A=(5,4), which first branch owns a new point `(5,3)`? Explain both coordinate decisions.**
+
+:::{dropdown} Show explanation
+SE. Equal x goes east; y=3 is strictly below 4 and goes south. The point differs from A, so it is not rejected as a duplicate. A tie does not put a record into two children.
+:::
+
+**2. If B becomes the first inserted point, must the point-quadtree partition stay the same? Must the final shared range-answer set stay the same?**
+
+:::{dropdown} Show explanation
+The partition need not stay the same: the root cuts would pass through B=(2,7). The answer set must still be B,D,E once the same points are stored. Insertion order can change the search structure without changing the query’s meaning.
+:::
+
+Next: [Point-region quadtrees](point-region-quadtrees.md), where the split positions change.

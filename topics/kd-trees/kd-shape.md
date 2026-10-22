@@ -1,5 +1,12 @@
 # Shape, median construction and limitations
 
+**After this page, you should be able to:**
+
+- Qualify height, construction cost and spatial-query cost as separate claims.
+- Identify why coordinate ties and ordinary BST rotations need special care in a k-d tree.
+
+**Builds on:** [Insertion](kd-construction.md) uses a depth-dependent axis rather than one global key order.
+
 (kd-height-cost)=
 ## Axis alternation does not maintain balance
 
@@ -36,5 +43,26 @@ Height control requires a k-d-tree construction or maintenance method designed f
 Useful pruning depends on the distribution of points, the query shape, dimension, and the chosen distance. In higher dimensions or poorly separated data, many regions may remain plausible. A balanced tree does not guarantee logarithmic nearest-neighbour or range-query time for arbitrary inputs.
 
 For geographical data, Euclidean distance in the given coordinates must have the intended meaning. Longitude and latitude in degrees are not a uniform metre grid. Choose a suitable projected coordinate system or a method supporting the intended metric before interpreting “nearest” as a geographical distance. The following page illustrates only ordinary planar Euclidean distance.
+
+:::{tip} Common misconception
+**A balanced tree guarantees logarithmic time for every spatial query.** A range can report every point, and a nearest query can leave many branches plausible.
+:::
+
+(pilot-kd-shape-checks)=
+## Check your understanding
+
+Predict the answer before opening the explanation.
+
+**1. Insert `(1,1),(2,2),(3,3),(4,4)` in that order. Predict the shape and the number of nonempty nodes visited when finding `(4,4)`.**
+
+:::{dropdown} Show explanation
+Every comparison goes right, producing a four-node chain of edge height 3. Exact lookup visits all four points. Changing the active axis does not help when both coordinates increase together.
+:::
+
+**2. A median builder chooses `(5,2)` as an x-split pivot and puts `(5,1)` in the left child by list position. Can the existing ties-right search reliably find `(5,1)`?**
+
+:::{dropdown} Show explanation
+No. Its x equals 5, so the unequal point is routed right, although the builder placed it left. The builder and search must share a tie rule. Sending every x tie right preserves the stated invariant but does not by itself guarantee balanced subsets.
+:::
 
 Next: [Nearest-neighbour search](kd-nearest.md).

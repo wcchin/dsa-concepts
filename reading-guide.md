@@ -21,3 +21,7 @@ Each topic asks what the input means, which operations are required, what the re
 Tie rules and boundary conventions are local contracts. Binary search can use inclusive or half-open intervals if its updates match. BSTs here keep distinct keys; k-d trees send coordinate ties right; priority queues use arrival counters when stable ties are wanted. Follow the stated convention rather than transferring a rule by name alone.
 
 For current scope, conceptual-only coverage and future additions, see [Coverage and extensions](coverage-review.md). [Topic 14](topics/applications/applications.md) now brings these ideas together through a complete fictional transport-network case.
+
+## Check your reasoning as you read
+
+[Topic 12](topics/kd-trees/kd-trees.md#where-to-check-your-understanding) pilots a self-reading format: two learning goals and prerequisite links at the start of each reading, then a misconception reminder and two prediction questions with expandable explanations. Predict a branch or result before opening the panel; use a mismatch to identify which boundary or invariant to revisit. These are ungraded, original examples.

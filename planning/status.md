@@ -38,4 +38,7 @@
 - Expanded Topic 12: seven new readings and eight accessible SVG figures, for twelve readings and fourteen figures overall. Separate point-quadtree and PR-quadtree pages follow the k-d-tree core. Adds midpoint/bucket/termination policies, iterative point and PR operations, R-tree grouping and given-tree query with integer segment refinement, and a standalone standard-library example. Original examples use the shared seven-point dataset and a separate five-line false-positive example.
 - Spatial extension source basis: OpenDSA spatial-structure chapters, Guttman's R-tree paper and the PostGIS indexing workshop. No notebook, rubric, solution or assessment material was consulted. Full nearest traversal remains implemented for k-d trees; the new structures' remaining variants are explicitly scoped.
 
-Next: prioritise negative-weight graph algorithms, selection/non-comparison sorting, and further DP problems.
+- Topic 12 self-reading pilot: all twelve readings have two explicit learning goals, prerequisite links, one misconception reminder and two original prediction questions with collapsed explanations (24 panels overall). The overview supplies code-context routes and a check-by-concept table. Essential explanations remain visible in the main text. Algorithms, figures, file paths and original concept labels are retained.
+- The pilot format and editorial checklist are recorded in `self-reading-pilot.md`. Review this implementation before applying it across other topics; a book-wide rollout has not been made.
+
+Next: review the Topic 12 self-reading pilot, then apply the agreed format across other topics. Subsequent content priorities are negative-weight graph algorithms, selection/non-comparison sorting, and further DP problems.

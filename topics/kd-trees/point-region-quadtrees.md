@@ -1,5 +1,12 @@
 # Point-region quadtrees: split the region at its midpoint
 
+**After this page, you should be able to:**
+
+- Explain how a PR cell fixes split locations independently of stored pivots.
+- Separate bucket capacity, storage-boundary ownership and termination policies.
+
+**Builds on:** [Point quadtrees](point-quadtrees.md) supply the four-way idea; PR trees change where cuts come from.
+
 (pr-quadtree-midpoints)=
 ## The cell determines where a split occurs
 
@@ -42,4 +49,27 @@ Distinct points can also be extremely close. A maximum depth limits subdivision;
 
 A **region quadtree** commonly subdivides raster/image regions until each leaf is homogeneous in value. It shares regular four-way subdivision but stores a different kind of information from a PR tree of point records. The word quadtree names a family, not one universal node contract.
 
-[OpenDSA's PR-quadtree chapter](https://opendsa-server.cs.vt.edu/OpenDSA/Books/Catalog/html/PRquadtree.html) introduces regular point-region subdivision and varying bucket thresholds. Our finite-depth implementation adds explicit stopping and half-open boundary policies. Next: [PR-quadtree operations](pr-quadtree-operations.md).
+[OpenDSA's PR-quadtree chapter](https://opendsa-server.cs.vt.edu/OpenDSA/Books/Catalog/html/PRquadtree.html) introduces regular point-region subdivision and varying bucket thresholds. Our finite-depth implementation adds explicit stopping and half-open boundary policies.
+
+:::{tip} Common misconception
+**The first inserted point fixes a PR tree’s root cuts.** A leaf does not split until needed; when it does split, the root extent determines its midpoint.
+:::
+
+(pilot-point-region-quadtrees-checks)=
+## Check your understanding
+
+Predict the answer before opening the explanation.
+
+**1. With extent `[0,12)²` and capacity 1, what happens after inserting A=(5,4) alone? Then where do A and B=(2,7) go after B is inserted?**
+
+:::{dropdown} Show explanation
+After A alone, the root is a leaf containing A; there are no child cells yet. B overflows that bucket, so the root splits at (6,6). A moves into SW and B into NW. Neither becomes an internal pivot.
+:::
+
+**2. At the root midpoint (6,6), which child owns `(6,6)`? Is `(12,6)` inside the root?**
+
+:::{dropdown} Show explanation
+(6,6) belongs to NE because both ties go east/north. (12,6) is outside the half-open root extent. If (6,6) is inserted, a closed point-sized query `(6,6,6,6)` includes it; storage ownership does not make the query half-open.
+:::
+
+Next: [PR-quadtree operations](pr-quadtree-operations.md).

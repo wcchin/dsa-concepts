@@ -1,5 +1,12 @@
 # Exact-point search and coordinate ties
 
+**After this page, you should be able to:**
+
+- Trace successful and failed exact searches, distinguishing a coordinate tie from full equality.
+- Explain why a subtree search must keep the subtree’s actual depth.
+
+**Builds on:** [Construction](kd-construction.md) establishes the axis and tie rules that lookup must follow.
+
 (kd-exact-search)=
 ## Check the entire point before choosing a side
 
@@ -43,4 +50,25 @@ This reasoning fails if construction placed equal split coordinates on both side
 
 The iterative function uses constant auxiliary space and follows $O(h+1)$ nodes. Balanced height makes this logarithmic for fixed-dimensional exact lookup; a chain makes the worst case linear. This is different from a range query, which can require both branches even in a balanced tree.
 
-**Check your understanding:** does encountering x = 5 prove `(5, 7)` is present? No. Only full coordinate equality does. Next: [Range search](kd-range-search.md).
+:::{tip} Common misconception
+**An equal active coordinate proves an exact match.** Exact membership needs equality of the entire point; a coordinate tie only chooses a branch.
+:::
+
+(pilot-kd-exact-search-checks)=
+## Check your understanding
+
+Predict the answer before opening the explanation.
+
+**1. Predict the full search path for `(5,7)` in the unchanged shared tree. Is the point present?**
+
+:::{dropdown} Show explanation
+A → C → F → empty left child. A has x=5 but is (5,4), so the unequal point goes right. C compares y and sends 7 right; F compares x and sends 5 left. The empty child proves absence under the insertion invariant.
+:::
+
+**2. Search for E=(3,6) starting at subtree B. What goes wrong if its depth is incorrectly reset to zero?**
+
+:::{dropdown} Show explanation
+B is at depth 1, so it must compare y: 6<7 leads to D, then D compares x and leads to E. Resetting B to depth 0 would compare x instead, send 3≥2 right, and incorrectly report absence from an empty branch.
+:::
+
+Next: [Range search](kd-range-search.md).

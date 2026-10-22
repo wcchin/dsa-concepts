@@ -21,6 +21,7 @@ A standalone Jupyter Book 2 project for a searchable, self-reading course resour
 - Optional algorithm design: six reading pages and four original SVG figures.
 - Optional strings and tries: eight reading pages and nine accessible SVG figures, with trie updates/prefix queries, naive substring search, KMP and verified rolling hashes.
 - Integrated transport application: six reading pages, five accessible SVG figures and a standalone standard-library Python example.
+- A Topic 12 self-reading pilot: page goals, prerequisite links, misconception reminders and 24 prediction questions with collapsed explanations.
 - A prerequisite reading guide and public coverage review.
 - An original probing-deletion diagram.
 - An author-facing source inventory under `planning/`.

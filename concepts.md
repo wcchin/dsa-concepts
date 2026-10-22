@@ -1022,6 +1022,8 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 
 ### 12. Spatial search and indexing
 
+**Self-reading support:** use the [topic’s check-by-concept table](topics/kd-trees/kd-trees.md#where-to-check-your-understanding) to find prediction questions and expandable explanations.
+
 **Split rules and k-d-tree construction**
 
 - [K-d tree](topics/kd-trees/kd-construction.md#kd-tree)
