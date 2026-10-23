@@ -84,3 +84,9 @@ The reordered graph sequence now aligns seven graph/traversal readings, four uni
 Five readings now align operation contracts, input size/cost models, exact counts and growth, cases versus bounds, expected versus amortised guarantees, working/output/peak space and correctness/termination evidence. A complete linear-search invariant/progress argument connects to its existing comparison counter. Ten original open prediction checks have collapsed explanations. Existing Python functions, explicit labels, formulas, worked traces and three SVG figures are retained. No notebook, rubric, solution or assessment source was consulted.
 
 The agreed remaining editorial order is Topic 3, then Topic 1, followed by Topics 14, 15 and 16.
+
+## Topic 3 recursion alignment — 23 October 2026
+
+Five readings align recursive/iterative sum and trace contracts, merge versus sort preconditions, base/progress/correctness arguments, exact depth and sort-call counts, peak frame/list/output storage and implementation choices. Adds ten original open prediction checks with collapsed explanations. The eight SVGs, existing Python listings, original headings/labels and worked traces are retained. Alternatives such as bottom-up/range-buffer merging remain clearly described comparisons rather than extra supplied implementations. No notebook, rubric, solution or assessment source was consulted.
+
+The remaining agreed order is Topic 1, then Topics 14, 15 and 16.

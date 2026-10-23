@@ -125,3 +125,11 @@ Five readings now align operation contracts, input size/cost models, exact count
 The agreed remaining editorial order is Topic 3, then Topic 1, followed by Topics 14, 15 and 16.
 
 Validation: 14,976 count/structure assertions passed, including exhaustive small search lists, duplicate/absent targets, empty inputs, pair-count formulas, floor-halving counts and shallow-copy identity. All 154 Python listings compile. Jupyter Book 2.1.7 builds 141 pages; all 1,939 local links, including 1,081 section links, resolve, and the ten new feedback panels render closed. Original listings, headings, explicit labels and SVG bytes are retained.
+
+## Topic 3 recursion alignment — 23 October 2026
+
+Five readings align recursive/iterative sum and trace contracts, merge versus sort preconditions, base/progress/correctness arguments, exact depth and sort-call counts, peak frame/list/output storage and implementation choices. Adds ten original open prediction checks with collapsed explanations. The eight SVGs, existing Python listings, original headings/labels and worked traces are retained. Alternatives such as bottom-up/range-buffer merging remain clearly described comparisons rather than extra supplied implementations. No notebook, rubric, solution or assessment source was consulted.
+
+The remaining agreed order is Topic 1, then Topics 14, 15 and 16.
+
+Validation: 17,075 semantic/structure assertions passed, including summation and invalid-input cases, exact printed traces, exhaustive short-list sorting/merging, stable record identity, shallow/input preservation, exact sort-call and active-frame counts, and documented merge comparison counts. All 154 Python listings compile. Jupyter Book 2.1.7 builds 141 pages; all 1,961 local links, including 1,093 section links, resolve. Ten feedback panels render closed. Existing code listings, headings, explicit labels and SVG bytes are retained.

@@ -1,5 +1,12 @@
 # Divide, conquer and combine
 
+**After this page, you should be able to:**
+
+- Connect splitting, recursive results and merging to a complete operation contract.
+- Explain ordering, record preservation, stable ties and input/output ownership.
+
+**Builds on:** [Recursive calls](recursive-calls.md), [stack sequencing](call-stack.md) and [shallow copying](../foundations/mutation-and-copying.md#shallow-copy).
+
 Recursion is a mechanism for expressing calls. **Divide-and-conquer** is a strategy for organising a solution: divide the problem into smaller subproblems, solve them, then combine their answers. Many implementations use recursion, but the two ideas are not synonyms.
 
 (divide-conquer-combine)=
@@ -49,6 +56,18 @@ At each step, the output contains the smallest consumed values in sorted order, 
 
 This argument depends on **both inputs being sorted**. Arbitrary input lists cannot be sorted by a single front-comparison pass. Repeated values are valid and must retain their multiplicities. Choosing the left item on equality will also support stable sorting, developed in Topic 4.
 
+(recursive-merge-contract)=
+## Specify merge and sort as different operations
+
+| Function | Preconditions | Returned result and mutation |
+|---|---|---|
+| `merge_sorted(left, right)` | Two lists already in nondecreasing order; values support a consistent total ordering through `<=` | New sorted list containing every item from both lists, preserving multiplicity; inputs unchanged |
+| `merge_sort(values)` | A list whose values support that consistent ordering | New sorted shallow list containing the same records; caller's outer list unchanged |
+
+Both return a new empty list on empty total input, and the sort returns a new outer list even for a singleton. Payload objects are shared rather than deeply copied. No type/order validation pass is supplied: incompatible comparisons can raise `TypeError`, and unsorted inputs violate the merge helper's precondition even if no exception is raised.
+
+The merge's `<=` chooses the left item on a tie. Combined with contiguous left/right splitting, this preserves the original relative order of equally ordered records: the sort is stable. It is not in-place. There is no `key` or `reverse` argument in these teaching functions; later [sorting interfaces](../sorting/sorting-properties.md) discuss those choices.
+
 (merge-sort-code)=
 ## A complete sequential implementation
 
@@ -84,6 +103,35 @@ This version accepts lists of mutually comparable values and returns a new sorte
 The base case is correct because a sequence of zero or one items is sorted. Assuming both smaller results are correct, the merge argument establishes a sorted permutation of the original input. Termination follows because each larger input is divided into smaller parts.
 
 The [implementation page](implementation-costs.md) examines why slicing and indices matter. The [Sorting topic](../sorting/sorting.md) compares this strategy with insertion, bubble and quicksort.
+
+## Costs and implementation choices
+
+For merge inputs of lengths a and b, the shown index-based merge uses Θ(a+b+1) time and Θ(a+b+1) returned list storage. The indices need O(1) words, but `left[i:]` and `right[j:]` can temporarily allocate O(a+b+1) additional reference slots. Replacing remainder slices with indexed loops avoids those temporary lists while preserving linear work and a separate output list.
+
+For n sorted or unsorted input items, this unoptimised merge sort performs Θ(n log(n+1)+1) time under constant-cost comparison and amortised append. Peak additional space including output is Θ(n+1); the stack alone is O(log(n+1)). It does not skip a merge just because the input was already sorted.
+
+Midpoint splitting controls shape, `<=` controls ties, slicing controls allocation and indices avoid front-removal shifts. These are implementation decisions inside the strategy. A bottom-up iterative merge sort, for example, can use the same divide/combine organisation without recursive Python calls.
+
+:::{tip} Common misconception
+**One merge pass sorts two arbitrary lists.** The front-selection argument requires both inputs already sorted; recursive sorting establishes that precondition.
+:::
+
+(divide-conquer-checks)=
+## Check your understanding
+
+Trace the calls or predict the result before opening the explanation.
+
+**1. Merging left=[1,3] and right=[1,2], which occurrence of 1 is chosen first?**
+
+:::{dropdown} Show explanation
+The left occurrence. On equality, <= selects left, which helps preserve stable order across the original contiguous halves.
+:::
+
+**2. Does merge_sort([record]) return the exact same outer list object?**
+
+:::{dropdown} Show explanation
+No. The base case returns values.copy(). The outer list is new, while the record object itself is still shared.
+:::
 
 Next: [Recursion trees and costs](recursion-costs.md).
 

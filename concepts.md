@@ -626,6 +626,14 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 - [Analysis-helper contracts and boundaries](topics/analysis/code-and-space.md#analysis-code-contracts)
 - [A complete linear-search invariant and termination argument](topics/analysis/correctness.md#linear-search-proof)
 
+## Recursion reasoning routes
+
+- [Recursive sum inputs, results and errors](topics/recursion/recursive-calls.md#recursive-sum-contract)
+- [Printed traces versus returned results](topics/recursion/call-stack.md#recursive-trace-contract)
+- [Merge and recursive-sort contracts](topics/recursion/divide-and-conquer.md#recursive-merge-contract)
+- [Depth, calls, time and live-storage summary](topics/recursion/recursion-costs.md#recursion-cost-summary)
+- [Recursive implementation choices and costs](topics/recursion/implementation-costs.md#recursive-implementation-costs)
+
 ## Concepts grouped by topic
 
 ### 1. Foundations and Python’s object model

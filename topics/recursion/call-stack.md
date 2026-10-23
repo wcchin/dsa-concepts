@@ -1,5 +1,12 @@
 # The call stack and waiting work
 
+**After this page, you should be able to:**
+
+- Trace frame creation, suspension, resumption and return values.
+- Separate total calls, maximum live frames, printed output and runtime limits.
+
+**Builds on:** [Recursive summation](recursive-calls.md) and [working/output-space conventions](../analysis/code-and-space.md#auxiliary-and-output-space).
+
 Recursion does not replace the current call. It starts another call while the caller retains the state needed to continue afterwards.
 
 (stack-frames)=
@@ -44,6 +51,13 @@ leave 2
 
 The first prints happen during descent. The later prints happen as calls finish. A recursive function intended to compute a sum must **return** its child result; merely printing the child result would not make it available for the caller’s addition.
 
+(recursive-trace-contract)=
+## Keep computational results and observable traces separate
+
+`trace_calls(n)` assumes a nonnegative integer, prints 2n+1 lines and returns `None`. Zero prints just `base`. Unlike `sum_to`, this tracing helper has no domain guard: do not assume a negative argument is rejected with the same `ValueError` policy. Valid inputs can still exceed Python's recursion capacity.
+
+`sum_to_iterative(n)` below has the same input validation and numerical result as `sum_to`, but it neither prints inside the function nor grows an input-dependent recursive call chain. Its example `print(...)` is outside the function. Compare return values, side effects and exceptions as well as final mathematical answers when evaluating alternatives.
+
 (depth-and-calls)=
 ## Depth, total calls and live storage differ
 
@@ -73,6 +87,39 @@ print(sum_to_iterative(3))  # 6
 ```
 
 Both versions perform linear work in n under the introductory model, but this loop uses Θ(1) working words. A recursive call placed last in a function does not make Python eliminate its frame. Prefer a suitable loop or explicit stack when input-dependent recursion can become deep, rather than assuming a larger recursion limit solves the design problem.
+
+## Compare implementations under the same model
+
+| Function | Returned result / observable effect | Time | Working storage excluding returned output |
+|---|---|---|---|
+| `sum_to(n)` | Integer sum; no internal printing | Θ(n+1) | Θ(n+1) live frames/words |
+| `sum_to_iterative(n)` | Same integer sum; no internal printing | Θ(n+1) | O(1) words |
+| `trace_calls(n)` | `None`; 2n+1 printed lines | Θ(n+1) if each printed line is treated as one output action | Θ(n+1) live frames/words |
+
+For the trace, retained printed output is a separate resource: a terminal or capture buffer may store O(n+1) lines. Actual formatting and character/I/O costs are not necessarily constant per line, especially when n has many digits. The recursion stack stores pending work; it is not a copy of all text already printed.
+
+A chain for n makes n+1 calls in total, with n+1 live helper frames at the base case: that is n edges but n+1 frames. An explicit stack is another implementation choice when pending work must be retained; replacing recursion with a stack does not automatically remove the need for that state. A direct running-total loop works here because additions can be accumulated without preserving all suspended calls.
+
+:::{tip} Common misconception
+**Printing a child result returns it to the caller.** `print` produces an output effect; a function must return a value if its caller is to use that result.
+:::
+
+(call-stack-checks)=
+## Check your understanding
+
+Trace the calls or predict the result before opening the explanation.
+
+**1. What does trace_calls(1) print, and what value does it return?**
+
+:::{dropdown} Show explanation
+It prints enter 1, then base, then leave 1 on three separate lines. Its return value is None, including at the bare return in the base case.
+:::
+
+**2. Do logarithmic live depth and two recursive children imply logarithmic total work?**
+
+:::{dropdown} Show explanation
+No. Depth counts the longest active chain, while both subtrees may contain many calls and each call may perform additional work. Count all local work as well as depth.
+:::
 
 Next: [Divide, conquer and combine](divide-and-conquer.md).
 

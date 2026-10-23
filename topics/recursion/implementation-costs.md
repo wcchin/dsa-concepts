@@ -1,5 +1,12 @@
 # Implementation choices can change the cost
 
+**After this page, you should be able to:**
+
+- Compare indexed merging, front removal, slicing and reusable-buffer choices.
+- Explain how contracts, mutation and allocation change complete-operation costs.
+
+**Builds on:** [Merge contracts and code](divide-and-conquer.md#recursive-merge-contract), [recursion costs](recursion-costs.md) and [list-reference storage](../foundations/mutation-and-copying.md).
+
 “Take the smallest first unused item” is a sound merge strategy. How we implement “take” determines whether the code retains the intended cost.
 
 (front-removal)=
@@ -54,5 +61,44 @@ An alternative implementation can sort ranges within one array and reuse an auxi
 Where is the reachable base case? What measure decreases? Which operations happen before and after child calls? How many calls are active simultaneously? What does the combine operation cost in the chosen representation?
 
 Use those questions when reading [Sorting](../sorting/sorting.md), [search-tree](../searching/searching.md) and [graph traversal](../graphs/graphs.md) topics.
+
+(recursive-implementation-costs)=
+## Compare equivalent goals without hiding side effects
+
+| Choice | Work and mutation | Storage implications |
+|---|---|---|
+| Shown merge with indices and remainder slices | Θ(a+b+1); input lists unchanged | New result plus possible linear temporary remainder storage |
+| Indices with explicit remainder loops | Same linear work and preserved inputs | New result; constant local merge workspace excluding it |
+| Repeated front removal from list halves | Can require quadratic shifts in total merge size; consumes those halves | New result does not make input mutation disappear |
+| Recursive midpoint slices | Θ(n log(n+1)+1) whole-sort work with the shown combine | Linear peak additional space including result; logarithmic stack |
+| Range indices plus a reusable merge buffer | Can retain linear combine work; side effects depend on the chosen interface | Linear buffer, with allocation reusable across merge levels |
+| Bottom-up merge passes | Can retain Θ(n log(n+1)+1) sorting work without recursive sort calls | Usually a merge buffer; eliminating recursion does not make it in-place |
+
+Only the indexed slicing-based implementation has full code on the preceding page; the alternatives here are design comparisons, not extra functions provided by this page. A front-removal version that first copies its halves still pays for those copies and shifts, even if it protects the caller's original list.
+
+For a balanced sort whose merge repeatedly shifts a linear-sized half, local worst-case merging is Θ(n²), giving T(n)=2T(n/2)+Θ(n²) on power-of-two inputs. Summing its geometric level costs yields Θ(n²) worst-case time, rather than preserving the indexed version's Θ(n log n) bound. This is a conditional analysis of that alternative, not a claim about the unchanged `merge_sorted` implementation.
+
+Inspect the actual list operations before transferring a complexity claim. Avoided copies, input mutation, reusable storage, stable ties and recursion overhead are separate choices; improving one does not settle the others.
+
+:::{tip} Common misconception
+**The merge has only two indices, so its entire workspace is constant.** The shown remainder slices allocate temporary lists; count live allocations as well as named scalar variables.
+:::
+
+(recursion-implementation-checks)=
+## Check your understanding
+
+Trace the calls or predict the result before opening the explanation.
+
+**1. If a left list has four items and is emptied by repeated pop(0), how many reference shifts occur?**
+
+:::{dropdown} Show explanation
+3+2+1+0=6 shifts. This is separate from comparisons and writes into the output list.
+:::
+
+**2. Replacing remainder slices with append loops makes the merge output disappear. True or false?**
+
+:::{dropdown} Show explanation
+False. It avoids those temporary remainder lists, but still returns a newly allocated result containing a+b references.
+:::
 
 **Browse:** [Recursion](recursion.md) · [Concept index](../../concepts.md)
