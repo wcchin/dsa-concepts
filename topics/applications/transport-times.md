@@ -1,5 +1,12 @@
 # A visitor asks for the least travel time
 
+**After this page, you should be able to:**
+
+- Trace how cumulative-cost relaxation improves an earlier route candidate.
+- Qualify the fastest-route guarantee using the supplied weights and model boundaries.
+
+**Builds on:** [Fewest-link routes](transport-hops.md), [heaps](../heaps/heaps.md) and [Dijkstra](../graph-algorithms/dijkstra.md).
+
 (transport-dijkstra-question)=
 ## Accumulate minutes along the route
 
@@ -29,6 +36,35 @@ The model adds fixed link times. It excludes waiting, congestion, timetables, fa
 
 `weighted_path_to("A", "G", time_distance, time_parent)` returns `None`, while the source has distance zero. This implementation initialises all declared vertices, unlike BFS's reached-only distance dictionary. Different containers express different conventions; an absent BFS key and an infinite Dijkstra label both indicate unreachable G here.
 
-**Think first:** why not mark B final when A first inserts it at 12? **Reasoning:** the later route through C costs 5. The nonnegative settlement argument applies at a valid minimum-cost pop, not at insertion.
+## Query contract, state and costs
+
+The query returns fresh distance and parent maps for every declared place without changing the graph. It requires a declared source, valid endpoints and finite nonnegative weights; this case supplies positive weights. The implementation explicitly rejects an unknown source with `KeyError` and a negative weight with `ValueError`. That negative-weight scan covers the whole graph, including unreachable components. It is not full validation of malformed records or non-finite numbers.
+
+Each finite tentative label is the cost of a discovered route. Relaxation keeps a better label and matching predecessor; an obsolete heap entry is skipped. At a valid minimum-cost pop, nonnegative remaining edges prevent an undiscovered cheaper completion to that vertex. This is the settlement argument; discovery alone is insufficient.
+
+`weighted_path_to` assumes distance and parent maps from the same run and the matching source. It returns `["A"]` for A, `None` for infinite-distance G, and raises `KeyError` for an unknown target because it indexes `distance[target]`. Its `source` argument does not validate the maps. Keep the source and both maps together when reusing results.
+
+With n vertices and m undirected links, the shown lazy-heap version takes O(n+m log(m+2)) time and O(n+m) auxiliary/result storage. Initialisation and weight validation are included; stale candidates can occupy more than one heap slot per vertex. Recovering a k-edge route adds O(k+1) time/output, and measuring it adds the adapter cost. Reuse all-source-A distances for several destinations until weights or links change.
+
+:::{tip} Common misconception
+**More links must mean more time.** Different edge weights permit a five-link route of 13 minutes to beat the three-link BFS result of 23 minutes.
+:::
+
+(transport-times-checks)=
+## Check your understanding
+
+Predict the result or justify the choice before opening the explanation.
+
+**1. May B be marked final when A first proposes its cost as 12?**
+
+:::{dropdown} Show explanation
+No. Processing C later discovers A–C–B at cost 5. B becomes settled at its valid minimum-cost pop, not at first insertion.
+:::
+
+**2. After adding a five-minute boarding wait at every intermediate stop, can we still report 13 minutes as the optimum journey time?**
+
+:::{dropdown} Show explanation
+No. The supplied weights omitted those waits. The current route has four intermediate stops and would total 33 minutes under that rule; other routes must be compared again using a model that includes the new costs.
+:::
 
 Next: [Incremental connectivity](transport-connectivity.md).

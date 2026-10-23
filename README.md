@@ -20,7 +20,7 @@ A standalone Jupyter Book 2 project for a searchable, self-reading course resour
 - Graph ordering, shortest paths and spanning trees: eight aligned readings and nine original SVG figures, with objective/input/result contracts, explicit code dependencies, implementation-specific costs and sixteen self-checks.
 - Optional algorithm design: six aligned readings and four original SVG figures, with problem/result contracts, sufficient-state and correctness arguments, explicit implementation costs and twelve self-checks.
 - Optional strings and tries: eight aligned readings and nine accessible SVG figures, with complete trie/query contracts, size/empty observers, shared substring semantics, qualified implementation costs and sixteen self-checks.
-- Integrated transport application: six reading pages, five accessible SVG figures and a standalone standard-library Python example.
+- Integrated transport application: six aligned readings, twelve explained prediction checks, five accessible SVG figures and a standalone standard-library Python example.
 - A Topic 9 self-reading pilot: page goals, prerequisite links, misconception reminders and 34 prediction questions with collapsed explanations.
 - A prerequisite reading guide and public coverage review.
 - An original probing-deletion diagram.

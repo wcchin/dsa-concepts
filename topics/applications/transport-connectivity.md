@@ -1,5 +1,12 @@
 # An operator asks whether places are connected
 
+**After this page, you should be able to:**
+
+- Explain a union result and component count after each link opening.
+- Separate incremental membership state from the graph needed to recover routes.
+
+**Builds on:** [The shared model](transport-model.md) and [union–find operations](../union-find/union-find.md).
+
 (transport-incremental-connectivity)=
 ## Answer after each arriving connection
 
@@ -30,6 +37,35 @@ The disjoint-set parent arrays are bookkeeping, not input connections. Compressi
 
 For one static snapshot, BFS/DFS can label all undirected components in linear time. Union–find earns its role when connectivity queries recur between added links. Removing an arbitrary link is different: ordinary union–find does not split a merged component or determine whether a redundant alternative remains.
 
-**Think first:** does `union(B,C) == False` justify removing BC from the fastest-route graph? **Reasoning:** no. It preserves reachability at that snapshot but can destroy the best travel-time route.
+## Update contract, state and costs
+
+The identifier map assigns each declared place a fixed integer index. `union` mutates the disjoint-set representation and returns `True` exactly when it merges two previous components; otherwise it returns `False`. The component counter decreases once per successful merge, independent of the chosen representative. `connected` returns a Boolean and may compress parents without changing membership. Neither query reports a route or a weight.
+
+After processing the first i links, two places share a representative exactly when they are connected using those opened links. Initially all seven are singletons; a new link either joins two components or stays inside one. Thus seven minus the number of successful unions equals the current count. The displayed SVG traces this partition invariant.
+
+An unknown place fails the `place_index` lookup with `KeyError`; an out-of-range member passed directly to the disjoint set raises `IndexError`. The fixed universe includes G from initialisation. This workload adds edges only: it does not add places or support arbitrary edge deletion.
+
+Building the map and singleton sets costs O(n) time/storage. With union by size and path compression, m updates take O(m α(n)) amortised time for n≥2, rather than guaranteeing constant time for each individual call. Keeping every opening record adds O(m) output storage. A repeated link leaves the partition unchanged; a physically closed link can require recomputing connectivity from the remaining graph.
+
+:::{tip} Common misconception
+**Disjoint-set parents are road connections.** They represent membership and may change under compression. Preserve adjacency and route predecessors for actual journeys.
+:::
+
+(transport-connectivity-checks)=
+## Check your understanding
+
+Predict the result or justify the choice before opening the explanation.
+
+**1. Does the false union result for BC justify discarding BC from a fastest-route graph?**
+
+:::{dropdown} Show explanation
+No. B and C were already connected through A, but the direct BC link improves travel time. It participates in the 13-minute route despite leaving the partition unchanged.
+:::
+
+**2. After all openings, what happens to the component count if AB is processed again? What if G is omitted at initialisation?**
+
+:::{dropdown} Show explanation
+Repeating AB returns False and leaves two components. Omitting G would incorrectly report one component for a different vertex universe, hiding the unserved place.
+:::
 
 Next: [Network design](transport-design.md).

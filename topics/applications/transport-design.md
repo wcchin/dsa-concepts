@@ -1,5 +1,12 @@
 # A planner asks for the cheapest connecting network
 
+**After this page, you should be able to:**
+
+- Specify the construction objective and interpret a forest when full connectivity is infeasible.
+- Check optimal cost, coverage and travel consequences as separate properties.
+
+**Builds on:** [Connectivity](transport-connectivity.md) and [minimum spanning forests](../graph-algorithms/spanning-trees.md).
+
 (transport-construction-objective)=
 ## Change the objective and choose the matching weight
 
@@ -38,6 +45,35 @@ built_route = weighted_path_to("A", "F", built_distance, built_parent)
 
 On this constructed tree, A-to-F follows **A–B–C–D–F**, taking **31 minutes**: 12+2+9+8. The full candidate network offered 13 minutes. Minimising edge construction cost did not preserve fastest routes; the chosen tree also has no backup route if an edge fails.
 
-**Think first:** is adding one more candidate link always wrong after finding an MST? **Reasoning:** it increases construction cost, but may serve a different objective such as shorter trips or resilience. The MST solves the stated single objective, not every planning concern.
+## Design contract, choices and costs
+
+Both algorithms return `(chosen_edges, total, components)` in fresh result containers. Chosen edges use `(construction_cost, u, v)`, not the source table's `(u, v, minutes, cost)` format. The original links and adjacency views remain available. The graph is simple and undirected, with valid endpoints and finite positive construction weights. Under positive costs, removing a cycle edge reduces cost without losing connectivity, so a cheapest network within a component can be a tree.
+
+Kruskal sorts all candidate edges and tracks an acyclic partition with union–find. Prim grows one tree using the cheapest edge crossing from its reached set; after finishing that component, it starts another. The respective cut arguments establish optimality. The check `selected edges = n − components` verifies a forest's size once acyclicity and component coverage are established; that equation alone does not prove minimum cost.
+
+Use Kruskal when a weighted edge table is already available, or Prim when weighted adjacency is convenient. Kruskal here takes O(n+m log(m+1)) usual time and O(n+m) extra storage; lazy Prim takes O(n+m log(m+2)) time and O(n+m) auxiliary/result storage. Kruskal's sorted copy and Prim's stale crossing candidates count as storage. A forest returns n−c edges for c components; it never silently drops isolated vertices. Equal weights can allow several optima on other inputs, so compare totals and coverage rather than requiring identical edge order.
+
+Filtering the source table to selected unordered pairs takes O(n+m) expected time with O(n+m) storage as an upper bound, followed by building another time view. Running Dijkstra on that view is a new query with a new edge set; its answer cannot be inherited from the full candidate network.
+
+:::{tip} Common misconception
+**Minimum construction cost implies fastest trips and resilience.** This forest changes A-to-F travel from 13 to 31 minutes and offers no alternative path inside its tree if a selected link fails.
+:::
+
+(transport-design-checks)=
+## Check your understanding
+
+Predict the result or justify the choice before opening the explanation.
+
+**1. An input-order union scan finds an acyclic network costing 22 units. Has it solved minimum-cost construction?**
+
+:::{dropdown} Show explanation
+No. It preserves connectivity without cycles, but lacks Kruskal's increasing-weight safe-choice rule. The minimum forest here costs 11 units, so feasibility alone is not optimality.
+:::
+
+**2. Must a planner reject an extra link after constructing the minimum forest? Can that forest claim to serve G?**
+
+:::{dropdown} Show explanation
+An extra positive-cost link increases construction expenditure but may improve travel time or resilience under a revised objective. G remains isolated because no candidate connection reaches it; a minimum forest is not evidence of full seven-place service.
+:::
 
 Next: [Compare decisions and model limits](transport-decisions.md).

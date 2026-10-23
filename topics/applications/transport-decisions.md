@@ -1,5 +1,12 @@
 # Compare the answers before making a decision
 
+**After this page, you should be able to:**
+
+- Compare valid answers by objective, units and feasibility rather than by algorithm name.
+- Audit preparation, working/output space and model limitations before using a result.
+
+**Builds on:** [All five preceding case readings](applications.md) and [cost models](../analysis/counting-work.md#cost-model).
+
 (transport-objective-comparison)=
 ## One candidate network supports several questions
 
@@ -25,10 +32,11 @@ Let n count declared places and m count undirected candidate links. Under the bo
 | Run lazy Dijkstra | O(n+m log(m+2)) time, O(n+m) auxiliary state including lazy candidates |
 | Process incremental connectivity | O(n+m α(n)) total for n≥2, including initialisation; O(n) disjoint-set state |
 | Keep the opening log | An additional O(m) records, beyond the disjoint-set structure |
+| Run lazy Prim | O(n+m log(m+2)) time, O(n+m) auxiliary/result storage including lazy crossing edges |
 | Run Kruskal | O(n+m log(m+1)) usual time bound, O(n+m) extra storage including sorted edges |
 | Recover one k-edge route | O(k+1) time and output |
 
-The simple `route_total` helper rebuilds an O(m) edge-weight map on each call, then scans the route: O(m+k+1) time and O(m+1) working storage, with endpoint-pair hashing constant here. For repeated measurements, prepare that map once. Comparing algorithm costs without accounting for adapters and output would hide part of the actual program.
+The simple `route_total` helper rebuilds an O(m) edge-weight map on each call, then scans the route: O(m+k+1) time and O(m+k+1) working storage, with endpoint-pair hashing constant here. The `route[1:]` slice contributes O(k) temporary references in this implementation. For repeated measurements, prepare that map once; iterating consecutive pairs without a slice can avoid that temporary copy. Comparing algorithm costs without accounting for adapters and output would hide part of the actual program.
 
 (transport-model-revisions)=
 ## Change the state when the question changes
@@ -52,3 +60,41 @@ Check that every candidate endpoint exists, each undirected adjacency entry has 
 The standalone example exposes the same data and computations as these pages. No plotting or third-party package is required to run it. The figures are exact traces of this invented dataset, not screenshots of a routing service.
 
 Further integrated cases could study dependency scheduling or a spatial directory. Return to the [application overview](applications.md), [reading guide](../../reading-guide.md) or [concept index](../../concepts.md).
+
+## A reusable application workflow
+
+For another case, retain the reasoning questions while adapting the page structure to its workload:
+
+| Step | Evidence to write down |
+|---|---|
+| Question | Who needs an answer, in which units, with which constraints? |
+| Model | Entity identifiers, relations, weights, absent cases and input assumptions |
+| Method | Matching operation/algorithm contract, representation and rejected alternatives |
+| Trace | State changes and the invariant or safe-choice argument |
+| Result | Returned values, units, ties, coverage and an independent small check |
+| Interpretation | Preparation/query/output costs, limitations and changes that require a new model |
+
+For the transport case, agreement between Prim and Kruskal is useful cross-checking, but not a substitute for an independent optimum check: implementations can share an input mistake. Similarly, obtaining a plausible route does not validate the units. Check contracts, data projections and results together. The standalone script supplies the core algorithms this case calls; consult their dedicated topics for the wider operation interfaces.
+
+This structure leaves room for scheduling to focus on dependencies and feasibility, or a spatial directory to focus on geometry and query boundaries. Those remain future cases, not claims of additional completed lessons.
+
+:::{tip} Common misconception
+**A correct algorithm validates the whole application.** It guarantees its result under its contract. Incorrect units, omitted places or unmodelled waiting can still make an application conclusion misleading.
+:::
+
+(transport-decisions-checks)=
+## Check your understanding
+
+Predict the result or justify the choice before opening the explanation.
+
+**1. If every construction weight is doubled but travel minutes remain unchanged, which existing results change?**
+
+:::{dropdown} Show explanation
+The selected Kruskal edges remain the same under the same ordering, and the construction total becomes 22 units. Connectivity, BFS hops, the 13-minute full-network route and the 31-minute constructed-tree route stay unchanged. Scaling one objective does not change the other supplied weights.
+:::
+
+**2. For repeated route measurements, is recovering a k-edge path the only work to count?**
+
+:::{dropdown} Show explanation
+No. The shown route_total rebuilds its m-edge lookup on every call and makes a route slice. Precomputing and reusing the lookup removes repeated O(m) preparation, but route scanning and any copied/output data still count. Rebuild cached state after relevant network changes.
+:::

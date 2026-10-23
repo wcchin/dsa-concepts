@@ -2,7 +2,7 @@
 
 Find a concept by its name or browse concepts by topic.
 
-The wiki is being developed progressively. All sixteen topics have developed explanations; Topics 14–15 are optional extensions beyond the lecture inventory.
+All sixteen topics have aligned self-reading explanations; Topics 14–15 are optional extensions beyond the lecture inventory. The integrated application adapts the common structure to questions, models, methods and interpretation.
 
 ## Browse by topic
 

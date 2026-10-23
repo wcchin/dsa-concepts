@@ -1902,3 +1902,9 @@ Topics 1–13 now have the agreed reading structure. The remaining alignment ord
 Six strategy readings and eight string readings now align goals/prerequisites, problem/query contracts, returned results and boundary errors, state/invariant/progress reasoning, implementation choices and costs. Adds 28 original open prediction checks with collapsed explanations. Trie adds len/is_empty observers while retaining its size field, original mutation returns and existing algorithms. The four strategy and nine string SVG figures, original function/method bodies, URLs and labels remain. No notebook, rubric, solution or assessment source was consulted.
 
 Topics 1–15 now have the agreed reading structure. Topic 16, integrated applications, is the remaining alignment task.
+
+## Topic 16 application alignment — 23 October 2026
+
+Six readings now follow question, model, method, trace, result and interpretation rather than imposing one ADT operation template. Each supplies goals/prerequisites, explicit contracts, state/correctness reasoning, choices, costs, a misconception reminder and two open prediction checks with collapsed explanations (twelve total). Unknown versus unreachable identifiers, false unions versus useful transport links, forest coverage and construction/travel tradeoffs are explicit. End-to-end accounting includes lazy Prim and the route-measurement slice. All five SVGs, algorithms, URLs and existing labels remain. No notebook, rubric, solution or assessment source was consulted.
+
+All sixteen topics now have the agreed reading structure. More integrated cases and the advanced concepts listed in the coverage review remain possible extensions, rather than completed material.

@@ -15,6 +15,12 @@ This worked example follows one small fictional network through those questions.
 
 Review [graph traversal](../graphs/graphs.md), [heaps](../heaps/heaps.md), [graph optimisation](../graph-algorithms/graph-algorithms.md) and [union–find](../union-find/union-find.md) as needed. The examples reuse those implementations and link back to their invariants.
 
+## Consistent questions, flexible case structure
+
+This topic integrates earlier concepts rather than introducing one new ADT. Follow **question → model → method → result → interpretation**. Each reading makes its assumptions, state or invariant, implementation choices, time/space costs and limits explicit, with two open prediction checks and collapsed explanations. A case need not force insertion, extraction or deletion headings where those operations do not answer its question.
+
+The transport case offers six readings and twelve checks. Preserve the distinction between an optimal answer to the supplied model and a recommendation for a real network. All five figures use the same invented dataset; its isolated place is part of the problem.
+
 ## Run the listings together
 
 [Download the standalone Python example](../../examples/transport_network.py). It includes the reused algorithms, shared data and all case-study calculations. Save the downloaded file as `transport_network.py`, then run `python transport_network.py` with Python 3; no external package, notebook or private course repository is required. To follow the page listings, keep the downloaded module in the working directory and read them in route order in one Python session.

@@ -1,5 +1,12 @@
 # Model places, links and two kinds of cost
 
+**After this page, you should be able to:**
+
+- Translate a transport question into vertices, edges and a weight with explicit units.
+- Derive consistent graph views while preserving isolated places and input assumptions.
+
+**Builds on:** [Maps and sets](../maps-sets-hashing/maps-sets-hashing.md) and [graph representations](../graphs/graph-representations.md).
+
 (transport-case-model)=
 ## Decide what vertices and edges represent
 
@@ -72,6 +79,33 @@ def route_total(route, links, weight_column):
 
 This helper assumes an actual route from the graph algorithms, with valid vertices and consecutive endpoints connected by declared links. A one-vertex route costs zero; `None` remains absence, not a zero-cost trip. A `frozenset` makes an unordered endpoint-pair key, appropriate here because there are no parallel links and direction is deliberately ignored.
 
-**Think first:** should an unreachable harbour be omitted from the vertex dictionary? **Reasoning:** no. Omitting it would hide a service gap and change the component count.
+## Adapter contracts and preparation costs
+
+`adjacency_view` returns fresh adjacency lists without changing `places` or `links`. The unweighted view contains neighbour identifiers; weighted entries are `(neighbour, weight)` pairs. Column `None`, 2 or 3 selects the representation. Another selector raises `ValueError`; an undeclared endpoint raises `KeyError` when its adjacency list is accessed. Invalid row shapes, duplicate pairs or non-finite weights are outside this helper's contract and are not comprehensively checked. Validate external data before adapting it.
+
+`route_total` returns a number in the selected units or `None` for an absent route. A selector other than 2 or 3 raises `ValueError`, even if the route is `None`. A missing consecutive pair raises `KeyError`; this does not make the helper a complete route validator. In particular, a singleton with an unknown identifier has no pair to check. Callers must supply a valid route, rather than use a zero sum as proof of validity.
+
+For n places and m links, each view takes O(n+m) time and returned storage under expected constant-time hashing. All three views preserve the same vertex set and edge pairs, but project different edge information. Keeping one source table prevents the time and construction views from accidentally describing different networks. Measuring a k-edge route rebuilds a pair lookup and scans k pairs; the final page accounts for that extra preparation and the Python slice.
+
+:::{tip} Common misconception
+**One adjacency view can serve every objective unchanged.** An unweighted view discards minutes; a construction-weighted view optimises different units. Choose the view from the question.
+:::
+
+(transport-model-checks)=
+## Check your understanding
+
+Predict the result or justify the choice before opening the explanation.
+
+**1. Should unreachable Harbour G be omitted from `places` to simplify the graph?**
+
+:::{dropdown} Show explanation
+No. G is a declared place with an empty adjacency list. Removing it would hide the service gap and change the component count from two to one.
+:::
+
+**2. What do `route_total(["A"], links, 2)` and `route_total(None, links, 2)` mean?**
+
+:::{dropdown} Show explanation
+The first returns 0 minutes for a valid trip that stays at A. The second returns None because no route was supplied. Absence is not a zero-cost journey.
+:::
 
 Next: [Fewest links](transport-hops.md).
