@@ -3,6 +3,10 @@ project:
   title: Data Structures and Algorithms
   subtitle: Concepts, Python Examples, and Algorithmic Reasoning
   github: wcchin/dsa-concepts
+  copyright: "2026 Benny Chin"
+  license:
+    content: CC-BY-NC-ND-4.0
+    code: MIT
   description: A searchable guide to concepts, representations and algorithmic reasoning.
   authors:
   - name: Benny Chin
@@ -11,6 +15,7 @@ project:
   - file: concepts.md
   - file: reading-guide.md
   - file: coverage-review.md
+  - file: licensing.md
   - file: topics/foundations/foundations.md
     children:
     - file: topics/foundations/data-and-algorithms.md
@@ -177,4 +182,5 @@ site:
     favicon: assets/brand/favicon.ico
     style: assets/custom.css
   parts:
+    footer: assets/page-footer.md
     primary_sidebar_footer: assets/sidebar-footer.md

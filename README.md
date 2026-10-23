@@ -65,5 +65,11 @@ Every push to `main` builds and publishes the site. Pull requests run the build 
 
 Read `planning/topic-inventory.md` for the source-based topics, page boundaries, lecture-source mapping and gaps. The inventory records the private course-source provenance but the source files themselves are not bundled. Do not place assessment solutions in this book project.
 
-All sixteen topics contain developed reading material; Topics 14–15 are optional extensions beyond the lecture inventory. See `coverage-review.md` for remaining gaps and `planning/coverage-audit.md` for the editorial review. No content licence has been selected yet.
+All sixteen topics contain developed reading material; Topics 14–15 are optional extensions beyond the lecture inventory. See `coverage-review.md` for remaining gaps and `planning/coverage-audit.md` for the editorial review.
 
+
+## Licensing
+
+© 2026 Benny Chin · Content **CC BY-NC-ND 4.0** · Code **MIT**.
+
+Original explanations and diagrams use [CC BY-NC-ND 4.0](LICENSE-CONTENT.txt). Original executable code, including embedded code listings and downloadable examples, uses [MIT](LICENSE-CODE.txt). Third-party material retains its own terms. See [LICENSE.md](LICENSE.md) and [Licensing and attribution](licensing.md) for scope and attribution. Project-level licence metadata supplies the article-header notices; `assets/page-footer.md` supplies the shared page footer.
