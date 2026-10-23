@@ -12,11 +12,13 @@ project:
   - name: Benny Chin
   toc:
   - file: index.md
-  - file: concepts.md
-  - file: reading-guide.md
-  - file: code-languages.md
-  - file: coverage-review.md
-  - file: licensing.md
+  - title: 0. Preface and reading guide
+    children:
+    - file: concepts.md
+    - file: reading-guide.md
+    - file: code-languages.md
+    - file: coverage-review.md
+    - file: licensing.md
   - file: topics/foundations/foundations.md
     children:
     - file: topics/foundations/data-and-algorithms.md
