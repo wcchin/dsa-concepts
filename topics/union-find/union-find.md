@@ -12,3 +12,9 @@ When connections arrive one at a time, we may need to ask whether two objects ar
 Review [arrays and references](../linear-structures/linear-structures.md), [connected components](../graphs/graph-components.md), and [amortised analysis](../linear-structures/dynamic-arrays.md). This topic is a prerequisite for the [Kruskal implementation](../graph-algorithms/kruskal.md) in the following topic.
 
 The code manages a fixed universe of integer indices `0..n-1`. It preserves the additional lecture's tie rule: if root sizes are equal, the first argument's root remains the root. This makes its traces reproducible; the abstract partition does not depend on which representative is chosen.
+
+## Common interface and implementation choices
+
+The [fixed-universe contract](disjoint-sets.md#disjoint-set-interface) includes root/merge/connectivity operations, element count, component count, component size and emptiness. The [operation table](union-compression.md#union-find-operation-costs) compares plain forests, weighted linking and compression, separating individual calls from amortised sequences.
+
+All four readings have goals/prerequisites and two explained self-checks (eight checks). The five original diagrams and the existing class's core find/union/tie behaviour are retained. Count/size observers extend the interface without changing Kruskal's existing `components` field. Arbitrary insertion, deletion/splitting, rollback, routes and automatic member enumeration remain outside this class.

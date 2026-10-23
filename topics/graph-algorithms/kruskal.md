@@ -1,11 +1,25 @@
 # Kruskal: sort edges and merge components
 
+**After this page, you should be able to:**
+
+- Trace globally sorted edges and use union returns to reject cycles.
+- Specify forest inputs/results, stable weight ties, dependencies and costs.
+
+**Builds on:** [Union–find operations](../union-find/disjoint-sets.md#disjoint-set-interface), [the complete class](../union-find/union-compression.md#disjoint-set-code) and [safe-edge reasoning](spanning-trees.md).
+
 (kruskal-algorithm)=
 ## Consider the globally lightest remaining edge
 
 Kruskal scans edges in nondecreasing weight order. Initially each vertex is its own component. Accept an edge exactly when its endpoints currently belong to different components; then merge those components. An edge within one component would close a cycle and is rejected.
 
 Read [Topic 12's disjoint-set class](../union-find/union-compression.md) first. This page deliberately reuses that class rather than presenting a second version with different tie or compression rules.
+
+(kruskal-contract)=
+## Preserve vertices, consume edges and retain one optimum forest
+
+`kruskal_forest(vertices, edges)` returns `(chosen, total, components)` under the [forest contract](spanning-trees.md#spanning-forest-contract). It first copies the vertex iterable and maps labels to integer indices for `DisjointSet`. Duplicate vertices raise `ValueError`; an edge endpoint outside that map raises `KeyError`. Finite weights and valid edge record shapes are preconditions. Input lists remain unchanged; iterables are consumed.
+
+Run the complete [DisjointSet class](../union-find/union-compression.md#disjoint-set-code) first. There is one shared implementation, including its union return and tie policies. Sorting uses weight only and is stable: equal-weight edges retain input order without comparing labels. Negative and zero weights are allowed. Empty vertices/edges return `([], 0, 0)`.
 
 (kruskal-code)=
 ## Union reports whether a merge actually occurred
@@ -43,4 +57,35 @@ Initialisation takes $\Theta(n)$, sorting m edges takes $O(m\log(m+1))$, and the
 
 The copied sorted edge list uses $O(m)$ storage; parent and size arrays use $O(n)$. Chosen edges add at most n−c entries. The full scan handles disconnected graphs uniformly. Once a nonempty connected graph has one component, an implementation could stop early, but this code continues and rejects the remaining cycle-forming edges.
 
-The union–find parent forest is bookkeeping; its parent links are not necessarily selected graph edges. Return `chosen` when the actual spanning forest is needed. Next: [Compare the objectives](graph-algorithm-choices.md).
+The union–find parent forest is bookkeeping; its parent links are not necessarily selected graph edges. Return `chosen` when the actual spanning forest is needed.
+
+## Choices, storage and suitability
+
+Kruskal is natural for an edge list: no adjacency matrix or reciprocal neighbour lists are required. Global sorting supplies a different selection policy from Prim's expanding frontier. Pre-sorted edges could be scanned directly by another implementation, but this function always creates a sorted copy and includes that work in its bound.
+
+The vertex copy/index map and disjoint-set arrays use O(n+1) workspace. The sorted copy and Python sorting workspace use O(m+1); chosen output uses O(n+1). Total additional storage is O(n+m+1). Initialisation, sorting, and amortised union checks contribute separately to the time bound already stated above.
+
+Representatives are implementation metadata. Keep the actual accepted `(weight, u, v)` records when the constructed network is needed. A different order among equal weights can return another equally light forest; the correctness claim is minimum total cost for each component, not a unique sequence of endpoints.
+
+:::{tip} Common misconception
+**Union–find parents are Kruskal's selected edges.** Root links and compression are bookkeeping; only `chosen` stores the accepted input edges.
+:::
+
+(kruskal-checks)=
+## Check your understanding
+
+Predict the result or state change before opening the explanation.
+
+**1. Why is AB(4) rejected in the shared trace even though its weight is smaller than BD(5)?**
+
+:::{dropdown} Show explanation
+A and B are already connected through accepted AC and BC. AB would close a cycle; BD later joins different components.
+:::
+
+**2. If two equal-weight edges exchange their input positions, must the returned edge list stay identical?**
+
+:::{dropdown} Show explanation
+No. Stable sorting preserves that changed tie order. Both results can be valid minimum forests with the same optimum total.
+:::
+
+Next: [Compare the objectives](graph-algorithm-choices.md).

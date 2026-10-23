@@ -1,5 +1,12 @@
 # DAGs and topological order
 
+**After this page, you should be able to:**
+
+- Specify Kahn outputs and trace remaining-indegree/ready-queue invariants.
+- Distinguish valid-order choices from cycle detection and blocked vertices.
+
+**Builds on:** [Directed graph lists](../graphs/graph-representations.md) and [FIFO queues](../linear-structures/queues-and-deques.md).
+
 (directed-acyclic-graph)=
 ## Dependencies require direction without cycles
 
@@ -23,6 +30,13 @@ def valid_topological_order(graph, order):
 ```
 
 Length and membership checks together exclude missing vertices, duplicates and unexpected labels. As throughout this topic, every listed destination must be a graph key.
+
+(topological-contract)=
+## Specify ordering, failure and mutation
+
+`topological_sort(graph)` accepts well-formed outgoing **unweighted directed** lists and returns a new list containing every vertex once. It leaves the graph unchanged. A cycle anywhere raises `ValueError`; an empty graph returns `[]`. `valid_topological_order(graph, order)` observes a candidate sequence and returns a boolean under the same graph contract.
+
+FIFO readiness follows dictionary insertion order initially and neighbour order when indegrees become zero. The result is deterministic for those orders, but need not be the alphabetically smallest valid order. Sinks and isolated vertices must be explicit keys. Logical edge removal is represented by decreasing temporary counts, not by editing input adjacency lists.
 
 (kahn-algorithm)=
 ## Ready vertices have no remaining prerequisites
@@ -67,4 +81,33 @@ Every nonempty finite DAG has a zero-indegree vertex: following incoming edges f
 
 Unprocessed vertices are **not necessarily all on cycles**. A vertex downstream of a cycle can also remain blocked. With A → B, B → A and B → C, C is blocked but not part of the A–B cycle. The processed-count test reports existence of a cycle, not its exact members.
 
-With adjacency lists, time is $O(n+m)$ and auxiliary storage is $O(n)$ under expected constant-time dictionary operations. Next: [Shortest-path state](shortest-path-state.md).
+With adjacency lists, time is $O(n+m)$ and auxiliary storage is $O(n)$ under expected constant-time dictionary operations.
+
+## Choices, costs and use
+
+Use topological order for dependency scheduling and DAG dynamic programming. FIFO Kahn takes O(n+m+1) time and O(n+1) working storage, plus O(n+1) returned order storage, under expected dictionary access. Validating one candidate order also takes O(n+m+1) time with O(n+1) position/set storage. No vertex-label comparisons are needed by FIFO readiness.
+
+Replacing the ready deque with a min-heap can choose a smallest-ready label under a stated ordering, adding O(n log(n+1)) heap work. A DFS-based ordering is another implementation choice that needs explicit directed-cycle handling; reversing an arbitrary DFS discovery list is insufficient. Kahn reports that a cycle exists, not a cycle witness or strongly connected groups.
+
+:::{tip} Common misconception
+**Every unprocessed vertex lies on a cycle.** Some may merely depend on a cycle and remain blocked downstream.
+:::
+
+(topological-checks)=
+## Check your understanding
+
+Predict the result or state change before opening the explanation.
+
+**1. A→B, B→A and B→C remain after the ready queue empties. Must C lie on a cycle?**
+
+:::{dropdown} Show explanation
+No. C is blocked by the A–B cycle but need not belong to it. The function reports a cycle exists somewhere in the remainder.
+:::
+
+**2. If two vertices are ready, must the alphabetically smaller one leave the FIFO queue first?**
+
+:::{dropdown} Show explanation
+Only if it was queued first. The shared initial queue A, B, G produces A, B, G, C, D, E, F rather than a globally alphabetical order.
+:::
+
+Next: [Shortest-path state](shortest-path-state.md).

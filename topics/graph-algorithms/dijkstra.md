@@ -1,5 +1,12 @@
 # Dijkstra's algorithm and lazy heap entries
 
+**After this page, you should be able to:**
+
+- Explain nonnegative-weight settlement and identify obsolete heap entries.
+- Connect the lazy implementation to its result contract, tie policy and costs.
+
+**Builds on:** [Relaxation](shortest-path-state.md) and [stable heap records](../heaps/heap-applications.md).
+
 (dijkstra)=
 ## Settle the smallest current tentative distance
 
@@ -7,12 +14,20 @@ Under **nonnegative** edge weights, the smallest current tentative distance can 
 
 That is a greedy correctness argument, not just a statement that a heap is fast. Marking a vertex final when first inserted is wrong: B in the shared graph improves from 4 to 3 after its first insertion.
 
+(dijkstra-contract)=
+## Specify weights, errors and tied results
+
+`dijkstra(graph, source)` returns all-vertex `(distance, parent)` dictionaries under the [shortest-path contract](shortest-path-state.md#shortest-path-contract). It rejects a missing source with `KeyError` and any negative edge anywhere with `ValueError`, including an unreachable negative edge. Zero weights are allowed; finite numeric weights and valid destination keys are preconditions. An empty graph has no valid source.
+
+The input remains unchanged. Strict relaxations retain the first equal-cost route already found; the counter resolves heap ties in candidate insertion order without comparing labels. The function computes distances for every source-reachable vertex and does not stop at one target.
+
 (lazy-dijkstra-code)=
 ## Insert improved candidates and skip obsolete ones
 
 ```python
 from heapq import heappush, heappop
 from itertools import count
+from math import inf
 
 def dijkstra(graph, source):
     if source not in graph:
@@ -37,7 +52,7 @@ def dijkstra(graph, source):
     return distance, parent
 ```
 
-This reuses `inf` from the preceding page. The counter resolves equal-cost heap ties without comparing vertex objects, as in [priority-queue entries](../heaps/heap-applications.md). The code checks negativity across the whole input, including unreachable edges. Its other input preconditions include finite weights and destinations that are graph keys.
+The listing includes all its imports. The counter resolves equal-cost heap ties without comparing vertex objects, as in [priority-queue entries](../heaps/heap-applications.md). The code checks negativity across the whole input, including unreachable edges. Its other input preconditions include finite weights and destinations that are graph keys.
 
 (dijkstra-stale-entries)=
 ## A heap pop is not always a settlement
@@ -59,3 +74,34 @@ Including initialisation and the whole-input weight check gives $O(n+m\log(m+2))
 ## The nonnegative condition is essential
 
 With A→B(2), A→C(5), C→B(−4), greedily declaring B final at 2 would be wrong: its optimum is 1. The function above rejects such input. For an acyclic graph with negative edges, use [DAG shortest paths](dag-shortest-paths.md). General graphs with negative edges require another algorithm and attention to negative cycles; see the book's [extension roadmap](../../coverage-review.md).
+
+## Implementation choices and suitability
+
+This is a **lazy candidate heap**: improvements insert new records and old records remain until popped. It deliberately does not call a decrease-key operation on the small priority-queue class. An indexed heap could keep one live record per vertex but needs an item-to-index map and index maintenance during swaps.
+
+The shown time bound includes whole-input initialisation and negativity checking. Distance/parent results occupy O(n+1); heap records require O(m+1) working space, so total additional space is O(n+m+1). Storage is not merely O(n) because a vertex can have multiple candidates. This accounts for the implementation actually shown rather than importing an indexed-heap bound.
+
+Use Dijkstra for nonnegative route costs on directed or reciprocal undirected weighted lists. For unweighted hops, BFS is simpler. For negative edges in a DAG, use topological relaxation. The priority is a complete route cost, unlike the individual edge weights used by Prim.
+
+:::{tip} Common misconception
+**Every heap pop finalises a new vertex.** Obsolete candidates are discarded and do not represent a new settlement.
+:::
+
+(dijkstra-checks)=
+## Check your understanding
+
+Predict the result or state change before opening the explanation.
+
+**1. After B improves from 4 to 3, what happens when the old B(4) candidate is popped?**
+
+:::{dropdown} Show explanation
+It fails cost == distance[B] and is skipped. It does not rescan B's outgoing edges.
+:::
+
+**2. Can an unreachable negative edge be ignored by this implementation?**
+
+:::{dropdown} Show explanation
+No. The explicit whole-input check rejects it, even though it would not affect paths from the source. This is part of the shown function's contract.
+:::
+
+Next: [Shortest paths in a DAG](dag-shortest-paths.md).

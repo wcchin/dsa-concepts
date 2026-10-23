@@ -1,5 +1,12 @@
 # Parent forests and finding a root
 
+**After this page, you should be able to:**
+
+- Follow parent links to roots and state the parent-forest invariant.
+- Explain why root linking preserves groups but arbitrary reparenting may not.
+
+**Builds on:** [Partitions and representatives](disjoint-sets.md) and [array/reference models](../linear-structures/arrays.md).
+
 (union-find-parent-forest)=
 ## Represent each set as a rooted tree
 
@@ -34,5 +41,32 @@ Unrestricted root linking can still produce a chain, making one find take $\Thet
 Union may connect two root indices even when no original graph edge joins those roots. Path compression later adds further shortcuts that were never input edges. The parent forest therefore cannot be interpreted as a route network or as Kruskal's chosen spanning edges.
 
 Keep accepted graph edges in a separate list if they are needed. This distinction also prevents confusing a graph traversal's discovery parent—which denotes an actual graph edge—with a union–find parent.
+
+## Helper contract, costs and alternatives
+
+`find_root(parent, x)` observes a supplied well-formed parent array and returns a root. It does not compress, check indices or maintain component sizes/counts. Invalid arrays can loop forever or raise errors; Python's negative indices are not an intended membership policy. The public [DisjointSet class](union-compression.md#disjoint-set-code) adds explicit checks.
+
+For a path with h parent links, this iterative helper uses Θ(h+1) time and O(1) auxiliary space. A plain forest uses Θ(n+1) persistent storage and may have h=n−1. Root linking after roots are known costs O(1); finding those roots is additional work. Union by size controls height, while compression repairs paths during find. Neither operation needs to sort member labels or preserve input graph edges.
+
+:::{tip} Common misconception
+**Two members are connected exactly when their immediate parents match.** Their paths can differ and still end at the same root.
+:::
+
+(parent-forest-checks)=
+## Check your understanding
+
+Predict the result or state change before opening the explanation.
+
+**1. For parent = [0,0,0,2,4,4,6], are 1 and 3 connected despite having parents 0 and 2?**
+
+:::{dropdown} Show explanation
+Yes. Both paths end at root 0. Compare representatives, not just one parent link.
+:::
+
+**2. Can a compressed parent link be used as a road in a recovered graph route?**
+
+:::{dropdown} Show explanation
+No. It records group membership and may never have been an input graph edge. Keep actual chosen edges separately.
+:::
 
 Next: [Union by size and compression](union-compression.md).

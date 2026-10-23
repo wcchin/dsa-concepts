@@ -74,3 +74,7 @@ Seven readings now align contracts, invariants, preserved traces, implementation
 ## Topic sequence — 23 October 2026
 
 Topics 1–8 are unchanged. The sidebar now reads 9 spatial search, 10 heaps, 11 graphs/traversal, 12 union–find, 13 graph algorithms, 14 optional design strategies, 15 optional strings, and 16 integrated applications. Topic numbers, concept indexes, prerequisite routes, coverage summaries and example descriptions follow this sequence; URLs, explicit labels, algorithms and figures are retained. Alignment of the graph, union–find and graph-algorithm content is deferred.
+
+## Topics 11–13 operation alignment — 23 October 2026
+
+The reordered graph sequence now aligns seven graph/traversal readings, four union–find readings and eight graph-algorithm readings. Adds one simple unweighted graph-operations page with checked construction/query/update helpers. Extends the existing DisjointSet with len/empty/component-count/component-size queries while retaining original find/union methods, public metadata and tie traces. Existing graph algorithms retain their core implementations, with local imports and linked helper dependencies made explicit. Each reading supplies goals, prerequisites, contracts/choices/costs, a misconception reminder and two collapsed-feedback checks (38 total). The 22 existing figures, original URLs and explicit concept labels remain. No notebook, rubric, solution or assessment source was consulted. Remaining directed/negative-cycle and dynamic-connectivity extensions are named without claiming implementations.

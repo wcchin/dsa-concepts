@@ -1,11 +1,25 @@
 # Breadth-first search: layers and a FIFO frontier
 
+**After this page, you should be able to:**
+
+- State BFS outputs and explain why discovery happens before enqueueing.
+- Recover one shortest-hop path and account for frontier and result storage.
+
+**Builds on:** [Graph representations](graph-representations.md), [graph operations](graph-operations.md) and [FIFO queues](../linear-structures/queues-and-deques.md).
+
 (breadth-first-search)=
 ## Expand the earliest discovered waiting vertex
 
 **Breadth-first search (BFS)** starts with one vertex and explores its reachable region in layers of hop distance. A FIFO queue stores the **frontier**: discovered vertices whose neighbour lists have not yet been fully examined.
 
 A vertex is **discovered** when first encountered and recorded. It is **expanded** when removed from the queue so that its neighbours can be examined. Returning a vertex's neighbours is different from returning the vertex itself as a result.
+
+(bfs-contract)=
+## Specify the returned reachable-region result
+
+`bfs(graph, start)` observes a well-formed outgoing adjacency-list graph; it leaves that graph unchanged and returns `(order, parent, distance)`. `order` records expansion order, `parent` records one discovery parent, and `distance` gives minimum hop counts. The dictionaries contain only reached vertices. The start has parent `None` and distance 0; a missing start raises `KeyError`, including any start in an empty graph.
+
+`path_to(parent, target)` expects a parent dictionary from that same traversal with non-`None` labels. It returns a new source-to-target vertex list, or `None` if the target was not reached. It does not validate an arbitrary parent structure or look up the original graph. Stored neighbour order breaks ties between equally short paths; no weighted-cost guarantee is supplied.
 
 (bfs-code)=
 ## Mark a vertex when it joins the queue
@@ -71,4 +85,35 @@ def path_to(parent, target):
 
 Here parent dictionaries come from a traversal and vertex labels are non-`None` strings. `None` marks the start's missing parent. Following G's parents backwards gives G, F, C, A; reversing yields **A, C, F, G**. A path to the start is `[A]`; an unreachable H returns `None`.
 
-Parents form a tree of first discoveries, not a copy of all graph edges. If several shortest paths exist, neighbour order can select a different parent without changing the shortest distance. Recovering a path of length k takes $O(k+1)$ time and output space. Next: [DFS](depth-first-search.md).
+Parents form a tree of first discoveries, not a copy of all graph edges. If several shortest paths exist, neighbour order can select a different parent without changing the shortest distance. Recovering a path of length k takes $O(k+1)$ time and output space.
+
+## Implementation choices, correctness and costs
+
+The queue invariant is that waiting vertices are discovered exactly once and have nondecreasing hop distance. Parents join successive distance layers. These facts justify both termination and the shortest-hop result; a queue alone would not do so if discovery were delayed.
+
+For n_R reached vertices and m_R examined outgoing entries, time is O(n_R+m_R+1) under expected hash-table costs. Returned dictionaries/order use O(n_R+1) space; the queue uses O(n_R+1) working space. These bounds exclude existing input storage. `path_to` takes O(k+1) time and returned space for a k-edge path, plus O(1) local workspace. A matrix-backed variant adds row scans; replacing `popleft()` with `list.pop(0)` adds shifts.
+
+Use BFS for reachable regions and shortest hop counts, including directed graphs when following outgoing edges. Use [Dijkstra](../graph-algorithms/dijkstra.md) or [DAG relaxation](../graph-algorithms/dag-shortest-paths.md) when unequal weights define the objective.
+
+:::{tip} Common misconception
+**A vertex waiting in the queue is still undiscovered.** It is already discovered; the queue records work waiting to be expanded.
+:::
+
+(bfs-checks)=
+## Check your understanding
+
+Predict the result or state change before opening the explanation.
+
+**1. In the shared graph, B discovers E before D is expanded. Should D enqueue E again?**
+
+:::{dropdown} Show explanation
+No. E already has a distance entry and a first-discovery parent, even while it waits in the queue.
+:::
+
+**2. What do bfs(graph, "H") and path_to(parent, "H") return for isolated H?**
+
+:::{dropdown} Show explanation
+The BFS result is (["H"], {"H": None}, {"H": 0}); using that result, path recovery returns ["H"]. Being isolated does not make H an invalid start.
+:::
+
+Next: [Depth-first search](depth-first-search.md).

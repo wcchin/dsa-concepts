@@ -606,6 +606,19 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 | Mutation versus in-place space | [Separate interface and storage guarantees](topics/sorting/sorting-properties.md#in-place-sorting) |
 | Sorting implementation comparison | [Version-specific costs and guarantees](topics/sorting/comparing-strategies.md#sorting-cost-comparison) |
 
+## Graph and disjoint-set operation routes
+
+- [Simple graph construction, observation and updates](topics/graphs/graph-operations.md#graph-operation-contract)
+- [Graph operation implementations](topics/graphs/graph-operations.md#graph-operation-code)
+- [Graph insertion/deletion costs](topics/graphs/graph-operations.md#graph-update-costs)
+- [BFS result contract](topics/graphs/breadth-first-search.md#bfs-contract)
+- [DFS result contract](topics/graphs/depth-first-search.md#dfs-contract)
+- [Whole-graph component result](topics/graphs/graph-components.md#components-contract)
+- [Disjoint-set counts, sizes and fixed-universe interface](topics/union-find/disjoint-sets.md#disjoint-set-interface)
+- [Union–find implementation/operation comparison](topics/union-find/union-compression.md#union-find-operation-costs)
+- [Graph algorithm result and cost comparison](topics/graph-algorithms/graph-algorithm-choices.md#graph-algorithm-contract-summary)
+
+
 ## Concepts grouped by topic
 
 ### 1. Foundations and Python’s object model
@@ -1167,6 +1180,9 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 - [Graph traversal cost assumptions](topics/graphs/graph-traversal-costs.md#traversal-cost-assumptions)
 - [BFS versus DFS](topics/graphs/graph-traversal-costs.md#bfs-versus-dfs)
 
+- [Graph operation contracts and updates](topics/graphs/graph-operations.md#graph-operation-contract)
+- [Graph update costs](topics/graphs/graph-operations.md#graph-update-costs)
+
 ### 12. Union–find
 
 **Partitions and representatives**
@@ -1199,6 +1215,9 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 - [Union find deletion limit](topics/union-find/union-find-applications.md#union-find-deletion-limit)
 - [Union find workload choice](topics/union-find/union-find-applications.md#union-find-workload-choice)
 
+
+- [Disjoint-set interface, counts and component sizes](topics/union-find/disjoint-sets.md#disjoint-set-interface)
+- [Union–find operation costs](topics/union-find/union-compression.md#union-find-operation-costs)
 
 ### 13. Graph ordering, paths and spanning trees
 

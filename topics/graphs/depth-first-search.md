@@ -1,11 +1,25 @@
 # Depth-first search: active paths and returns
 
+**After this page, you should be able to:**
+
+- Trace suspended DFS calls and distinguish discovery from completion.
+- Specify DFS results, recursion costs and the extra state required by extensions.
+
+**Builds on:** [Recursive call frames](../recursion/call-stack.md) and [BFS state/results](breadth-first-search.md).
+
 (depth-first-search)=
 ## Finish a branch before resuming its caller
 
 **Depth-first search (DFS)** explores an undiscovered neighbour immediately, continuing deeper until it must return. Recursion supplies the stack of waiting calls. Each caller resumes at its next unchecked neighbour after the deeper call finishes.
 
 The input is the same adjacency-list graph as for BFS. We keep its alphabetical neighbour order, so differences in the traces come from the frontier policy.
+
+(dfs-contract)=
+## Specify discovery, completion and parents
+
+`dfs(graph, start)` returns `(discovery, finish, parent)` for the reachable region and leaves the input unchanged. Each reached vertex occurs once in each order. The start's parent is `None`; every other parent is the actual edge that first discovered it. Invalid starts raise `KeyError`. Use non-`None` labels if reusing [path recovery](breadth-first-search.md#bfs-parent-path).
+
+Neighbour order fixes this implementation's exact trace, but not the set of reached vertices. The function does not return shortest distances, classify every edge, or report cycles. An empty graph has no valid single start; [component traversal](graph-components.md) instead handles an empty full graph.
 
 (dfs-code)=
 ## Mark on entry and finish after neighbour checks
@@ -64,3 +78,34 @@ A stack can replace recursion, which is useful when a long path would exceed Pyt
 To reproduce the recursive trace exactly, each explicit frame needs the active vertex **and** its next-neighbour position or iterator. Descend when it finds an undiscovered neighbour; finish and pop the frame only when its neighbour sequence is exhausted. This matches the suspended work in a recursive call.
 
 DFS may have $O(n)$ active calls in a graph with n vertices. Linear total work therefore does not imply a small call stack. For a full graph rather than just one start's reachable region, continue to [components and restarts](graph-components.md).
+
+## Correctness, costs and suitability
+
+Marking on entry means each reachable vertex starts one call. Each call advances through a finite neighbour sequence and finishes after its child calls, so revisits cannot cause endless recursion. In abstract execution, time is O(n_R+m_R+1), with O(n_R+1) working storage for seen/call frames and O(n_R+1) returned order/parent storage. These inherit expected dictionary/set costs.
+
+Python has a finite recursion limit: a long chain can raise `RecursionError` before the mathematical traversal finishes. An explicit stack of iterator frames avoids that language limit and can reproduce discovery and finish events. A simple stack of pending vertices is a different implementation choice and need not reproduce the exact recursive trace.
+
+Use DFS for reachability and nesting/completion reasoning. Directed-cycle detection needs active/finished states; strongly connected components require further algorithms. Those are extensions to the shown traversal, not outputs hidden in its single seen set.
+
+:::{tip} Common misconception
+**Completion is always reverse discovery.** A call can finish one child before discovering another; the two event sequences need not be reverses.
+:::
+
+(dfs-checks)=
+## Check your understanding
+
+Predict the result or state change before opening the explanation.
+
+**1. In the shared trace, C finishes before G is discovered. Is that consistent with DFS?**
+
+:::{dropdown} Show explanation
+Yes. F finishes exploring C, resumes its neighbour iteration, then enters G. Both are descendants explored while F is active.
+:::
+
+**2. Does an edge to a discovered vertex prove a directed cycle?**
+
+:::{dropdown} Show explanation
+No. The destination might already be finished. An edge to an active ancestor is the relevant directed-cycle evidence; one seen set does not distinguish these states.
+:::
+
+Next: [Reachability and connected components](graph-components.md).

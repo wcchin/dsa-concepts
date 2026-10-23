@@ -15,9 +15,9 @@ A standalone Jupyter Book 2 project for a searchable, self-reading course resour
 - Balanced search trees: six aligned readings and five original SVG figures, with shared ordered-set operations, qualified costs and twelve self-checks.
 - Spatial search and indexing: seventeen reading pages grouped under four methods, with seventeen original SVG figures. Each method covers construction/insertion, exact lookup, range, nearest and deletion with time/space costs. Point-tree operations and given-tree R-tree queries have runnable code; general R-tree updates have worked algorithm traces.
 - Priority queues and heaps: seven aligned readings, an overview and nine original SVG explanations, with min/max contracts, stable record adapters, explicit repair/allocation costs and fourteen self-checks.
-- Graphs and traversal: six reading pages, an overview and eight original SVG explanations.
-- Union–find: four reading pages and five original SVG figures.
-- Graph ordering, shortest paths and spanning trees: eight reading pages and nine original SVG figures.
+- Graphs and traversal: seven aligned readings, an overview and eight original SVG explanations, with checked simple-graph updates, explicit BFS/DFS/component contracts and fourteen self-checks.
+- Union–find: four aligned readings and five original SVG figures, with a fixed-universe interface, count/component-size observers, operation-cost comparison and eight self-checks.
+- Graph ordering, shortest paths and spanning trees: eight aligned readings and nine original SVG figures, with objective/input/result contracts, explicit code dependencies, implementation-specific costs and sixteen self-checks.
 - Optional algorithm design: six reading pages and four original SVG figures.
 - Optional strings and tries: eight reading pages and nine accessible SVG figures, with trie updates/prefix queries, naive substring search, KMP and verified rolling hashes.
 - Integrated transport application: six reading pages, five accessible SVG figures and a standalone standard-library Python example.

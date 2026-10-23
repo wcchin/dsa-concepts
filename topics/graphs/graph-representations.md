@@ -1,5 +1,12 @@
 # Adjacency lists and matrices
 
+**After this page, you should be able to:**
+
+- Read the same graph from lists and a matrix, including isolated vertices.
+- Choose a representation by membership, neighbour enumeration, updates and storage.
+
+**Builds on:** [Graph modelling](graph-concepts.md), [reference sharing](../foundations/mutation-and-copying.md) and [hashing assumptions](../maps-sets-hashing/performance.md).
+
 (adjacency-list)=
 ## Store each vertex's neighbours
 
@@ -65,4 +72,33 @@ A **sparse** graph has relatively few edges compared with the possible number of
 
 For weighted matrices, choose an explicit no-edge marker rather than using zero if zero-weight edges are legal. For weighted lists, store each neighbour together with its weight. Neither extension changes the distinction between a connection and its cost.
 
-Next: [Breadth-first search](breadth-first-search.md).
+## Construction, updates and implementation choices
+
+The matrix code assumes the supplied adjacency lists already satisfy the contract. It allocates n distinct rows, then fills entries: Θ(n²+m+1) time and Θ(n²+1) output storage. For a simple graph, m is at most quadratic. The index dictionary adds Θ(n+1) storage and expected constant-time label-to-row lookup.
+
+Lists preserve supplied neighbour order and are easy to inspect in traces. Sets improve expected edge membership/update costs but require an explicit ordering policy for reproducible traversal. Matrices make edge tests/updates constant-time after allocation; they do not make neighbour enumeration constant-time. See the [complete update route](graph-operations.md#graph-update-costs) for insertion and deletion, including matrix vertex-management choices.
+
+The 0/1 matrix here is unweighted. A weighted representation needs a separate absent-edge marker when weight zero is legal. Weighted lists later use `(neighbour, weight)` entries, while edge-list algorithms use `(weight, u, v)` records; check the interface before passing one format to another.
+
+:::{tip} Common misconception
+**A matrix makes every graph operation constant-time.** One indexed edge lookup is constant-time; enumerating a row still examines n positions.
+:::
+
+(graph-representation-checks)=
+## Check your understanding
+
+Predict the result or state change before opening the explanation.
+
+**1. Why does isolated H need a dictionary key and a matrix row/column?**
+
+:::{dropdown} Show explanation
+It belongs to the vertex set. Dropping it changes component counts and any result that must cover all vertices.
+:::
+
+**2. For a sparse graph, must a matrix save space because most entries are zero?**
+
+:::{dropdown} Show explanation
+No. The shown dense matrix still allocates all n² entries. An adjacency list omits absent connections.
+:::
+
+Next: [Graph operations](graph-operations.md), then [breadth-first search](breadth-first-search.md).

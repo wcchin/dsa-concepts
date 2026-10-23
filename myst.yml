@@ -120,6 +120,7 @@ project:
     children:
     - file: topics/graphs/graph-concepts.md
     - file: topics/graphs/graph-representations.md
+    - file: topics/graphs/graph-operations.md
     - file: topics/graphs/breadth-first-search.md
     - file: topics/graphs/depth-first-search.md
     - file: topics/graphs/graph-components.md

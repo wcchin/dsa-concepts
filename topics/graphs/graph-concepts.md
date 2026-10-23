@@ -1,5 +1,12 @@
 # Graph concepts and modelling
 
+**After this page, you should be able to:**
+
+- Distinguish vertex/edge models, direction, weights and graph simplicity.
+- Explain reachability, path length and degree without reading geometry as cost.
+
+**Builds on:** [ADT contracts](../linear-structures/adts-and-contracts.md) and [sets/maps](../maps-sets-hashing/maps-sets-hashing.md).
+
 (graph-vertices-edges)=
 ## Decide what the connections mean
 
@@ -38,5 +45,32 @@ In the shared graph, A–C–F–G is a path of three edges. B–D–E–B is a 
 In a simple undirected graph, a vertex's **degree** is its number of neighbours. B has degree 3, G has degree 1, and H has degree 0. Each edge contributes to two vertex degrees, so the shared degree sum is $2|E|=16$.
 
 In a directed graph, **outdegree** counts outgoing edges and **indegree** counts incoming edges; their totals each equal the number of directed edges. Our teaching graph is **simple**: it has no self-loops and no repeated parallel edges. Other models can allow these, but their representations and counting conventions must say so.
+
+## Contract, representation and use
+
+The model determines whether A–B and B–A are one edge or two arcs, whether parallel connections exist, and what an edge weight measures. Our core examples are simple graphs with explicit isolated vertices. [Graph operations](graph-operations.md#graph-operation-contract) implement the unweighted simple case; [weighted algorithms](../graph-algorithms/graph-algorithms.md) state additional conditions.
+
+A graph is the relationship model; an adjacency list or matrix is a representation. Degree, reachability and shortest routes are distinct queries, so their costs cannot be inferred from the drawing alone. With n vertices and m edges, lists use Θ(n+m+1) storage and a matrix Θ(n²+1); [representation costs](graph-representations.md#graph-representation-costs) explain the operations behind those bounds. Storing a graph does not precompute answers to every route query.
+
+:::{tip} Common misconception
+**An isolated vertex is missing data.** It can be an intentional member with no connections, and must remain present in the vertex set.
+:::
+
+(graph-model-checks)=
+## Check your understanding
+
+Predict the result or state change before opening the explanation.
+
+**1. The path A–C–F–G contains four vertices. What is its unweighted length?**
+
+:::{dropdown} Show explanation
+Three edges. Vertex count on a nonempty simple path is one more than its edge count.
+:::
+
+**2. If A→B exists, must B be able to reach A?**
+
+:::{dropdown} Show explanation
+No. A reverse arc or another directed route is needed; the drawing of two nearby vertices does not supply one.
+:::
 
 Next: [Representing graphs](graph-representations.md).

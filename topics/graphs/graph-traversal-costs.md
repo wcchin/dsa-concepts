@@ -1,5 +1,12 @@
 # Traversal costs and algorithm choice
 
+**After this page, you should be able to:**
+
+- Count examined vertices/entries and distinguish input, workspace and results.
+- Select BFS, DFS or component traversal using the required output and representation.
+
+**Builds on:** [Representation costs](graph-representations.md), [BFS](breadth-first-search.md), [DFS](depth-first-search.md) and [components](graph-components.md).
+
 (adjacency-list-traversal-cost)=
 ## Count vertices and examined neighbour entries
 
@@ -50,5 +57,39 @@ The outer component loop does not multiply the cost by n: its shared seen set en
 | Minimise unequal edge-weight sums | A weighted shortest-path algorithm | BFS's hop guarantee is insufficient |
 
 Neighbour order can change traversal order and parent choices, while reachability stays the same. BFS distances also remain the same for a fixed graph and start. DFS completion order carries structural information, but interpreting it requires the appropriate graph assumptions and algorithm; it is not automatically a dependency ordering for every graph.
+
+## Compare the actual interfaces
+
+| Function | Scope and returned result | Boundary and limitation |
+|---|---|---|
+| `bfs(graph, start)` | One reachable region; expansion order, parents, hop distances | Missing start raises `KeyError`; no unequal-weight optimum |
+| `dfs(graph, start)` | One reachable region; discovery/finish orders and parents | Missing start raises `KeyError`; recursive implementation can exceed Python's call limit |
+| `connected_components(graph)` | All vertices; lists forming an undirected partition | Empty input returns `[]`; reciprocal adjacency required |
+| `path_to(parent, target)` | One recovered path, or `None` | Uses a valid traversal parent structure; no independent graph validation |
+
+These algorithms observe the graph; their temporary discovery and parent state is separate from graph mutation. Returned paths/orders/partitions are snapshots. A successful graph update can invalidate those old results without altering the Python lists already returned.
+
+The n/m notation refers to logical vertices and edges. For empty inputs, use O(n+m+1) and O(n+1) when a constant term matters; earlier O(n+m) notation describes growing nonempty graphs. Matrix allocation, graph construction, sorting neighbours and path recovery are additional work unless explicitly included. The [operation table](graph-operations.md#graph-update-costs) describes update costs rather than traversal costs.
+
+:::{tip} Common misconception
+**Many component starts multiply traversal cost by n.** One shared seen set makes all starts together visit each vertex once.
+:::
+
+(graph-cost-checks)=
+## Check your understanding
+
+Predict the result or state change before opening the explanation.
+
+**1. In a matrix for n vertices, BFS reaches only r vertices. How many row entries are examined?**
+
+:::{dropdown} Show explanation
+n times r, because each reached vertex requires a full n-entry row scan, excluding input construction.
+:::
+
+**2. Is O(n) additional space a claim that the input edges also fit in O(n) storage?**
+
+:::{dropdown} Show explanation
+No. It describes traversal state/results. An adjacency-list input separately occupies Θ(n+m+1) storage.
+:::
 
 Continue to [Topic 12: union–find](../union-find/union-find.md) for maintained connectivity, followed by [Topic 13](../graph-algorithms/graph-algorithms.md) for graph ordering, weighted routes and spanning trees, or return to the [concept index](../../concepts.md).

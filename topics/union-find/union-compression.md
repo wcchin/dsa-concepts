@@ -1,5 +1,12 @@
 # Union by size and path compression
 
+**After this page, you should be able to:**
+
+- Trace weighted root linking, compression and component metadata.
+- Compare individual-call costs with amortised sequence guarantees.
+
+**Builds on:** [Parent forests](parent-forests.md) and [amortised reasoning](../linear-structures/dynamic-arrays.md#amortised-array-append).
+
 (union-by-size)=
 ## Attach the smaller root tree to the larger
 
@@ -54,6 +61,18 @@ class DisjointSet:
 
     def connected(self, a, b):
         return self.find(a) == self.find(b)
+
+    def __len__(self):
+        return len(self.parent)
+
+    def is_empty(self):
+        return len(self) == 0
+
+    def component_count(self):
+        return self.components
+
+    def component_size(self, x):
+        return self.size[self.find(x)]
 ```
 
 The explicit bounds check rejects negative Python indices rather than accidentally treating −1 as the last member. Equal sizes retain the first argument's root. Clients must preserve the internal arrays; changing them directly can break the forest or its metadata.
@@ -73,5 +92,49 @@ Start with seven singleton sets. Perform `(0,1), (2,3), (0,2), (4,5), (0,4)` in 
 Initialisation takes $\Theta(n)$ time and storage. Union by size plus path compression gives $O(\alpha(n))$ amortised time per valid operation, where $\alpha$ is the inverse Ackermann function. For n≥2 and q operations after initialisation, the standard sequence bound is $O(n+q\alpha(n))$.
 
 This is a worst-case sequence guarantee, not a probability claim and not a promise that every call takes the same constant number of steps. An individual uncompressed path can still contain $O(\log n)$ links with union by size. The iterative two-pass find uses constant auxiliary space; the full structure stores $\Theta(n)$ entries. Empty and singleton universes are handled directly without needing the asymptotic formula.
+
+(union-find-operation-costs)=
+## Compare operations and implementation choices
+
+The class above retains its original `parent`, root `size` and `components` fields so existing Kruskal code stays compatible. Public observers `len(ds)`, `is_empty()` and `component_count()` are O(1). `component_size(x)` follows `find(x)` and then reads the authoritative root size. Non-root size entries can be stale and must not be summed as component sizes.
+
+| Choice | Individual find / connectivity / union | Sequence guarantee | Persistent storage |
+|---|---|---|---|
+| Unrestricted parent forest | O(n+1), including finding roots for union | May repeatedly follow long chains | Θ(n+1) |
+| Union by size, no compression | O(log(n+1)) | Same worst-case bound per call | Θ(n+1), including root sizes |
+| Shown union by size plus full compression | O(log(n+1)) worst-case for one call | O(α(n)) amortised per operation for n≥2 after initialisation | Θ(n+1) |
+
+Union by rank is another linking policy: rank bounds tree height rather than storing component cardinality. With compression, rank need not equal the current height. It is not implemented here; the size metadata directly supports our component-size query.
+
+These bounds also apply to `component_size`, since it finds a root. Queries involving two elements perform two finds, which does not change the asymptotic bound. Iterative find uses O(1) local workspace and returns one index; union and connectivity return booleans. Initialisation is Θ(n+1), including empty/singleton cases.
+
+The class has a fixed universe. There is no `add`, `remove`, `extract` or split operation. A failed member check does not promise representation rollback: an earlier valid find in the same call might already have compressed paths, while the partition remains unchanged. Use this structure when merges and connectivity queries dominate, and use [traversal](../graphs/graph-components.md) when routes or a static partition are the required result.
+
+## Read the metadata after a merge
+
+After `ds = DisjointSet(7)` and the five documented unions, `len(ds)` is 7, `ds.component_count()` is 2, `ds.component_size(3)` is 6, and `ds.is_empty()` is `False`. The size query also calls find, so it compresses 3's path just as an explicit `find(3)` would. It does not compress an unrelated branch through 5.
+
+A representative can change at a later successful union; root identities are not persistent application labels. Equal sizes retain the first argument's root in this implementation. That choice makes the shared trace reproducible but does not change the abstract connectivity result.
+
+:::{tip} Common misconception
+**Amortised almost-constant time means every call has constant cost.** The bound describes a sequence; an individual path can still have logarithmic length.
+:::
+
+(union-compression-checks)=
+## Check your understanding
+
+Predict the result or state change before opening the explanation.
+
+**1. After the documented five unions, what does component_size(3) return, and does component_count change?**
+
+:::{dropdown} Show explanation
+It returns 6 and leaves the count at 2. It can compress the path 3→2→0 without merging groups.
+:::
+
+**2. If all seven elements are merged into one group, is the structure empty?**
+
+:::{dropdown} Show explanation
+No. len(ds) remains 7, component_count() is 1, and is_empty() is False. Empty means no elements, not one component.
+:::
 
 Next: [Connectivity applications](union-find-applications.md).

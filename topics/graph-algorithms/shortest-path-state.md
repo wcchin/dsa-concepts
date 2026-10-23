@@ -1,5 +1,12 @@
 # Shortest paths and relaxation
 
+**After this page, you should be able to:**
+
+- Explain relaxation and distinguish tentative labels from final distances.
+- Specify complete distance/parent results and recover one consistent route.
+
+**Builds on:** [BFS distances and parents](../graphs/breadth-first-search.md) and [weighted graph models](../graphs/graph-concepts.md#weighted-graphs).
+
 (weighted-shortest-path)=
 ## Minimise the sum along a source-to-target route
 
@@ -18,6 +25,13 @@ weighted = {
 ```
 
 ![The shared directed weighted graph offers several routes from A and leaves G unreachable.](../../assets/graph-algorithms/weighted-routes.svg)
+
+(shortest-path-contract)=
+## Separate an algorithm result from route recovery
+
+The shortest-path functions return `(distance, parent)` dictionaries covering **all graph keys**. The source distance is 0, an unreachable distance is `inf`, and the source/unreachable parents are `None`. Each reachable non-source parent selects one route, not every tied shortest route. Source labels must exist; a missing source raises `KeyError`. The input graph is observed without mutation, and the dictionaries are snapshots.
+
+Use finite numeric edge weights with consistent comparison/arithmetic and non-`None` hashable labels. These are preconditions unless a function explicitly checks them. [Dijkstra](dijkstra.md) additionally rejects negative edges; [DAG relaxation](dag-shortest-paths.md) permits negatives but rejects cycles. The graph's weighted list entries are `(destination, weight)`, not the `(weight, u, v)` edge-list format used by Kruskal.
 
 (relaxation)=
 ## A known route supplies a candidate improvement
@@ -53,4 +67,35 @@ def weighted_path_to(source, target, distance, parent):
 
 Use valid source and target keys, non-`None` vertex labels, and predecessor results from the same algorithm run. The `source` argument documents that association; this helper does not independently validate a supplied predecessor structure. The source returns a one-vertex path. An unreachable vertex has infinite distance and returns `None`, even though its predecessor and the source's predecessor are both `None`.
 
-For the shared graph, the eventual A-to-F route is A–C–B–D–E–F with cost 8; G stays unreachable. Recovering a k-edge route takes $O(k+1)$ time and output storage. Next: [Dijkstra](dijkstra.md).
+For the shared graph, the eventual A-to-F route is A–C–B–D–E–F with cost 8; G stays unreachable. Recovering a k-edge route takes $O(k+1)$ time and output storage.
+
+## Implementation choices, costs and limits
+
+One relaxation uses O(1) time/workspace under constant-cost arithmetic and expected dictionary access. Initialising all distance/parent entries takes Θ(n+1) time and result storage. The processing order determines how many relaxations are needed and why the final labels are correct; the relaxation formula alone supplies neither a whole algorithm nor its total bound.
+
+`weighted_path_to` uses O(k+1) time and returned space for a k-edge route, with O(1) local workspace. Unknown target keys raise `KeyError`; an unreachable valid target returns `None`. The helper assumes consistent dictionaries from the same run and does not detect malformed/cyclic parent data. Following parents is appropriate only after an algorithm has established the required result.
+
+Equal-cost candidates do not replace parents in the shown algorithms. This gives one reproducible result for fixed iteration/heap tie order, without claiming uniqueness. Graph changes require another run. General negative-cycle problems remain an [explicit extension](../../coverage-review.md), rather than something route recovery can fix.
+
+:::{tip} Common misconception
+**The first finite distance is already shortest.** It is the cost of a route found so far; finality needs the algorithm's processing-order argument.
+:::
+
+(relaxation-checks)=
+## Check your understanding
+
+Predict the result or state change before opening the explanation.
+
+**1. A first gives B distance 4. C later offers a route of cost 3. Should B's distance and parent change?**
+
+:::{dropdown} Show explanation
+Yes. Strict improvement replaces the distance and records C as the improving predecessor.
+:::
+
+**2. Both the source and an unreachable G have parent None. How does route recovery distinguish them?**
+
+:::{dropdown} Show explanation
+It checks distance first: the source has distance 0 and returns a one-vertex route; G has inf and returns None.
+:::
+
+Next: [Dijkstra](dijkstra.md).
