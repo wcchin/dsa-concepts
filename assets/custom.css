@@ -2,3 +2,17 @@
 .myst-made-with-myst {
   display: none !important;
 }
+
+/* Keep long lines inside the pilot's code blocks on narrow screens. */
+.code-language-tabs .myst-tab-item-body,
+.code-language-tabs .myst-tab-item-text {
+  min-width: 0;
+  max-width: 100%;
+}
+.code-language-tabs .myst-tab-item-text {
+  padding-inline: 1rem;
+}
+.code-language-tabs pre {
+  max-width: 100%;
+  overflow-x: auto;
+}

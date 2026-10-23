@@ -55,4 +55,4 @@ Sorting now has a dedicated merge-sort reading and a short Timsort/Powersort exp
 
 All sixteen topics have the self-reading structure described in the [reading guide](reading-guide.md): goals/prerequisites, worked reasoning, explicit contracts and costs, misconception reminders and explained checks. Use the reading routes and suggested study blocks to work through concepts at a pace that leaves time for diagrams, traces and checks. Conceptual-only implementations in the tables above remain deliberate scope boundaries.
 
-The next development stages are a small Python/JavaScript/Julia tab pilot, tracing-oriented interactive checks, and then selected content extensions. These are planned, not implemented. More applications could develop dependency scheduling or a spatial service directory.
+A [binary-search pilot](topics/searching/binary-search.md#binary-search-language-example) now offers Python/JavaScript/Julia code tabs. Other readings remain Python-only. Broader language coverage, tracing-oriented interactive checks and selected content extensions are planned. More applications could develop dependency scheduling or a spatial service directory.

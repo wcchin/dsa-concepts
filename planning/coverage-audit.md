@@ -6,12 +6,12 @@ Updated 23 October 2026. This is the current audit summary. Earlier dated counts
 
 - Sixteen developed topics, 120 reading pages, sixteen overviews and five front-matter pages: 141 navigation pages.
 - Two goals, a prerequisite/context cue, a misconception reminder and two explained open checks per reading: 240 feedback panels.
-- 154 embedded Python listings, with ordinary code examples and standalone spatial/transport scripts.
+- 155 embedded Python listings, plus two JavaScript and two Julia listings in the binary-search pilot; standalone spatial/transport and three-language binary-search examples are supplied.
 - All sixteen topics have completed the agreed structure alignment. Topics 14–15 remain optional extensions; Topic 16 is an integrated application.
 
 The [whole-book editorial review](editorial-review.md) records findings and fixes for every topic. The [public coverage review](../coverage-review.md) distinguishes developed content, conceptual-only variants and future extensions. The [current status](status.md) is the single task checklist. This audit makes no claim of exhaustive DSA coverage or equal learning effort per page.
 
-## Validation for the editorial revision
+## Validation for the editorial revision (8bdddd7)
 
 - Jupyter Book 2.1.7 builds all 141 navigation pages successfully.
 - All 154 embedded Python listings compile. Every pre-existing topical code fence, executable Python example, SVG and stylesheet is byte-for-byte unchanged, as are myst.yml and its navigation.
@@ -21,3 +21,7 @@ The [whole-book editorial review](editorial-review.md) records findings and fixe
 - 3,505 source/structure assertions pass, covering preservation, compilation, scaffolding, reading-order continuations, prerequisite ordering, 2,113 repository-local Markdown destinations and stale-task removal. The historical lecture-heading inventory is retained verbatim.
 
 Algorithms did not change, so this pass relies on exact source preservation and the previously archived semantic checks rather than claiming new algorithm implementations or repeating their full test suites. Desktop/narrow-screen visual redesign and measured student reading times were not part of this editorial pass.
+
+## Language-tab pilot validation — 23 October 2026
+
+Binary search now has two synchronised three-language tab groups and matching runnable examples. See [the pilot record](language-tabs.md) for scope, native-index/absence conventions, execution results, browser checks and the keyboard-control limitation. All three implementations pass 5,562 shared cases each; all six displayed snippets execute and all downloads match their listings. The Python algorithm and existing diagram/checks are unchanged. The current build passes for 141 pages, 155 Python listings, 7,752 local rendered links (2,368 fragments) and 240 closed feedback panels. Future coverage and interaction follow-ups remain in [status.md](status.md).

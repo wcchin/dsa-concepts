@@ -25,3 +25,5 @@ Read **purpose/contract → invariant and representation → trace → code → 
 The seven-node reference tree precedes insertion of 65; pages explicitly identify examples that include it. Trace updates against the indicated starting tree rather than carrying a changed tree into the next independent example. The strict distinct-key policy applies to both BST and AVL implementations.
 
 The supplied code covers exact/boundary array search, all three traversals, extremes, strict neighbours, closed ranges, BST updates and a shared public set interface. It does not implement a key–value ordered map, rank/select augmentation or a static median builder.
+
+The [binary-search reading](binary-search.md#binary-search-language-example) pilots Python, JavaScript and Julia tabs. Python remains the teaching/trace language; the other readings in this topic currently supply Python implementations.

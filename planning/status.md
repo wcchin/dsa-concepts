@@ -1,6 +1,6 @@
 # Current progress and task list
 
-Updated 23 October 2026 after the whole-book editorial review. **This is the authoritative progress checklist.** Dated earlier records are in the [development archive](archive/development-history-2026-10-23.md); they are historical, not pending work.
+Updated 23 October 2026 after the first language-tab pilot. **This is the authoritative progress checklist.** Dated earlier records are in the [development archive](archive/development-history-2026-10-23.md); they are historical, not pending work.
 
 ## Completed
 
@@ -12,18 +12,19 @@ Updated 23 October 2026 after the whole-book editorial review. **This is the aut
 - [x] Complete the original spatial-search and transport application examples; distinguish conceptual-only update/build variants.
 - [x] Review book-wide sequence, terminology, prerequisites, repeated explanation, study effort and reading transitions. See the [review findings](editorial-review.md).
 - [x] Reconcile stale pilot/alignment text, consolidate history, and separate current scope from future extensions.
+- [x] Publish the first Python/JavaScript/Julia tab pilot on binary search, retaining Python as the teaching language and documenting native indexing/absence conventions. See [the pilot record](language-tabs.md).
 
 ## Next stages, in order
 
 | Order | Task | Status and completion criterion |
 |---|---|---|
-| 1 | Pilot language tabs | Planned. Keep Python canonical; add matching JavaScript and Julia to one small topic, verify equivalent contracts/results, and review readability before expanding |
+| 1 | Review the published language-tab pilot | Implemented on binary search. Review readability and address native-theme keyboard/assistive-technology support before broad rollout; direct source links provide an alternative |
 | 2 | Expand language coverage | Pending the pilot. Apply the agreed pattern gradually; do not describe planned translations as supplied implementations |
 | 3 | Pilot interactive tracing checks | Planned. Start with a small JupyterQuiz example and validate feedback/trace semantics before wider use |
 | 4 | Explore prepared algorithm visualisations | Later. Separate from browser notebooks; choose a small example with synchronised code and state |
 | 5 | Add selected content extensions | Planned after the stable reading edition. Follow the prioritised [coverage roadmap](../coverage-review.md), starting with graph extensions, selection/non-comparison sorting and contrasting DP problems |
 
-Language tabs and interactive tools are development stages, not prerequisites for using the current book. No JavaScript/Julia implementations, interactive quiz engine or code visualiser are claimed complete. Browser notebooks remain deferred.
+Language tabs are piloted on one reading, not rolled out book-wide. Python remains canonical. Interactive quizzes and code visualisers are planned; browser notebooks remain deferred.
 
 ## Current scope boundaries
 

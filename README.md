@@ -23,6 +23,7 @@ A standalone Jupyter Book 2 project for a searchable, self-reading course resour
 - Integrated transport application: six aligned readings, twelve explained prediction checks, five accessible SVG figures and a standalone standard-library Python example.
 - A completed self-reading format across all 120 readings: goals, prerequisite cues, misconception reminders and 240 open prediction checks with collapsed explanations.
 - A prerequisite reading guide and public coverage review.
+- A binary-search language-tab pilot: Python first, with equivalent JavaScript and Julia code, synchronised usage examples and explicit native index/absence conventions.
 - An original probing-deletion diagram.
 - An author-facing source inventory under `planning/`.
 - A build-check workflow and automatic publishing on pushes to `main`.

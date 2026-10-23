@@ -23,3 +23,18 @@ jobs:
         with:
           name: book-preview
           path: _build/html
+  language-pilot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+      - uses: julia-actions/setup-julia@v2
+        with:
+          version: '1.10.10'
+      - name: Check displayed binary-search implementations
+        run: python tests/check_binary_search_tabs.py
