@@ -1,5 +1,12 @@
 # String models and query contracts
 
+**After this page, you should be able to:**
+
+- Distinguish exact, prefix, substring and subsequence query contracts.
+- Apply a consistent code-point, case and normalisation model to inputs and indices.
+
+**Builds on:** [Identity/equality and values](../foundations/objects-and-references.md) and [string-key hashing assumptions](../maps-sets-hashing/hashing.md).
+
 (string-query-contracts)=
 ## Ask what must match
 
@@ -45,5 +52,34 @@ Transformations can change lengths: `"Straße".casefold()` is `"strasse"`. An in
 Let L be key length, n text length and m pattern length. Lexicographic string comparison may inspect a long common prefix. Computing a string hash can inspect the whole string; cached hashes may improve repeated operations in a particular runtime. Topic 6's expected constant-time table probe does not imply that processing an arbitrary new L-code-point key is independent of L.
 
 We assume constant-time code-point indexing/comparison and bounded-cost arithmetic where stated. Proper slices generally allocate new strings; the search algorithms below compare by index so their stated working-space bounds do not hide candidate copies.
+
+## Representation, costs and comparison policy
+
+The algorithms here accept Python strings as their documented domain. Trie methods explicitly reject nonstrings; substring helpers rely on the stated string precondition rather than performing a universal validation pass. Strings remain unchanged. Search returns positions in the exact text passed to it, not automatically in an original string from before normalisation or case folding.
+
+For key length L, processing characters can require work growing with L even when the containing hash-table lookup has expected constant probe cost. A trie shares key prefixes, KMP stores pattern borders, and a rolling hash stores a window fingerprint. Their state supports different future operations.
+
+Use one policy for stored/query strings, preserve display labels where needed, and treat transformed-position mapping as a separate application concern. A normalisation policy is part of the contract; these helpers do not silently apply one.
+
+:::{tip} Common misconception
+**A visible character always occupies one string index.** Python positions count Unicode code points; one displayed character can contain multiple code points.
+:::
+
+(string-model-checks)=
+## Check your understanding
+
+Predict the result or justify the choice before opening the explanation.
+
+**1. Do "é" and "e\u0301" necessarily compare equal or have the same length as supplied?**
+
+:::{dropdown} Show explanation
+No. The supplied strings compare unequal and have lengths one and two. Consistent NFC normalisation can make this example equal.
+:::
+
+**2. After casefolding "Straße" to "strasse", can a transformed result index automatically be used as an original display span?**
+
+:::{dropdown} Show explanation
+No. The transformation changes length; returning original spans needs a mapping policy rather than assuming unchanged positions.
+:::
 
 Next: [Trie representation](trie-representation.md).

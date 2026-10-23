@@ -643,6 +643,20 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 - [State and traversal invariants](topics/foundations/collections-and-classes.md#foundation-state-invariants)
 - [Reading an ADT contract](topics/foundations/adt-basics.md#adt-intro-operation-checklist)
 
+## Design and string operation routes
+
+- [Design-strategy contract checklist](topics/strategies/strategy-selection.md#strategy-contract-checklist)
+- [Activity-selection inputs, outputs and tie policy](topics/strategies/greedy.md#activity-selection-contract)
+- [Coin-change solver contracts](topics/strategies/dynamic-programming.md#coin-change-contract)
+- [Position-distinct subset enumeration](topics/strategies/backtracking.md#subset-enumeration-contract)
+- [Prefix/two-pointer/window contracts](topics/strategies/sequence-patterns.md#sequence-pattern-contracts)
+- [Strategy resource comparison](topics/strategies/complexity-limits.md#strategy-resource-comparison)
+- [Complete trie interface](topics/strings/trie-operations.md#trie-complete-interface)
+- [Lazy prefix-query contracts](topics/strings/trie-prefix-queries.md#trie-prefix-contracts)
+- [KMP query and preprocessing contract](topics/strings/kmp-matching.md#kmp-query-contract)
+- [Verified rolling query contract](topics/strings/rolling-hash-search.md#rolling-query-contract)
+- [String method cost comparison](topics/strings/string-choices.md#string-method-cost-summary)
+
 ## Concepts grouped by topic
 
 ### 1. Foundations and Python’s object model

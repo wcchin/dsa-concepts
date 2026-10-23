@@ -1,5 +1,12 @@
 # Trie representation and complete keys
 
+**After this page, you should be able to:**
+
+- Read prefix paths, sparse child maps and terminal markers as separate information.
+- Explain root/empty-key behaviour and key-length/node-storage costs.
+
+**Builds on:** [String contracts](string-model.md), [tree terminology](../searching/tree-basics.md) and [dictionary models](../maps-sets-hashing/hashing.md).
+
 (trie-prefix-invariant)=
 ## A node represents the path from the root
 
@@ -36,5 +43,34 @@ A fixed alphabet could use one array slot per symbol, trading direct access for 
 Let S be the sum of lengths of all distinct stored keys. There is one node per distinct nonempty prefix, plus the root, so at most S+1 nodes. Space is $O(S+1)$ in the node/reference model. Even an empty trie has a root. Many Python objects and small dictionaries can still consume substantial memory.
 
 This shape depends on symbols, not on balance rotations or numerical key intervals. A long single key creates a long path. Trie lookup depends on key length rather than a logarithmic height guarantee in the number of stored keys.
+
+## Invariants, construction and representation choices
+
+Every node describes one root-to-node prefix, each outgoing symbol names at most one child, and terminal status records whether that prefix is a complete stored key. Node construction creates a fresh empty child dictionary and a nonterminal flag; it does not insert a key. [`Trie`](trie-operations.md) owns the root and maintains complete-key count separately.
+
+If S is the sum of distinct key lengths, there are at most S+1 nodes, including the permanent root. With sparse expected dictionary access, one key walk takes O(L+1) time; space depends on stored prefixes rather than a logarithmic balance guarantee. A fixed-alphabet child array has different occupancy costs, and compressed/radix representations can reduce unary chains but need different edge-walk code.
+
+Use the trie when prefix structure is relevant. A dictionary may be simpler for exact whole-key queries alone. Neither trie paths nor code-point ordering supplies locale-aware collation or relevance ranking.
+
+:::{tip} Common misconception
+**Only leaves can be complete keys.** A terminal node can have descendants, and the root can represent a stored empty key.
+:::
+
+(trie-representation-checks)=
+## Check your understanding
+
+Predict the result or justify the choice before opening the explanation.
+
+**1. If bus and buses are stored, must the bus node be a leaf?**
+
+:::{dropdown} Show explanation
+No. It is terminal and has descendants. Removing leaf-only assumptions is essential for keys that prefix other keys.
+:::
+
+**2. Does an empty trie have zero nodes?**
+
+:::{dropdown} Show explanation
+No. It has a root, but zero stored keys until a terminal marker is set. Root existence and empty-key membership are different facts.
+:::
 
 Next: [Trie operations](trie-operations.md).

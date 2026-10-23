@@ -16,3 +16,9 @@ A directory of place names and a long paragraph both contain strings, but they a
 This is an optional extension beyond the lecture inventory, with original examples. It does not change CS2040HS assessment scope. Read [maps and hashing](../maps-sets-hashing/maps-sets-hashing.md), [tree traversal](../searching/bst-traversal.md) and [sequence patterns](../strategies/sequence-patterns.md) for useful prerequisites. Recursion is useful background, although the trie operations here are iterative.
 
 The examples use ordinary Python code listings. They index Python string code points, use exact case-sensitive equality unless a transformation is explicitly applied, and leave input strings unchanged. The [coverage review](../../coverage-review.md) records remaining advanced extensions.
+
+## A common operation and implementation route
+
+Across eight readings, specify the query, comparison units, valid inputs and result/error policies before tracing nodes or matches. Then connect the invariant to implementation choices, preprocessing, working/index state and output costs. Each reading has two goals and two explained prediction checks (sixteen total); the nine existing figures and original algorithm bodies remain.
+
+The [complete trie interface](trie-operations.md#trie-complete-interface) includes key count and emptiness while retaining existing insert/delete boolean returns and the size field. The [cost comparison](string-choices.md#string-method-cost-summary) distinguishes prefix indexing from all-match scanning. Trie-node, prefix-query and KMP helper dependencies are explicit; advanced ranking, approximate/multiple-pattern and suffix-index methods remain extensions.

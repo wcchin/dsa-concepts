@@ -18,8 +18,8 @@ A standalone Jupyter Book 2 project for a searchable, self-reading course resour
 - Graphs and traversal: seven aligned readings, an overview and eight original SVG explanations, with checked simple-graph updates, explicit BFS/DFS/component contracts and fourteen self-checks.
 - Union–find: four aligned readings and five original SVG figures, with a fixed-universe interface, count/component-size observers, operation-cost comparison and eight self-checks.
 - Graph ordering, shortest paths and spanning trees: eight aligned readings and nine original SVG figures, with objective/input/result contracts, explicit code dependencies, implementation-specific costs and sixteen self-checks.
-- Optional algorithm design: six reading pages and four original SVG figures.
-- Optional strings and tries: eight reading pages and nine accessible SVG figures, with trie updates/prefix queries, naive substring search, KMP and verified rolling hashes.
+- Optional algorithm design: six aligned readings and four original SVG figures, with problem/result contracts, sufficient-state and correctness arguments, explicit implementation costs and twelve self-checks.
+- Optional strings and tries: eight aligned readings and nine accessible SVG figures, with complete trie/query contracts, size/empty observers, shared substring semantics, qualified implementation costs and sixteen self-checks.
 - Integrated transport application: six reading pages, five accessible SVG figures and a standalone standard-library Python example.
 - A Topic 9 self-reading pilot: page goals, prerequisite links, misconception reminders and 34 prediction questions with collapsed explanations.
 - A prerequisite reading guide and public coverage review.

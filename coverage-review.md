@@ -74,3 +74,9 @@ The remaining agreed order is Topic 1, then Topics 14, 15 and 16.
 Five readings now align problem/first-search contracts; names, slots, attributes and reference identity; mutation, copy ownership and returned values; built-in collection choices; validated class states and linked traversal; and the brief ADT introduction. Adds ten open prediction checks with collapsed explanations, preserving the original code, headings/labels and three SVG figures. Cost discussion stays introductory and links to Topic 2 rather than requiring asymptotic notation in the opening topic. Full ADT implementations remain with their respective topics. No notebook, rubric, solution or assessment source was consulted.
 
 Topics 1–13 now have the agreed reading structure. The remaining alignment order is Topics 14, 15 and 16.
+
+## Topics 14–15 alignment — 23 October 2026
+
+Six strategy readings and eight string readings now align goals/prerequisites, problem/query contracts, returned results and boundary errors, state/invariant/progress reasoning, implementation choices and costs. Adds 28 original open prediction checks with collapsed explanations. Trie adds len/is_empty observers while retaining its size field, original mutation returns and existing algorithms. The four strategy and nine string SVG figures, original function/method bodies, URLs and labels remain. No notebook, rubric, solution or assessment source was consulted.
+
+Topics 1–15 now have the agreed reading structure. Topic 16, integrated applications, is the remaining alignment task.

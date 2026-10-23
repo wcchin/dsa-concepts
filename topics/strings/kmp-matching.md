@@ -1,5 +1,12 @@
 # KMP: reuse information after a mismatch
 
+**After this page, you should be able to:**
+
+- Use borders/fallback lengths to preserve viable alignments without rewinding text.
+- Justify aggregate linear work and specify preprocessing, output and boundary behaviour.
+
+**Builds on:** [All-match baseline](substring-baseline.md) and [aggregate/sequence analysis](../analysis/cases-and-bounds.md#expected-versus-amortised-analysis).
+
 (pattern-border)=
 ## A border is a prefix that is also a suffix
 
@@ -50,6 +57,13 @@ def kmp_find_all(text, pattern):
 
 Before comparing the current text symbol, the previously matched prefix of length j equals a suffix of text processed so far. On mismatch, retain its longest border that might still extend with the current symbol. No occurrence is skipped: a surviving overlapping alignment must have that prefix/suffix agreement. The text index never moves backwards, although one symbol can be compared against several pattern positions.
 
+(kmp-query-contract)=
+## Reuse the all-match contract and declare preprocessing
+
+Run `prefix_function` above before `kmp_find_all`; it is a helper definition, not an imported library function. Both take strings under the shared code-point comparison model and observe inputs without mutation. `prefix_function(pattern)` returns a new length-m integer table, or `[]` for an empty pattern. It does not return matched text positions.
+
+`kmp_find_all(text, pattern)` returns the same ascending, overlapping occurrence list as the baseline. An empty pattern reports every boundary; a longer nonempty pattern returns no matches, although this implementation still preprocesses that pattern and scans the text. No explicit invalid-type validation pass is supplied. Equal-looking but differently normalised strings remain different inputs.
+
 (kmp-trace-overlaps)=
 ## A full match can leave a useful border
 
@@ -67,5 +81,32 @@ In prefix construction, j increases at most once per outer iteration; each fallb
 Including preprocessing and r results, time is $O(n+m+r+1)$; for a nonempty pattern, r≤n and the usual summary is $O(n+m+1)$. Auxiliary storage is $O(m+r+1)$ including output. The prefix table can be reused across searches for the same pattern, though this simple function rebuilds it per call. It does not build a full alphabet-by-state transition table.
 
 KMP stands for Knuth–Morris–Pratt. See [Princeton's pattern-matching lecture](https://www.cs.princeton.edu/courses/archive/spr08/cos226/lectures/19PatternMatching.pdf) for the distinction between a full transition table and one-dimensional fallback information. This page's original implementation uses the latter.
+
+## Implementation choices and storage
+
+The shown algorithm stores one fallback length per pattern position, not a dense alphabet-by-state automaton. Prefix construction takes O(m+1) time and O(m+1) table storage. The query rebuilds that table per call; an API with reusable preprocessing could avoid rebuilding for repeated searches of one pattern, but is not provided here.
+
+Including r reported starts, total time is O(n+m+r+1). Working storage is O(m+1), separate from O(r+1) output. The total-fallback argument bounds the whole sequence of j changes; it does not claim every text symbol triggers just one comparison. After a full match, falling back to the longest proper border preserves overlaps while keeping j within valid pattern positions.
+
+:::{tip} Common misconception
+**Nested fallback loops make KMP quadratic.** Each fallback decreases the matched length, and total decreases are bounded by earlier increases across the scan.
+:::
+
+(kmp-checks)=
+## Check your understanding
+
+Predict the result or justify the choice before opening the explanation.
+
+**1. After finding aba at start 0 in ababa, why retain border length one?**
+
+:::{dropdown} Show explanation
+The final a can begin another aba. Retaining that border allows the occurrence at start 2 without rewinding the text.
+:::
+
+**2. For pattern ababaca, what is pi[4], and is that value a text index?**
+
+:::{dropdown} Show explanation
+It is 3, the length of the border aba of ababa. It describes a pattern-prefix length, not a text position.
+:::
 
 Next: [Rolling hashes](rolling-hash-search.md).

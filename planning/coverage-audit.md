@@ -141,3 +141,11 @@ Five readings now align problem/first-search contracts; names, slots, attributes
 Topics 1–13 now have the agreed reading structure. The remaining alignment order is Topics 14, 15 and 16.
 
 Validation: 18,118 semantic/structure assertions passed, covering first-occurrence/absence contracts, aliases and slot replacement, repeated sharing under shallow/deep copying, mutable tuple contents/hashability, parameter mutation/returns, fresh defaults, validated passenger-state transitions and the introductory contract against the later Stack class. All 154 Python listings compile. Jupyter Book 2.1.7 builds 141 pages; all 1,981 local links, including 1,102 section links, resolve. Ten feedback panels render closed. Original Python listings, headings, explicit labels and SVG bytes are retained.
+
+## Topics 14–15 alignment — 23 October 2026
+
+Six strategy readings and eight string readings now align goals/prerequisites, problem/query contracts, returned results and boundary errors, state/invariant/progress reasoning, implementation choices and costs. Adds 28 original open prediction checks with collapsed explanations. Trie adds len/is_empty observers while retaining its size field, original mutation returns and existing algorithms. The four strategy and nine string SVG figures, original function/method bodies, URLs and labels remain. No notebook, rubric, solution or assessment source was consulted.
+
+Topics 1–15 now have the agreed reading structure. Topic 16, integrated applications, is the remaining alignment task.
+
+Validation: 192,777 semantic/structure assertions passed against exhaustive tiny interval schedules, BFS coin-count answers, all position subsets, direct sequence sums/pairs, a reference string set with structural trie checks, brute-force pattern borders and an independent all-match oracle. Includes invalid requests, Unicode/empty boundaries, duplicate keys, long iterative trie paths, overlapping matches and deliberately colliding fingerprints. All 154 Python listings compile. Jupyter Book 2.1.7 builds 141 pages; all 2,038 local links, including 1,125 section links, resolve. The 28 feedback panels render closed. Original function/method ASTs, headings, labels and SVG bytes are retained; Trie adds only len/is_empty observers.
