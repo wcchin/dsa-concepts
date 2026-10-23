@@ -1,5 +1,21 @@
 # Insertion and sift-up
 
+**After this page, you should be able to:**
+
+- Trace append followed by sift-up without changing existing off-path branches.
+- Separate repair comparisons, resizing and returned results.
+
+**Builds on:** [Heap shape, order and indices](heap-representation.md).
+
+## Operation contracts
+
+| Helper | Precondition | Result and state change |
+|---|---|---|
+| `push_min(heap, priority)` | Existing list is a valid min-heap | Return `None`; add one priority and preserve the original list object |
+| `sift_up(heap, i)` | i is the newly appended last position; all other heap relations were valid | Return `None`; repair along its ancestor path without adding/removing entries |
+
+An empty heap accepts its first item at index zero. Duplicate priorities add another entry. Consistent comparable finite priorities are the input contract; these small functions do not add runtime type-validation code.
+
 (heap-insertion)=
 ## Preserve shape before repairing order
 
@@ -42,4 +58,31 @@ Before a swap, the parent was at most all priorities in its original descendant 
 
 There are at most $\lfloor\log_2 n\rfloor$ upward steps for the resulting heap size n. Repair uses $O(\log n)$ worst-case comparisons and $O(1)$ auxiliary space. It can stop immediately when the new item is large enough.
 
-The list append can separately resize the backing array and copy $O(n)$ references on one insertion. With geometric growth, insertion is amortised $O(\log(n+1))$ overall; logarithmic repair is not a promise that every Python-list insertion avoids a resizing pause. Next: [Root removal](heap-removal.md).
+## Implementation choices and space
+
+Appending first preserves completeness. Adjacent-on-path swaps make the repair visible; a hole-moving implementation can instead save the new item and shift parents, but needs its own careful bookkeeping. Equal priorities stop at `<=`; that local tie decision does not promise FIFO for attached records. Each sift uses O(1) workspace and allocates no new logical entry beyond the appended value.
+
+The list append can separately resize the backing array and copy $O(n)$ references on one insertion. With geometric growth, insertion is amortised $O(\log(n+1))$ overall; logarithmic repair is not a promise that every Python-list insertion avoids a resizing pause.
+
+:::{tip} Common misconception
+**Logarithmic sift-up means every insertion avoids a linear pause.** The list can separately resize and copy references.
+:::
+
+(heap-insert-checks)=
+## Check your understanding
+
+Predict the returned result and remaining heap before opening the explanation.
+
+**1. Insert 1 into [2,5,4,9,7,6]. Which indices does it visit on the upward path?**
+
+:::{dropdown} Show explanation
+6,2,0. It swaps with 4 and then 2, leaving [1,5,2,9,7,6,4].
+:::
+
+**2. Does inserting another equal priority leave size unchanged?**
+
+:::{dropdown} Show explanation
+No. A priority queue permits duplicate entries. The size increases by one even if no sift swap is needed.
+:::
+
+Next: [Root removal](heap-removal.md).

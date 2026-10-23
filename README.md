@@ -15,7 +15,7 @@ A standalone Jupyter Book 2 project for a searchable, self-reading course resour
 - Balanced search trees: six aligned readings and five original SVG figures, with shared ordered-set operations, qualified costs and twelve self-checks.
 - Spatial search and indexing: seventeen reading pages grouped under four methods, with seventeen original SVG figures. Each method covers construction/insertion, exact lookup, range, nearest and deletion with time/space costs. Point-tree operations and given-tree R-tree queries have runnable code; general R-tree updates have worked algorithm traces.
 - Graphs and traversal: six reading pages, an overview and eight original SVG explanations.
-- Priority queues and heaps: seven reading pages, an overview and nine original SVG explanations.
+- Priority queues and heaps: seven aligned readings, an overview and nine original SVG explanations, with min/max contracts, stable record adapters, explicit repair/allocation costs and fourteen self-checks.
 - Graph ordering, shortest paths and spanning trees: eight reading pages and nine original SVG figures.
 - Union–find: four reading pages and five original SVG figures.
 - Optional algorithm design: six reading pages and four original SVG figures.

@@ -1,5 +1,18 @@
 # Bottom-up heap construction
 
+**After this page, you should be able to:**
+
+- Trace bottom-up construction with valid child-subtree preconditions.
+- Explain linear building work and distinguish copied output from in-place heapify.
+
+**Builds on:** [Sift-down](heap-removal.md) repairs a root whose child subtrees are already heaps.
+
+## Construction contract and implementation choice
+
+`build_min_heap(values)` returns a **new list** holding exactly the supplied priorities with their multiplicities, arranged as a min-heap. It does not sort them or mutate an input list. The copy is shallow. Finite numeric priorities satisfy this topic's comparison contract; empty input returns a new empty list. For a general iterable, iteration consumes it to produce the copy.
+
+The public record queues start empty; this numeric builder is not a bulk-construction method on those classes. For a record batch, constructing `(priority,sequence,item)` entries then using heapify would also need an explicit arrival-order policy.
+
 (heapify)=
 ## Begin where every child is already a heap
 
@@ -49,5 +62,30 @@ Each step makes only constant comparison work, and each internal node adds const
 ![A fifteen-node complete tree has eight leaves, four height-one nodes, two height-two nodes and one height-three root, illustrating the small total downward budget.](../../assets/heaps/heapify-height-budget.svg)
 
 Repeated insertion has an $O(n\log n)$ bound and can take $\Theta(n\log n)$ comparisons for descending distinct priorities. Bottom-up construction is preferable when the whole batch is already available. The builder uses $\Theta(n)$ additional list storage; iterative in-place heapify uses $O(1)$ auxiliary storage beyond its existing array.
+
+## Space, choices and suitability
+
+The returned list occupies O(n) result storage and retains the payload references; the iterative repairs use O(1) workspace beyond it. The source and copied result coexist for a list input. An in-place heapify has a different mutation contract and omits that growing output allocation. Appending one at a time is useful for interleaved arrivals; bottom-up construction avoids repeated long upward repairs when the entire batch is available.
+
+:::{tip} Common misconception
+**n nodes times logarithmic height proves heapify needs n log n time.** That is loose: most nodes have very little downward work.
+:::
+
+(heap-build-checks)=
+## Check your understanding
+
+Predict the returned result and remaining heap before opening the explanation.
+
+**1. Which internal indices are processed for six items?**
+
+:::{dropdown} Show explanation
+2,1,0. Their children are already valid heaps when each parent is repaired.
+:::
+
+**2. Does build_min_heap change the supplied input list?**
+
+:::{dropdown} Show explanation
+No. It copies it and returns a new heap list. In-place heapify would have a different mutation contract.
+:::
 
 Next: [Python heaps and application records](heap-applications.md).

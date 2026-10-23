@@ -970,6 +970,10 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 
 ### 9. Priority queues and heaps
 
+- [Priority-queue min/max operation contracts](topics/heaps/priority-queues.md#priority-queue-adt)
+- [Max-priority adapter and FIFO ties](topics/heaps/heap-applications.md#max-priority-adapter)
+- [Record queue operation costs](topics/heaps/heap-applications.md#heap-record-operation-costs)
+
 **Priority queues: select by importance**
 
 - [Priority queue ADT](topics/heaps/priority-queues.md#priority-queue-adt)

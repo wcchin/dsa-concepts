@@ -1,5 +1,18 @@
 # Heap order, complete shape and array indices
 
+**After this page, you should be able to:**
+
+- Check complete shape and parent-child heap order separately.
+- Translate logical relationships into valid array indices and operation costs.
+
+**Builds on:** [Priority-queue behaviour](priority-queues.md) defines what the representation must support.
+
+## Representation contract
+
+The teaching functions use the entire list as the active heap, storing one finite numeric priority in each slot. Duplicates are permitted and count as separate entries. The level-order array prefix enforces complete shape; comparisons enforce min-heap order. Read-only peek accesses slot zero after checking emptiness; insertion and extraction must preserve both properties.
+
+A drawn linked heap is another representation, but it would need a way to find the next/final leaf efficiently. The code here does not implement that alternative. Its array layout is an implementation choice, not the Priority Queue ADT itself.
+
 (complete-binary-tree)=
 ## Shape fixes the next leaf position
 
@@ -42,5 +55,32 @@ In the six-item example, index 1 has children 3 and 4. Index 5 has parent 2. Ind
 ![One example has complete shape but broken parent order; another has ordered keys but a gap in the last level. Neither is a binary heap.](../../assets/heaps/heap-two-invariants.svg)
 
 An array prefix naturally encodes complete shape; the priority comparisons still need checking. In a drawn linked tree, both shape and order must be checked. The last internal index is `n // 2 - 1`; positions `n // 2` through `n - 1` are leaves. Empty and singleton heaps have no internal node needing repair.
+
+## Implementation choices, costs and suitability
+
+Computed child/parent indices avoid allocating explicit link objects or storing AVL height metadata. A valid occupied index is directly accessible in O(1) time; that does not make finding an arbitrary priority O(1). Inspecting every parent-child edge costs O(n+1) if a full validation is needed. Persistent storage is O(n+1) references under ordinary dynamic-array capacity management, and index calculation uses O(1) workspace.
+
+Choose this representation when repeated extreme selection and compact storage matter. It supplies no subtree key ranges, sorted traversal order or item-to-index directory; those would require different information and maintenance.
+
+:::{tip} Common misconception
+**A heap is a BST with a different drawing.** Heap order constrains parent-child priorities, not whole left/right key ranges.
+:::
+
+(heap-representation-checks)=
+## Check your understanding
+
+Predict the returned result and remaining heap before opening the explanation.
+
+**1. In the six-item lecture heap, does index 2 have a right child?**
+
+:::{dropdown} Show explanation
+No. Its right-child position is 6, outside size six. The left child at index 5 exists.
+:::
+
+**2. Can a complete tree with one parent larger than its child be a valid min-heap?**
+
+:::{dropdown} Show explanation
+No. Completeness and heap order are separate requirements, and both must hold.
+:::
 
 Next: [Insertion and sift-up](heap-insertion.md).

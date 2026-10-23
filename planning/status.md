@@ -66,3 +66,7 @@ Seven readings align Map/Set contracts, exact results/errors, state invariants, 
 ## Topics 7–8 operation alignment
 
 Topic 7 has nine readings; Topic 8 has six. Both align operation/helper contracts, results and errors, representation invariants, preserved traces, code choices, costs and thirty open self-checks. Added complete preorder/postorder, maximum and root-based strict-neighbour queries, a key-only OrderedSet adapter, and an AVL operation route reusing the same readers. Public set removal returns None; extreme extraction returns its key; raw update helpers return roots and raw absent deletion is a no-op. Global count is distinct from subtree rank/select augmentation. All existing pages, labels, algorithms and fourteen figures are retained. No notebooks or assessment sources were used.
+
+## Topic 9 operation alignment
+
+Seven readings now align contracts, invariants, preserved traces, implementation choices, time/space and fourteen open self-checks. Numeric sifts/build/heapsort remain unchanged. The stable MinPriorityQueue adds size/empty and an extract_min alias; a composed MaxPriorityQueue negates finite numeric priorities while preserving FIFO sequence ties. Public methods return items, numeric helpers return priorities, and removal/extraction are aliases. Duplicate inserts remain separate entries. Arbitrary removal and indexed priority changes remain conceptual. All existing URLs, labels, headings and nine figures are retained. No notebooks or assessment sources were used.

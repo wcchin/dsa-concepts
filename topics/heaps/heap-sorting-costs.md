@@ -1,5 +1,16 @@
 # Heapsort, operation costs and choices
 
+**After this page, you should be able to:**
+
+- Separate priority-queue extraction from in-place heapsort.
+- Compare repair, allocation, stability and output costs under stated assumptions.
+
+**Builds on:** [Heap construction](heap-construction.md), [record priorities](heap-applications.md) and [sorting properties](../sorting/sorting-properties.md).
+
+## Sorting and queue contracts are different
+
+`heapsort(a)` rearranges a supplied list into ascending order, preserves every record/multiplicity and returns `None`. Empty and singleton lists are valid. Repeated min extraction instead consumes a heap and returns its removed values one by one; collecting them creates a separate ordered result. The [record queue](heap-applications.md) returns payloads under its tie policy, not necessarily bare priorities.
+
 (heap-extraction-sorting)=
 ## Repeated minima produce ordered output
 
@@ -43,17 +54,27 @@ This heapsort has $O(n\log(n+1))$ worst-case time and $O(1)$ auxiliary space: it
 
 Ordinary heapsort is **not stable**. Equal-key records can cross during root–end swaps even if every local comparison treats ties consistently. For `[2_A, 2_B, 1]`, the shown max-heap sort comparing numeric keys can produce `[1, 2_B, 2_A]`. A stable application priority queue uses additional arrival keys; the bare heapsort has no such guarantee.
 
+## Implementation choices and suitability
+
+This heapsort uses an iterative max-heap over an exclusive active prefix, so it has no recursion stack or copied sublists. Root–end swaps establish the sorted suffix and can reorder equal-key records. A stable priority queue with arrival metadata is a different implementation; it does not make this bare heapsort stable.
+
+Worst-case time is O(n log(n+2)). The early-stop sifts shown can make all-equal input Θ(n), consistent with the [sorting comparison](../sorting/comparing-strategies.md#sorting-cost-comparison). This does not change the worst-case bound. Use the function to understand in-place comparison sorting; for everyday Python application sorting, prefer the built-in stable interface.
+
 (heap-operation-costs)=
 ## Separate heap repair from storage management
 
-| Operation | Binary min-heap cost and condition |
-|---|---|
-| Peek minimum | $O(1)$ when nonempty |
-| Insert | $O(\log(n+1))$ repair; amortised with dynamic-array growth |
-| Remove minimum | $O(\log(n+1))$ repair; storage shrink can add occasional copying |
-| Bottom-up build | $\Theta(n)$ for the shown copying builder |
-| Find an arbitrary key | $O(n)$ worst case without an additional index |
-| Produce sorted output | $O(n\log(n+1))$ by repeated extraction |
+| Operation | Time and assumption | Extra workspace / output |
+|---|---|---|
+| Peek extreme | O(1); empty raises | O(1) |
+| Size / empty | O(1), list length | O(1) |
+| Insert | O(log(n+2)) repair; amortised with geometric growth; O(n+1) individual resize | O(1) repair; up to O(n+1) allocation |
+| Remove / extract extreme | O(log(n+2)) repair; occasional shrink can add O(n+1) copying | O(1) repair; up to O(n+1) allocation |
+| Bottom-up build | Θ(n+1), shown copying builder | O(n) returned list; O(1) repair workspace |
+| Find arbitrary key/item | O(n+1) worst-case scan without an index | O(1) scan workspace |
+| Sorted output by extraction | O(n log(n+2)+1), including build | O(n) heap and O(n) collected output |
+| In-place heapsort | O(n log(n+2)+1) worst case | O(1) beyond supplied array |
+
+The min/max record adapters have the same path/allocation bounds. No arbitrary-key search path follows from heap order, and no stable tie guarantee follows from choosing a child consistently. Neither a membership scan nor arbitrary-item deletion is part of the supplied queue class interface.
 
 These bounds assume constant-time comparisons and array access. The heap's own array stores $O(n)$ references with geometric capacity management. That input storage is distinct from a sift operation's constant auxiliary space.
 
@@ -63,5 +84,26 @@ These bounds assume constant-time comparisons and array access. The heap's own a
 An [AVL tree](../balanced-trees/balanced-trees.md) supports logarithmic arbitrary-key lookup and linear sorted inorder traversal. A binary heap exposes a minimum immediately but supplies much less information about other keys. A basic AVL minimum query follows left links in $O(\log(n+1))$ time unless an extra minimum reference is maintained.
 
 For repeated extreme selection with interleaved arrivals, a heap is a natural fit. For changing ordered data requiring arbitrary lookup and ordered traversal, a balanced search tree offers a different set of strengths. For ordinary batch sorting, Python's stable `sorted` and `.sort` are useful application interfaces; implementing heapsort explains another strategy and its space trade-off.
+
+:::{tip} Common misconception
+**A stable priority-queue class makes ordinary heapsort stable.** The class has arrival metadata; the sorting function has no such guarantee.
+:::
+
+(heap-costs-checks)=
+## Check your understanding
+
+Predict the returned result and remaining heap before opening the explanation.
+
+**1. Does building a heap make its array globally sorted?**
+
+:::{dropdown} Show explanation
+No. Parent-child heap order is sufficient for extreme selection but leaves siblings and many other pairs unordered.
+:::
+
+**2. Can an O(1) root peek provide O(1) lookup of an arbitrary key?**
+
+:::{dropdown} Show explanation
+No. Heap order gives no whole-subtree key partition, so arbitrary lookup may require a linear scan.
+:::
 
 Return to the [topic overview](heaps.md), compare [sorting strategies](../sorting/comparing-strategies.md), or continue to [graph algorithms](../graph-algorithms/graph-algorithms.md).
