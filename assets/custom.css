@@ -16,3 +16,43 @@
   max-width: 100%;
   overflow-x: auto;
 }
+
+/* A persistent feedback link, below navigation overlays and clear of safe areas. */
+.issue-report-corner {
+  position: fixed;
+  right: max(0.875rem, env(safe-area-inset-right));
+  bottom: max(0.875rem, env(safe-area-inset-bottom));
+  z-index: 9;
+  max-width: calc(100vw - 1.75rem);
+}
+.issue-report-corner p {
+  margin: 0;
+}
+.issue-report-corner a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.625rem 0.875rem;
+  border: 1px solid #0f766e;
+  border-radius: 999px;
+  background: #0f766e;
+  color: #fff !important;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 16%);
+}
+.issue-report-corner a:hover {
+  background: #115e59;
+  border-color: #115e59;
+  text-decoration: underline;
+}
+.issue-report-corner a:focus-visible {
+  outline: 3px solid #f59e0b;
+  outline-offset: 3px;
+}
+/* Leave room to read the final footer lines above the floating link. */
+footer.article {
+  padding-bottom: calc(4.5rem + env(safe-area-inset-bottom));
+}
