@@ -1,4 +1,4 @@
-# 16. Strings, tries and pattern matching
+# 15. Strings, tries and pattern matching
 
 A directory of place names and a long paragraph both contain strings, but they ask different search questions. Does the key `"bus"` exist? Which keys begin with `"bu"`? Where does `"bus"` occur inside a report? Choosing a structure starts by separating those requirements.
 

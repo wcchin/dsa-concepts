@@ -24,7 +24,7 @@ A complete design explanation states the required operations, their meaning, the
 
 For a station directory, a hash-based Map is a plausible choice when exact identifier lookup and updates dominate. If ordered key traversal or range queries matter, compare it with a search-tree representation. A Python dictionary’s insertion order does not turn it into a sorted search tree.
 
-For keys sharing initial symbols, [Topic 16: strings and tries](../strings/strings.md) develops prefix reporting and explains why string length also matters to hash-table costs. Exact lookup and finding all keys beginning with a prefix are different operations.
+For keys sharing initial symbols, [Topic 15: strings and tries](../strings/strings.md) develops prefix reporting and explains why string length also matters to hash-table costs. Exact lookup and finding all keys beginning with a prefix are different operations.
 
 ## Questions to revisit
 

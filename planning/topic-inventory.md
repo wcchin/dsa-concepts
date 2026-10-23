@@ -16,23 +16,25 @@ This is an editorial map of source coverage, not a claim that all chapters have 
 | 6. Maps, sets and hashing | Maps: keys, values and operations; Sets: membership and distinctness; Hashing: hash codes, indices, equality and hashability; Separate chaining: buckets and key comparisons; Open addressing: probing, deletion and tombstones; Load factor, rehashing and performance; Choosing a structure and connecting the concepts | `cs2040hs_week01_online.md`, `cs2040hs_week06_classroom.md`, `cs2040hs_week06_online.md` |
 | 7. Searching and binary search trees | Linear search, binary search and interval invariants; Tree terminology, traversal and whole-subtree ordering; BST lookup, insertion, deletion and height-dependent cost | `cs2040hs_week09_classroom.md`, `cs2040hs_week09_online.md` |
 | 8. Balanced search trees | Heights, balance factors and AVL invariants; Left/right rotations, inorder preservation and subtree transfer; LL/RR/LR/RL cases, height updates, insertion and deletion | `cs2040hs_week10_classroom.md`, `cs2040hs_week10_online.md` |
-| 9. Priority queues and heaps | Priority Queue behaviour and heap invariants; Array indices, sift-up, sift-down and root removal; Bottom-up construction and operation costs | `cs2040hs_week10_classroom.md`, `cs2040hs_week10_online.md` |
-| 10. Graphs and traversal | Graph terminology, directedness, degree and modelling; Adjacency matrices, lists and representation costs; BFS: discovery, queues, parents and hop distance; DFS: recursion, discovery, completion and components | `cs2040hs_week11_classroom.md`, `cs2040hs_week11_online.md` |
-| 11. Graph ordering, paths and spanning trees | DAGs, indegrees, Kahn’s algorithm and cycle detection; Relaxation, Dijkstra, lazy heaps and DAG shortest paths; Spanning trees, forests, cut property and exchange reasoning; Prim, Kruskal, union–find and complexity; Shortest-path trees versus minimum spanning trees | `cs2040hs_week12_classroom.md`, `cs2040hs_week12_online.md`, `cs2040hs_week13_classroom.md`, `cs2040hs_week13_online.md` |
-| 12. Spatial search and indexing | K-d-tree core; original extensions for point quadtrees, bounded bucket PR quadtrees, R-tree filtering/refinement and spatial-query comparison | `cs2040hs_week10_kd_tree_additional.md` |
-| 13. Union–find | Partitions, representatives and connectivity; Parent forests, find and union by size; Path compression, amortised cost and cycle checks | `cs2040hs_week12_union_find_additional.md`, `cs2040hs_week13_online.md` |
-| 14. Integrated applications | Fictional transport network: data models, hop/time routes, connectivity and construction | Original case using the developed graph and union–find topics |
+| 9. Spatial search and indexing | K-d-tree core; original extensions for point quadtrees, bounded bucket PR quadtrees, R-tree filtering/refinement and spatial-query comparison | `cs2040hs_week10_kd_tree_additional.md` |
+| 10. Priority queues and heaps | Priority Queue behaviour and heap invariants; Array indices, sift-up, sift-down and root removal; Bottom-up construction and operation costs | `cs2040hs_week10_classroom.md`, `cs2040hs_week10_online.md` |
+| 11. Graphs and traversal | Graph terminology, directedness, degree and modelling; Adjacency matrices, lists and representation costs; BFS: discovery, queues, parents and hop distance; DFS: recursion, discovery, completion and components | `cs2040hs_week11_classroom.md`, `cs2040hs_week11_online.md` |
+| 12. Union–find | Partitions, representatives and connectivity; Parent forests, find and union by size; Path compression, amortised cost and cycle checks | `cs2040hs_week12_union_find_additional.md`, `cs2040hs_week13_online.md` |
+| 13. Graph ordering, paths and spanning trees | DAGs, indegrees, Kahn’s algorithm and cycle detection; Relaxation, Dijkstra, lazy heaps and DAG shortest paths; Spanning trees, forests, cut property and exchange reasoning; Prim, Kruskal, union–find and complexity; Shortest-path trees versus minimum spanning trees | `cs2040hs_week12_classroom.md`, `cs2040hs_week12_online.md`, `cs2040hs_week13_classroom.md`, `cs2040hs_week13_online.md` |
+| 14. Algorithmic problem-solving strategies | Greedy reasoning, dynamic programming, backtracking, sequence patterns and complexity limits | Original optional extension; general references linked in the readings |
+| 15. Strings, tries and pattern matching | String models, trie operations and prefix queries, naive/KMP/verified rolling-hash matching | Original optional extension; general references linked in the readings |
+| 16. Integrated applications | Fictional transport network: data models, hop/time routes, connectivity and construction | Original case using the developed graph and union–find topics |
 
 ## Conversion decisions and gaps
 
-- Topic 11 explicitly includes the Week 13 minimum-spanning-tree material; it is core source coverage, not an unspecified future application.
+- Topic 13 explicitly includes the Week 13 minimum-spanning-tree material; it is core source coverage, not an unspecified future application.
 - Maps and Sets are separate ADT pages within Topic 6. Hashing is introduced separately as an implementation technique.
-- Week 10 sources currently combine AVL and heaps; split their content into Topics 8 and 9 without inheriting the week organisation.
+- Week 10 sources currently combine AVL and heaps; split their content into Topics 8 and 10 without inheriting the week organisation.
 - Week 1 collection introductions feed Topic 1 and Topic 6; linked-route mechanics feed Topic 5. Use cross-links rather than duplicate explanations.
 - Merge-sort mechanism belongs to Topic 4; the general recursion strategy belongs to Topic 3.
-- Union–find belongs to Topic 13 and is linked from Kruskal in Topic 11.
+- Union–find belongs to Topic 12 and is linked from Kruskal in Topic 13.
 - The k-d source includes range search and a conceptual nearest-neighbour extension. Do not silently promote the latter into a complete algorithm chapter.
-- Topic 14 now contains an original transport-network case. Contexts already in slides (undo, consultation queues, rolling windows and station counts) continue to illustrate their parent topics.
+- Topic 16 now contains an original transport-network case. Contexts already in slides (undo, consultation queues, rolling windows and station counts) continue to illustrate their parent topics.
 - Each page needs definitions, prerequisites, a continuous explanation, a worked example, boundary cases, qualified costs and related-concept links.
 - Slide reveal sequences require consolidation. Speaker timing notes, presentation directives and repeated navigation headings do not belong in student chapters.
 - Diagrams must be checked at reading-page width; no slide stylesheet is reused.
@@ -1835,27 +1837,27 @@ Headings below omit fenced code. They provide an audit trail, including repeated
 
 ## Coverage review update
 
-The original fourteen-topic lecture map remains above. Topics 1–14 now have developed readings, including the integrated transport case. The current reading order and remaining conceptual gaps are recorded in `../coverage-review.md` and `coverage-audit.md`.
+The current topic map above includes the original lecture coverage and two optional editorial extensions. Topics 1–13 and 16 now have developed readings, including the integrated transport case. The current reading order and remaining conceptual gaps are recorded in `../coverage-review.md` and `coverage-audit.md`.
 
-Topic 15, **Algorithm design and sequence patterns**, is an optional editorial extension beyond this lecture inventory: greedy reasoning, dynamic programming, backtracking, prefix sums, two pointers, sliding windows and complexity limits. Its worked examples are original, supported by general algorithm references linked in the reading. This does not change the course syllabus or assessment scope.
+Topic 14, **Algorithm design and sequence patterns**, is an optional editorial extension beyond this lecture inventory: greedy reasoning, dynamic programming, backtracking, prefix sums, two pointers, sliding windows and complexity limits. Its worked examples are original, supported by general algorithm references linked in the reading. This does not change the course syllabus or assessment scope.
 
-The review also expands Topic 2 with correctness methods and Topic 7 with binary-search boundaries and BST range queries. Weeks 12–13 lecture Markdown and the union–find additional lecture supplied the source basis for Topics 11 and 13; notebooks, rubrics and solutions were excluded.
+The review also expands Topic 2 with correctness methods and Topic 7 with binary-search boundaries and BST range queries. Weeks 12–13 lecture Markdown and the union–find additional lecture supplied the source basis for Topics 12 and 13; notebooks, rubrics and solutions were excluded.
 
-## Topic 16 extension — 22 October 2026
+## Topic 15 extension — 22 October 2026
 
-Strings, tries and pattern matching are now developed in eight reading pages plus an overview, with nine original SVG figures. This editorial extension adds string-cost/Unicode models, sparse trie operations and queries, naive substring search, prefix-function KMP and verified rolling hashes. It draws on general references linked in the reading rather than additional course or assessment materials. Topic 14 now has an integrated transport case; no existing topic was renumbered.
+Strings, tries and pattern matching are now developed in eight reading pages plus an overview, with nine original SVG figures. This editorial extension adds string-cost/Unicode models, sparse trie operations and queries, naive substring search, prefix-function KMP and verified rolling hashes. It draws on general references linked in the reading rather than additional course or assessment materials. Topic 16 now has an integrated transport case. The 23 October reordering updates topic numbers throughout this inventory while retaining URLs.
 
-## Topic 14 application — 22 October 2026
+## Topic 16 application — 22 October 2026
 
 Six reading pages now develop one original fictional transport network, with separate travel-time and construction weights, five exact SVG diagrams and a standalone standard-library Python example. It integrates existing book algorithms without adding course or assessment source material. Dependency scheduling and a spatial directory remain future application candidates.
 
-## Topic 12 spatial-search expansion — 22 October 2026
+## Topic 9 spatial-search expansion — 22 October 2026
 
 The five k-d-tree readings remain intact within a broader spatial-search topic. Seven original extension readings add query foundations, a separate point-quadtree page before the PR-quadtree page, PR insertion/query operations, R-tree representation and query/refinement, and comparisons. Eight new SVGs supplement the six k-d figures; a standalone standard-library Python file runs the examples together. Extensions use OpenDSA/Guttman/PostGIS primary references and original code/figures rather than additional lecture, notebook or assessment materials.
 
 ## Spatial operation completion (supersedes earlier extension boundaries)
 
-Topic 12 now groups readings under k-d, point-quadtree, PR-quadtree and R-tree methods, preserving existing URLs. Five new readings add complete point-tree deletion and nearest operations, exact/nearest R-tree queries, per-operation time/space tables and self-reading checks. Dynamic R-tree construction/splitting/condensation are worked conceptual algorithms, not implemented updates. No notebook, rubric, solution or assessment source was used.
+Topic 9 now groups readings under k-d, point-quadtree, PR-quadtree and R-tree methods, preserving existing URLs. Five new readings add complete point-tree deletion and nearest operations, exact/nearest R-tree queries, per-operation time/space tables and self-reading checks. Dynamic R-tree construction/splitting/condensation are worked conceptual algorithms, not implemented updates. No notebook, rubric, solution or assessment source was used.
 
 ## Topic 5 operation alignment
 
@@ -1869,6 +1871,6 @@ Seven readings align Map/Set contracts, exact results/errors, state invariants, 
 
 Topic 7 has nine readings; Topic 8 has six. Both align operation/helper contracts, results and errors, representation invariants, preserved traces, code choices, costs and thirty open self-checks. Added complete preorder/postorder, maximum and root-based strict-neighbour queries, a key-only OrderedSet adapter, and an AVL operation route reusing the same readers. Public set removal returns None; extreme extraction returns its key; raw update helpers return roots and raw absent deletion is a no-op. Global count is distinct from subtree rank/select augmentation. All existing pages, labels, algorithms and fourteen figures are retained. No notebooks or assessment sources were used.
 
-## Topic 9 operation alignment
+## Topic 10 operation alignment
 
 Seven readings now align contracts, invariants, preserved traces, implementation choices, time/space and fourteen open self-checks. Numeric sifts/build/heapsort remain unchanged. The stable MinPriorityQueue adds size/empty and an extract_min alias; a composed MaxPriorityQueue negates finite numeric priorities while preserving FIFO sequence ties. Public methods return items, numeric helpers return priorities, and removal/extraction are aliases. Duplicate inserts remain separate entries. Arbitrary removal and indexed priority changes remain conceptual. All existing URLs, labels, headings and nine figures are retained. No notebooks or assessment sources were used.

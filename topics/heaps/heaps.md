@@ -1,4 +1,4 @@
-# 9. Priority queues and heaps
+# 10. Priority queues and heaps
 
 A queue chooses the oldest waiting item. A priority queue chooses the most important item under a stated priority rule. A binary heap implements that rule by keeping an extreme priority at the root while maintaining a compact, shallow tree.
 

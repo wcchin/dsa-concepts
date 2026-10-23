@@ -16,7 +16,7 @@ Ordering is useful because it supplies evidence about where a target cannot be. 
 
 Review [sorting](../sorting/sorting.md), [linked structures](../linear-structures/linked-structures.md) and [recursive calls](../recursion/recursive-calls.md). Code stores one node per distinct key. Repeated insertion leaves the set unchanged; comparisons must define a consistent order.
 
-The figures reuse the lecture tree rooted at 50. [Topic 8](../balanced-trees/balanced-trees.md) explains how to keep its paths short; [Topic 12](../kd-trees/kd-trees.md) changes the ordering rule for multidimensional points.
+The figures reuse the lecture tree rooted at 50. [Topic 8](../balanced-trees/balanced-trees.md) explains how to keep its paths short; [Topic 9](../kd-trees/kd-trees.md) changes the ordering rule for multidimensional points.
 
 ## Consistent contracts and implementation scope
 

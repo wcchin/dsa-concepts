@@ -30,12 +30,12 @@ For constant-time key comparisons and list access, the implementations in this b
 | Bubble sort with early stop | Θ(n) | Θ(n²), uniform random distinct-key permutations | Θ(n²) | Θ(1) | Yes | Yes |
 | Slicing merge sort | Θ(n log n) | Θ(n log n), for every input distribution | Θ(n log n) | Θ(n) peak including result and stack | Yes, left-first ties | No |
 | Last-pivot two-way quicksort | Θ(n log n) | Θ(n log n), uniform random distinct-key permutations | Θ(n²) | Θ(log n) balanced; Θ(n) worst stack | No | Yes |
-| Iterative heapsort in Topic 9 | Θ(n) on all-equal input | Θ(n log n), uniform random distinct-key permutations | Θ(n log n) | Θ(1) | No | Yes |
+| Iterative heapsort in Topic 10 | Θ(n) on all-equal input | Θ(n log n), uniform random distinct-key permutations | Θ(n log n) | Θ(1) | No | Yes |
 | Timsort-derived built-in sorting | Θ(n) | Typically Θ(n log n) on random order | O(n log n) | O(n) worst case | Yes | `.sort()`: yes; `sorted()`: no |
 
 Bounds describe n≥2 with constant-cost comparisons and ordinary list access. Θ(1) handles empty and singleton lists. “Extra space” includes recursion and any returned list; mutating input is a separate property. No timing benchmark is implied.
 
-Quicksort's best case assumes balanced partitions, not already sorted input. Its expected time needs an input-distribution or random-pivot assumption; it is not a synonym for best-case time. The merge-sort row describes the implementation without an already-ordered shortcut. The heapsort best case refers specifically to the early-stop sifts shown in Topic 9; a blanket Θ(n log n) best-case claim would overlook all-equal input. Powersort is the merge-policy explanation within the hybrid row, not an independently callable built-in.
+Quicksort's best case assumes balanced partitions, not already sorted input. Its expected time needs an input-distribution or random-pivot assumption; it is not a synonym for best-case time. The merge-sort row describes the implementation without an already-ordered shortcut. The heapsort best case refers specifically to the early-stop sifts shown in Topic 10; a blanket Θ(n log n) best-case claim would overlook all-equal input. Powersort is the merge-policy explanation within the hybrid row, not an independently callable built-in.
 
 (choosing-sorting-strategy)=
 ## Match the strategy to the requirement

@@ -1,4 +1,4 @@
-# 11. Graph ordering, paths and spanning trees
+# 13. Graph ordering, paths and spanning trees
 
 Three graph questions require different evidence: which task may happen next, which route is cheapest from a source, and which connections join a network at minimum total cost? A traversal alone does not answer all three.
 
@@ -13,6 +13,6 @@ Three graph questions require different evidence: which task may happen next, wh
 7. [Kruskal's algorithm](kruskal.md): scan globally sorted edges and reject cycles.
 8. [Compare the graph objectives](graph-algorithm-choices.md): select an algorithm by the required result.
 
-Read [graph representations, BFS and DFS](../graphs/graphs.md) and [priority queues](../heaps/heaps.md) first. Before the Kruskal code, read [Topic 13: union–find](../union-find/union-find.md); its full implementation is kept there rather than duplicated here. Topic 12 is a separate spatial-search branch and is not a prerequisite.
+Read [graph representations, BFS and DFS](../graphs/graphs.md) and [priority queues](../heaps/heaps.md) first. Before the Kruskal code, read [Topic 12: union–find](../union-find/union-find.md); its full implementation is kept there rather than duplicated here. Topic 9 is a separate spatial-search branch and is not a prerequisite.
 
 The examples follow the Week 12–13 lecture graphs. All graph keys include sinks and isolated vertices. Weighted code assumes finite numeric edge weights, consistent adjacency lists and bounded-cost arithmetic; Dijkstra additionally checks for negative weights. String labels are used in the traces, and `None` denotes a missing predecessor.

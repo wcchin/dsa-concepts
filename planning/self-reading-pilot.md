@@ -1,4 +1,4 @@
-# Topic 12 self-reading pilot — 22 October 2026
+# Topic 9 self-reading pilot — 22 October 2026
 
 Scope: the spatial-search overview and its twelve developed readings. This is an editorial pilot before any book-wide rollout, rather than a new assessment component.
 
@@ -26,4 +26,4 @@ Check whether two goals and two questions are useful at the existing page length
 
 ## Spatial operation completion (supersedes earlier extension boundaries)
 
-Topic 12 now groups readings under k-d, point-quadtree, PR-quadtree and R-tree methods, preserving existing URLs. Five new readings add complete point-tree deletion and nearest operations, exact/nearest R-tree queries, per-operation time/space tables and self-reading checks. Dynamic R-tree construction/splitting/condensation are worked conceptual algorithms, not implemented updates. No notebook, rubric, solution or assessment source was used.
+Topic 9 now groups readings under k-d, point-quadtree, PR-quadtree and R-tree methods, preserving existing URLs. Five new readings add complete point-tree deletion and nearest operations, exact/nearest R-tree queries, per-operation time/space tables and self-reading checks. Dynamic R-tree construction/splitting/condensation are worked conceptual algorithms, not implemented updates. No notebook, rubric, solution or assessment source was used.

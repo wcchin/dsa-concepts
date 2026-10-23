@@ -1,4 +1,4 @@
-"""Spatial-search teaching examples for DSA Concepts Topic 12.
+"""Spatial-search teaching examples for DSA Concepts Topic 9.
 
 Run: python spatial_search.py
 Python standard library only; original point/PR/R-tree examples, with existing

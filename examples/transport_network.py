@@ -1,8 +1,8 @@
-"""Original fictional transport case for DSA Concepts, Topic 14.
+"""Original fictional transport case for DSA Concepts, Topic 16.
 
 Run: python transport_network.py
-Python standard library only. Reused algorithm definitions match Topics 10, 11
-and 13; case calculations match the Topic 14 listings. This is a teaching model,
+Python standard library only. Reused algorithm definitions match Topics 11, 12
+and 13; case calculations match the Topic 16 listings. This is a teaching model,
 not a real transport service or a timetable-aware route planner.
 """
 

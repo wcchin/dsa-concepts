@@ -30,4 +30,4 @@ Include empty graphs, isolated vertices, disconnected components, equal-weight a
 
 Proof obligations differ too: Kahn preserves remaining indegrees; Dijkstra justifies settlement; DAG relaxation processes predecessors first; MST algorithms preserve safe completion. Memorising the same “greedy” label for all these methods does not replace those arguments.
 
-Continue to [Topic 13](../union-find/union-find.md) for the reusable connectivity structure, or use the [coverage review](../../coverage-review.md) to see what extensions remain beyond this book's core syllabus.
+Review [Topic 12](../union-find/union-find.md) for the reusable connectivity structure, continue to [Topic 14: algorithm design strategies](../strategies/strategies.md), or apply these methods in [Topic 16: the transport case](../applications/applications.md). The [coverage review](../../coverage-review.md) records further extensions.

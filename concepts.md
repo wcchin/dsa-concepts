@@ -2,7 +2,7 @@
 
 Find a concept by its name or browse concepts by topic.
 
-The wiki is being developed progressively. Topics 1–14 and optional Topics 15–16 have developed explanations.
+The wiki is being developed progressively. All sixteen topics have developed explanations; Topics 14–15 are optional extensions beyond the lecture inventory.
 
 ## Browse by topic
 
@@ -14,15 +14,14 @@ The wiki is being developed progressively. Topics 1–14 and optional Topics 15�
 - [6. Maps, sets and hashing](topics/maps-sets-hashing/maps-sets-hashing.md)
 - [7. Searching and binary search trees](topics/searching/searching.md)
 - [8. Balanced search trees](topics/balanced-trees/balanced-trees.md)
-- [9. Priority queues and heaps](topics/heaps/heaps.md)
-- [10. Graphs and traversal](topics/graphs/graphs.md)
-- [11. Graph ordering, paths and spanning trees](topics/graph-algorithms/graph-algorithms.md)
-- [12. Spatial search and indexing](topics/kd-trees/kd-trees.md)
-- [13. Union–find](topics/union-find/union-find.md)
-- [14. Integrated applications](topics/applications/applications.md)
-- [15. Algorithm design and sequence patterns](topics/strategies/strategies.md)
-
-- [16. Strings, tries and pattern matching](topics/strings/strings.md)
+- [9. Spatial search and indexing](topics/kd-trees/kd-trees.md)
+- [10. Priority queues and heaps](topics/heaps/heaps.md)
+- [11. Graphs and traversal](topics/graphs/graphs.md)
+- [12. Union–find](topics/union-find/union-find.md)
+- [13. Graph ordering, paths and spanning trees](topics/graph-algorithms/graph-algorithms.md)
+- [14. Algorithm design and sequence patterns](topics/strategies/strategies.md)
+- [15. Strings, tries and pattern matching](topics/strings/strings.md)
+- [16. Integrated applications](topics/applications/applications.md)
 
 ## Find a concept alphabetically
 
@@ -968,116 +967,7 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 - [AVL deletion cascade](topics/balanced-trees/avl-deletion.md#avl-deletion-cascade)
 - [AVL validation](topics/balanced-trees/avl-deletion.md#avl-validation)
 
-### 9. Priority queues and heaps
-
-- [Priority-queue min/max operation contracts](topics/heaps/priority-queues.md#priority-queue-adt)
-- [Max-priority adapter and FIFO ties](topics/heaps/heap-applications.md#max-priority-adapter)
-- [Record queue operation costs](topics/heaps/heap-applications.md#heap-record-operation-costs)
-
-**Priority queues: select by importance**
-
-- [Priority queue ADT](topics/heaps/priority-queues.md#priority-queue-adt)
-- [Priority versus FIFO selection](topics/heaps/priority-queues.md#priority-versus-fifo)
-- [Priority-queue contract](topics/heaps/priority-queues.md#priority-queue-contract)
-- [Priority-queue implementations](topics/heaps/priority-queues.md#priority-queue-implementations)
-
-**Heap order, complete shape and array indices**
-
-- [Complete binary tree](topics/heaps/heap-representation.md#complete-binary-tree)
-- [Min-heap invariant](topics/heaps/heap-representation.md#min-heap-invariant)
-- [Heap versus BST ordering](topics/heaps/heap-representation.md#heap-versus-bst)
-- [Heap array indices](topics/heaps/heap-representation.md#heap-array-indices)
-- [Heap shape and order](topics/heaps/heap-representation.md#heap-shape-order)
-
-**Insertion and sift-up**
-
-- [Heap insertion](topics/heaps/heap-insertion.md#heap-insertion)
-- [Sift-up](topics/heaps/heap-insertion.md#sift-up)
-- [Sift-up trace](topics/heaps/heap-insertion.md#sift-up-trace)
-- [Sift-up correctness and cost](topics/heaps/heap-insertion.md#sift-up-correctness-cost)
-
-**Root removal and sift-down**
-
-- [Heap minimum inspection](topics/heaps/heap-removal.md#heap-minimum)
-- [Sift-down](topics/heaps/heap-removal.md#sift-down)
-- [Heap minimum removal](topics/heaps/heap-removal.md#heap-remove-min)
-- [Sift-down trace](topics/heaps/heap-removal.md#sift-down-trace)
-- [Heap removal boundary cases](topics/heaps/heap-removal.md#heap-removal-boundaries)
-
-**Bottom-up heap construction**
-
-- [Bottom-up heap construction](topics/heaps/heap-construction.md#heapify)
-- [Heapify invariant](topics/heaps/heap-construction.md#heapify-invariant)
-- [Heapify trace](topics/heaps/heap-construction.md#heapify-trace)
-- [Linear-time heapify](topics/heaps/heap-construction.md#heapify-linear-time)
-
-**Python heaps, records and ties**
-
-- [Python heapq](topics/heaps/heap-applications.md#python-heapq)
-- [Heap record priorities](topics/heaps/heap-applications.md#heap-record-priorities)
-- [Priority-queue stable ties](topics/heaps/heap-applications.md#priority-queue-stable-ties)
-- [Changing heap priorities](topics/heaps/heap-applications.md#heap-changing-priorities)
-
-**Heapsort, operation costs and choices**
-
-- [Heap extraction sorting](topics/heaps/heap-sorting-costs.md#heap-extraction-sorting)
-- [In-place heapsort](topics/heaps/heap-sorting-costs.md#in-place-heapsort)
-- [Heapsort properties](topics/heaps/heap-sorting-costs.md#heapsort-properties)
-- [Heap operation costs](topics/heaps/heap-sorting-costs.md#heap-operation-costs)
-- [Heap versus AVL choices](topics/heaps/heap-sorting-costs.md#heap-versus-avl)
-
-### 10. Graphs and traversal
-
-**Graph concepts and modelling**
-
-- [Graph vertices and edges](topics/graphs/graph-concepts.md#graph-vertices-edges)
-- [Directed and undirected graphs](topics/graphs/graph-concepts.md#directed-undirected-graphs)
-- [Weighted graphs](topics/graphs/graph-concepts.md#weighted-graphs)
-- [Graph paths, cycles and walks](topics/graphs/graph-concepts.md#graph-paths-cycles)
-- [Graph degree](topics/graphs/graph-concepts.md#graph-degree)
-
-**Adjacency lists and matrices**
-
-- [Adjacency list](topics/graphs/graph-representations.md#adjacency-list)
-- [Graph representation contract](topics/graphs/graph-representations.md#graph-representation-contract)
-- [Adjacency matrix](topics/graphs/graph-representations.md#adjacency-matrix)
-- [Graph representation costs](topics/graphs/graph-representations.md#graph-representation-costs)
-- [Sparse and dense graphs](topics/graphs/graph-representations.md#sparse-dense-graphs)
-
-**Breadth-first search: layers and a FIFO frontier**
-
-- [Breadth-first search (BFS)](topics/graphs/breadth-first-search.md#breadth-first-search)
-- [BFS implementation](topics/graphs/breadth-first-search.md#bfs-code)
-- [BFS discovery marking](topics/graphs/breadth-first-search.md#bfs-discovery-marking)
-- [BFS shortest hop distances](topics/graphs/breadth-first-search.md#bfs-hop-distance)
-- [Traversal parents and path recovery](topics/graphs/breadth-first-search.md#bfs-parent-path)
-
-**Depth-first search: active paths and returns**
-
-- [Depth-first search (DFS)](topics/graphs/depth-first-search.md#depth-first-search)
-- [DFS implementation](topics/graphs/depth-first-search.md#dfs-code)
-- [DFS discovery and completion](topics/graphs/depth-first-search.md#dfs-discovery-completion)
-- [DFS parent tree](topics/graphs/depth-first-search.md#dfs-parent-tree)
-- [DFS revisits and cycles](topics/graphs/depth-first-search.md#dfs-cycles)
-- [Iterative DFS and suspended frames](topics/graphs/depth-first-search.md#iterative-dfs)
-
-**Reachability and connected components**
-
-- [Graph reachability](topics/graphs/graph-components.md#graph-reachability)
-- [Connected components](topics/graphs/graph-components.md#connected-components)
-- [Connected-component implementation](topics/graphs/graph-components.md#connected-components-code)
-- [Traversal forest](topics/graphs/graph-components.md#component-forest)
-- [Weak and strong directed connectivity](topics/graphs/graph-components.md#directed-connectivity)
-
-**Traversal costs and algorithm choice**
-
-- [Adjacency-list traversal costs](topics/graphs/graph-traversal-costs.md#adjacency-list-traversal-cost)
-- [Adjacency-matrix traversal costs](topics/graphs/graph-traversal-costs.md#adjacency-matrix-traversal-cost)
-- [Graph traversal space](topics/graphs/graph-traversal-costs.md#traversal-space)
-- [Graph traversal cost assumptions](topics/graphs/graph-traversal-costs.md#traversal-cost-assumptions)
-- [BFS versus DFS](topics/graphs/graph-traversal-costs.md#bfs-versus-dfs)
-
-### 12. Spatial search and indexing
+### 9. Spatial search and indexing
 
 **Self-reading support:** use the [topic’s check-by-concept table](topics/kd-trees/kd-trees.md#where-to-check-your-understanding) to find prediction questions and expandable explanations.
 
@@ -1168,30 +1058,149 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 - [Spatial executable example](topics/kd-trees/spatial-index-choices.md#spatial-executable-example)
 
 
-### Review additions to Topics 2 and 7
+### 10. Priority queues and heaps
 
-**Correctness, termination and evidence**
+- [Priority-queue min/max operation contracts](topics/heaps/priority-queues.md#priority-queue-adt)
+- [Max-priority adapter and FIFO ties](topics/heaps/heap-applications.md#max-priority-adapter)
+- [Record queue operation costs](topics/heaps/heap-applications.md#heap-record-operation-costs)
 
-- [Algorithm contract reasoning](topics/analysis/correctness.md#algorithm-contract-reasoning)
-- [Loop invariant method](topics/analysis/correctness.md#loop-invariant-method)
-- [Termination variant](topics/analysis/correctness.md#termination-variant)
-- [Inductive algorithm reasoning](topics/analysis/correctness.md#inductive-algorithm-reasoning)
-- [Counterexamples and tests](topics/analysis/correctness.md#counterexamples-and-tests)
+**Priority queues: select by importance**
 
-**Binary-search boundaries and duplicate runs**
+- [Priority queue ADT](topics/heaps/priority-queues.md#priority-queue-adt)
+- [Priority versus FIFO selection](topics/heaps/priority-queues.md#priority-versus-fifo)
+- [Priority-queue contract](topics/heaps/priority-queues.md#priority-queue-contract)
+- [Priority-queue implementations](topics/heaps/priority-queues.md#priority-queue-implementations)
 
-- [Lower bound search](topics/searching/search-boundaries.md#lower-bound-search)
-- [Upper bound search](topics/searching/search-boundaries.md#upper-bound-search)
-- [Duplicate run boundaries](topics/searching/search-boundaries.md#duplicate-run-boundaries)
-- [Monotone boundary search](topics/searching/search-boundaries.md#monotone-boundary-search)
+**Heap order, complete shape and array indices**
 
-**Ordered range queries in a BST**
+- [Complete binary tree](topics/heaps/heap-representation.md#complete-binary-tree)
+- [Min-heap invariant](topics/heaps/heap-representation.md#min-heap-invariant)
+- [Heap versus BST ordering](topics/heaps/heap-representation.md#heap-versus-bst)
+- [Heap array indices](topics/heaps/heap-representation.md#heap-array-indices)
+- [Heap shape and order](topics/heaps/heap-representation.md#heap-shape-order)
 
-- [BST range query](topics/searching/bst-range-queries.md#bst-range-query)
-- [BST range pruning cost](topics/searching/bst-range-queries.md#bst-range-pruning-cost)
+**Insertion and sift-up**
+
+- [Heap insertion](topics/heaps/heap-insertion.md#heap-insertion)
+- [Sift-up](topics/heaps/heap-insertion.md#sift-up)
+- [Sift-up trace](topics/heaps/heap-insertion.md#sift-up-trace)
+- [Sift-up correctness and cost](topics/heaps/heap-insertion.md#sift-up-correctness-cost)
+
+**Root removal and sift-down**
+
+- [Heap minimum inspection](topics/heaps/heap-removal.md#heap-minimum)
+- [Sift-down](topics/heaps/heap-removal.md#sift-down)
+- [Heap minimum removal](topics/heaps/heap-removal.md#heap-remove-min)
+- [Sift-down trace](topics/heaps/heap-removal.md#sift-down-trace)
+- [Heap removal boundary cases](topics/heaps/heap-removal.md#heap-removal-boundaries)
+
+**Bottom-up heap construction**
+
+- [Bottom-up heap construction](topics/heaps/heap-construction.md#heapify)
+- [Heapify invariant](topics/heaps/heap-construction.md#heapify-invariant)
+- [Heapify trace](topics/heaps/heap-construction.md#heapify-trace)
+- [Linear-time heapify](topics/heaps/heap-construction.md#heapify-linear-time)
+
+**Python heaps, records and ties**
+
+- [Python heapq](topics/heaps/heap-applications.md#python-heapq)
+- [Heap record priorities](topics/heaps/heap-applications.md#heap-record-priorities)
+- [Priority-queue stable ties](topics/heaps/heap-applications.md#priority-queue-stable-ties)
+- [Changing heap priorities](topics/heaps/heap-applications.md#heap-changing-priorities)
+
+**Heapsort, operation costs and choices**
+
+- [Heap extraction sorting](topics/heaps/heap-sorting-costs.md#heap-extraction-sorting)
+- [In-place heapsort](topics/heaps/heap-sorting-costs.md#in-place-heapsort)
+- [Heapsort properties](topics/heaps/heap-sorting-costs.md#heapsort-properties)
+- [Heap operation costs](topics/heaps/heap-sorting-costs.md#heap-operation-costs)
+- [Heap versus AVL choices](topics/heaps/heap-sorting-costs.md#heap-versus-avl)
+
+### 11. Graphs and traversal
+
+**Graph concepts and modelling**
+
+- [Graph vertices and edges](topics/graphs/graph-concepts.md#graph-vertices-edges)
+- [Directed and undirected graphs](topics/graphs/graph-concepts.md#directed-undirected-graphs)
+- [Weighted graphs](topics/graphs/graph-concepts.md#weighted-graphs)
+- [Graph paths, cycles and walks](topics/graphs/graph-concepts.md#graph-paths-cycles)
+- [Graph degree](topics/graphs/graph-concepts.md#graph-degree)
+
+**Adjacency lists and matrices**
+
+- [Adjacency list](topics/graphs/graph-representations.md#adjacency-list)
+- [Graph representation contract](topics/graphs/graph-representations.md#graph-representation-contract)
+- [Adjacency matrix](topics/graphs/graph-representations.md#adjacency-matrix)
+- [Graph representation costs](topics/graphs/graph-representations.md#graph-representation-costs)
+- [Sparse and dense graphs](topics/graphs/graph-representations.md#sparse-dense-graphs)
+
+**Breadth-first search: layers and a FIFO frontier**
+
+- [Breadth-first search (BFS)](topics/graphs/breadth-first-search.md#breadth-first-search)
+- [BFS implementation](topics/graphs/breadth-first-search.md#bfs-code)
+- [BFS discovery marking](topics/graphs/breadth-first-search.md#bfs-discovery-marking)
+- [BFS shortest hop distances](topics/graphs/breadth-first-search.md#bfs-hop-distance)
+- [Traversal parents and path recovery](topics/graphs/breadth-first-search.md#bfs-parent-path)
+
+**Depth-first search: active paths and returns**
+
+- [Depth-first search (DFS)](topics/graphs/depth-first-search.md#depth-first-search)
+- [DFS implementation](topics/graphs/depth-first-search.md#dfs-code)
+- [DFS discovery and completion](topics/graphs/depth-first-search.md#dfs-discovery-completion)
+- [DFS parent tree](topics/graphs/depth-first-search.md#dfs-parent-tree)
+- [DFS revisits and cycles](topics/graphs/depth-first-search.md#dfs-cycles)
+- [Iterative DFS and suspended frames](topics/graphs/depth-first-search.md#iterative-dfs)
+
+**Reachability and connected components**
+
+- [Graph reachability](topics/graphs/graph-components.md#graph-reachability)
+- [Connected components](topics/graphs/graph-components.md#connected-components)
+- [Connected-component implementation](topics/graphs/graph-components.md#connected-components-code)
+- [Traversal forest](topics/graphs/graph-components.md#component-forest)
+- [Weak and strong directed connectivity](topics/graphs/graph-components.md#directed-connectivity)
+
+**Traversal costs and algorithm choice**
+
+- [Adjacency-list traversal costs](topics/graphs/graph-traversal-costs.md#adjacency-list-traversal-cost)
+- [Adjacency-matrix traversal costs](topics/graphs/graph-traversal-costs.md#adjacency-matrix-traversal-cost)
+- [Graph traversal space](topics/graphs/graph-traversal-costs.md#traversal-space)
+- [Graph traversal cost assumptions](topics/graphs/graph-traversal-costs.md#traversal-cost-assumptions)
+- [BFS versus DFS](topics/graphs/graph-traversal-costs.md#bfs-versus-dfs)
+
+### 12. Union–find
+
+**Partitions and representatives**
+
+- [Disjoint set partition](topics/union-find/disjoint-sets.md#disjoint-set-partition)
+- [Union find adt](topics/union-find/disjoint-sets.md#union-find-adt)
+- [Disjoint set representative](topics/union-find/disjoint-sets.md#disjoint-set-representative)
+- [Union find versus sets](topics/union-find/disjoint-sets.md#union-find-versus-sets)
+
+**Parent forests and finding a root**
+
+- [Union find parent forest](topics/union-find/parent-forests.md#union-find-parent-forest)
+- [Basic find](topics/union-find/parent-forests.md#basic-find)
+- [Union find root linking](topics/union-find/parent-forests.md#union-find-root-linking)
+- [Union find links versus edges](topics/union-find/parent-forests.md#union-find-links-versus-edges)
+
+**Union by size and path compression**
+
+- [Union by size](topics/union-find/union-compression.md#union-by-size)
+- [Path compression](topics/union-find/union-compression.md#path-compression)
+- [Disjoint set code](topics/union-find/union-compression.md#disjoint-set-code)
+- [Union find shared trace](topics/union-find/union-compression.md#union-find-shared-trace)
+- [Union find amortised cost](topics/union-find/union-compression.md#union-find-amortised-cost)
+
+**Connectivity, cycle checks and limits**
+
+- [Incremental connectivity](topics/union-find/union-find-applications.md#incremental-connectivity)
+- [Union find cycle check](topics/union-find/union-find-applications.md#union-find-cycle-check)
+- [Union find directed limit](topics/union-find/union-find-applications.md#union-find-directed-limit)
+- [Union find deletion limit](topics/union-find/union-find-applications.md#union-find-deletion-limit)
+- [Union find workload choice](topics/union-find/union-find-applications.md#union-find-workload-choice)
 
 
-### 11. Graph ordering, paths and spanning trees
+### 13. Graph ordering, paths and spanning trees
 
 **DAGs and topological order**
 
@@ -1249,80 +1258,7 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 - [Graph algorithm boundaries](topics/graph-algorithms/graph-algorithm-choices.md#graph-algorithm-boundaries)
 
 
-### 13. Union–find
-
-**Partitions and representatives**
-
-- [Disjoint set partition](topics/union-find/disjoint-sets.md#disjoint-set-partition)
-- [Union find adt](topics/union-find/disjoint-sets.md#union-find-adt)
-- [Disjoint set representative](topics/union-find/disjoint-sets.md#disjoint-set-representative)
-- [Union find versus sets](topics/union-find/disjoint-sets.md#union-find-versus-sets)
-
-**Parent forests and finding a root**
-
-- [Union find parent forest](topics/union-find/parent-forests.md#union-find-parent-forest)
-- [Basic find](topics/union-find/parent-forests.md#basic-find)
-- [Union find root linking](topics/union-find/parent-forests.md#union-find-root-linking)
-- [Union find links versus edges](topics/union-find/parent-forests.md#union-find-links-versus-edges)
-
-**Union by size and path compression**
-
-- [Union by size](topics/union-find/union-compression.md#union-by-size)
-- [Path compression](topics/union-find/union-compression.md#path-compression)
-- [Disjoint set code](topics/union-find/union-compression.md#disjoint-set-code)
-- [Union find shared trace](topics/union-find/union-compression.md#union-find-shared-trace)
-- [Union find amortised cost](topics/union-find/union-compression.md#union-find-amortised-cost)
-
-**Connectivity, cycle checks and limits**
-
-- [Incremental connectivity](topics/union-find/union-find-applications.md#incremental-connectivity)
-- [Union find cycle check](topics/union-find/union-find-applications.md#union-find-cycle-check)
-- [Union find directed limit](topics/union-find/union-find-applications.md#union-find-directed-limit)
-- [Union find deletion limit](topics/union-find/union-find-applications.md#union-find-deletion-limit)
-- [Union find workload choice](topics/union-find/union-find-applications.md#union-find-workload-choice)
-
-
-### 14. Integrated applications
-
-**Model places, links and two kinds of cost**
-
-- [Transport case model](topics/applications/transport-model.md#transport-case-model)
-- [Transport data representations](topics/applications/transport-model.md#transport-data-representations)
-- [Transport route measurement](topics/applications/transport-model.md#transport-route-measurement)
-
-**A visitor asks for the fewest links**
-
-- [Transport BFS question](topics/applications/transport-hops.md#transport-bfs-question)
-- [Transport BFS result](topics/applications/transport-hops.md#transport-bfs-result)
-- [Transport BFS boundaries](topics/applications/transport-hops.md#transport-bfs-boundaries)
-
-**A visitor asks for the least travel time**
-
-- [Transport Dijkstra question](topics/applications/transport-times.md#transport-dijkstra-question)
-- [Transport Dijkstra trace](topics/applications/transport-times.md#transport-dijkstra-trace)
-- [Transport travel assumptions](topics/applications/transport-times.md#transport-travel-assumptions)
-
-**An operator asks whether places are connected**
-
-- [Transport incremental connectivity](topics/applications/transport-connectivity.md#transport-incremental-connectivity)
-- [Transport connectivity trace](topics/applications/transport-connectivity.md#transport-connectivity-trace)
-- [Transport connectivity versus routes](topics/applications/transport-connectivity.md#transport-connectivity-versus-routes)
-
-**A planner asks for the cheapest connecting network**
-
-- [Transport construction objective](topics/applications/transport-design.md#transport-construction-objective)
-- [Transport MST result](topics/applications/transport-design.md#transport-mst-result)
-- [Transport design route tradeoff](topics/applications/transport-design.md#transport-design-route-tradeoff)
-
-**Compare the answers before making a decision**
-
-- [Transport objective comparison](topics/applications/transport-decisions.md#transport-objective-comparison)
-- [Transport end to end costs](topics/applications/transport-decisions.md#transport-end-to-end-costs)
-- [Transport model revisions](topics/applications/transport-decisions.md#transport-model-revisions)
-- [Transport independent checks](topics/applications/transport-decisions.md#transport-independent-checks)
-
-
-### 15. Algorithm design and sequence patterns
+### 14. Algorithm design and sequence patterns
 
 **Choose a strategy from the problem**
 
@@ -1366,7 +1302,7 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 - [P, NP and NP-completeness](topics/strategies/complexity-limits.md#complexity-p-np)
 
 
-### 16. Strings, tries and pattern matching
+### 15. Strings, tries and pattern matching
 
 **String models and query contracts**
 
@@ -1423,3 +1359,63 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 - [String matching boundaries](topics/strings/string-choices.md#string-matching-boundaries)
 - [String indexing extensions](topics/strings/string-choices.md#string-indexing-extensions)
 
+### 16. Integrated applications
+
+**Model places, links and two kinds of cost**
+
+- [Transport case model](topics/applications/transport-model.md#transport-case-model)
+- [Transport data representations](topics/applications/transport-model.md#transport-data-representations)
+- [Transport route measurement](topics/applications/transport-model.md#transport-route-measurement)
+
+**A visitor asks for the fewest links**
+
+- [Transport BFS question](topics/applications/transport-hops.md#transport-bfs-question)
+- [Transport BFS result](topics/applications/transport-hops.md#transport-bfs-result)
+- [Transport BFS boundaries](topics/applications/transport-hops.md#transport-bfs-boundaries)
+
+**A visitor asks for the least travel time**
+
+- [Transport Dijkstra question](topics/applications/transport-times.md#transport-dijkstra-question)
+- [Transport Dijkstra trace](topics/applications/transport-times.md#transport-dijkstra-trace)
+- [Transport travel assumptions](topics/applications/transport-times.md#transport-travel-assumptions)
+
+**An operator asks whether places are connected**
+
+- [Transport incremental connectivity](topics/applications/transport-connectivity.md#transport-incremental-connectivity)
+- [Transport connectivity trace](topics/applications/transport-connectivity.md#transport-connectivity-trace)
+- [Transport connectivity versus routes](topics/applications/transport-connectivity.md#transport-connectivity-versus-routes)
+
+**A planner asks for the cheapest connecting network**
+
+- [Transport construction objective](topics/applications/transport-design.md#transport-construction-objective)
+- [Transport MST result](topics/applications/transport-design.md#transport-mst-result)
+- [Transport design route tradeoff](topics/applications/transport-design.md#transport-design-route-tradeoff)
+
+**Compare the answers before making a decision**
+
+- [Transport objective comparison](topics/applications/transport-decisions.md#transport-objective-comparison)
+- [Transport end to end costs](topics/applications/transport-decisions.md#transport-end-to-end-costs)
+- [Transport model revisions](topics/applications/transport-decisions.md#transport-model-revisions)
+- [Transport independent checks](topics/applications/transport-decisions.md#transport-independent-checks)
+
+### Review additions to Topics 2 and 7
+
+**Correctness, termination and evidence**
+
+- [Algorithm contract reasoning](topics/analysis/correctness.md#algorithm-contract-reasoning)
+- [Loop invariant method](topics/analysis/correctness.md#loop-invariant-method)
+- [Termination variant](topics/analysis/correctness.md#termination-variant)
+- [Inductive algorithm reasoning](topics/analysis/correctness.md#inductive-algorithm-reasoning)
+- [Counterexamples and tests](topics/analysis/correctness.md#counterexamples-and-tests)
+
+**Binary-search boundaries and duplicate runs**
+
+- [Lower bound search](topics/searching/search-boundaries.md#lower-bound-search)
+- [Upper bound search](topics/searching/search-boundaries.md#upper-bound-search)
+- [Duplicate run boundaries](topics/searching/search-boundaries.md#duplicate-run-boundaries)
+- [Monotone boundary search](topics/searching/search-boundaries.md#monotone-boundary-search)
+
+**Ordered range queries in a BST**
+
+- [BST range query](topics/searching/bst-range-queries.md#bst-range-query)
+- [BST range pruning cost](topics/searching/bst-range-queries.md#bst-range-pruning-cost)

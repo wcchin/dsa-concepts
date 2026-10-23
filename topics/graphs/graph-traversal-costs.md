@@ -51,4 +51,4 @@ The outer component loop does not multiply the cost by n: its shared seen set en
 
 Neighbour order can change traversal order and parent choices, while reachability stays the same. BFS distances also remain the same for a fixed graph and start. DFS completion order carries structural information, but interpreting it requires the appropriate graph assumptions and algorithm; it is not automatically a dependency ordering for every graph.
 
-Continue to [Topic 11](../graph-algorithms/graph-algorithms.md) for graph ordering, weighted routes and spanning trees, or return to the [concept index](../../concepts.md).
+Continue to [Topic 12: union–find](../union-find/union-find.md) for maintained connectivity, followed by [Topic 13](../graph-algorithms/graph-algorithms.md) for graph ordering, weighted routes and spanning trees, or return to the [concept index](../../concepts.md).

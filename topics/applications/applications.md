@@ -1,4 +1,4 @@
-# 14. Integrated applications: a transport network
+# 16. Integrated applications: a transport network
 
 A visitor wants to reach the park. An operator wants to know which places are connected. A planner wants to connect facilities at minimum construction cost. They can use the same candidate links, but they need different answers.
 

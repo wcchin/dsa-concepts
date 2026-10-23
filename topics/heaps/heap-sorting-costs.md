@@ -106,4 +106,4 @@ No. Parent-child heap order is sufficient for extreme selection but leaves sibli
 No. Heap order gives no whole-subtree key partition, so arbitrary lookup may require a linear scan.
 :::
 
-Return to the [topic overview](heaps.md), compare [sorting strategies](../sorting/comparing-strategies.md), or continue to [graph algorithms](../graph-algorithms/graph-algorithms.md).
+Return to the [topic overview](heaps.md), compare [sorting strategies](../sorting/comparing-strategies.md), or continue to [Topic 11: graphs and traversal](../graphs/graphs.md).

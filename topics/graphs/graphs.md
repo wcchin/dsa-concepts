@@ -1,4 +1,4 @@
-# 10. Graphs and traversal
+# 11. Graphs and traversal
 
 A route network can branch, reconnect and contain loops. A tree gives each non-root node one parent, but many networks need a more general model. A graph represents those connections; a traversal supplies a rule for exploring them without repeatedly revisiting the same vertices.
 
@@ -11,6 +11,6 @@ A route network can branch, reconnect and contain loops. A tree gives each non-r
 5. [Reachability and components](graph-components.md): restart traversal to cover an undirected graph, including isolated vertices.
 6. [Traversal costs and choices](graph-traversal-costs.md): count examined entries, state assumptions and choose a traversal for the question.
 
-Read [queues and stacks](../linear-structures/linear-structures.md), [recursive calls](../recursion/recursive-calls.md) and [algorithm analysis](../analysis/analysis.md) first. Priority queues are not needed for this topic. [Topic 11](../graph-algorithms/graph-algorithms.md) will add dependency ordering and weighted routes.
+Read [queues and stacks](../linear-structures/linear-structures.md), [recursive calls](../recursion/recursive-calls.md) and [algorithm analysis](../analysis/analysis.md) first. Priority queues are not needed for this topic. Next, [Topic 12: union–find](../union-find/union-find.md) maintains connectivity as connections arrive. [Topic 13](../graph-algorithms/graph-algorithms.md) will add dependency ordering and weighted routes.
 
 The shared lecture graph has vertices A through H and eight undirected edges. All code assumes well-formed adjacency lists, non-`None` string vertex labels, and the stored neighbour order. The graph remains unchanged during traversal. No notebook is needed.

@@ -14,20 +14,20 @@ A standalone Jupyter Book 2 project for a searchable, self-reading course resour
 - Searching and BSTs: nine aligned readings and nine original SVG figures, with ordered-set contracts, complete ordered queries and eighteen self-checks.
 - Balanced search trees: six aligned readings and five original SVG figures, with shared ordered-set operations, qualified costs and twelve self-checks.
 - Spatial search and indexing: seventeen reading pages grouped under four methods, with seventeen original SVG figures. Each method covers construction/insertion, exact lookup, range, nearest and deletion with time/space costs. Point-tree operations and given-tree R-tree queries have runnable code; general R-tree updates have worked algorithm traces.
-- Graphs and traversal: six reading pages, an overview and eight original SVG explanations.
 - Priority queues and heaps: seven aligned readings, an overview and nine original SVG explanations, with min/max contracts, stable record adapters, explicit repair/allocation costs and fourteen self-checks.
-- Graph ordering, shortest paths and spanning trees: eight reading pages and nine original SVG figures.
+- Graphs and traversal: six reading pages, an overview and eight original SVG explanations.
 - Union–find: four reading pages and five original SVG figures.
+- Graph ordering, shortest paths and spanning trees: eight reading pages and nine original SVG figures.
 - Optional algorithm design: six reading pages and four original SVG figures.
 - Optional strings and tries: eight reading pages and nine accessible SVG figures, with trie updates/prefix queries, naive substring search, KMP and verified rolling hashes.
 - Integrated transport application: six reading pages, five accessible SVG figures and a standalone standard-library Python example.
-- A Topic 12 self-reading pilot: page goals, prerequisite links, misconception reminders and 34 prediction questions with collapsed explanations.
+- A Topic 9 self-reading pilot: page goals, prerequisite links, misconception reminders and 34 prediction questions with collapsed explanations.
 - A prerequisite reading guide and public coverage review.
 - An original probing-deletion diagram.
 - An author-facing source inventory under `planning/`.
 - A build-check workflow and automatic publishing on pushes to `main`.
 
-No notebooks, rubric files, solution files, slide files or Git history are included. Topic 14 develops one complete transport-network application; dependency scheduling and a spatial directory remain possible future cases.
+No notebooks, rubric files, solution files, slide files or Git history are included. Topic 16 develops one complete transport-network application; dependency scheduling and a spatial directory remain possible future cases.
 
 ## Repository
 
@@ -65,5 +65,5 @@ Every push to `main` builds and publishes the site. Pull requests run the build 
 
 Read `planning/topic-inventory.md` for the source-based topics, page boundaries, lecture-source mapping and gaps. The inventory records the private course-source provenance but the source files themselves are not bundled. Do not place assessment solutions in this book project.
 
-Topics 1–14 and optional Topics 15–16 contain developed reading material. See `coverage-review.md` for remaining gaps and `planning/coverage-audit.md` for the editorial review. No content licence has been selected yet.
+All sixteen topics contain developed reading material; Topics 14–15 are optional extensions beyond the lecture inventory. See `coverage-review.md` for remaining gaps and `planning/coverage-audit.md` for the editorial review. No content licence has been selected yet.
 

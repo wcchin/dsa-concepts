@@ -84,33 +84,6 @@ project:
     - file: topics/balanced-trees/avl-insertion.md
     - file: topics/balanced-trees/avl-deletion.md
     - file: topics/balanced-trees/avl-operations.md
-  - file: topics/heaps/heaps.md
-    children:
-    - file: topics/heaps/priority-queues.md
-    - file: topics/heaps/heap-representation.md
-    - file: topics/heaps/heap-insertion.md
-    - file: topics/heaps/heap-removal.md
-    - file: topics/heaps/heap-construction.md
-    - file: topics/heaps/heap-applications.md
-    - file: topics/heaps/heap-sorting-costs.md
-  - file: topics/graphs/graphs.md
-    children:
-    - file: topics/graphs/graph-concepts.md
-    - file: topics/graphs/graph-representations.md
-    - file: topics/graphs/breadth-first-search.md
-    - file: topics/graphs/depth-first-search.md
-    - file: topics/graphs/graph-components.md
-    - file: topics/graphs/graph-traversal-costs.md
-  - file: topics/graph-algorithms/graph-algorithms.md
-    children:
-    - file: topics/graph-algorithms/topological-order.md
-    - file: topics/graph-algorithms/shortest-path-state.md
-    - file: topics/graph-algorithms/dijkstra.md
-    - file: topics/graph-algorithms/dag-shortest-paths.md
-    - file: topics/graph-algorithms/spanning-trees.md
-    - file: topics/graph-algorithms/prim.md
-    - file: topics/graph-algorithms/kruskal.md
-    - file: topics/graph-algorithms/graph-algorithm-choices.md
   - file: topics/kd-trees/kd-trees.md
     children:
     - file: topics/kd-trees/spatial-queries.md
@@ -134,20 +107,39 @@ project:
       - file: topics/kd-trees/r-tree-queries.md
       - file: topics/kd-trees/r-tree-operations.md
     - file: topics/kd-trees/spatial-index-choices.md
+  - file: topics/heaps/heaps.md
+    children:
+    - file: topics/heaps/priority-queues.md
+    - file: topics/heaps/heap-representation.md
+    - file: topics/heaps/heap-insertion.md
+    - file: topics/heaps/heap-removal.md
+    - file: topics/heaps/heap-construction.md
+    - file: topics/heaps/heap-applications.md
+    - file: topics/heaps/heap-sorting-costs.md
+  - file: topics/graphs/graphs.md
+    children:
+    - file: topics/graphs/graph-concepts.md
+    - file: topics/graphs/graph-representations.md
+    - file: topics/graphs/breadth-first-search.md
+    - file: topics/graphs/depth-first-search.md
+    - file: topics/graphs/graph-components.md
+    - file: topics/graphs/graph-traversal-costs.md
   - file: topics/union-find/union-find.md
     children:
     - file: topics/union-find/disjoint-sets.md
     - file: topics/union-find/parent-forests.md
     - file: topics/union-find/union-compression.md
     - file: topics/union-find/union-find-applications.md
-  - file: topics/applications/applications.md
+  - file: topics/graph-algorithms/graph-algorithms.md
     children:
-    - file: topics/applications/transport-model.md
-    - file: topics/applications/transport-hops.md
-    - file: topics/applications/transport-times.md
-    - file: topics/applications/transport-connectivity.md
-    - file: topics/applications/transport-design.md
-    - file: topics/applications/transport-decisions.md
+    - file: topics/graph-algorithms/topological-order.md
+    - file: topics/graph-algorithms/shortest-path-state.md
+    - file: topics/graph-algorithms/dijkstra.md
+    - file: topics/graph-algorithms/dag-shortest-paths.md
+    - file: topics/graph-algorithms/spanning-trees.md
+    - file: topics/graph-algorithms/prim.md
+    - file: topics/graph-algorithms/kruskal.md
+    - file: topics/graph-algorithms/graph-algorithm-choices.md
   - file: topics/strategies/strategies.md
     children:
     - file: topics/strategies/strategy-selection.md
@@ -166,6 +158,15 @@ project:
     - file: topics/strings/kmp-matching.md
     - file: topics/strings/rolling-hash-search.md
     - file: topics/strings/string-choices.md
+  - file: topics/applications/applications.md
+    children:
+    - file: topics/applications/transport-model.md
+    - file: topics/applications/transport-hops.md
+    - file: topics/applications/transport-times.md
+    - file: topics/applications/transport-connectivity.md
+    - file: topics/applications/transport-design.md
+    - file: topics/applications/transport-decisions.md
+
 site:
   template: book-theme
   options:

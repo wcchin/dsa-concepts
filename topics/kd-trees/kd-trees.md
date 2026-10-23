@@ -1,4 +1,4 @@
-# 12. Spatial search and indexing
+# 9. Spatial search and indexing
 
 A nearby point, a point inside a rectangle, and a line crossing a region require spatial evidence. This topic compares structures by what their boundaries mean and how those boundaries justify skipping work.
 

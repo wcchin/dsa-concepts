@@ -5,7 +5,7 @@
 
 Kruskal scans edges in nondecreasing weight order. Initially each vertex is its own component. Accept an edge exactly when its endpoints currently belong to different components; then merge those components. An edge within one component would close a cycle and is rejected.
 
-Read [Topic 13's disjoint-set class](../union-find/union-compression.md) first. This page deliberately reuses that class rather than presenting a second version with different tie or compression rules.
+Read [Topic 12's disjoint-set class](../union-find/union-compression.md) first. This page deliberately reuses that class rather than presenting a second version with different tie or compression rules.
 
 (kruskal-code)=
 ## Union reports whether a merge actually occurred
