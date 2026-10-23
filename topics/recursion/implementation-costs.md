@@ -101,4 +101,6 @@ Trace the calls or predict the result before opening the explanation.
 False. It avoids those temporary remainder lists, but still returns a newly allocated result containing a+b references.
 :::
 
+Next: [Sorting](../sorting/sorting.md), which compares this merge strategy with insertion, adjacent swaps and partitioning.
+
 **Browse:** [Recursion](recursion.md) · [Concept index](../../concepts.md)

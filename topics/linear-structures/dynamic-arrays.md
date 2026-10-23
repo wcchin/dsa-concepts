@@ -81,3 +81,5 @@ Five. Spare capacity is not part of the logical sequence.
 :::{dropdown} Show explanation
 No. It bounds total work for every append sequence from the stated initial state.
 :::
+
+Next: [Linked structures](linked-structures.md).

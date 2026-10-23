@@ -1,6 +1,6 @@
-# Topic 9 self-reading pilot — 22 October 2026
+# Self-reading editorial guide
 
-Scope: the spatial-search overview and its twelve developed readings. This is an editorial pilot before any book-wide rollout, rather than a new assessment component.
+Current scope: all sixteen topics and 120 reading pages. The format originated in Topic 9 and has completed its book-wide rollout. This file retains its historical name; it is the maintenance checklist, not an outstanding pilot task.
 
 ## Reader-facing pattern
 
@@ -17,13 +17,13 @@ The overview explains how to use the checks, maps code dependencies by route, an
 - Include both a concrete state/branch prediction and an explanation, transfer or assumption check where appropriate.
 - State hypothetical modifications explicitly so they are not confused with the shared seven-point dataset.
 - Keep distinctions precise: full equality versus coordinate ties; closed queries versus half-open cells; point tests versus region tests; buckets versus pivots; candidates versus exact geometry; height versus visited work.
-- Preserve original concept labels, routes, figures and Python listings. No executable implementation changes are part of this pass.
+- Preserve concept labels and routes. When a later task changes code or a figure, verify it against its contract and update every dependent trace; editorial-only passes leave algorithms unchanged.
 - Check the compiled HTML for closed details/summary controls, visible question text and complete answer content. Review desktop and narrow-screen presentation without changing established book branding.
 
-## Review before wider adoption
+## Maintain the completed rollout
 
-Check whether two goals and two questions are useful at the existing page lengths, whether the prerequisite cues are enough for direct search arrivals, and whether the feedback explains why rather than only naming an answer. Keep any later rollout sensitive to topic scope; do not add boxes mechanically when a shorter page needs less scaffolding.
+When editing a reading, keep the goals and checks specific to its concept. Ensure prerequisite cues work for direct search arrivals and feedback explains why rather than only naming an answer. Adapt structure to scope: an analysis argument or integrated application does not need an artificial container-operation template. Use the study blocks in the [reading guide](../reading-guide.md) to manage effort rather than forcing equal page lengths.
 
-## Spatial operation completion (supersedes earlier extension boundaries)
+## Current validation and tasks
 
-Topic 9 now groups readings under k-d, point-quadtree, PR-quadtree and R-tree methods, preserving existing URLs. Five new readings add complete point-tree deletion and nearest operations, exact/nearest R-tree queries, per-operation time/space tables and self-reading checks. Dynamic R-tree construction/splitting/condensation are worked conceptual algorithms, not implemented updates. No notebook, rubric, solution or assessment source was used.
+Each of the 120 readings has two goals, a prerequisite/context cue, a misconception reminder and two collapsed-feedback checks (240 total). Keep essential explanation visible, code dependencies explicit and next-reading links consistent with the sidebar or a labelled alternative route. Current task status is maintained only in [status.md](status.md); the [editorial review](editorial-review.md) records topic-specific findings.

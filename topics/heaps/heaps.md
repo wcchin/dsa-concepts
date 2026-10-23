@@ -18,7 +18,7 @@ The core follows the lecture's min-heap `[2, 5, 4, 9, 7, 6]`. Teaching functions
 
 ## Consistent operation and implementation route
 
-Each reading follows **purpose/contract → representation and invariant → visual trace → implementation → choices/correctness → time/space → suitability → self-checks**, adapted to the helper or algorithm it explains. All seven readings start with goals/prerequisites and end with two open prediction checks. The original nine diagrams and numerical traces remain.
+Each reading follows **purpose/contract → representation and invariant → visual trace → implementation → choices/correctness → time/space → suitability → self-checks**, adapted to the helper or algorithm it explains. Use the min-heap diagrams to trace repairs first; the record adapters and max-heap sorting code then change the interface or ordering rule explicitly.
 
 | Layer | Return and mutation contract | What the code implements |
 |---|---|---|

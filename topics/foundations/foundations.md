@@ -22,6 +22,6 @@ After reading, you should be able to draw references between objects, predict th
 
 Begin with the required result and state changes. Identify which names, container slots and attributes reach each object; distinguish local rebinding from mutation through shared references. If a copy is made, determine exactly which levels remain shared. Then check which invariant the supported operations preserve and separate that behavioural promise from storage choices.
 
-All five readings have two goals, prerequisite/context cues, a misconception reminder and two explained prediction questions (ten checks). The three original reference diagrams, original Python examples and existing concept labels remain. This is an introduction to the contracts and object model; full container interfaces and formal time/space analysis are developed in their later topics.
+Use the reference diagrams to predict which object a name, slot or attribute reaches before running the code. Full container interfaces and formal time/space analysis are developed in later topics; the goal here is to explain the state change correctly.
 
 For a particular term, use the [concept index](../../concepts.md). Continue with [Analysing algorithms](../analysis/analysis.md). For a developed application of these foundations, see [Maps, Sets and Hashing](../maps-sets-hashing/maps-sets-hashing.md).

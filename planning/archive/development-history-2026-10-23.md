@@ -1,0 +1,163 @@
+# Development history through the topic alignment
+
+Archived on 23 October 2026. The dated statements below describe earlier stages and are not the current task list. See [current status](../status.md), [the editorial review](../editorial-review.md) and [the public coverage roadmap](../../coverage-review.md).
+
+# Coherence and coverage audit — updated 23 October 2026
+
+Scope: all topic overviews and reading pages, concept destinations, shared contracts, code dependencies, examples and complexity conventions. Core lecture basis remains the original lecture Markdown; no notebook, rubric, solution or assessment file was consulted.
+
+## Topic-by-topic findings
+
+| Topic | Coherent role and retained coverage | Finding / action |
+|---|---|---|
+| 1 Foundations | Objects, identity, mutation, copying, collection choices, classes and invariants | Sound prerequisite for every reference diagram. Basic Python syntax is assumed explicitly; this is not a first programming course. |
+| 2 Analysis | Input size, word model, cases, bounds, growth, time and peak/output space | Added a reusable correctness page. Kept probability separate from amortisation and input magnitude separate from bit length. |
+| 3 Recursion | Calls/returns, stack depth, divide/combine, recurrences, merge implementation costs | Removed stale planned-topic wording. General recurrence methods remain optional; existing analysis uses explicit level sums. |
+| 4 Sorting | Insertion, bubble, merge links, partition, quicksort, stability, space and comparison lower bound | Heap sorting now linked. Selection and actual counting/radix implementations remain a prioritised extension. |
+| 5 Linear structures | ADTs, stacks, queues/deques, arrays, resizing, singly/doubly linked concepts, circular and linked queues | Preserves observer/mutator distinction at the logical level, compatible with compressing union–find queries. Full linked deque is still conceptual. |
+| 6 Maps/sets/hashing | Behaviour versus hashing, equality/hash contract, chaining, tombstones, load, expected/amortised cost | Corrected stale prerequisite/status links. Complete resizable probing-map implementation remains absent, although insertion rules are explained. |
+| 7 Search/BST | Search intervals, ancestor bounds, insertion, traversal, deletion and height costs | Added boundary search and BST ranges. Distinct-key contract and successor-child retention remain explicit. |
+| 8 AVL | Edge heights, balance factors, transferred subtrees, all rotation cases and full insert/delete | Cached heights and returned roots are consistent. Broader tree families are optional, not missing from the stated AVL scope. |
+| 9 Spatial search | K-d core; point quadtrees; PR midpoints/buckets; R-tree enclosures and exact refinement | Expanded in the agreed sequence with shared point queries, explicit boundary ownership, stopping limits, given-tree R-tree scope and a runnable example. Existing k-d-tree URLs are retained. |
+| 10 Heaps | Complete shape, heap order, indices, repairs, linear build, ties, heapsort | Provides the heap prerequisite for Topic 13. Indexed updates remain an extension; lazy candidates now have a full graph example. |
+| 11 Graphs | Model, representations, BFS, DFS, components, trace order and cost assumptions | Maintains directed/undirected distinction. Directed cycle and SCC implementations are still absent and are listed as high-priority extensions. |
+| 12 Union–find | Partitions, parent forests, weighted union, compression, amortisation and connectivity limits | Newly completed. Parent links are not graph edges; ordinary deletion and directed reachability are not supported. |
+| 13 Graph algorithms | Kahn, relaxation, Dijkstra, DAG routes, MST proofs, Prim/Kruskal and forests | Newly completed; separates the three objectives, handles isolated vertices, and links to Topic 12 before Kruskal. |
+| 14 Strategies | Greedy proof, DP state/reconstruction, backtracking, prefix sums, two pointers, windows and tractability | Added as a clearly marked extension beyond the lecture inventory, rather than overloading union–find. |
+| 15 Strings | String units and contracts, trie updates/prefix queries, naive/KMP/rolling search | Added optional extension with exact verification, empty/overlap cases and output-sensitive accounting. Ranking, approximate and multi-pattern/suffix indexes remain extensions. |
+| 16 Applications | Developed fictional transport network integrating data representations, BFS, Dijkstra, union–find and MSTs | Separates travel from construction weights, keeps isolated vertices, compares objectives and includes a runnable script. Other applications remain future candidates. |
+
+## Structural changes
+
+- Reordered topics on 23 October 2026: spatial search follows AVL; union–find precedes graph algorithms; design strategies and strings precede the integrated application. URLs and explicit concept labels are retained. Historical notes below use the current topic numbers.
+- Graph route explicitly reads union–find before Kruskal; k-d trees remain independent of the graph optimisation sequence.
+- New small gaps are filled in their existing topics. Larger design material has its own Topic 14; Topic 16 retains its application purpose and now has a complete transport case.
+- Public coverage review lists remaining conceptual-only material and a prioritised beyond-syllabus roadmap. No unfinished extension is described as implemented.
+- Per-function conventions remain explicit: BST distinct keys; coordinate ties right in k-d trees; stable heap ties via counters; edge-height −1 for empty binary subtrees; output and recursion storage stated separately where useful.
+
+## Follow-up priorities
+
+1. Review the new explanations for teaching emphasis, especially the optional Topic 14.
+2. Strings/tries are developed in Topic 15. The integrated application is developed in Topic 16; advanced string indexing remains optional.
+3. Add Bellman–Ford and directed SCC/cycle pages, then selection/non-comparison sorting.
+4. Expand DP with contrasting state models before adding specialised range trees or advanced graph algorithms.
+
+The public [coverage review](../../coverage-review.md) contains the detailed missing-item list. This audit records editorial judgement; it is not a claim of exhaustive coverage of the DSA field.
+
+## Validation for the Topics 12/13/14 review
+
+- Compiled all 105 Python listings across the book.
+- Ran 32,363 semantic and structural checks for the new and expanded examples, including exhaustive tiny digraphs, independent shortest-path answers, brute-force minimum forests/schedules/subsets, partition invariants, DP answers, range queries and sequence patterns.
+- Rendered and visually inspected all 19 new accessible SVG figures and checked their trace values against the listings.
+- Built all 105 navigation pages with Jupyter Book 2.1.7; checked 1,251 local links, including 766 section links, against generated HTML with no broken destinations.
+
+These checks complement the reasoning in each reading; they do not establish correctness for every possible input. Earlier topics' Python listings were syntax-checked in this pass; the semantic checks above focus on the newly added algorithms.
+
+## Topic 15 validation — 22 October 2026
+
+- Compiled all 115 Python listings in the expanded book and executed every Topic 15 listing in reading order.
+- Ran 54,695 semantic checks: exhaustive small substring cases against direct matching, independently computed pattern borders and rolling residues, Unicode cases, deliberate collisions, and random trie operations against a reference set. Long 5,000-symbol keys also exercise iterative traversal and deletion.
+- Rendered and visually inspected all nine accessible SVG figures; every new figure is linked from its reading page.
+- Built 114 navigation pages with Jupyter Book 2.1.7. Checked 1,359 local links, including 833 section links, against the built HTML with no broken destinations.
+
+The examples teach exact code-point matching, prefix reporting and one-pattern search. Ranked autocomplete, edit distance, multi-pattern automata and suffix indexes remain explicit extensions rather than completed coverage.
+
+## Topic 16 validation — 22 October 2026
+
+- Executed the standalone standard-library example and all seven code listings in page order. Its reused algorithm definitions match their source-page ASTs.
+- Ran 253 case checks, including all-source/target comparisons with independently enumerated simple paths, every incremental connectivity snapshot, reciprocal adjacency checks and neighbour-order changes. Exhaustive candidate-edge subsets identify 55 valid spanning forests; the minimum construction cost is 11.
+- Compiled all 122 Python listings across the expanded book. Rendered and visually inspected all five new accessible SVG figures.
+- Built all 120 navigation pages with Jupyter Book 2.1.7. Checked 1,429 local links including 872 section links, with no broken destinations. The published downloadable Python asset is byte-identical to the runnable source.
+- Recorded a proposed spatial-search expansion in `spatial-search-plan.md`. The current Topic 9 content and its URLs are preserved; quadtrees/R-trees are not yet described as implemented.
+
+## Spatial-search expansion validation — 22 October 2026
+
+- Executed every new listing in reading order and the standalone spatial example. Copied k-d insert/range definitions match the original teaching-source ASTs.
+- Ran 200,215 semantic checks: random exact/range comparisons with scans; all 5,040 insertion orders of the shared points; PR record/cell/shape invariants; half-open storage and closed boundary queries; close-point overflow and non-advancing midpoint cases; R-tree enclosures and candidate completeness.
+- Independently compared 18,225 segment/rectangle cases with exact rational slab clipping, covering crossings, collinearity, touching and degenerate geometry.
+- Compiled all 130 Python listings. Rendered and visually checked all eight new accessible SVG figures, including non-overlapping line labels and paired partition/tree views.
+- Built all 127 navigation pages with Jupyter Book 2.1.7. Checked 1,521 local links including 935 section links, with no broken destinations. Both published Python downloads match their source files byte for byte.
+- Retained the k-d-tree files, route names and labelled sections. General R-tree insertion/splitting, new-structure nearest traversal, PR deletion/merging and full raster quadtrees remain explicitly outside the implemented scope.
+
+## Topic 9 self-reading pilot — 22 October 2026
+
+- Reviewed all twelve spatial-search readings and added two learning goals, linked prerequisite cues, one misconception reminder and two original prediction/reasoning checks per reading.
+- The overview now explains the reading/check sequence, supplies a code-context table and links to the checks by concept. Main conceptual explanations remain visible; only feedback on the checks is collapsed.
+- Ran 117 content/structure/example checks, including concrete feedback predictions evaluated against the existing algorithms. Confirmed every Topic 9 Python listing and original explicit concept label is retained; figures and downloadable implementations were not edited.
+- Built all 127 navigation pages with Jupyter Book 2.1.7. Checked 1,558 local links including 951 section links with no broken destinations. Inspected generated HTML for all 24 visible prompts and 24 default-closed native details/summary controls with complete feedback.
+- All 130 book Python listings compile. This pass does not repeat the earlier full algorithm test suite because executable code is unchanged.
+- Pilot review remains the next editorial step before a book-wide rollout. `self-reading-pilot.md` records the reusable pattern and its scope.
+
+## Spatial operation completion (supersedes earlier extension boundaries)
+
+Topic 9 now groups readings under k-d, point-quadtree, PR-quadtree and R-tree methods, preserving existing URLs. Five new readings add complete point-tree deletion and nearest operations, exact/nearest R-tree queries, per-operation time/space tables and self-reading checks. Dynamic R-tree construction/splitting/condensation are worked conceptual algorithms, not implemented updates. No notebook, rubric, solution or assessment source was used.
+
+## Sorting editorial alignment
+
+Nine readings now connect contracts, visual traces, code, correctness, implementation choices, stability, mutation versus auxiliary space, time costs, suitability and open self-checks. Added a merge-sort page reusing the Topic 3 functions and a conceptual Timsort/Powersort page with an original run diagram. Version-specific CPython notes cite its 3.14 design document; Powersort scheduling has an original abstract merge-cost example. Existing routes and labels are retained. Eighteen collapsed-feedback questions cover the readings. No notebooks or assessment materials were used.
+
+## Topic 5 operation alignment
+
+Eleven readings now separate sequence, stack, queue and deque contracts from array, growth, linked and circular implementations. Added strict-index ArraySequence, Queue and Deque adapters, consistent size/len/empty queries, explicit return/error/full policies, operation costs and 22 collapsed-feedback checks. Existing URLs, concept labels and twelve diagrams are retained; historical deque anchors link to the dedicated page. Linked low-level helpers are not presented as a complete positional List class, and underlying library storage is explicitly delegated. No notebooks or assessment materials were used.
+
+## Topic 6 operation alignment
+
+Seven readings align Map/Set contracts, exact results/errors, state invariants, traces, implementation choices, time/space and fourteen collapsed-feedback checks. Added dict/set-backed public adapters, chained deletion, bounded probing insertion/deletion and rebuild helpers. Public put returns None; helper put returns a new-key Boolean; Map removal returns its value while Set removal returns None. Snapshot outputs are shallow, and set combinations create new membership containers. Automatic resize/count policies remain explicit scope boundaries. Existing headings, URLs and the probing-deletion diagram are preserved. No assessment materials were used.
+
+## Topics 7–8 operation alignment
+
+Topic 7 has nine readings; Topic 8 has six. Both align operation/helper contracts, results and errors, representation invariants, preserved traces, code choices, costs and thirty open self-checks. Added complete preorder/postorder, maximum and root-based strict-neighbour queries, a key-only OrderedSet adapter, and an AVL operation route reusing the same readers. Public set removal returns None; extreme extraction returns its key; raw update helpers return roots and raw absent deletion is a no-op. Global count is distinct from subtree rank/select augmentation. All existing pages, labels, algorithms and fourteen figures are retained. No notebooks or assessment sources were used.
+
+## Topic 10 operation alignment
+
+Seven readings now align contracts, invariants, preserved traces, implementation choices, time/space and fourteen open self-checks. Numeric sifts/build/heapsort remain unchanged. The stable MinPriorityQueue adds size/empty and an extract_min alias; a composed MaxPriorityQueue negates finite numeric priorities while preserving FIFO sequence ties. Public methods return items, numeric helpers return priorities, and removal/extraction are aliases. Duplicate inserts remain separate entries. Arbitrary removal and indexed priority changes remain conceptual. All existing URLs, labels, headings and nine figures are retained. No notebooks or assessment sources were used.
+
+## Sequence validation — 23 October 2026
+
+Reordered the sixteen topic blocks while retaining every nested reading route and all 139 navigation pages. The HTML build passes; rendered sidebar order and topic titles match the source. Checked 76 numbered link labels and 1,824 local destinations, including 1,033 fragments, against generated HTML. Concept indexes and author-facing topic tables follow the same sequence. All Python listings, executable example code, SVG figures and explicit concept labels are unchanged; only example module descriptions carry new topic numbers. Content alignment for the new Topics 11–13 remains pending.
+
+## Topics 11–13 operation alignment — 23 October 2026
+
+The reordered graph sequence now aligns seven graph/traversal readings, four union–find readings and eight graph-algorithm readings. Adds one simple unweighted graph-operations page with checked construction/query/update helpers. Extends the existing DisjointSet with len/empty/component-count/component-size queries while retaining original find/union methods, public metadata and tie traces. Existing graph algorithms retain their core implementations, with local imports and linked helper dependencies made explicit. Each reading supplies goals, prerequisites, contracts/choices/costs, a misconception reminder and two collapsed-feedback checks (38 total). The 22 existing figures, original URLs and explicit concept labels remain. No notebook, rubric, solution or assessment source was consulted. Remaining directed/negative-cycle and dynamic-connectivity extensions are named without claiming implementations.
+
+Validation for this alignment: 68,092 semantic/structural assertions passed against independent reachability, explicit partitions, Floyd–Warshall route costs and brute-force tiny spanning forests. All 154 Python listings compile. The Jupyter Book 2.1.7 HTML build passes for 140 navigation pages; all 1,922 local links, including 1,072 section links, resolve. All 38 feedback panels render closed. Original function/method ASTs, explicit labels, headings and all SVG bytes are retained. Checks use original examples and source listings only.
+
+## Topic 2 analysis alignment — 23 October 2026
+
+Five readings now align operation contracts, input size/cost models, exact counts and growth, cases versus bounds, expected versus amortised guarantees, working/output/peak space and correctness/termination evidence. A complete linear-search invariant/progress argument connects to its existing comparison counter. Ten original open prediction checks have collapsed explanations. Existing Python functions, explicit labels, formulas, worked traces and three SVG figures are retained. No notebook, rubric, solution or assessment source was consulted.
+
+The agreed remaining editorial order is Topic 3, then Topic 1, followed by Topics 14, 15 and 16.
+
+Validation: 14,976 count/structure assertions passed, including exhaustive small search lists, duplicate/absent targets, empty inputs, pair-count formulas, floor-halving counts and shallow-copy identity. All 154 Python listings compile. Jupyter Book 2.1.7 builds 141 pages; all 1,939 local links, including 1,081 section links, resolve, and the ten new feedback panels render closed. Original listings, headings, explicit labels and SVG bytes are retained.
+
+## Topic 3 recursion alignment — 23 October 2026
+
+Five readings align recursive/iterative sum and trace contracts, merge versus sort preconditions, base/progress/correctness arguments, exact depth and sort-call counts, peak frame/list/output storage and implementation choices. Adds ten original open prediction checks with collapsed explanations. The eight SVGs, existing Python listings, original headings/labels and worked traces are retained. Alternatives such as bottom-up/range-buffer merging remain clearly described comparisons rather than extra supplied implementations. No notebook, rubric, solution or assessment source was consulted.
+
+The remaining agreed order is Topic 1, then Topics 14, 15 and 16.
+
+Validation: 17,075 semantic/structure assertions passed, including summation and invalid-input cases, exact printed traces, exhaustive short-list sorting/merging, stable record identity, shallow/input preservation, exact sort-call and active-frame counts, and documented merge comparison counts. All 154 Python listings compile. Jupyter Book 2.1.7 builds 141 pages; all 1,961 local links, including 1,093 section links, resolve. Ten feedback panels render closed. Existing code listings, headings, explicit labels and SVG bytes are retained.
+
+## Topic 1 foundations alignment — 23 October 2026
+
+Five readings now align problem/first-search contracts; names, slots, attributes and reference identity; mutation, copy ownership and returned values; built-in collection choices; validated class states and linked traversal; and the brief ADT introduction. Adds ten open prediction checks with collapsed explanations, preserving the original code, headings/labels and three SVG figures. Cost discussion stays introductory and links to Topic 2 rather than requiring asymptotic notation in the opening topic. Full ADT implementations remain with their respective topics. No notebook, rubric, solution or assessment source was consulted.
+
+Topics 1–13 now have the agreed reading structure. The remaining alignment order is Topics 14, 15 and 16.
+
+Validation: 18,118 semantic/structure assertions passed, covering first-occurrence/absence contracts, aliases and slot replacement, repeated sharing under shallow/deep copying, mutable tuple contents/hashability, parameter mutation/returns, fresh defaults, validated passenger-state transitions and the introductory contract against the later Stack class. All 154 Python listings compile. Jupyter Book 2.1.7 builds 141 pages; all 1,981 local links, including 1,102 section links, resolve. Ten feedback panels render closed. Original Python listings, headings, explicit labels and SVG bytes are retained.
+
+## Topics 14–15 alignment — 23 October 2026
+
+Six strategy readings and eight string readings now align goals/prerequisites, problem/query contracts, returned results and boundary errors, state/invariant/progress reasoning, implementation choices and costs. Adds 28 original open prediction checks with collapsed explanations. Trie adds len/is_empty observers while retaining its size field, original mutation returns and existing algorithms. The four strategy and nine string SVG figures, original function/method bodies, URLs and labels remain. No notebook, rubric, solution or assessment source was consulted.
+
+Topics 1–15 now have the agreed reading structure. Topic 16, integrated applications, is the remaining alignment task.
+
+Validation: 192,777 semantic/structure assertions passed against exhaustive tiny interval schedules, BFS coin-count answers, all position subsets, direct sequence sums/pairs, a reference string set with structural trie checks, brute-force pattern borders and an independent all-match oracle. Includes invalid requests, Unicode/empty boundaries, duplicate keys, long iterative trie paths, overlapping matches and deliberately colliding fingerprints. All 154 Python listings compile. Jupyter Book 2.1.7 builds 141 pages; all 2,038 local links, including 1,125 section links, resolve. The 28 feedback panels render closed. Original function/method ASTs, headings, labels and SVG bytes are retained; Trie adds only len/is_empty observers.
+
+## Topic 16 application alignment — 23 October 2026
+
+Six readings now follow question, model, method, trace, result and interpretation rather than imposing one ADT operation template. Each supplies goals/prerequisites, explicit contracts, state/correctness reasoning, choices, costs, a misconception reminder and two open prediction checks with collapsed explanations (twelve total). Unknown versus unreachable identifiers, false unions versus useful transport links, forest coverage and construction/travel tradeoffs are explicit. End-to-end accounting includes lazy Prim and the route-measurement slice. All five SVGs, algorithms, URLs and existing labels remain. No notebook, rubric, solution or assessment source was consulted.
+
+All sixteen topics now have the agreed reading structure. More integrated cases and the advanced concepts listed in the coverage review remain possible extensions, rather than completed material.
+
+Validation: 25,922 semantic/structural assertions passed, including all-source simple-path oracles, all 512 candidate-edge subsets for connectivity and independent minimum-forest costs, documented error boundaries and counterfactual questions. All 154 Python listings compile, and the six readings execute in order with the standalone example's exact results. Jupyter Book 2.1.7 builds 141 pages; all 7,723 rendered local link occurrences, including 2,368 fragments and repeated navigation links, resolve. Twelve feedback panels render closed. Original listings, executable algorithm ASTs, headings, explicit labels and all five SVGs are retained; only the example's introductory description is clarified.

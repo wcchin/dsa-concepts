@@ -1,110 +1,32 @@
-# Book development status
+# Current progress and task list
 
-- Sixteen topic areas contain developed self-reading explanations; Topics 14–15 are optional extensions. Topic 16 currently contains one complete application.
-- Topic 1: four pages covering problem requirements; objects and references; mutation and copying; collections, classes and invariants. Three original SVG diagrams illustrate aliasing/rebinding, shallow copying and linked objects.
-- Topic 1 uses explicit concept labels for stable indexed targets. The alphabetical and topic-grouped indexes include these concepts and retain the Topic 6 entries.
-- Source basis: Week 1 classroom and online lecture material; the general problem/representation framing also follows the course introduction. No notebook, rubric or solution file was used. The book text consolidates the slide explanations rather than reproducing presentation directives.
-- Editorial corrections: the passenger-count class validates nonnegative integer updates; linked-object examples distinguish the node from its stop payload and mutation from rebinding.
-- Topic 2: five pages covering counting work, growth rates, cases versus bounds, and code/space analysis. Source basis is the Week 2 classroom and online lecture material. Three original figures show growth functions, quadratic bounds and full versus triangular loops.
-- Topic 2 refinements: exact floor(log2 n) count for integer halving; explicit successful/unsuccessful average-search models; consistent inclusion of output in auxiliary space unless stated otherwise; word-model assumptions distinguished from bit costs. Its 27 indexed concepts use explicit labels.
-- Topic 3: five reading pages and eight original SVG figures based on the Week 3 classroom and online materials. Retains the sum_to trace, eight-value split/merge example, sorted-front merge, odd-size split, balanced/unbalanced shape and list-front-removal explanations. Source images are redrawn as legible, accessible vector figures; the unrelated historical portrait is not part of the reading argument.
-- Topic 3 explicitly separates sequential execution from tree shape, total calls from live depth, and peak space from cumulative allocation. The shown slicing-based merge sort has 2n−1 calls for n≥1, ceiling-logarithmic depth and linear peak additional list storage. Its 26 indexed terms use explicit concept labels.
-- Topic 4: seven reading pages and seven original accessible SVG figures, based on Week 4 classroom and online lectures. Covers sorting contracts, keys, stability, insertion sort, bubble sort, partitioning, quicksort, strategy trade-offs and the comparison lower bound. No notebooks, rubric files or solution files were used.
-- Topic 4 keeps the lecture’s <= partition tie rule, states inclusive code bounds, qualifies random-pivot expected time for distinct keys, accounts for recursion space, and supplies the required lower-bound inequality for log(n!). The index links to each labelled concept.
-- Topic 5: nine reading pages and twelve original accessible SVG figures, based on Week 5 classroom and online lectures. Covers contracts, positional sequences, stacks, bracket matching, FIFO, deques, rolling windows, arrays, geometric growth, linked updates, circular queues, linked queues and selection trade-offs. No notebooks, rubrics or solution files were used.
-- Topic 5 refinements: distinguishes array reference slots from payload objects; uses explicit fixed-capacity overflow and empty-underflow contracts; permits None as queue data; includes singleton head/tail transitions; separates local link updates from finding a predecessor; qualifies dynamic-array and allocation cost assumptions; keeps browser current state separate from both history stacks.
-- Topic 7: eight reading pages and nine original accessible SVG figures, based on Week 9 classroom and online lecture Markdown. Uses the shared BST with successor 60 and child 65; includes full insertion, traversal and deletion code, interval and ancestor-bound invariants, duplicate policy and height-qualified costs.
-- Topic 8: five reading pages and five original SVG figures, based on the AVL portions of Week 10 classroom and online lectures. Adds complete readable AVL insertion/deletion around cached heights, returned subtree roots and a shared child-factor rebalance helper. Covers nonempty middle transfer and deletion’s zero-child-factor and cascading repairs.
-- Topic 9 k-d-tree core: five retained reading pages and six original SVG figures, based on the additional Week 10 k-d-tree lecture. Preserves its shared seven points, strict-left/ties-right convention and inclusive range-query boundaries. A nearest-neighbour implementation extends the conceptual lesson; static median construction remains conceptual with explicit tie and construction-cost caveats.
-- Only lecture Markdown was consulted from the course repo for Topics 7, 8 and 9; no notebook, rubric or solution file was used. Supplementary concept references are Cornell AVL notes and Princeton’s k-d-tree specification. All precise diagrams are authored SVG assets.
-- Topic 11: six reading pages and eight accessible SVG figures, based on the Week 11 classroom and online lecture Markdown. Preserves the shared A–H graph, alphabetical neighbour order, isolated H, BFS queue states and DFS discovery/finish traces. Includes representation, BFS/path recovery, DFS and undirected-component code with explicit contracts. No notebook, rubric or solution file was used.
-- Topic 11 distinguishes discovery from expansion/completion, marks BFS at enqueue, keeps original edges separate from parent trees, qualifies Python hash-table complexity assumptions, and distinguishes directed reachability from weak/strong connectivity. Exact figure matrices and traces are checked against the shown graph and code.
-- Topic 10: seven reading pages and nine accessible SVG figures based on the priority-queue and heap portions of Week 10 classroom and online lecture Markdown. Retains the six-priority heap, insertion of 1, removal of 2 and the bottom-up construction trace. Includes numeric heap operations, a stable application wrapper using heapq, and iterative in-place max-heapsort. No notebook, rubric or solution file was used.
-- Topic 10 separates shape from priority order, array copying from comparison costs, heapify from full sorting, and a priority-queue tie policy from bare heap stability. The linear-build argument bounds the sum of possible downward steps; diagrams are checked against the shown operations.
-- Jupyter Book 2.1.7 remains pinned. Pushes to main build and publish automatically; pull requests build without publishing.
+Updated 23 October 2026 after the whole-book editorial review. **This is the authoritative progress checklist.** Dated earlier records are in the [development archive](archive/development-history-2026-10-23.md); they are historical, not pending work.
 
-- Topic 13: eight reading pages and nine accessible SVG figures, based on Week 12 and Week 13 classroom/online lecture Markdown. Covers Kahn, relaxation, Dijkstra, DAG shortest paths, cuts, Prim, Kruskal and objective/algorithm choice. Code distinguishes disconnected forests, unreachable vertices, negative edges and lazy heap records.
-- Topic 12: four reading pages and five accessible SVG figures, based on the additional union–find lecture and Week 13 online lecture. Covers partitions, root forests, union by size, iterative full compression, amortised costs, online connectivity and undirected cycle checks.
-- Cross-book review: adds a shared correctness method in Topic 2, duplicate-aware binary-search boundaries and BST range queries in Topic 7, prerequisite routes and a public coverage review. Topic 12 now precedes Kruskal in Topic 13 in the sidebar.
-- Optional Topic 14: six reading pages and four SVG figures. Adds strategy selection, greedy exchange arguments, memoised/tabulated coin change with recovery, backtracking, prefix sums, two pointers, sliding windows and complexity limits. This editorial extension is not a claim about assessment scope.
-- Review outcome and remaining priorities: see `coverage-review.md` and `planning/coverage-audit.md`. Topic 16 now contains a developed application; no textbook-completeness claim is made. No notebook, rubric or solution file was consulted for this pass.
+## Completed
 
-- Topic 15: eight reading pages and nine accessible SVG figures, added as an optional extension. Covers string/Unicode query contracts; sparse trie nodes; insertion, complete-key lookup, prefix existence and safe deletion; iterative completion reporting and longest stored prefixes; naive all-match search; prefix-function KMP; and verified rolling hashes with deliberate collision examples. Inputs are case-sensitive Python strings, empty and overlapping cases are explicit, and output/working-space costs are separated.
-- Topic 15 sources: Python's Unicode HOWTO and Princeton's trie/pattern-matching references. Code and diagrams are original; no course notebook, rubric, solution or assessment file was used. Advanced string indexes and ranking remain explicitly out of scope.
+- [x] Standalone Jupyter Book v2 repository, established branding, concept indexes and prerequisite routes.
+- [x] Automatic build checks and publication on pushes to main, using the pinned Jupyter Book 2.1.7 workflow.
+- [x] Attribution and licensing at article headers and the footer: © 2026 Benny Chin · Content CC BY-NC-ND 4.0 · Code MIT.
+- [x] Develop and align all sixteen topics: 120 readings, sixteen topic overviews and five front-matter pages (141 navigation pages).
+- [x] Supply two goals, a prerequisite/context cue, a misconception reminder and two explained open checks per reading: 240 checks.
+- [x] Complete the original spatial-search and transport application examples; distinguish conceptual-only update/build variants.
+- [x] Review book-wide sequence, terminology, prerequisites, repeated explanation, study effort and reading transitions. See the [review findings](editorial-review.md).
+- [x] Reconcile stale pilot/alignment text, consolidate history, and separate current scope from future extensions.
 
-- Topic 16: six reading pages, five accessible SVG figures and a runnable Python example integrate maps, BFS/deques, Dijkstra/heaps, union–find, Prim and Kruskal. An original seven-place network separates travel minutes from construction units and keeps an isolated place visible. Complete candidate routes are compared with the travel consequences of constructing a minimum-cost forest. Other applications remain proposals.
-- Topic 9 expansion is implemented as recorded in `spatial-search-plan.md`; existing k-d-tree URLs and algorithms are retained. No notebook, rubric, solution or assessment file was consulted for this case.
+## Next stages, in order
 
-- Expanded Topic 9: seven new readings and eight accessible SVG figures, for twelve readings and fourteen figures overall. Separate point-quadtree and PR-quadtree pages follow the k-d-tree core. Adds midpoint/bucket/termination policies, iterative point and PR operations, R-tree grouping and given-tree query with integer segment refinement, and a standalone standard-library example. Original examples use the shared seven-point dataset and a separate five-line false-positive example.
-- Spatial extension source basis: OpenDSA spatial-structure chapters, Guttman's R-tree paper and the PostGIS indexing workshop. No notebook, rubric, solution or assessment material was consulted. Full nearest traversal remains implemented for k-d trees; the new structures' remaining variants are explicitly scoped.
+| Order | Task | Status and completion criterion |
+|---|---|---|
+| 1 | Pilot language tabs | Planned. Keep Python canonical; add matching JavaScript and Julia to one small topic, verify equivalent contracts/results, and review readability before expanding |
+| 2 | Expand language coverage | Pending the pilot. Apply the agreed pattern gradually; do not describe planned translations as supplied implementations |
+| 3 | Pilot interactive tracing checks | Planned. Start with a small JupyterQuiz example and validate feedback/trace semantics before wider use |
+| 4 | Explore prepared algorithm visualisations | Later. Separate from browser notebooks; choose a small example with synchronised code and state |
+| 5 | Add selected content extensions | Planned after the stable reading edition. Follow the prioritised [coverage roadmap](../coverage-review.md), starting with graph extensions, selection/non-comparison sorting and contrasting DP problems |
 
-- Topic 9 self-reading pilot: all twelve readings have two explicit learning goals, prerequisite links, one misconception reminder and two original prediction questions with collapsed explanations (24 panels overall). The overview supplies code-context routes and a check-by-concept table. Essential explanations remain visible in the main text. Algorithms, figures, file paths and original concept labels are retained.
-- The pilot format and editorial checklist are recorded in `self-reading-pilot.md`. Review this implementation before applying it across other topics; a book-wide rollout has not been made.
+Language tabs and interactive tools are development stages, not prerequisites for using the current book. No JavaScript/Julia implementations, interactive quiz engine or code visualiser are claimed complete. Browser notebooks remain deferred.
 
-Next: review the Topic 9 self-reading pilot, then apply the agreed format across other topics. Subsequent content priorities are negative-weight graph algorithms, selection/non-comparison sorting, and further DP problems.
+## Current scope boundaries
 
-## Spatial operation completion (supersedes earlier extension boundaries)
+Topics 14–15 are optional extensions beyond the lecture inventory. Topic 16 contains one complete fictional transport case; dependency scheduling and a spatial directory are future candidates. The [coverage review](../coverage-review.md) is the single detailed list of conceptual-only implementations and proposed additional content. No claim of exhaustive DSA coverage is made.
 
-Topic 9 now groups readings under k-d, point-quadtree, PR-quadtree and R-tree methods, preserving existing URLs. Five new readings add complete point-tree deletion and nearest operations, exact/nearest R-tree queries, per-operation time/space tables and self-reading checks. Dynamic R-tree construction/splitting/condensation are worked conceptual algorithms, not implemented updates. No notebook, rubric, solution or assessment source was used.
-
-## Sorting editorial alignment
-
-Nine readings now connect contracts, visual traces, code, correctness, implementation choices, stability, mutation versus auxiliary space, time costs, suitability and open self-checks. Added a merge-sort page reusing the Topic 3 functions and a conceptual Timsort/Powersort page with an original run diagram. Version-specific CPython notes cite its 3.14 design document; Powersort scheduling has an original abstract merge-cost example. Existing routes and labels are retained. Eighteen collapsed-feedback questions cover the readings. No notebooks or assessment materials were used.
-
-## Foundations ADT introduction
-
-Topic 1 now has five reading pages. A brief ADT introduction follows collections/classes, uses a shuttle-code LIFO trace, separates behaviour/representation/code, and states empty-operation policy. Topic 5 retains the fuller contracts and implementation comparisons, with a backlink. No algorithm or assessment material changed.
-
-## Topic 5 operation alignment
-
-Eleven readings now separate sequence, stack, queue and deque contracts from array, growth, linked and circular implementations. Added strict-index ArraySequence, Queue and Deque adapters, consistent size/len/empty queries, explicit return/error/full policies, operation costs and 22 collapsed-feedback checks. Existing URLs, concept labels and twelve diagrams are retained; historical deque anchors link to the dedicated page. Linked low-level helpers are not presented as a complete positional List class, and underlying library storage is explicitly delegated. No notebooks or assessment materials were used.
-
-## Topic 6 operation alignment
-
-Seven readings align Map/Set contracts, exact results/errors, state invariants, traces, implementation choices, time/space and fourteen collapsed-feedback checks. Added dict/set-backed public adapters, chained deletion, bounded probing insertion/deletion and rebuild helpers. Public put returns None; helper put returns a new-key Boolean; Map removal returns its value while Set removal returns None. Snapshot outputs are shallow, and set combinations create new membership containers. Automatic resize/count policies remain explicit scope boundaries. Existing headings, URLs and the probing-deletion diagram are preserved. No assessment materials were used.
-
-## Topics 7–8 operation alignment
-
-Topic 7 has nine readings; Topic 8 has six. Both align operation/helper contracts, results and errors, representation invariants, preserved traces, code choices, costs and thirty open self-checks. Added complete preorder/postorder, maximum and root-based strict-neighbour queries, a key-only OrderedSet adapter, and an AVL operation route reusing the same readers. Public set removal returns None; extreme extraction returns its key; raw update helpers return roots and raw absent deletion is a no-op. Global count is distinct from subtree rank/select augmentation. All existing pages, labels, algorithms and fourteen figures are retained. No notebooks or assessment sources were used.
-
-## Topic 10 operation alignment
-
-Seven readings now align contracts, invariants, preserved traces, implementation choices, time/space and fourteen open self-checks. Numeric sifts/build/heapsort remain unchanged. The stable MinPriorityQueue adds size/empty and an extract_min alias; a composed MaxPriorityQueue negates finite numeric priorities while preserving FIFO sequence ties. Public methods return items, numeric helpers return priorities, and removal/extraction are aliases. Duplicate inserts remain separate entries. Arbitrary removal and indexed priority changes remain conceptual. All existing URLs, labels, headings and nine figures are retained. No notebooks or assessment sources were used.
-
-## Topic sequence — 23 October 2026
-
-Topics 1–8 are unchanged. The sidebar now reads 9 spatial search, 10 heaps, 11 graphs/traversal, 12 union–find, 13 graph algorithms, 14 optional design strategies, 15 optional strings, and 16 integrated applications. Topic numbers, concept indexes, prerequisite routes, coverage summaries and example descriptions follow this sequence; URLs, explicit labels, algorithms and figures are retained. Alignment of the graph, union–find and graph-algorithm content is deferred.
-
-## Topics 11–13 operation alignment — 23 October 2026
-
-The reordered graph sequence now aligns seven graph/traversal readings, four union–find readings and eight graph-algorithm readings. Adds one simple unweighted graph-operations page with checked construction/query/update helpers. Extends the existing DisjointSet with len/empty/component-count/component-size queries while retaining original find/union methods, public metadata and tie traces. Existing graph algorithms retain their core implementations, with local imports and linked helper dependencies made explicit. Each reading supplies goals, prerequisites, contracts/choices/costs, a misconception reminder and two collapsed-feedback checks (38 total). The 22 existing figures, original URLs and explicit concept labels remain. No notebook, rubric, solution or assessment source was consulted. Remaining directed/negative-cycle and dynamic-connectivity extensions are named without claiming implementations.
-
-## Topic 2 analysis alignment — 23 October 2026
-
-Five readings now align operation contracts, input size/cost models, exact counts and growth, cases versus bounds, expected versus amortised guarantees, working/output/peak space and correctness/termination evidence. A complete linear-search invariant/progress argument connects to its existing comparison counter. Ten original open prediction checks have collapsed explanations. Existing Python functions, explicit labels, formulas, worked traces and three SVG figures are retained. No notebook, rubric, solution or assessment source was consulted.
-
-The agreed remaining editorial order is Topic 3, then Topic 1, followed by Topics 14, 15 and 16.
-
-## Topic 3 recursion alignment — 23 October 2026
-
-Five readings align recursive/iterative sum and trace contracts, merge versus sort preconditions, base/progress/correctness arguments, exact depth and sort-call counts, peak frame/list/output storage and implementation choices. Adds ten original open prediction checks with collapsed explanations. The eight SVGs, existing Python listings, original headings/labels and worked traces are retained. Alternatives such as bottom-up/range-buffer merging remain clearly described comparisons rather than extra supplied implementations. No notebook, rubric, solution or assessment source was consulted.
-
-The remaining agreed order is Topic 1, then Topics 14, 15 and 16.
-
-## Topic 1 foundations alignment — 23 October 2026
-
-Five readings now align problem/first-search contracts; names, slots, attributes and reference identity; mutation, copy ownership and returned values; built-in collection choices; validated class states and linked traversal; and the brief ADT introduction. Adds ten open prediction checks with collapsed explanations, preserving the original code, headings/labels and three SVG figures. Cost discussion stays introductory and links to Topic 2 rather than requiring asymptotic notation in the opening topic. Full ADT implementations remain with their respective topics. No notebook, rubric, solution or assessment source was consulted.
-
-Topics 1–13 now have the agreed reading structure. The remaining alignment order is Topics 14, 15 and 16.
-
-## Topics 14–15 alignment — 23 October 2026
-
-Six strategy readings and eight string readings now align goals/prerequisites, problem/query contracts, returned results and boundary errors, state/invariant/progress reasoning, implementation choices and costs. Adds 28 original open prediction checks with collapsed explanations. Trie adds len/is_empty observers while retaining its size field, original mutation returns and existing algorithms. The four strategy and nine string SVG figures, original function/method bodies, URLs and labels remain. No notebook, rubric, solution or assessment source was consulted.
-
-Topics 1–15 now have the agreed reading structure. Topic 16, integrated applications, is the remaining alignment task.
-
-## Topic 16 application alignment — 23 October 2026
-
-Six readings now follow question, model, method, trace, result and interpretation rather than imposing one ADT operation template. Each supplies goals/prerequisites, explicit contracts, state/correctness reasoning, choices, costs, a misconception reminder and two open prediction checks with collapsed explanations (twelve total). Unknown versus unreachable identifiers, false unions versus useful transport links, forest coverage and construction/travel tradeoffs are explicit. End-to-end accounting includes lazy Prim and the route-measurement slice. All five SVGs, algorithms, URLs and existing labels remain. No notebook, rubric, solution or assessment source was consulted.
-
-All sixteen topics now have the agreed reading structure. More integrated cases and the advanced concepts listed in the coverage review remain possible extensions, rather than completed material.
+No notebook, rubric, solution or assessment file was used for this editorial work. Preserve that separation in future book development. The [source inventory](topic-inventory.md) records lecture provenance; the [self-reading guide](self-reading-pilot.md) records editorial conventions; the [coverage audit](coverage-audit.md) summarises current validation.

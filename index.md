@@ -4,7 +4,7 @@
 
 Developed from the CS2040HS teaching materials at the National University of Singapore, this guide explains how representations, operation rules and algorithmic strategies fit together. Read by topic to build understanding, or use search and the [concept index](concepts.md) to revisit a specific idea.
 
-**Current coverage:** Topics 1–13 and 16 have developed reading material, including a complete transport-network application. Topics 14–15 add optional DSA concepts beyond the lecture inventory. See the [coverage review](coverage-review.md) for additions, limitations and priorities.
+**Current coverage:** All sixteen topics have developed, aligned self-reading material, including a complete transport-network application. Topics 14–15 add optional DSA concepts beyond the lecture inventory. See the [coverage review](coverage-review.md) for additions, limitations and priorities.
 
 ## Choose a reading route
 

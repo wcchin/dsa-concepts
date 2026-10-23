@@ -35,4 +35,4 @@ The Map and Set readings follow **purpose → operation contracts → representa
 
 For a public Map, put returns None; the storage helpers return a new-key Boolean to support size bookkeeping. A Map removal returns its value; Set removal deletes a specified member and returns None. Do not infer one contract from a similarly named operation in another ADT.
 
-Ordinary Python and standard-library features suffice. These examples do not reproduce the internal layout of CPython dict/set, require notebooks or include assessment material. All existing page URLs and concept headings remain available.
+Ordinary Python and standard-library features suffice. The wrappers demonstrate the stated contracts; the storage helpers explain hashing mechanisms rather than reproducing CPython dict/set internals.

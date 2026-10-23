@@ -94,4 +94,4 @@ Yes. It only reads the BST ordering and links. AVL height bounds make the same p
 No. Also check strict ancestor bounds, actual and cached heights, every node's balance, and the adapter count. An ordered tree may still be unbalanced or hold stale metadata.
 :::
 
-Return to [balanced search trees](balanced-trees.md), or continue to [priority queues and heaps](../heaps/heaps.md).
+Continue in sidebar order to [spatial search](../kd-trees/kd-trees.md), which changes the partition invariant. For the graph route, you can instead go directly to [priority queues and heaps](../heaps/heaps.md), or return to [balanced search trees](balanced-trees.md).

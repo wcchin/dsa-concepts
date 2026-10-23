@@ -34,6 +34,10 @@ Before processing the next symbol, j describes a border of the previous prefix. 
 
 ![The prefix-function table for ababaca includes border length three for ababa and falls through lengths three, one and zero before accepting the c position's zero.](../../assets/strings/kmp-borders.svg)
 
+:::{note} Pause and trace
+Build the prefix table for a short pattern before tracing the text scan. Keep the text position and matched-prefix length in separate columns; a fallback changes the latter without moving the text backwards.
+:::
+
 (kmp-find-all)=
 ## Preserve the text position while shortening the matched prefix
 

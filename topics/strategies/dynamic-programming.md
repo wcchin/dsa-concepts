@@ -46,6 +46,10 @@ def min_coins_memo(coins, amount):
 
 The dictionary caches both possible and impossible states. Positive denominations ensure recursive amounts decrease. Recursion depth can still grow with A, so Python can reach its recursion limit; memoisation reduces repeated work, not necessarily depth.
 
+:::{note} Pause and trace
+Work out the minimum counts for a few small amounts using the recurrence first. Then read the bottom-up version as another dependency order for those states. Reconstruction adds a separate question: which decision produced each best count?
+:::
+
 (tabulation)=
 ## Bottom-up tabulation follows the state dependencies
 

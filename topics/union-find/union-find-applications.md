@@ -83,4 +83,4 @@ Predict the result or state change before opening the explanation.
 No. Kruskal adds a weight-ordered edge policy around the same connectivity interface. An unsorted connection forest is not guaranteed minimum-weight.
 :::
 
-Return to [Kruskal](../graph-algorithms/kruskal.md), the [topic overview](union-find.md), or the [coverage review](../../coverage-review.md) for remaining concepts and proposed extensions.
+Continue to [graph ordering, paths and spanning trees](../graph-algorithms/graph-algorithms.md). Its Kruskal reading reuses this disjoint-set class. You can also return to the [topic overview](union-find.md) or consult the [coverage review](../../coverage-review.md).

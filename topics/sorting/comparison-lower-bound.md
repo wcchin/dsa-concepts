@@ -70,4 +70,4 @@ It fails the sorting contract: the input records must be preserved.
 No. A particular favourable input can be easy while some other inputs require Ω(n log n) comparisons.
 :::
 
-Return to the [sorting overview](sorting.md) or find a term in the [concept index](../../concepts.md).
+Continue to [Sequences, stacks, queues and deques](../linear-structures/linear-structures.md), return to the [sorting overview](sorting.md), or find a term in the [concept index](../../concepts.md).

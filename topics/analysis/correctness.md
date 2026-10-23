@@ -84,4 +84,4 @@ No. The invariant is stated before the next comparison and after a failed compar
 No. The tests cover those cases only. A larger valid counterexample could still refute the claim; an invariant or another general argument is needed.
 :::
 
-Return to [algorithm analysis](analysis.md) or use the [reading guide](../../reading-guide.md) to connect the examples across topics.
+Continue to [Recursion](../recursion/recursion.md), return to [algorithm analysis](analysis.md), or use the [reading guide](../../reading-guide.md) to connect the examples across topics.

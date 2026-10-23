@@ -9,7 +9,7 @@
 
 ## The complete operation route
 
-Read construction/insertion below first, then exact lookup, [range search](r-tree-queries.md), nearest search, and finally deletion. The supplied `r_root` remains a deliberately small, given tree. Exact and nearest functions below are runnable against it. General insertion, splitting, bulk loading and condensation are explained algorithmically, not supplied as Python implementations. Do not edit `segments` without also maintaining the tree entries and ancestor bounds.
+The preceding [range-search reading](r-tree-queries.md) defines the candidate traversal reused below. On this page, read construction/insertion concepts, exact lookup, nearest search and deletion; return to range refinement when comparing the five operations. The supplied `r_root` remains a deliberately small, given tree. Exact and nearest functions below are runnable against it. General insertion, splitting, bulk loading and condensation are explained algorithmically, not supplied as Python implementations. Do not edit `segments` without also maintaining the tree entries and ancestor bounds.
 
 (rtree-insertion)=
 ## Construct by insertion, or pack a static collection
@@ -38,6 +38,10 @@ def rtree_exact_segment(root, query_segment, records):
 ```
 
 The existing range-candidate function may admit many other lines with overlapping MBRs. The final endpoint test establishes equality. A tighter traversal could descend only into child boxes containing the query MBR, but this reuse is correct because an equal geometry necessarily has an overlapping MBR. For lookup by a known record identifier alone, an ordinary dictionary is usually the direct tool.
+
+:::{note} Pause and trace
+This page supports two study blocks. First connect construction and exact lookup to the given tree and range helpers. Then study nearest search and deletion separately: predict a lower bound before a heap pop, and account for every surviving entry during condensation.
+:::
 
 (rtree-nearest)=
 ## Nearest line means exact point-to-segment distance

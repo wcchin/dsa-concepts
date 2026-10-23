@@ -81,6 +81,10 @@ Suppose indices 1, 2 and 3 contain `DELETED`, `(22, C)` and `EMPTY`. Both key 22
 
 Inserting immediately at the tombstone could create two copies of key 22. The insertion algorithm remembers the first deleted slot but continues searching for an equal key. A full cycle also proves absence; reuse a remembered tombstone or grow the full table.
 
+:::{note} Pause and trace
+First trace lookup past a tombstone and explain why only EMPTY permits an early stop. Then read the update helpers: insertion must prove whether the key already exists before reusing a remembered deleted slot.
+:::
+
 (probed-update-code)=
 ## Complete insertion, replacement and deletion helpers
 

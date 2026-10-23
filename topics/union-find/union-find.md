@@ -17,4 +17,4 @@ The code manages a fixed universe of integer indices `0..n-1`. It preserves the 
 
 The [fixed-universe contract](disjoint-sets.md#disjoint-set-interface) includes root/merge/connectivity operations, element count, component count, component size and emptiness. The [operation table](union-compression.md#union-find-operation-costs) compares plain forests, weighted linking and compression, separating individual calls from amortised sequences.
 
-All four readings have goals/prerequisites and two explained self-checks (eight checks). The five original diagrams and the existing class's core find/union/tie behaviour are retained. Count/size observers extend the interface without changing Kruskal's existing `components` field. Arbitrary insertion, deletion/splitting, rollback, routes and automatic member enumeration remain outside this class.
+Read element count, component count and component size as three different observations. The `components` field is also used by Kruskal to report the number of trees in its result. Arbitrary insertion, deletion/splitting, rollback, routes and automatic member enumeration remain outside this class.

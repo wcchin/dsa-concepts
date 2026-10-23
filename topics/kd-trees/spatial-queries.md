@@ -86,4 +86,4 @@ B=(2,7), D=(1,3) and E=(3,6). B is on the included upper y edge; D is on the inc
 Yes. The query includes its maximum x edge, so its predicate accepts `(12,6)`. The storage extent excludes x=12, so that PR tree rejects insertion. A query boundary defines what to report; a storage boundary defines which tree cell owns a record.
 :::
 
-Next: [K-d-tree construction](kd-construction.md), followed by the existing exact, range, shape and nearest readings. Then continue to [point quadtrees](point-quadtrees.md).
+Next: [The k-d-tree method](kd-methods.md), then follow construction, exact, range, shape, nearest and deletion in sidebar order. Point quadtrees follow that group.

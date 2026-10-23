@@ -1,6 +1,6 @@
 # Coverage and extensions
 
-Topics **1–13 and 16** now contain developed core reading material. [Topic 14](topics/strategies/strategies.md) and [Topic 15](topics/strings/strings.md) add optional algorithm-design and string-search material beyond the lecture inventory. [Topic 16](topics/applications/applications.md) supplies a developed transport-network application. “Developed” means explanatory reading and worked examples, not exhaustive coverage of every variant.
+Topics **1–13 and 16** contain developed core reading material. [Topic 14](topics/strategies/strategies.md) and [Topic 15](topics/strings/strings.md) add optional algorithm-design and string-search material beyond the lecture inventory. [Topic 16](topics/applications/applications.md) supplies a developed transport-network application. “Developed” means explanatory reading and worked examples, not exhaustive coverage of every variant.
 
 ## Gaps addressed in the coherence review
 
@@ -51,38 +51,8 @@ The extension choices were cross-checked against the [MIT 6.006 course descripti
 
 Sorting now has a dedicated merge-sort reading and a short Timsort/Powersort explanation. Elementary listings remain complete direct-comparison algorithms; general `key`/`reverse` options belong to the built-in interface examples. Full Timsort, Powersort power calculations and galloping implementations remain outside this introductory treatment.
 
-Topic 5 now aligns eleven readings around explicit operation contracts, representation invariants, traces, implementation choices, time/space and self-checks. Sequence and deque adapters have complete interfaces; queue implementations share FIFO operations and size queries. Linked positional List classes and custom circular/doubly linked Deque classes remain conceptual alternatives to the included adapters.
+## Current edition and next work
 
-Topic 6 now aligns Map/Set contracts, returns, absent-key policies, snapshots, set combinations, hashing invariants, complete chaining/probing update helpers and table rebuilding. Python adapters delegate storage management; low-level helpers do not implement automatic count tracking or resize thresholds. Fourteen original open self-checks support the readings.
+All sixteen topics have the self-reading structure described in the [reading guide](reading-guide.md): goals/prerequisites, worked reasoning, explicit contracts and costs, misconception reminders and explained checks. Use the reading routes and suggested study blocks to work through concepts at a pace that leaves time for diagrams, traces and checks. Conceptual-only implementations in the tables above remain deliberate scope boundaries.
 
-Topics 11–13 now align graph operations/traversals, the fixed-universe disjoint-set interface and graph algorithms. Simple unweighted graph construction/query/update helpers preserve list-based traversal contracts; union–find adds element/empty/component-count/component-size observers. Algorithm contracts distinguish outputs, errors, ties, input mutation and code dependencies; cost tables separate working state and returned data. Nineteen readings contain 38 explained self-checks. Directed SCC/cycle-witness algorithms, negative-cycle route algorithms and dynamic/rollback disjoint sets remain extensions.
-
-## Topic 2 analysis alignment — 23 October 2026
-
-Five readings now align operation contracts, input size/cost models, exact counts and growth, cases versus bounds, expected versus amortised guarantees, working/output/peak space and correctness/termination evidence. A complete linear-search invariant/progress argument connects to its existing comparison counter. Ten original open prediction checks have collapsed explanations. Existing Python functions, explicit labels, formulas, worked traces and three SVG figures are retained. No notebook, rubric, solution or assessment source was consulted.
-
-The agreed remaining editorial order is Topic 3, then Topic 1, followed by Topics 14, 15 and 16.
-
-## Topic 3 recursion alignment — 23 October 2026
-
-Five readings align recursive/iterative sum and trace contracts, merge versus sort preconditions, base/progress/correctness arguments, exact depth and sort-call counts, peak frame/list/output storage and implementation choices. Adds ten original open prediction checks with collapsed explanations. The eight SVGs, existing Python listings, original headings/labels and worked traces are retained. Alternatives such as bottom-up/range-buffer merging remain clearly described comparisons rather than extra supplied implementations. No notebook, rubric, solution or assessment source was consulted.
-
-The remaining agreed order is Topic 1, then Topics 14, 15 and 16.
-
-## Topic 1 foundations alignment — 23 October 2026
-
-Five readings now align problem/first-search contracts; names, slots, attributes and reference identity; mutation, copy ownership and returned values; built-in collection choices; validated class states and linked traversal; and the brief ADT introduction. Adds ten open prediction checks with collapsed explanations, preserving the original code, headings/labels and three SVG figures. Cost discussion stays introductory and links to Topic 2 rather than requiring asymptotic notation in the opening topic. Full ADT implementations remain with their respective topics. No notebook, rubric, solution or assessment source was consulted.
-
-Topics 1–13 now have the agreed reading structure. The remaining alignment order is Topics 14, 15 and 16.
-
-## Topics 14–15 alignment — 23 October 2026
-
-Six strategy readings and eight string readings now align goals/prerequisites, problem/query contracts, returned results and boundary errors, state/invariant/progress reasoning, implementation choices and costs. Adds 28 original open prediction checks with collapsed explanations. Trie adds len/is_empty observers while retaining its size field, original mutation returns and existing algorithms. The four strategy and nine string SVG figures, original function/method bodies, URLs and labels remain. No notebook, rubric, solution or assessment source was consulted.
-
-Topics 1–15 now have the agreed reading structure. Topic 16, integrated applications, is the remaining alignment task.
-
-## Topic 16 application alignment — 23 October 2026
-
-Six readings now follow question, model, method, trace, result and interpretation rather than imposing one ADT operation template. Each supplies goals/prerequisites, explicit contracts, state/correctness reasoning, choices, costs, a misconception reminder and two open prediction checks with collapsed explanations (twelve total). Unknown versus unreachable identifiers, false unions versus useful transport links, forest coverage and construction/travel tradeoffs are explicit. End-to-end accounting includes lazy Prim and the route-measurement slice. All five SVGs, algorithms, URLs and existing labels remain. No notebook, rubric, solution or assessment source was consulted.
-
-All sixteen topics now have the agreed reading structure. More integrated cases and the advanced concepts listed in the coverage review remain possible extensions, rather than completed material.
+The next development stages are a small Python/JavaScript/Julia tab pilot, tracing-oriented interactive checks, and then selected content extensions. These are planned, not implemented. More applications could develop dependency scheduling or a spatial service directory.

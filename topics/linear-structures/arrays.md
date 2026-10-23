@@ -80,3 +80,5 @@ Move D, then C, then B right. Starting at B without saving later values would ov
 :::{dropdown} Show explanation
 No. It replaces the existing item; insert(1,X) is the operation that increases length.
 :::
+
+Next: [Dynamic arrays](dynamic-arrays.md).

@@ -22,6 +22,6 @@ The figures reuse the lecture tree rooted at 50. [Topic 8](../balanced-trees/bal
 
 Read **purpose/contract → invariant and representation → trace → code → choices/correctness → costs → suitability → self-checks**. Exact binary search and boundary search return positions; BST readers return nodes or key snapshots; update helpers return subtree roots. The [ordered-set adapter](ordered-set-operations.md#ordered-set-contract) makes the public operation results explicit rather than confusing those different layers.
 
-Each reading has two goals, prerequisites, a misconception reminder and two prediction checks. All original diagrams and key examples are retained. The seven-node reference tree precedes insertion of 65; pages explicitly identify examples that include it. The strict distinct-key policy applies to both BST and AVL implementations.
+The seven-node reference tree precedes insertion of 65; pages explicitly identify examples that include it. Trace updates against the indicated starting tree rather than carrying a changed tree into the next independent example. The strict distinct-key policy applies to both BST and AVL implementations.
 
 The supplied code covers exact/boundary array search, all three traversals, extremes, strict neighbours, closed ranges, BST updates and a shared public set interface. It does not implement a key–value ordered map, rank/select augmentation or a static median builder.

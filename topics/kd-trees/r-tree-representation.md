@@ -105,4 +105,4 @@ No. Its box (0,0,10,10) overlaps the query, so L1 is a candidate. On L1, y=x; fo
 No. U’s box (0,0,10,10) and V’s box (3,0,10,9) both meet the query. Equal leaf depth does not make their bounds disjoint or establish a single search path.
 :::
 
-Next: [Construction and exact lookup](r-tree-operations.md#rtree-insertion), then [range refinement](r-tree-queries.md), nearest search and deletion.
+Next: [Range candidates and exact refinement](r-tree-queries.md). The following [operation reading](r-tree-operations.md) reuses that traversal for exact lookup and develops construction, nearest search and deletion.

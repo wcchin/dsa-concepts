@@ -2,11 +2,11 @@
 
 Source: `wcchin/CS2040HS-2610`, main commit `254cb7e7684a93be1f06cde42e973df458fe9366`.
 All 25 lecture Markdown files were read. No notebook, rubric or solution files were used.
-This is an editorial map of source coverage, not a claim that all chapters have been written.
+This inventory records source provenance and concept allocation. All sixteen topics have developed readings; current counts and tasks are maintained in [status.md](status.md), not in this source record.
 
-## Main topics and page boundaries
+## Source concepts and topic allocation
 
-| Topic | Proposed concept pages | Lecture sources |
+| Topic | Allocated source concepts | Lecture sources |
 |---|---|---|
 | 1. Foundations and Python’s object model | Data structures, algorithms and problem requirements; Objects, references, identity and equality; Mutability, aliasing, rebinding and copying; Built-in collections, classes and invariants | `cs2040hs_week00_classroom.md`, `cs2040hs_week01_classroom.md`, `cs2040hs_week01_online.md` |
 | 2. Analysing algorithms | Input size, operation counts and growth rates; Best, worst and average cases; O, Ω and Θ; Loops, repeated halving and auxiliary space | `cs2040hs_week02_classroom.md`, `cs2040hs_week02_online.md` |
@@ -33,7 +33,7 @@ This is an editorial map of source coverage, not a claim that all chapters have 
 - Week 1 collection introductions feed Topic 1 and Topic 6; linked-route mechanics feed Topic 5. Use cross-links rather than duplicate explanations.
 - Merge-sort mechanism belongs to Topic 4; the general recursion strategy belongs to Topic 3.
 - Union–find belongs to Topic 12 and is linked from Kruskal in Topic 13.
-- The k-d source includes range search and a conceptual nearest-neighbour extension. Do not silently promote the latter into a complete algorithm chapter.
+- The k-d source presents nearest neighbours conceptually. The book adds an original runnable nearest implementation and makes its assumptions/costs explicit; that implementation is an editorial extension, not a claim about the lecture source.
 - Topic 16 now contains an original transport-network case. Contexts already in slides (undo, consultation queues, rolling windows and station counts) continue to illustrate their parent topics.
 - Each page needs definitions, prerequisites, a continuous explanation, a worked example, boundary cases, qualified costs and related-concept links.
 - Slide reveal sequences require consolidation. Speaker timing notes, presentation directives and repeated navigation headings do not belong in student chapters.
@@ -41,7 +41,7 @@ This is an editorial map of source coverage, not a claim that all chapters have 
 
 ## Source-by-source concept headings
 
-Headings below omit fenced code. They provide an audit trail, including repeated reveal headings that will be consolidated.
+Headings below omit fenced code. They preserve the historical lecture audit trail, including slide reveal headings consolidated in the book. They are not chapter tasks.
 
 ### cs2040hs_week00_classroom.md
 
@@ -1834,77 +1834,6 @@ Headings below omit fenced code. They provide an audit trail, including repeated
 - Prim and Kruskal in one comparison
 - Independent trace and explanation
 
+## Editorial extensions and current records
 
-## Coverage review update
-
-The current topic map above includes the original lecture coverage and two optional editorial extensions. Topics 1–13 and 16 now have developed readings, including the integrated transport case. The current reading order and remaining conceptual gaps are recorded in `../coverage-review.md` and `coverage-audit.md`.
-
-Topic 14, **Algorithm design and sequence patterns**, is an optional editorial extension beyond this lecture inventory: greedy reasoning, dynamic programming, backtracking, prefix sums, two pointers, sliding windows and complexity limits. Its worked examples are original, supported by general algorithm references linked in the reading. This does not change the course syllabus or assessment scope.
-
-The review also expands Topic 2 with correctness methods and Topic 7 with binary-search boundaries and BST range queries. Weeks 12–13 lecture Markdown and the union–find additional lecture supplied the source basis for Topics 12 and 13; notebooks, rubrics and solutions were excluded.
-
-## Topic 15 extension — 22 October 2026
-
-Strings, tries and pattern matching are now developed in eight reading pages plus an overview, with nine original SVG figures. This editorial extension adds string-cost/Unicode models, sparse trie operations and queries, naive substring search, prefix-function KMP and verified rolling hashes. It draws on general references linked in the reading rather than additional course or assessment materials. Topic 16 now has an integrated transport case. The 23 October reordering updates topic numbers throughout this inventory while retaining URLs.
-
-## Topic 16 application — 22 October 2026
-
-Six reading pages now develop one original fictional transport network, with separate travel-time and construction weights, five exact SVG diagrams and a standalone standard-library Python example. It integrates existing book algorithms without adding course or assessment source material. Dependency scheduling and a spatial directory remain future application candidates.
-
-## Topic 9 spatial-search expansion — 22 October 2026
-
-The five k-d-tree readings remain intact within a broader spatial-search topic. Seven original extension readings add query foundations, a separate point-quadtree page before the PR-quadtree page, PR insertion/query operations, R-tree representation and query/refinement, and comparisons. Eight new SVGs supplement the six k-d figures; a standalone standard-library Python file runs the examples together. Extensions use OpenDSA/Guttman/PostGIS primary references and original code/figures rather than additional lecture, notebook or assessment materials.
-
-## Spatial operation completion (supersedes earlier extension boundaries)
-
-Topic 9 now groups readings under k-d, point-quadtree, PR-quadtree and R-tree methods, preserving existing URLs. Five new readings add complete point-tree deletion and nearest operations, exact/nearest R-tree queries, per-operation time/space tables and self-reading checks. Dynamic R-tree construction/splitting/condensation are worked conceptual algorithms, not implemented updates. No notebook, rubric, solution or assessment source was used.
-
-## Topic 5 operation alignment
-
-Eleven readings now separate sequence, stack, queue and deque contracts from array, growth, linked and circular implementations. Added strict-index ArraySequence, Queue and Deque adapters, consistent size/len/empty queries, explicit return/error/full policies, operation costs and 22 collapsed-feedback checks. Existing URLs, concept labels and twelve diagrams are retained; historical deque anchors link to the dedicated page. Linked low-level helpers are not presented as a complete positional List class, and underlying library storage is explicitly delegated. No notebooks or assessment materials were used.
-
-## Topic 6 operation alignment
-
-Seven readings align Map/Set contracts, exact results/errors, state invariants, traces, implementation choices, time/space and fourteen collapsed-feedback checks. Added dict/set-backed public adapters, chained deletion, bounded probing insertion/deletion and rebuild helpers. Public put returns None; helper put returns a new-key Boolean; Map removal returns its value while Set removal returns None. Snapshot outputs are shallow, and set combinations create new membership containers. Automatic resize/count policies remain explicit scope boundaries. Existing headings, URLs and the probing-deletion diagram are preserved. No assessment materials were used.
-
-## Topics 7–8 operation alignment
-
-Topic 7 has nine readings; Topic 8 has six. Both align operation/helper contracts, results and errors, representation invariants, preserved traces, code choices, costs and thirty open self-checks. Added complete preorder/postorder, maximum and root-based strict-neighbour queries, a key-only OrderedSet adapter, and an AVL operation route reusing the same readers. Public set removal returns None; extreme extraction returns its key; raw update helpers return roots and raw absent deletion is a no-op. Global count is distinct from subtree rank/select augmentation. All existing pages, labels, algorithms and fourteen figures are retained. No notebooks or assessment sources were used.
-
-## Topic 10 operation alignment
-
-Seven readings now align contracts, invariants, preserved traces, implementation choices, time/space and fourteen open self-checks. Numeric sifts/build/heapsort remain unchanged. The stable MinPriorityQueue adds size/empty and an extract_min alias; a composed MaxPriorityQueue negates finite numeric priorities while preserving FIFO sequence ties. Public methods return items, numeric helpers return priorities, and removal/extraction are aliases. Duplicate inserts remain separate entries. Arbitrary removal and indexed priority changes remain conceptual. All existing URLs, labels, headings and nine figures are retained. No notebooks or assessment sources were used.
-
-## Topics 11–13 operation alignment — 23 October 2026
-
-The reordered graph sequence now aligns seven graph/traversal readings, four union–find readings and eight graph-algorithm readings. Adds one simple unweighted graph-operations page with checked construction/query/update helpers. Extends the existing DisjointSet with len/empty/component-count/component-size queries while retaining original find/union methods, public metadata and tie traces. Existing graph algorithms retain their core implementations, with local imports and linked helper dependencies made explicit. Each reading supplies goals, prerequisites, contracts/choices/costs, a misconception reminder and two collapsed-feedback checks (38 total). The 22 existing figures, original URLs and explicit concept labels remain. No notebook, rubric, solution or assessment source was consulted. Remaining directed/negative-cycle and dynamic-connectivity extensions are named without claiming implementations.
-
-## Topic 2 analysis alignment — 23 October 2026
-
-Five readings now align operation contracts, input size/cost models, exact counts and growth, cases versus bounds, expected versus amortised guarantees, working/output/peak space and correctness/termination evidence. A complete linear-search invariant/progress argument connects to its existing comparison counter. Ten original open prediction checks have collapsed explanations. Existing Python functions, explicit labels, formulas, worked traces and three SVG figures are retained. No notebook, rubric, solution or assessment source was consulted.
-
-The agreed remaining editorial order is Topic 3, then Topic 1, followed by Topics 14, 15 and 16.
-
-## Topic 3 recursion alignment — 23 October 2026
-
-Five readings align recursive/iterative sum and trace contracts, merge versus sort preconditions, base/progress/correctness arguments, exact depth and sort-call counts, peak frame/list/output storage and implementation choices. Adds ten original open prediction checks with collapsed explanations. The eight SVGs, existing Python listings, original headings/labels and worked traces are retained. Alternatives such as bottom-up/range-buffer merging remain clearly described comparisons rather than extra supplied implementations. No notebook, rubric, solution or assessment source was consulted.
-
-The remaining agreed order is Topic 1, then Topics 14, 15 and 16.
-
-## Topic 1 foundations alignment — 23 October 2026
-
-Five readings now align problem/first-search contracts; names, slots, attributes and reference identity; mutation, copy ownership and returned values; built-in collection choices; validated class states and linked traversal; and the brief ADT introduction. Adds ten open prediction checks with collapsed explanations, preserving the original code, headings/labels and three SVG figures. Cost discussion stays introductory and links to Topic 2 rather than requiring asymptotic notation in the opening topic. Full ADT implementations remain with their respective topics. No notebook, rubric, solution or assessment source was consulted.
-
-Topics 1–13 now have the agreed reading structure. The remaining alignment order is Topics 14, 15 and 16.
-
-## Topics 14–15 alignment — 23 October 2026
-
-Six strategy readings and eight string readings now align goals/prerequisites, problem/query contracts, returned results and boundary errors, state/invariant/progress reasoning, implementation choices and costs. Adds 28 original open prediction checks with collapsed explanations. Trie adds len/is_empty observers while retaining its size field, original mutation returns and existing algorithms. The four strategy and nine string SVG figures, original function/method bodies, URLs and labels remain. No notebook, rubric, solution or assessment source was consulted.
-
-Topics 1–15 now have the agreed reading structure. Topic 16, integrated applications, is the remaining alignment task.
-
-## Topic 16 application alignment — 23 October 2026
-
-Six readings now follow question, model, method, trace, result and interpretation rather than imposing one ADT operation template. Each supplies goals/prerequisites, explicit contracts, state/correctness reasoning, choices, costs, a misconception reminder and two open prediction checks with collapsed explanations (twelve total). Unknown versus unreachable identifiers, false unions versus useful transport links, forest coverage and construction/travel tradeoffs are explicit. End-to-end accounting includes lazy Prim and the route-measurement slice. All five SVGs, algorithms, URLs and existing labels remain. No notebook, rubric, solution or assessment source was consulted.
-
-All sixteen topics now have the agreed reading structure. More integrated cases and the advanced concepts listed in the coverage review remain possible extensions, rather than completed material.
+Correctness methods, search boundaries and BST ranges extend their parent topics. Spatial-search operations beyond the lecture's k-d core, optional Topics 14–15, and the Topic 16 transport case use original examples and references linked in the readings. No notebook, rubric, solution or assessment source was used. The public [coverage review](../coverage-review.md) distinguishes implemented and conceptual material. See [current status](status.md), the [editorial review](editorial-review.md) and [archived development history](archive/development-history-2026-10-23.md) for progress and validation.

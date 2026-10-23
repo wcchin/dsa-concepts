@@ -63,6 +63,10 @@ On each call, the local parameter `route` initially refers to the object supplie
 
 Both functions return `None` because neither returns a value explicitly. In particular, `stops = extend_route(stops)` would mutate the list and then bind `stops` to `None`. Similarly, `list.append` itself returns `None`; do not replace the list with its return value.
 
+:::{note} Pause and trace
+Before comparing copies, draw the shared list after the argument-passing example. Identify which statement mutates an object and which only rebinds a local name. Then use the copy diagram to check which sharing changes.
+:::
+
 (shallow-copy)=
 ## A shallow copy creates a new outer container
 

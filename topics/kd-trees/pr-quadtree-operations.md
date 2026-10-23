@@ -41,6 +41,10 @@ class PRNode:
 
 The overlap test is intentionally asymmetric: a query whose minimum equals the cell's excluded maximum cannot find a point in that cell. A query whose maximum equals the cell's included minimum can. Midpoint calculation avoids summing two large same-sign endpoints before halving; the strict interior test also detects numerical failure to shrink a cell.
 
+:::{note} Pause and trace
+Trace child ownership and bounds for one midpoint case before reading insertion. In the longer listing, follow one split and its redistribution first; revisit duplicate detection and subdivision stopping on a second pass.
+:::
+
 (pr-quadtree-insertion)=
 ## Redistribute records when a leaf becomes internal
 

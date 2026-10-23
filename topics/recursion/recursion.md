@@ -22,6 +22,6 @@ After reading, you should be able to trace calls and returns, justify terminatio
 
 Specify valid inputs, returned results, side effects and exceptions first. Identify a reachable base case and a decreasing measure that keeps child calls in the valid domain. Follow the suspended work and returned results, justify the local combine step, then count total local work and maximum live storage separately.
 
-The five readings have goals/prerequisites, a misconception reminder and two explained self-checks each (ten checks). The eight existing SVG figures, complete recursive/iterative sum and indexed merge-sort code, original labels and worked traces are retained. [The cost summary](recursion-costs.md#recursion-cost-summary) distinguishes sort frames, total sort calls, merging, copied references and returned output. Python's finite recursion capacity remains a practical limit, not a proof that a valid mathematical recursion fails to terminate.
+Read each call diagram in execution order, then trace the returned values. [The cost summary](recursion-costs.md#recursion-cost-summary) distinguishes sort frames, total sort calls, merging, copied references and returned output. Python's finite recursion capacity remains a practical limit, not a proof that a valid mathematical recursion fails to terminate.
 
 For a particular term, use the [concept index](../../concepts.md). The [Sorting topic](../sorting/sorting.md) compares merge sort with other strategies; here merge sort supplies a concrete example of recursive decomposition.

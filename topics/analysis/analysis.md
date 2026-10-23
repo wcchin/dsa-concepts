@@ -22,6 +22,6 @@ By the end, you should be able to justify a cost expression, distinguish best/wo
 
 Across the five readings, start with the operation contract and size parameters, choose a resource and cost model, identify the input family or probability/sequence guarantee, derive the work or maximum live storage, then state a justified bound. Correctness and termination need their own arguments; the final reading works the linear-search example through that reasoning.
 
-Each reading has two goals, prerequisite links, a misconception reminder and two prediction questions with collapsed explanations (ten checks). The existing functions, formulas, worked counts and three original figures are retained. Later chapters apply this method to sorting, recursion, hashing, trees and graphs rather than introducing a new meaning of complexity.
+Use the worked counts to justify a bound before reading its simplified growth class. Later topics apply the same cost models to sorting, recursion, hashing, trees and graphs.
 
-Use the [concept index](../../concepts.md) for a particular term. Continue with [Recursion and divide-and-conquer](../recursion/recursion.md) topic. For a later application, see [hash-table performance](../maps-sets-hashing/performance.md).
+Use the [concept index](../../concepts.md) for a particular term. Continue with [Recursion and divide-and-conquer](../recursion/recursion.md). For a later application, see [hash-table performance](../maps-sets-hashing/performance.md).

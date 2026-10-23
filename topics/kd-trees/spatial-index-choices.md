@@ -80,4 +80,4 @@ No. The counters measure different work. This PR representation includes explici
 That would miss valid crossings. L2 runs from (0,7) to (6,7); neither endpoint is inside [2,4] × [6,8], but the segment crosses it. Object bounds plus an exact segment predicate preserve that case; a point-endpoint query answers a different question.
 :::
 
-Return to the [spatial-search overview](kd-trees.md), [concept index](../../concepts.md) or [coverage review](../../coverage-review.md).
+Continue to [priority queues and heaps](../heaps/heaps.md), or return to the [spatial-search overview](kd-trees.md), [concept index](../../concepts.md) or [coverage review](../../coverage-review.md).

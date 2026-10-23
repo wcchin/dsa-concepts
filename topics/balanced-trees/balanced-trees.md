@@ -19,6 +19,6 @@ The figures show where every retained subtree goes. A rotation is complete only 
 
 [Topic 7’s ordered-set contract](../searching/ordered-set-operations.md#ordered-set-contract) applies unchanged. Add, remove, discard and extreme extraction use AVL mutation; exact lookup, traversal, ranges and strict neighbours reuse the BST readers. Rotation, rebalance and returned-root conventions are internal implementation contracts, not extra public ADT operations.
 
-The readings follow contracts, invariants, visual traces, code, implementation choices, costs and self-checks, adapted to each helper’s purpose. All six readings begin with goals/prerequisites and contain two prediction checks. The five existing figures remain; rotations retain both middle and outside subtrees.
+Follow contracts, invariants, visual traces, code, implementation choices and costs. When drawing a rotation, account for both middle and outside subtrees before checking the cached heights.
 
 Check ordering, actual versus cached heights and every balance factor after updates; the owning adapter also maintains total size. Full node-identity preservation, parent pointers and rank/select augmentation are outside this implementation. The [final operation table](avl-operations.md#avl-all-operation-costs) separates path length from traversal/output size and local rotation work.

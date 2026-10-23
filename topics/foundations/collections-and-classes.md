@@ -123,6 +123,10 @@ Annotations such as `number: int` document intent and support static tools. They
 
 Default equality for ordinary instances of this class is based on identity. Two separately constructed stops do not become equal merely because their code and name match; value-based equality would need an explicit design, such as defining `__eq__`.
 
+:::{note} Pause and trace
+You can study this page in two sittings: collection choices and validated instance state first, linked objects second. Before continuing, explain why rejected boarding/alighting leaves the count unchanged; then distinguish a RouteNode from the ShuttleStop it refers to.
+:::
+
 (linked-objects)=
 ## References connect instances into structures
 

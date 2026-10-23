@@ -107,4 +107,4 @@ The result is L4,L2. Both actual segments meet the closed query rectangle. L1’
 Yes. L2 ends at (6,7), so the segment and query share that point. The endpoint-inside test accepts it. Requiring positive-length or positive-area overlap would silently change the contract.
 :::
 
-Next: [Compare spatial indexes](spatial-index-choices.md).
+Next: [R-tree construction, exact lookup, nearest and deletion](r-tree-operations.md), which reuses the candidate traversal defined here.

@@ -19,6 +19,6 @@ The examples follow the Week 12–13 lecture graphs. All graph keys include sink
 
 ## Read each method through the same questions
 
-Each algorithm page states its objective, input/return/error contract, working state, next-step invariant, trace, code context, implementation choices and costs. All eight readings have two goals and two explained self-checks (sixteen checks); the nine original figures and algorithm traces are retained.
+Each algorithm page states its objective, input/return/error contract, working state, next-step invariant, trace, code context, implementation choices and costs. Compare the meaning of a queue entry, heap key or parent map before reusing an earlier implementation.
 
 The [comparison table](graph-algorithm-choices.md#graph-algorithm-contract-summary) separates working storage from returned state and covers ties, empty/disconnected graphs and unsupported weights/cycles. Imports are explicit where possible; DAG paths reuses Kahn and Kruskal reuses Topic 12's class, with those dependencies linked beside the code. Negative-cycle route algorithms, directed-cycle witnesses and SCC implementations remain future extensions.

@@ -21,13 +21,13 @@ A standalone Jupyter Book 2 project for a searchable, self-reading course resour
 - Optional algorithm design: six aligned readings and four original SVG figures, with problem/result contracts, sufficient-state and correctness arguments, explicit implementation costs and twelve self-checks.
 - Optional strings and tries: eight aligned readings and nine accessible SVG figures, with complete trie/query contracts, size/empty observers, shared substring semantics, qualified implementation costs and sixteen self-checks.
 - Integrated transport application: six aligned readings, twelve explained prediction checks, five accessible SVG figures and a standalone standard-library Python example.
-- A Topic 9 self-reading pilot: page goals, prerequisite links, misconception reminders and 34 prediction questions with collapsed explanations.
+- A completed self-reading format across all 120 readings: goals, prerequisite cues, misconception reminders and 240 open prediction checks with collapsed explanations.
 - A prerequisite reading guide and public coverage review.
 - An original probing-deletion diagram.
 - An author-facing source inventory under `planning/`.
 - A build-check workflow and automatic publishing on pushes to `main`.
 
-No notebooks, rubric files, solution files, slide files or Git history are included. Topic 16 develops one complete transport-network application; dependency scheduling and a spatial directory remain possible future cases.
+No notebooks, rubric files, solution files or slide files are bundled as learning materials. Topic 16 develops one complete transport-network application; dependency scheduling and a spatial directory remain possible future cases.
 
 ## Repository
 
@@ -65,7 +65,7 @@ Every push to `main` builds and publishes the site. Pull requests run the build 
 
 Read `planning/topic-inventory.md` for the source-based topics, page boundaries, lecture-source mapping and gaps. The inventory records the private course-source provenance but the source files themselves are not bundled. Do not place assessment solutions in this book project.
 
-All sixteen topics contain developed reading material; Topics 14–15 are optional extensions beyond the lecture inventory. See `coverage-review.md` for remaining gaps and `planning/coverage-audit.md` for the editorial review.
+All sixteen topics contain developed and aligned readings; Topics 14–15 are optional extensions beyond the lecture inventory. Use [planning/status.md](planning/status.md) for the current task list, [coverage-review.md](coverage-review.md) for content boundaries and extensions, and [planning/editorial-review.md](planning/editorial-review.md) for the whole-book review. Earlier records are archived rather than repeated as current tasks.
 
 
 ## Licensing

@@ -112,6 +112,10 @@ These are analysis examples under explicit preconditions, rather than general-pu
 
 The two-pass count assumes a reusable list. Replacing it with a single-use iterator would consume it in the first pass and change the result. The returned list from `copy_values` has its own slots while sharing references to the original elements.
 
+:::{note} Pause and trace
+Finish the loop and branch counts first. For a second pass, set the counts aside and classify existing input, new output and temporary working storage. The same function can have different time and space growth.
+:::
+
 (space-complexity)=
 ## Time and space measure different resources
 
@@ -190,5 +194,7 @@ The triangular inner range is range(i) for i=0 through 4, so its row lengths are
 :::{dropdown} Show explanation
 Three updates: 13→6→3→1. The copy uses linear auxiliary space because the default convention includes its new output list; its logical workspace excluding output is constant.
 :::
+
+Next: [Correctness and proof habits](correctness.md).
 
 **Browse:** [Analysing algorithms](analysis.md) · [Concept index](../../concepts.md)

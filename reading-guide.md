@@ -24,6 +24,46 @@ For current scope, conceptual-only coverage and future additions, see [Coverage 
 
 ## Check your reasoning as you read
 
-[Topic 9](topics/kd-trees/kd-trees.md#where-to-check-your-understanding) pilots a self-reading format: two learning goals and prerequisite links at the start of each reading, then a misconception reminder and two prediction questions with expandable explanations. Predict a branch or result before opening the panel; use a mismatch to identify which boundary or invariant to revisit. These are ungraded, original examples.
+All sixteen topics use a self-reading format: two learning goals and prerequisite links at the start of each reading, then a misconception reminder and two prediction questions with expandable explanations. Predict a branch or result before opening the panel; use a mismatch to identify which boundary or invariant to revisit. These are ungraded, original examples.
 
-The spatial sidebar now groups k-d trees, point quadtrees, PR quadtrees and R-trees. Follow each method’s five-operation route from construction through deletion. Compare the cost summaries only after checking which code, occupancy assumptions, node visits and geometry tests each bound describes.
+The spatial sidebar groups k-d trees, point quadtrees, PR quadtrees and R-trees. Compare construction/insertion, exact lookup, range search, nearest search and deletion for each method. The R-tree range helpers precede the exact lookup that reuses them. Compare the cost summaries only after checking which code, occupancy assumptions, node visits and geometry tests each bound describes.
+
+
+## Plan study blocks around the work
+
+Reading a definition, tracing a figure and understanding a complete class require different effort. The blocks below are suggested stopping places, not equal-duration lessons or measured reading-time estimates. Split a block again when you need to draw references, trace code or attempt the checks. Short method/contract pages often orient the longer implementation that follows.
+
+| Topic | Suggested study blocks | Main effort to allow for |
+|---|---|---|
+| [1. Foundations](topics/foundations/foundations.md) | Problems and references; mutation and copies; classes and ADTs | Draw shared objects and distinguish slot updates from object updates |
+| [2. Analysis](topics/analysis/analysis.md) | Counts and growth; cases and bounds; code/storage; correctness | Derive a count or invariant before reading its simplified claim |
+| [3. Recursion](topics/recursion/recursion.md) | Calls and frames; split/merge trace; costs and allocation choices | Follow returns as well as calls; count live state separately |
+| [4. Sorting](topics/sorting/sorting.md) | Insertion/bubble; merge; partition/quicksort; runs/comparison/lower bound | Compare different invariants using the same sorting contract |
+| [5. Linear structures](topics/linear-structures/linear-structures.md) | ADT interfaces; arrays/growth; linked edits; queue implementations/choices | Trace empty/singleton transitions and safe link-update order |
+| [6. Hashing](topics/maps-sets-hashing/maps-sets-hashing.md) | Map/Set contracts; hashing/chaining; probing; rebuilding/choices | Follow a collision chain and tombstones before maintenance costs |
+| [7. Searching/BSTs](topics/searching/searching.md) | Array search; tree bounds/insertion; traversal/ranges; deletion/public interface | Keep global bounds and returned subtree roots consistent |
+| [8. AVL](topics/balanced-trees/balanced-trees.md) | Invariants/rotations; case identification; updates/operation comparison | Draw transferred subtrees and recompute heights bottom-up |
+| [9. Spatial search](topics/kd-trees/kd-trees.md) | Shared queries; k-d trees; point quadtrees; PR quadtrees; R-trees; comparison | Give each method its own block; distinguish ownership, enclosure and exact geometry |
+| [10. Heaps](topics/heaps/heaps.md) | Priority/shape; repairs; build; records/sorting/costs | Separate complete shape, heap order and application tie policies |
+| [11. Graphs](topics/graphs/graphs.md) | Model/representation/updates; BFS; DFS/components; costs | Trace frontier and parent state against stored neighbour order |
+| [12. Union–find](topics/union-find/union-find.md) | Partitions/forests; weighted union/compression; applications | Track membership, representative, element count and component count separately |
+| [13. Graph algorithms](topics/graph-algorithms/graph-algorithms.md) | Topological order; relaxation/Dijkstra/DAG paths; cuts/Prim/Kruskal; comparison | State the objective before choosing a safe processing order |
+| [14. Strategies](topics/strategies/strategies.md) | Strategy/greedy; DP; backtracking; sequence patterns/limits | Give each new state model its own worked trace |
+| [15. Strings](topics/strings/strings.md) | String/trie model; trie updates/prefix queries; baseline/KMP; rolling hash/choices | Trace terminal flags, fallback lengths and exact verification separately |
+| [16. Applications](topics/applications/applications.md) | Model; hop/time routes; connectivity/design; interpretation | Reuse one dataset while changing the objective and units explicitly |
+
+On a first pass, state the contract and trace the supplied example. On a second pass, explain the invariant, implementation choices and full costs, then try the checks without the answers. Revisit prerequisite links when a trace fails; you do not need to restart an entire topic.
+
+## Read local contracts with a shared vocabulary
+
+| Term or convention | How to read it across the book |
+|---|---|
+| ADT, representation, implementation | Behaviour promised to a client; stored organisation/invariant; code that maintains it |
+| Key, value, node, reference | A comparison/lookup field; associated data; a structural object; access to an object. These roles can differ even in one example |
+| Observe versus mutate | Observe the logical collection versus change it. Union–find queries may compress representation links while preserving the partition |
+| Remove versus extract | Read the named operation's contract. Stack/queue extraction returns the selected record; Set removal of a specified key may return None or report a Boolean state change |
+| Missing versus stored None | None can be legitimate data in several containers. The local contract chooses exceptions, sentinels or absence results |
+| Working versus output storage | Working storage excludes the existing input and returned output when stated separately. This book's default auxiliary-space convention includes newly allocated output unless explicitly excluded |
+| Height, visits and output size | Height bounds a path. A range or spatial query can visit many paths and must pay to report its answers |
+
+The brief [ADT introduction](topics/foundations/adt-basics.md) and [analysis conventions](topics/analysis/code-and-space.md#auxiliary-and-output-space) define these distinctions. Later pages make their particular result, tie, boundary and error policies explicit.
