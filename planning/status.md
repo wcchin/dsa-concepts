@@ -78,3 +78,9 @@ Topics 1–8 are unchanged. The sidebar now reads 9 spatial search, 10 heaps, 11
 ## Topics 11–13 operation alignment — 23 October 2026
 
 The reordered graph sequence now aligns seven graph/traversal readings, four union–find readings and eight graph-algorithm readings. Adds one simple unweighted graph-operations page with checked construction/query/update helpers. Extends the existing DisjointSet with len/empty/component-count/component-size queries while retaining original find/union methods, public metadata and tie traces. Existing graph algorithms retain their core implementations, with local imports and linked helper dependencies made explicit. Each reading supplies goals, prerequisites, contracts/choices/costs, a misconception reminder and two collapsed-feedback checks (38 total). The 22 existing figures, original URLs and explicit concept labels remain. No notebook, rubric, solution or assessment source was consulted. Remaining directed/negative-cycle and dynamic-connectivity extensions are named without claiming implementations.
+
+## Topic 2 analysis alignment — 23 October 2026
+
+Five readings now align operation contracts, input size/cost models, exact counts and growth, cases versus bounds, expected versus amortised guarantees, working/output/peak space and correctness/termination evidence. A complete linear-search invariant/progress argument connects to its existing comparison counter. Ten original open prediction checks have collapsed explanations. Existing Python functions, explicit labels, formulas, worked traces and three SVG figures are retained. No notebook, rubric, solution or assessment source was consulted.
+
+The agreed remaining editorial order is Topic 3, then Topic 1, followed by Topics 14, 15 and 16.

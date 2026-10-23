@@ -1,5 +1,12 @@
 # Cases and bounds: two separate questions
 
+**After this page, you should be able to:**
+
+- Distinguish best/worst/expected input choices from O, Ω and Θ bounds.
+- State probability assumptions and separate expected from amortised costs.
+
+**Builds on:** [Exact comparison counts](counting-work.md) and [dominant growth](growth-rates.md).
+
 **Cases select inputs; bounds describe functions.** Keeping these choices separate prevents a common mistake: treating Big-O as a synonym for worst case or Big-Ω as a synonym for best case.
 
 (best-and-worst-cases)=
@@ -109,6 +116,44 @@ A cubic upper bound need not be false just because a quadratic bound is availabl
 Each row selects inputs or a probability model, then bounds the resulting function. The best-case function is also O(1) and Ω(1). The worst-case function is also O(n) and Ω(n).
 
 Do not confuse a bound for this implementation with a lower bound for **every** algorithm solving the problem. A problem-level lower bound needs a separate argument about the allowed algorithms and computational model.
+
+(expected-versus-amortised-analysis)=
+## Expected and amortised are different guarantees
+
+Expected cost averages using an explicit probability model: a distribution over inputs, internal random choices, or both. The search expectation above describes a distribution of target positions, not a guarantee on each search. Expected O(1) hash lookup later relies on hashing assumptions; it does not say every key has a constant-time lookup.
+
+Amortised analysis instead bounds the total cost of a sequence of operations and spreads that bound across the sequence. A dynamic-array append may copy many references on one call while geometric growth gives O(1) amortised append cost. No random inputs are required for that sequence argument. [Dynamic arrays](../linear-structures/dynamic-arrays.md#amortised-array-append) provide the worked example.
+
+A complete statement names which guarantee is intended: an individual worst-case bound, an expected cost under a model, or an amortised cost across operations. These terms cannot be substituted just because all three are sometimes described informally as an average.
+
+## Choose the function before choosing its bound
+
+A reproducible claim identifies the input family and resource before simplifying. “Worst-case target comparisons for this linear-search implementation are Θ(n)” is different from “every comparison-based solution to this problem needs Ω(n) work.” The second statement quantifies over algorithms and needs its own model and lower-bound argument.
+
+For n=4 under the stated half-absent, half-uniform-success model, successful searches contribute expected 2.5 comparisons and absent searches contribute 4; weighting those gives 3.25. Measuring another workload does not make this calculation wrong, but can show that its distribution does not describe the application.
+
+Big-O permits loose upper bounds, but a justified tight Θ bound communicates more. The constants and threshold in a bound must work for every sufficiently large n in the selected cost function; choosing a new multiplier for each input size would not establish the asymptotic claim.
+
+:::{tip} Common misconception
+**Big-Ω describes the best case.** It describes a lower bound on whichever function was selected, including a worst-case or expected-cost function.
+:::
+
+(analysis-bounds-checks)=
+## Check your understanding
+
+Predict the count or assess the claim before opening the explanation.
+
+**1. If T(n)=3n²+5n+2, can O(n³) and Θ(n²) both be correct?**
+
+:::{dropdown} Show explanation
+Yes. O(n³) is a loose upper bound; Θ(n²) states the tight growth class. A valid bound need not be the most informative one.
+:::
+
+**2. Is the midpoint of best and worst search counts always the average-case cost?**
+
+:::{dropdown} Show explanation
+No. It happens to match the uniform successful-position model here, but a different success probability or position distribution gives another expectation.
+:::
 
 Next: [Analysing code and space](code-and-space.md).
 

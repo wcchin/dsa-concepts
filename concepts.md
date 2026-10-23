@@ -619,6 +619,13 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 - [Graph algorithm result and cost comparison](topics/graph-algorithms/graph-algorithm-choices.md#graph-algorithm-contract-summary)
 
 
+## Analysis reasoning routes
+
+- [Contracts for the counting examples](topics/analysis/counting-work.md#analysis-counting-contract)
+- [Expected versus amortised guarantees](topics/analysis/cases-and-bounds.md#expected-versus-amortised-analysis)
+- [Analysis-helper contracts and boundaries](topics/analysis/code-and-space.md#analysis-code-contracts)
+- [A complete linear-search invariant and termination argument](topics/analysis/correctness.md#linear-search-proof)
+
 ## Concepts grouped by topic
 
 ### 1. Foundations and Python’s object model

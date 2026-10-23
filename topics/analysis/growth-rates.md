@@ -1,5 +1,12 @@
 # Growth rates and dominant terms
 
+**After this page, you should be able to:**
+
+- Explain dominant terms and compare growth without ignoring finite-size costs.
+- Predict doubling ratios and relate logarithms to fixed-factor reductions.
+
+**Builds on:** [Input size and cost models](counting-work.md), powers and simple arithmetic.
+
 An exact count describes work at a particular size. A growth rate describes how that count changes as size increases. This helps compare methods whose costs cross over as inputs grow.
 
 (asymptotic-growth)=
@@ -81,6 +88,35 @@ We therefore often write “log n” for a growth class, while specifying the ba
 ## Growth is not yet a bound claim
 
 Identifying a dominant term prepares us to state a bound. We still need to choose upper, lower or tight bounds, and specify which input cases the cost function describes.
+
+## Read the growth claim with its assumptions
+
+The functions on this page describe counted work, not a universal execution time. For T(n)=an²+bn+c with fixed coefficients and a>0, quadratic growth follows because lower-order contributions become small relative to n². Multipliers and setup still matter at actual input sizes: T_A and T_B in the table tie at n=6 even though their long-run growth differs.
+
+For logarithms, specify a positive domain and a fixed base greater than 1. The loop's rounding and stopping test determine an exact iteration count; its growth class does not settle that count. Likewise, an observed doubling ratio near 2 does not by itself distinguish n from n log n over a short range. Use the derivation as well as measurements.
+
+A growth expression is not tied to one resource: time and maximum live storage can have different functions for the same algorithm. Nor does the expression alone choose a best, worst or expected input family. The [next reading](cases-and-bounds.md) makes those quantifiers explicit.
+
+:::{tip} Common misconception
+**A lower growth class is faster for every input size.** Fixed setup, constant factors, representation and workload can reverse the comparison over a finite range.
+:::
+
+(analysis-growth-checks)=
+## Check your understanding
+
+Predict the count or assess the claim before opening the explanation.
+
+**1. For T(n)=3n²+5n+2, is T(2n) exactly four times T(n)?**
+
+:::{dropdown} Show explanation
+No. T(2n)=12n²+10n+2, while 4T(n)=12n²+20n+8. The ratio approaches 4 as the quadratic term dominates.
+:::
+
+**2. If f(n)=2ⁿ, does doubling n merely double the work?**
+
+:::{dropdown} Show explanation
+No. f(2n)/f(n)=2ⁿ. Adding one to n doubles this model; doubling n has a much larger effect.
+:::
 
 Next: [Cases and bounds](cases-and-bounds.md).
 

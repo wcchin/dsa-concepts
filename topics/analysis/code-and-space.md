@@ -1,5 +1,12 @@
 # Analysing code and additional storage
 
+**After this page, you should be able to:**
+
+- Derive loop, branch and halving counts from limits and stopping rules.
+- Report working, output and peak auxiliary storage under an explicit model.
+
+**Builds on:** [Cases and bounds](cases-and-bounds.md) and [shallow copies](../foundations/mutation-and-copying.md#shallow-copy).
+
 Loop syntax suggests where to look, but iteration counts and operation costs determine the result. Explain the count first, then simplify its growth.
 
 (consecutive-loops)=
@@ -89,6 +96,22 @@ This calls `count_two_passes` from the first example on this page. For a nonempt
 
 Alternative branches are not automatically added as if both ran. Conditions and all work along the selected path still count.
 
+(analysis-code-contracts)=
+## Check helper inputs, returns and dependencies
+
+These are analysis examples under explicit preconditions, rather than general-purpose validating APIs. List arguments are finite and remain unchanged; n is a nonnegative integer for `count_pairs`, a positive integer for `halving_steps`, and `detailed` is boolean for `inspect_count`. Passing other types or invalid sizes is outside the stated examples unless an explicit error is shown.
+
+| Function | Result / mutation | Empty or boundary behaviour |
+|---|---|---|
+| `count_two_passes(values)` | Return 2n; observe the list | Empty list returns 0 |
+| `count_pairs(n)` | Return `(n², n(n−1)/2)`; no input mutation | n=0 returns `(0, 0)`; n=1 returns `(1, 0)` |
+| `halving_steps(n)` | Return floor(log₂ n); no input mutation | n=1 returns 0; n<1 explicitly raises `ValueError` |
+| `inspect_count(values, detailed)` | Return 0 for empty, 1 for non-detailed, otherwise 2n | Run `count_two_passes` above first; this is a helper dependency |
+| `count_values(values)` | Return n; observe the list | Empty list returns 0 |
+| `copy_values(values)` | Return a new shallow outer list; observe the original | Empty list returns a new empty list |
+
+The two-pass count assumes a reusable list. Replacing it with a single-use iterator would consume it in the first pass and change the result. The returned list from `copy_values` has its own slots while sharing references to the original elements.
+
 (space-complexity)=
 ## Time and space measure different resources
 
@@ -128,5 +151,44 @@ Under a bit-level model, a counter up to n needs Θ(log n) bits, rather than one
 Define input size, choose a resource, specify the case and cost assumptions, derive the count, and state the most informative justified bound.
 
 For example: “For n list elements with constant-cost equality, linear search uses n target comparisons in the worst case, giving tight time Θ(n), and maintains Θ(1) extra words.” This explains more than “the code is Big-O”.
+
+## Compare costs for the actual listings
+
+| Example | Time under the stated word/operation model | Working storage excluding input/output; returned storage |
+|---|---|---|
+| Two full list passes | Θ(n+1) | O(1) words; O(1) words |
+| Full and triangular pair counts together | Θ(n²+1) | O(1) words; O(1) words |
+| Floor-halving positive integer n | Θ(1+log n) | O(1) words; O(1) words |
+| Non-detailed inspection | Θ(1) | O(1) words; O(1) words |
+| Detailed inspection of a list | Θ(n+1) | O(1) words; O(1) words |
+| Count list values | Θ(n+1) | O(1) words; O(1) words |
+| Shallow list copy | Θ(n+1), including amortised append allocation | O(1) logical workspace; Θ(n+1) returned slots |
+
+The added constant makes empty/singleton setup visible; it does not change the growing-input class. Python `range` objects do not allocate all loop indices in advance. Counters and loop indices are counted as words here; Python big-integer bit costs require a more detailed analysis.
+
+The copy's table treats its dynamic-list backing storage as output space. During an occasional resize, old and replacement backing arrays can coexist temporarily, still within O(n+1) total additional space. A fixed count of local variable names therefore does not imply a fixed amount of live storage.
+
+If a task first constructs or sorts its representation, include that preparation in the complete task's time and peak storage. Keeping multiple parameters, such as rows and columns, can be more informative than turning every loop into a claim about one n.
+
+:::{tip} Common misconception
+**Two nested loops always mean quadratic time.** Count actual row lengths and operation costs: a fixed inner limit gives linear work, while distinct n and m limits give a two-parameter nm count.
+:::
+
+(analysis-code-checks)=
+## Check your understanding
+
+Predict the count or assess the claim before opening the explanation.
+
+**1. For count_pairs(5), why are the counts 25 and 10 rather than 25 and 15?**
+
+:::{dropdown} Show explanation
+The triangular inner range is range(i) for i=0 through 4, so its row lengths are 0,1,2,3,4. They sum to 10.
+:::
+
+**2. halving_steps(13) makes how many updates, and does copy_values use constant auxiliary space under this book's default convention?**
+
+:::{dropdown} Show explanation
+Three updates: 13→6→3→1. The copy uses linear auxiliary space because the default convention includes its new output list; its logical workspace excluding output is constant.
+:::
 
 **Browse:** [Analysing algorithms](analysis.md) · [Concept index](../../concepts.md)

@@ -56,3 +56,9 @@ Topic 5 now aligns eleven readings around explicit operation contracts, represen
 Topic 6 now aligns Map/Set contracts, returns, absent-key policies, snapshots, set combinations, hashing invariants, complete chaining/probing update helpers and table rebuilding. Python adapters delegate storage management; low-level helpers do not implement automatic count tracking or resize thresholds. Fourteen original open self-checks support the readings.
 
 Topics 11–13 now align graph operations/traversals, the fixed-universe disjoint-set interface and graph algorithms. Simple unweighted graph construction/query/update helpers preserve list-based traversal contracts; union–find adds element/empty/component-count/component-size observers. Algorithm contracts distinguish outputs, errors, ties, input mutation and code dependencies; cost tables separate working state and returned data. Nineteen readings contain 38 explained self-checks. Directed SCC/cycle-witness algorithms, negative-cycle route algorithms and dynamic/rollback disjoint sets remain extensions.
+
+## Topic 2 analysis alignment — 23 October 2026
+
+Five readings now align operation contracts, input size/cost models, exact counts and growth, cases versus bounds, expected versus amortised guarantees, working/output/peak space and correctness/termination evidence. A complete linear-search invariant/progress argument connects to its existing comparison counter. Ten original open prediction checks have collapsed explanations. Existing Python functions, explicit labels, formulas, worked traces and three SVG figures are retained. No notebook, rubric, solution or assessment source was consulted.
+
+The agreed remaining editorial order is Topic 3, then Topic 1, followed by Topics 14, 15 and 16.
