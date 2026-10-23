@@ -8,7 +8,6 @@ How can the same assignment sometimes appear to change several variables and som
 2. [Objects and references](objects-and-references.md): trace names, identity, equality and absence.
 3. [Mutation and copying](mutation-and-copying.md): distinguish object updates from reference updates.
 4. [Collections and classes](collections-and-classes.md): choose built-in representations and connect custom objects safely.
-
 5. [Abstract data types](adt-basics.md): separate promised behaviour, data organisation and implementation.
 
 The campus shuttle examples run through these five pages. They are small enough to trace by hand and lead naturally to linked structures, search and graph representations.
@@ -19,5 +18,10 @@ You should be able to read basic Python assignments, function calls, `if` statem
 
 After reading, you should be able to draw references between objects, predict the effect of mutation and rebinding, explain shallow copying, identify the invariant maintained by a small class, and distinguish an ADT contract from its implementation.
 
-For a particular term, use the [concept index](../../concepts.md). Continue with [Analysing algorithms](../analysis/analysis.md). For a developed application of these foundations, see [Maps, Sets and Hashing](../maps-sets-hashing/maps-sets-hashing.md).
+## Carry the same questions into every structure
 
+Begin with the required result and state changes. Identify which names, container slots and attributes reach each object; distinguish local rebinding from mutation through shared references. If a copy is made, determine exactly which levels remain shared. Then check which invariant the supported operations preserve and separate that behavioural promise from storage choices.
+
+All five readings have two goals, prerequisite/context cues, a misconception reminder and two explained prediction questions (ten checks). The three original reference diagrams, original Python examples and existing concept labels remain. This is an introduction to the contracts and object model; full container interfaces and formal time/space analysis are developed in their later topics.
+
+For a particular term, use the [concept index](../../concepts.md). Continue with [Analysing algorithms](../analysis/analysis.md). For a developed application of these foundations, see [Maps, Sets and Hashing](../maps-sets-hashing/maps-sets-hashing.md).

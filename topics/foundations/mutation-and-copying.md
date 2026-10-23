@@ -1,5 +1,12 @@
 # Mutability, rebinding and copying
 
+**After this page, you should be able to:**
+
+- Predict mutation, rebinding and parameter effects by following shared references.
+- Choose shallow/deep copying and fresh defaults using explicit sharing contracts.
+
+**Builds on:** [Names, slots, attributes, identity and equality](objects-and-references.md).
+
 When a program seems to change two variables at once, the underlying cause is often shared access to one mutable object. Trace the objects and references before deciding what changed.
 
 (mutability)=
@@ -109,9 +116,52 @@ print(first is second)  # False
 
 Here a missing argument selects `None`, and the function creates a fresh list inside the call. If the caller explicitly supplies a list, the function appends to that list. The interface deliberately distinguishes those two cases.
 
+(mutation-operation-contracts)=
+## Read returns and sharing together
+
+| Operation in this reading | Returned value | Effect on caller-visible state |
+|---|---|---|
+| `replace_route(route)` | `None` | Rebinds only its local parameter; caller's list unchanged |
+| `extend_route(route)` | `None` | Appends to the caller's list |
+| `add_stop(stop)` or `add_stop(stop, None)` | Newly created list | Creates a fresh list for that call and appends stop |
+| `add_stop(stop, existing)` | That same existing list | Mutates the supplied list and returns its reference |
+| `routes.copy()` | New outer list | Copies outer slots; nested objects remain shared |
+| `deepcopy(routes)` | Copy according to the reachable structure and copy rules | Separates the ordinary mutable lists in the example; preserves internal repeated sharing |
+
+The route parameters are assumed to be lists when list operations are performed. These helpers do not validate arbitrary collection types. `None` is the missing-route convention for `add_stop`, not a ban on storing `None` as the stop value. A mutator can return `None`, a result or the mutated object; read the contract rather than inferring returns from the word “mutation.”
+
+A shallow copy separates **slots**, not their referents. Replacing `backup[0]` changes only that new outer slot, while `backup[0].append(...)` edits a shared inner list. With deep copying, if two original slots referred to the same inner list, their copied slots normally refer to one shared copied inner list; deep copying does not turn every incoming arrow into an independent object.
+
 ## Questions to revisit
 
 Does the operation redirect a reference or change an object? Which references still reach that object? If a copy was made, which levels remain shared? These questions explain the result more reliably than saying “Python copies variables”.
+
+## Choose the sharing policy before counting copies
+
+Use aliases when shared updates are intended, a shallow copy when outer-container independence is sufficient, and a deeper copying policy when nested mutable state must be separated. A tuple can hold a mutable list even though its own slots are fixed. Such a tuple is also unhashable in Python: immutable outer structure alone does not guarantee a valid dictionary key. [Hashability](../maps-sets-hashing/hashing.md#hashability-in-python) develops that separate requirement.
+
+A shallow copy of n list slots takes work and new outer storage growing with n. Deep-copy cost depends on the reachable structure and any custom copying behaviour, not merely the outer list length. Assignment to a local name does not perform either traversal. The [analysis topic](../analysis/code-and-space.md#auxiliary-and-output-space) formalises these costs and distinguishes copied reference slots from deeply copied objects.
+
+:::{tip} Common misconception
+**A new outer list means independent nested data.** Shallow copying leaves the nested referents shared; check which level an operation changes.
+:::
+
+(foundation-mutation-checks)=
+## Check your understanding
+
+Predict the result or draw the references before opening the explanation.
+
+**1. After backup=routes.copy(), backup[0] is replaced with a new list. Does this replace routes[0] too?**
+
+:::{dropdown} Show explanation
+No. The outer slots belong to different lists. Mutating the previously shared inner list would be visible through both references; replacing one outer slot is a different operation.
+:::
+
+**2. Two calls to add_stop omit the route argument. Do their returned lists share identity? What if both calls supply the same list?**
+
+:::{dropdown} Show explanation
+Omitted arguments create separate lists because each call constructs one after testing None. Supplying the same list makes both calls mutate and return that shared list.
+:::
 
 Next: [Collections, classes and invariants](collections-and-classes.md).
 

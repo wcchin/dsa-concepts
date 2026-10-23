@@ -634,6 +634,15 @@ This index covers developed explanations in Topics 1–16. Entries link directly
 - [Depth, calls, time and live-storage summary](topics/recursion/recursion-costs.md#recursion-cost-summary)
 - [Recursive implementation choices and costs](topics/recursion/implementation-costs.md#recursive-implementation-costs)
 
+## Foundation reasoning routes
+
+- [First-occurrence search inputs, results and absence](topics/foundations/data-and-algorithms.md#first-search-contract)
+- [Names, collection slots and attribute updates](topics/foundations/objects-and-references.md#reference-update-locations)
+- [Mutation, copying, returns and sharing](topics/foundations/mutation-and-copying.md#mutation-operation-contracts)
+- [Passenger-operation contracts](topics/foundations/collections-and-classes.md#shuttle-stop-contract)
+- [State and traversal invariants](topics/foundations/collections-and-classes.md#foundation-state-invariants)
+- [Reading an ADT contract](topics/foundations/adt-basics.md#adt-intro-operation-checklist)
+
 ## Concepts grouped by topic
 
 ### 1. Foundations and Python’s object model

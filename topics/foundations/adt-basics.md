@@ -44,9 +44,46 @@ An **operation contract** specifies valid requests, returned results and changes
 
 These promises describe externally observable behaviour. Internal details can change as long as supported operations continue to satisfy the contract. This separation will help us compare several implementations of the same ADT throughout the book.
 
+(adt-intro-operation-checklist)=
+## Read a contract without exposing the storage
+
+For each supported operation, ask what inputs are valid, what it returns, what logical state changes, and what happens at boundaries or on failure. An observer such as `peek` leaves the logical stack unchanged; a mutator such as `pop` changes it. Internal bookkeeping can change without changing the abstract value, provided the promised behaviour remains the same.
+
+| Question | Stack contract here | A different requirement |
+|---|---|---|
+| Which waiting item is selected? | Most recently pushed | A queue selects the earliest waiting item |
+| Does observation remove it? | No; use `peek` | `pop` removes and returns it |
+| Can equal values appear twice? | Yes; each push adds one entry | A set keeps distinct values |
+| What happens when empty? | `peek` and `pop` raise `IndexError` | Another API may choose a different stated policy |
+
+The trace does not require the client to know an array capacity or node address. Repeated equal values are still separate stack entries. An empty error is distinguishable from a stored `None`: `None` can be a legitimate item, while empty `pop` raises an exception.
+
+## Implementation choices and the later reading route
+
+Two implementations can satisfy the same functional contract while differing in allocation, layout, per-operation costs and worst-case guarantees. A dynamic array and linked stack therefore need both a behavioural comparison and an implementation-specific cost analysis. Those details belong with [stacks](../linear-structures/stacks.md), not in this brief introduction.
+
+The rest of the book applies this distinction to [sequences/queues/deques](../linear-structures/linear-structures.md), [maps and sets](../maps-sets-hashing/maps-sets-hashing.md), [ordered sets](../searching/ordered-set-operations.md), [priority queues](../heaps/priority-queues.md) and [disjoint sets](../union-find/disjoint-sets.md). Their operations differ because their promised behaviour differs; every ADT need not expose the same insert/remove names.
+
+:::{tip} Common misconception
+**Matching method names establish the same ADT.** Clients need matching behaviour, returns and boundary policies, not merely functions called push and pop.
+:::
+
+(foundation-adt-checks)=
 ## Check your understanding
 
-If two classes both provide `push` and `pop`, but one removes the oldest item, are both stacks? No: the second violates LIFO. Matching operation names is not enough.
+Predict the result or draw the references before opening the explanation.
+
+**1. Two classes both offer push and pop, but one removes the oldest waiting entry. Are both stacks under this contract?**
+
+:::{dropdown} Show explanation
+No. The oldest-entry policy violates LIFO. It is queue-like behaviour even if its methods use stack names.
+:::
+
+**2. Starting empty, push(None) then pop(). Is the returned None proof that pop failed?**
+
+:::{dropdown} Show explanation
+No. It successfully removes the stored None item. Calling pop again on the now-empty stack raises IndexError, so failure is not encoded by that payload value.
+:::
 
 For detailed contracts, observers and mutators, and implementation comparisons, continue later with [ADTs and contracts](../linear-structures/adts-and-contracts.md). Next in the main reading route: [Analysing algorithms](../analysis/analysis.md).
 

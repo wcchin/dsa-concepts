@@ -133,3 +133,11 @@ Five readings align recursive/iterative sum and trace contracts, merge versus so
 The remaining agreed order is Topic 1, then Topics 14, 15 and 16.
 
 Validation: 17,075 semantic/structure assertions passed, including summation and invalid-input cases, exact printed traces, exhaustive short-list sorting/merging, stable record identity, shallow/input preservation, exact sort-call and active-frame counts, and documented merge comparison counts. All 154 Python listings compile. Jupyter Book 2.1.7 builds 141 pages; all 1,961 local links, including 1,093 section links, resolve. Ten feedback panels render closed. Existing code listings, headings, explicit labels and SVG bytes are retained.
+
+## Topic 1 foundations alignment — 23 October 2026
+
+Five readings now align problem/first-search contracts; names, slots, attributes and reference identity; mutation, copy ownership and returned values; built-in collection choices; validated class states and linked traversal; and the brief ADT introduction. Adds ten open prediction checks with collapsed explanations, preserving the original code, headings/labels and three SVG figures. Cost discussion stays introductory and links to Topic 2 rather than requiring asymptotic notation in the opening topic. Full ADT implementations remain with their respective topics. No notebook, rubric, solution or assessment source was consulted.
+
+Topics 1–13 now have the agreed reading structure. The remaining alignment order is Topics 14, 15 and 16.
+
+Validation: 18,118 semantic/structure assertions passed, covering first-occurrence/absence contracts, aliases and slot replacement, repeated sharing under shallow/deep copying, mutable tuple contents/hashability, parameter mutation/returns, fresh defaults, validated passenger-state transitions and the introductory contract against the later Stack class. All 154 Python listings compile. Jupyter Book 2.1.7 builds 141 pages; all 1,981 local links, including 1,102 section links, resolve. Ten feedback panels render closed. Original Python listings, headings, explicit labels and SVG bytes are retained.

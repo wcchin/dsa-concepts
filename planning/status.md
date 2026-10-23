@@ -90,3 +90,9 @@ The agreed remaining editorial order is Topic 3, then Topic 1, followed by Topic
 Five readings align recursive/iterative sum and trace contracts, merge versus sort preconditions, base/progress/correctness arguments, exact depth and sort-call counts, peak frame/list/output storage and implementation choices. Adds ten original open prediction checks with collapsed explanations. The eight SVGs, existing Python listings, original headings/labels and worked traces are retained. Alternatives such as bottom-up/range-buffer merging remain clearly described comparisons rather than extra supplied implementations. No notebook, rubric, solution or assessment source was consulted.
 
 The remaining agreed order is Topic 1, then Topics 14, 15 and 16.
+
+## Topic 1 foundations alignment — 23 October 2026
+
+Five readings now align problem/first-search contracts; names, slots, attributes and reference identity; mutation, copy ownership and returned values; built-in collection choices; validated class states and linked traversal; and the brief ADT introduction. Adds ten open prediction checks with collapsed explanations, preserving the original code, headings/labels and three SVG figures. Cost discussion stays introductory and links to Topic 2 rather than requiring asymptotic notation in the opening topic. Full ADT implementations remain with their respective topics. No notebook, rubric, solution or assessment source was consulted.
+
+Topics 1–13 now have the agreed reading structure. The remaining alignment order is Topics 14, 15 and 16.

@@ -5,7 +5,7 @@ A standalone Jupyter Book 2 project for a searchable, self-reading course resour
 ## Contents
 
 - Sixteen topic areas, with alphabetical and topic-based concept indexes.
-- A developed Foundations topic: five reading pages, an overview and three object diagrams, including a brief ADT introduction.
+- Foundations: five aligned readings, an overview and three original reference diagrams, with explicit search/mutation/class contracts, identity and sharing traces, invariant reasoning, a brief ADT introduction and ten self-checks.
 - Algorithm Analysis: five aligned readings, an overview and three original mathematical figures, with explicit cost models, cases/bounds, expected/amortised distinctions, working/output storage, a complete search proof and ten self-checks.
 - Recursion: five aligned readings, an overview and eight original SVG explanations, with input/result/mutation contracts, reachable base cases, call/return traces, correctness, precise depth/call/space distinctions, implementation comparisons and ten self-checks.
 - A developed Sorting topic: nine reading pages, an overview and eight original SVG explanations. Algorithm readings align choices, stability, mutation, time/space and self-checks; includes a conceptual Timsort/Powersort overview.

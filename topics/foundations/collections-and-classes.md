@@ -1,5 +1,12 @@
 # Collections, classes and invariants
 
+**After this page, you should be able to:**
+
+- Choose a built-in collection by sequence, key/value or membership requirements.
+- Read instance methods, validated state transitions and linked-object invariants.
+
+**Builds on:** [Object/reference locations](objects-and-references.md) and [mutation/sharing contracts](mutation-and-copying.md#mutation-operation-contracts).
+
 Built-in collections give us useful representations immediately. Classes let us define objects with named state and operations. Both approaches require clear decisions about what the data means and which states are valid.
 
 (built-in-collections)=
@@ -79,6 +86,20 @@ print(utown)   # ShuttleStop('UTN', 'University Town', passengers=8)
 
 `__init__` initialises each newly created instance. Assignments to `self.code`, `self.name` and `self._passengers` establish instance attributes. Each stop has its own count; updating Museum does not change University Town. `__repr__` supplies an informative representation for inspection. Here `!r` requests the representation of each string, including its quotes.
 
+(shuttle-stop-contract)=
+## Specify the small class's supported operations
+
+| Operation | Result and state change | Boundary or invalid request |
+|---|---|---|
+| `ShuttleStop(code, name)` | New instance with passenger count 0 | String annotations describe intended inputs; constructor does not validate them |
+| `board(number=1)` | `None`; increase this instance's recorded count | Exact nonnegative `int` required; otherwise `ValueError` |
+| `alight(number=1)` | `None`; decrease this instance's recorded count | Same type/range check; insufficient passengers also raises `ValueError` |
+| `repr(stop)` | New descriptive string through `__repr__` | Observes state; no passenger update |
+
+Zero boarding/alighting is valid and leaves the count unchanged. Rejected boarding/alighting leaves it unchanged because validation precedes the update. There is no capacity limit, passenger-list storage or public count-query method in this small model; inspect the displayed representation for the example. Later ADT implementations provide their own complete interfaces.
+
+`board` and `alight` update one instance. Another reference to that **same** instance observes those changes; a separately constructed instance keeps its own state. `_check_number` is an internal helper, not an additional operation required from clients.
+
 (self)=
 ## What does self mean?
 
@@ -127,6 +148,36 @@ The output is Kent Ridge followed by Museum. Each node refers to a stop and eith
 Rebinding `current` advances the traversal without changing `first` or any node’s `next` attribute. Assigning `first.next = None` would instead change the structure and make the traversal stop after the first node. The loop finishes for this finite, acyclic chain. If links form a cycle, the same stopping test alone is insufficient.
 
 Insertion, removal and safe reference-update order belong to [linear structures](../linear-structures/linear-structures.md). This introduction supplies the object model needed to read those operations.
+
+(foundation-state-invariants)=
+## Check state boundaries and traversal assumptions
+
+The passenger invariant is established by construction and preserved by supported methods, including rejected requests. An alias to the instance shares its state; a second constructor call creates a different instance. The count itself is an immutable integer, but rebinding the instance's count attribute changes the mutable instance's recorded state.
+
+For the route example, each `next` reference must lead to another valid node or `None`, and the displayed traversal assumes a finite acyclic chain whose stops have names. `RouteNode` does not enforce these conditions. Advancing the local `current` binding is an observer of the chain; changing a node's `next` is a structural mutation and may change reachability or create a cycle.
+
+Under the introductory fixed-size-value model, boarding/alighting performs a fixed amount of validation and arithmetic; it does not scan one stored object per passenger. A chain traversal, however, visits each reached node, and the comprehension inspects each dictionary entry and allocates a list for selected names. The amount of represented data and the operation's actual steps determine cost, not the number of attribute names in the class.
+
+:::{tip} Common misconception
+**Type hints and underscores enforce valid state automatically.** Runtime checks maintain this model's count invariant; clients can still bypass conventions by assigning internal attributes.
+:::
+
+(foundation-class-checks)=
+## Check your understanding
+
+Predict the result or draw the references before opening the explanation.
+
+**1. Museum has count 2. What happens after alight(3), and what happens after board(True)?**
+
+:::{dropdown} Show explanation
+Each raises ValueError without changing the count. The first request exceeds the count; the second fails the exact-int check even though bool is numerically related to int in Python.
+:::
+
+**2. If current=first and then current=current.next, has first.next changed?**
+
+:::{dropdown} Show explanation
+No. The local traversal binding moves to another existing node. Assigning first.next directly would instead mutate the structure.
+:::
 
 Next: [Abstract data types: behaviour before representation](adt-basics.md).
 

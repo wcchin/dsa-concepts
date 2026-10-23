@@ -1,5 +1,12 @@
 # Objects, references, identity and equality
 
+**After this page, you should be able to:**
+
+- Distinguish names, objects, references, identity, equality and explicit absence.
+- Locate the updated name, collection slot or attribute in a reference diagram.
+
+**Builds on:** [Problem specifications and representations](data-and-algorithms.md); familiar assignment and collection syntax.
+
 To understand a Python data structure, we need a model of what its names and fields refer to. Otherwise, an innocent-looking assignment can be mistaken for a copy, and a reference update can be mistaken for a change to the referenced object.
 
 (objects-and-bindings)=
@@ -63,9 +70,51 @@ print(next_node is None)  # True
 
 Use `is None` and `is not None` for these tests. An empty list is a different object with a different meaning: it is a collection containing zero items. A function that reaches its end without a `return` value also returns `None`.
 
+(reference-update-locations)=
+## Identify where the reference is stored
+
+A reference can be held by a local name, a collection slot or an object attribute. The location being updated matters:
+
+| Operation | What changes? | What does not follow automatically? |
+|---|---|---|
+| `b = a` | Bind b to the object currently reached by a | No new copy of that object is made |
+| `b = []` | Redirect b to a new empty list | Other names are not redirected |
+| `a[0] = value` | Replace one reference stored in a list | The previously referenced object's state is not edited by that assignment |
+| `node.next = other` | Change the node's next attribute | Neither the old nor new target is cloned |
+| `del b` | Remove the name binding b | An object still reachable through another reference does not disappear |
+
+Changing a slot or attribute is a mutation of its containing object, even when the change redirects a reference. This is why “assignment changes an arrow” and “mutation changes an object” must be read with the arrow's owner in mind: local rebinding differs from updating a shared list or node.
+
 ## Read a reference diagram in three steps
 
 First locate the names or attributes. Then follow their arrows to the objects. Finally distinguish an operation that changes a box’s state from an assignment that redirects an arrow. This method scales from two list aliases to linked nodes and trees.
+
+## Use the model to state sharing and costs
+
+If `a` and `b` are aliases, the useful invariant is `a is b` until one binding changes. Their contents may be mutated in between without breaking that identity. Equal contents alone do not establish sharing; two distinct lists can compare equal and respond independently to later changes.
+
+Binding one name to an existing object does not traverse and copy its contents. Equality may examine contents or run custom code, while identity asks whether the two references reach the same object. Do not infer equality cost, deep memory size or physical address layout from a diagram containing one arrow. The [next reading](mutation-and-copying.md) makes copying and ownership choices explicit.
+
+:::{tip} Common misconception
+**Two equal objects must be aliases.** Equal values and shared identity are different observations; use the appropriate test for the question.
+:::
+
+(foundation-reference-checks)=
+## Check your understanding
+
+Predict the result or draw the references before opening the explanation.
+
+**1. x and y are separately created equal lists, while z=x. Which identity tests are true: x is y, x is z?**
+
+:::{dropdown} Show explanation
+x is y is False; x is z is True. Equality of x and y does not merge their identities.
+:::
+
+**2. After a=["KR"], b=a, and b=[], what does a contain?**
+
+:::{dropdown} Show explanation
+a still contains ["KR"]. Only b was rebound to the new empty list; no operation emptied a's original object.
+:::
 
 Next: [Mutability, rebinding and copying](mutation-and-copying.md).
 

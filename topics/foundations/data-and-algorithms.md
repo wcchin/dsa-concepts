@@ -1,5 +1,12 @@
 # Data structures, algorithms and problem requirements
 
+**After this page, you should be able to:**
+
+- Connect a problem specification to a representation and its required operations.
+- Trace first-occurrence search, including duplicates, zero indices and absence.
+
+**Builds on:** Basic assignments, lists, functions, conditionals and loops; this opening page introduces the book's reasoning vocabulary.
+
 A campus shuttle route seems simple: keep a sequence of stops and visit them in order. But a useful program must also answer questions. Which stop comes next? Has a stop already been visited? What changes when a new stop is inserted?
 
 These questions connect the information we store to the operations we need. That connection is the starting point for studying data structures and algorithms.
@@ -31,6 +38,15 @@ print(find_stop(route, "CLM"))  # None
 ```
 
 The problem is **first-occurrence search**, not sorting or finding every match. The input order matters: the first MUS is at index 1. Python indices begin at zero. Here `None` explicitly reports absence, while index 0 is a valid answer. A client should test `result is None`, rather than use a truth-value check that would also treat 0 as false.
+
+(first-search-contract)=
+## Make the example's contract explicit
+
+`find_stop(route, target)` expects a finite list of stop values, unchanged during the search, with a consistent equality comparison. It returns the **zero-based index of the first match**, or `None` when no match exists. It leaves the list and its order unchanged. Duplicates are allowed; the function does not remove them, return every occurrence, or sort the input.
+
+The empty list returns `None`. A match at the first position returns 0, which is a successful result even though 0 is false in a boolean test. Even `None` can be a stored value: `find_stop([None], None)` returns 0. The absence marker is unambiguous because successful results are indices, not the stored stop values.
+
+This teaching function does not perform a separate input-validation pass or promise an exception for every malformed request. State preconditions before reasoning about its normal result; other search interfaces may choose different returns or errors.
 
 (algorithm-reasoning)=
 ## Follow the work and explain why it finishes
@@ -68,6 +84,33 @@ The [ADT introduction later in this topic](adt-basics.md) separates an **abstrac
 ## Questions to revisit
 
 Why does first-occurrence search stop at the first match? What does an empty input return? Would a Set preserve the information needed by this particular problem? Each answer depends on the specification, not just the Python syntax.
+
+## Compare the complete request, not just the container
+
+For a route of n stops, the first-match search examines at most n positions. A first-position match examines one; an empty route examines none. It keeps a fixed number of local references and returns one index or `None`, rather than copying the route. These are counts and storage observations; [Topic 2](../analysis/counting-work.md) introduces formal bounds and the assumptions behind constant-cost comparisons.
+
+A set is useful for distinct membership but loses both repeated visits and route positions. A dictionary can retrieve a name by code, but that does not answer which occurrence comes first in a route. Choose the question and operation contract before comparing implementations; a faster answer to a different question does not meet this specification.
+
+:::{tip} Common misconception
+**A false-valued search result always means absence.** Index 0 is a valid first match. Test `result is None` for this particular interface.
+:::
+
+(foundation-problem-checks)=
+## Check your understanding
+
+Predict the result or draw the references before opening the explanation.
+
+**1. For ["KR", "MUS", "KR"], what do searches for "KR" and "UTN" return?**
+
+:::{dropdown} Show explanation
+The first returns 0, and the second returns None. The later KR at index 2 does not replace the first-occurrence answer.
+:::
+
+**2. Can a set of stop codes replace the route without changing what find_stop must return?**
+
+:::{dropdown} Show explanation
+No. A set does not retain repeated visits or their sequence positions, so it cannot directly supply the required first route index.
+:::
 
 Next: [Objects, references, identity and equality](objects-and-references.md).
 
