@@ -7,6 +7,10 @@
 
 **Builds on:** [Spatial bounds](spatial-queries.md#spatial-pruning-certificates) justify exclusion; they are not exact object distances.
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/kd-trees.js) · [Julia](../../examples/languages/kd-trees.jl).
+
+JavaScript points are arrays compared by same_point; Julia points are value tuples. Julia coordinate/child indices are one-based (x=1, y=2; SW/SE/NW/NE=1/2/3/4), while depth still starts at zero. R-tree orientation uses exact big-integer arithmetic for the supplied integer-coordinate geometry; nearest distances remain floating calculations. General R-tree update code is still conceptual in every language.
+
 (kd-nearest-neighbour)=
 ## A nearby path is only a starting point
 
@@ -29,6 +33,12 @@ In the picture, root (5,0) splits x at 5, query Q = (4.9,5) goes left to (1,5), 
 
 (kd-nearest-code)=
 ## Search the near side, then reconsider the far side
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def kd_nearest(root, query):
@@ -56,6 +66,52 @@ def kd_nearest(root, query):
     visit(root, 0)
     return best_point
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function kd_nearest(root,query) {
+    let best_point=null, best_d2=Infinity;
+    function visit(node,depth) {
+        if (node===null) return;
+        const p=node.point, d2=(p[0]-query[0])**2+(p[1]-query[1])**2;
+        if (best_point===null || d2<best_d2) { best_point=p; best_d2=d2; }
+        const delta=query[depth%2]-p[depth%2];
+        const near=delta<0 ? node.left : node.right, far=delta<0 ? node.right : node.left;
+        visit(near,depth+1);
+        if (delta*delta<=best_d2) visit(far,depth+1);
+    }
+    visit(root,0); return best_point;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function kd_nearest(root,query)
+    best_point=nothing; best_d2=Inf
+    function visit(node,depth)
+        node===nothing && return
+        p=node.point; d2=sum((p[i]-query[i])^2 for i in 1:2)
+        if best_point===nothing || d2<best_d2; best_point=p; best_d2=d2; end
+        axis=mod(depth,2)+1; delta=query[axis]-p[axis]
+        near,far=delta<0 ? (node.left,node.right) : (node.right,node.left)
+        visit(near,depth+1)
+        delta^2<=best_d2 && visit(far,depth+1)
+    end
+    visit(root,0); return best_point
+end
+```
+
+:::
+
+::::
 
 The far-side test uses the **updated** best distance after the near-side recursion. `nonlocal` allows inner calls to update the shared candidate held by this query; no state is shared across separate function calls. Return `None` for an empty tree. For equal nearest distances, this implementation keeps the first point encountered, so it promises one nearest point rather than a particular tie order.
 

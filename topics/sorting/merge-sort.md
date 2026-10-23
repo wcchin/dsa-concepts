@@ -7,6 +7,10 @@
 
 **Builds on:** [Recursion](../recursion/recursive-calls.md) and the [sorting contract](sorting-properties.md). The [divide-and-conquer reading](../recursion/divide-and-conquer.md) develops the same implementation from recursive calls.
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/sorting.js) · [Julia](../../examples/languages/sorting.jl).
+
+Teaching sorts retain their mutation/return policy: JavaScript mutators return undefined and Julia teaching mutators return nothing. Built-in sort APIs are shown separately: JavaScript sort and Julia sort! return their mutated arrays. The Timsort/Powersort discussion describes Python’s implementation, not the algorithms used by the other runtimes.
+
 (sorting-merge-sort)=
 ## Idea and visual trace
 
@@ -21,6 +25,12 @@ The figure uses the eight-value example from Topic 3 to show all levels. The fiv
 ## Python implementation
 
 This is the same code as Topic 3. It returns a **new list** and preserves the caller's list. It accepts mutually comparable values; there is no `key` or `reverse` parameter in this teaching version.
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def merge_sorted(left, right):
@@ -45,6 +55,61 @@ def merge_sort(values):
     right = merge_sort(values[middle:])
     return merge_sorted(left, right)
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function merge_sorted(left, right) {
+    const result = [];
+    let i = 0, j = 0;
+    while (i < left.length && j < right.length) {
+        if (left[i] <= right[j]) result.push(left[i++]);
+        else result.push(right[j++]);
+    }
+    while (i < left.length) result.push(left[i++]);
+    while (j < right.length) result.push(right[j++]);
+    return result;
+}
+function merge_sort(values) {
+    if (values.length <= 1) return values.slice();
+    const middle = Math.floor(values.length / 2);
+    return merge_sorted(merge_sort(values.slice(0, middle)), merge_sort(values.slice(middle)));
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function merge_sorted(left, right)
+    result = Any[]
+    i, j = 1, 1
+    while i <= length(left) && j <= length(right)
+        if left[i] <= right[j]
+            push!(result, left[i]); i += 1
+        else
+            push!(result, right[j]); j += 1
+        end
+    end
+    append!(result, left[i:end])
+    append!(result, right[j:end])
+    return result
+end
+function merge_sort(values)
+    length(values) <= 1 && return copy(values)
+    middle = div(length(values), 2)
+    return merge_sorted(merge_sort(values[1:middle]), merge_sort(values[middle+1:end]))
+end
+```
+
+:::
+
+::::
 
 ## Why it works
 

@@ -7,12 +7,22 @@
 
 **Builds on:** [Recursive frames](../recursion/call-stack.md), [mutation/shallow copies](../foundations/mutation-and-copying.md) and [state contracts](strategy-selection.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/strategies.js) · [Julia](../../examples/languages/strategies.jl).
+
+State definitions, pruning conditions and tie policies are shared. Julia returns one-based position tuples/subsets, and its coin table uses slot a+1 for amount a. The finite numeric examples require representable intermediate arithmetic in each runtime.
+
 (backtracking)=
 ## Build a candidate, explore, then undo
 
 Backtracking explores alternatives from a partial candidate. It adds a choice, recursively explores the consequences, then restores the earlier state before trying another branch. The restoration matters when the partial candidate is a shared mutable list.
 
 For subset sum, choose each input position at most once and report every subset totalling a target. This version requires strictly positive integer values and a nonnegative integer target. Equal values at different positions are distinct selectable items.
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def subset_sum_indices(values, target):
@@ -38,6 +48,54 @@ def subset_sum_indices(values, target):
     search(0, target)
     return results
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function subset_sum_indices(values,target) {
+    values = [...values];
+    if (!Number.isSafeInteger(target)||target<0||values.some(v=>!Number.isSafeInteger(v)||v<=0))
+        throw new RangeError("nonnegative target and positive integers required");
+    const results=[], chosen=[];
+    function search(i,remaining) {
+        if (remaining===0) { results.push(chosen.slice()); return; }
+        if (i===values.length) return;
+        if (values[i]<=remaining) { chosen.push(i); search(i+1,remaining-values[i]); chosen.pop(); }
+        search(i+1,remaining);
+    }
+    search(0,target); return results;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function subset_sum_indices(values,target)
+    values = collect(values)
+    (target isa Int && target>=0) || throw(ArgumentError("invalid target"))
+    all(v isa Int && v>0 for v in values) || throw(ArgumentError("positive integers required"))
+    results=Vector{Int}[]; chosen=Int[]
+    function search(i,remaining)
+        if remaining==0; push!(results,copy(chosen)); return; end
+        i>length(values) && return
+        if values[i]<=remaining
+            push!(chosen,i); search(i+1,remaining-values[i]); pop!(chosen)
+        end
+        search(i+1,remaining)
+    end
+    search(1,target); return results
+end
+```
+
+:::
+
+::::
 
 (subset-enumeration-contract)=
 ## Return positions and preserve each distinct choice

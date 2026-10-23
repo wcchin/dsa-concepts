@@ -7,6 +7,10 @@
 
 **Builds on:** [ADTs and contracts](adts-and-contracts.md) separates required behaviour from storage choices.
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/linear-structures.js) · [Julia](../../examples/languages/linear-structures.jl).
+
+Julia uses one-based positions and named functions such as enqueue! rather than Python-style instance methods. Endpoint adapters use the supplied linked DequeBuffer, so they do not hide linear array-front shifts. Empty operations reject the request; null/nothing remain valid payloads.
+
 (sequence-operation-contract)=
 ## Purpose and operation contracts
 
@@ -44,6 +48,12 @@ Replacement preserves positions. Insertion shifts the old item at i and later re
 
 (array-sequence-code)=
 ## Python implementation
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 class ArraySequence:
@@ -85,6 +95,63 @@ class ArraySequence:
         self._check_index(i)
         return self._items.pop(i)
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+class ArraySequence {
+    constructor(values = []) { this._items = [...values]; }
+    size() { return this._items.length; }
+    is_empty() { return this.size() === 0; }
+    _check_index(i, allow_end = false) {
+        if (!Number.isInteger(i)) throw new TypeError("integer index required");
+        if (i < 0 || i > this.size() - (allow_end ? 0 : 1)) throw new RangeError("index out of range");
+    }
+    get(i) { this._check_index(i); return this._items[i]; }
+    set(i, item) { this._check_index(i); this._items[i] = item; }
+    insert(i, item) { this._check_index(i, true); this._items.splice(i, 0, item); }
+    append(item) { this._items.push(item); }
+    remove_at(i) { this._check_index(i); return this._items.splice(i, 1)[0]; }
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+mutable struct ArraySequence
+    items::Vector{Any}
+end
+ArraySequence(values=()) = ArraySequence(Any[values...])
+Base.length(s::ArraySequence) = length(s.items)
+Base.isempty(s::ArraySequence) = isempty(s.items)
+function check_index(s::ArraySequence, i, allow_end=false)
+    i isa Int || throw(ArgumentError("integer index required"))
+    1 <= i <= length(s) + (allow_end ? 1 : 0) || throw(BoundsError(s.items, i))
+end
+function get_at(s::ArraySequence, i)
+    check_index(s, i); return s.items[i]
+end
+function set_at!(s::ArraySequence, i, item)
+    check_index(s, i); s.items[i] = item; return nothing
+end
+function insert_at!(s::ArraySequence, i, item)
+    check_index(s, i, true); insert!(s.items, i, item); return nothing
+end
+append_item!(s::ArraySequence, item) = (push!(s.items, item); nothing)
+function remove_at!(s::ArraySequence, i)
+    check_index(s, i); item = s.items[i]; deleteat!(s.items, i); return item
+end
+```
+
+:::
+
+::::
 
 The constructor makes a shallow list copy: payload objects remain shared. `None` and duplicate values are valid records. The wrapper restricts how clients address positions; it does not implement Python's storage allocator itself.
 

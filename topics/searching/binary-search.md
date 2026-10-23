@@ -7,6 +7,10 @@
 
 **Builds on:** [Sorting contracts](../sorting/sorting-properties.md) supply the ordered-input precondition.
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/searching.js) · [Julia](../../examples/languages/searching.jl).
+
+Python and JavaScript positions are zero-based; Julia vector positions and insertion boundaries are one-based. A missing lookup is None/null/nothing, while a boundary query can return the one-past-end position. Julia public ordered-set operations use functions such as add!, ordered_keys and range_keys.
+
 (linear-search)=
 ## What can a comparison exclude?
 
@@ -172,7 +176,7 @@ All three versions observe the input, keep an inclusive candidate interval, disc
 
 For the parallel examples, use ascending numeric arrays/vectors whose values have the same ordering and equality in all three languages. Integer examples stay within JavaScript's safe-integer range. The Julia listing assumes an ordinary one-based vector; offset-indexed arrays, strings and custom indexing are outside this example. None of these listings validates sortedness or repairs invalid comparison data such as NaN. The original Python contract can also apply to other consistently ordered random-access values.
 
-For keyboard access, or to read code without switching tabs, open the complete runnable examples directly: [Python](../../examples/binary_search.py), [JavaScript](../../examples/binary_search.js) and [Julia](../../examples/binary_search.jl). Run them with `python binary_search.py`, `node binary_search.js` or `julia binary_search.jl`, respectively.
+To read code without switching tabs, open the complete runnable examples directly: [Python](../../examples/binary_search.py), [JavaScript](../../examples/binary_search.js) and [Julia](../../examples/binary_search.jl). Run them with `python binary_search.py`, `node binary_search.js` or `julia binary_search.jl`, respectively.
 
 Language references: [Julia's differences from Python](https://docs.julialang.org/en/v1/manual/noteworthy-differences/#Noteworthy-differences-from-Python) and [JavaScript safe integers](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isSafeInteger).
 

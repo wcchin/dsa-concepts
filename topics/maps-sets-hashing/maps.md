@@ -7,6 +7,10 @@
 
 **Builds on:** [ADTs and contracts](../linear-structures/adts-and-contracts.md) distinguishes behaviour, mutation and implementation.
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/maps-sets-hashing.js) · [Julia](../../examples/languages/maps-sets-hashing.jl).
+
+Native containers have different equality and iteration rules. JavaScript examples use primitive keys; array keys compare by identity. The low-level helpers use the supplied teaching hash: h(k)=k for integer traces. Julia helper indices are one-based; table layouts for other native hash functions need not match Python. Snapshot containers differ in type, not ownership.
+
 A **Map** associates each distinct key with one value. A key identifies an entry; the value carries its associated information. Different keys may have equal values. A key may also be associated with a collection, such as a list of readings, without changing the one-key/one-value rule.
 
 ## Map ADT and operations
@@ -39,6 +43,12 @@ The representation below wraps a Python dictionary. Each distinct key has exactl
 
 (map-interface-code)=
 ## Python implementation of the stated interface
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 class HashMap:
@@ -73,6 +83,49 @@ class HashMap:
         return tuple(self._entries.items())
 ```
 
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+class HashMap {
+    constructor() { this._entries = new Map(); }
+    size() { return this._entries.size; }
+    is_empty() { return this.size() === 0; }
+    put(key, value) { this._entries.set(key, value); }
+    get(key) { if (!this.contains_key(key)) throw new KeyError(String(key)); return this._entries.get(key); }
+    remove(key) { const value = this.get(key); this._entries.delete(key); return value; }
+    contains_key(key) { return this._entries.has(key); }
+    keys() { return [...this._entries.keys()]; }
+    items() { return [...this._entries]; }
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+mutable struct HashMap
+    entries::Dict{Any,Any}
+end
+HashMap() = HashMap(Dict{Any,Any}())
+Base.length(m::HashMap) = length(m.entries)
+Base.isempty(m::HashMap) = isempty(m.entries)
+put!(m::HashMap, key, value) = (m.entries[key] = value; nothing)
+get_value(m::HashMap, key) = m.entries[key]
+remove!(m::HashMap, key) = pop!(m.entries, key)
+contains_key(m::HashMap, key) = haskey(m.entries, key)
+key_snapshot(m::HashMap) = Tuple(keys(m.entries))
+item_snapshot(m::HashMap) = Tuple(pairs(m.entries))
+```
+
+:::
+
+::::
+
 ## Implementation choices and correctness
 
 The wrapper delegates hashing, collision handling and resizing to `dict`. Assignment preserves one association per key; indexing observes it; `pop` removes and returns its value. Failed strict lookup/removal leaves the associations unchanged. Clients use these methods rather than modifying `_entries` directly.
@@ -83,6 +136,12 @@ The [chaining](chaining.md) and [probing](open-addressing.md) readings expose st
 
 Python’s `dict` supplies Map behaviour, although the operation names differ from our abstract contract.
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 directory = {"S01": "Central", "S02": "Museum"}
 directory["S03"] = "Harbour"     # insert a new key
@@ -92,11 +151,45 @@ del directory["S03"]             # remove one association
 present = "S04" in directory     # False: membership checks keys
 ```
 
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+var directory = new Map([["S01", "Central"], ["S02", "Museum"]]);
+directory.set("S03", "Harbour"); directory.set("S01", "Downtown");
+var name = directory.get("S02"); directory.delete("S03");
+var present = directory.has("S04");
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+directory = Dict("S01"=>"Central", "S02"=>"Museum")
+directory["S03"] = "Harbour"; directory["S01"] = "Downtown"
+name = directory["S02"]; delete!(directory, "S03")
+present = haskey(directory, "S04")
+```
+
+:::
+
+::::
+
 The final directory has two keys. Updating S01 changes its associated name; it does not add a second S01 entry. In contrast, `"Museum" in directory` tests whether that string is a **key**, not whether it occurs among the values. Use `directory.values()` when the question concerns values.
 
 ## Missing keys and `None` values
 
 `directory[key]` raises `KeyError` when the key is absent. `directory.get(key)` returns `None` by default, but `None` may itself be a legitimate stored value. If the distinction matters, test membership or supply a unique sentinel:
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 missing = object()
@@ -104,6 +197,32 @@ result = directory.get("S04", missing)
 if result is missing:
     print("No such station")
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+var missing = Symbol("missing");
+var result = directory.has("S04") ? directory.get("S04") : missing;
+if (result === missing) console.log("No such station");
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+missing_key = Ref(nothing) # unique sentinel, not Julia's missing value
+result = get(directory, "S04", missing_key)
+result === missing_key && println("No such station")
+```
+
+:::
+
+::::
 
 The sentinel is compared by identity because it represents one particular marker object.
 

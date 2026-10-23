@@ -7,6 +7,10 @@
 
 **Builds on:** [Relaxation](shortest-path-state.md) and [stable heap records](../heaps/heap-applications.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/graph-algorithms.js) · [Julia](../../examples/languages/graph-algorithms.jl).
+
+These versions reuse the translated deque, heap and disjoint-set definitions. Julia Dict order can select a different valid topological order or tied forest; compare the objective, feasibility and optimum cost rather than requiring an identical printed edge order. Heap counters avoid comparing payloads.
+
 (dijkstra)=
 ## Settle the smallest current tentative distance
 
@@ -23,6 +27,12 @@ The input remains unchanged. Strict relaxations retain the first equal-cost rout
 
 (lazy-dijkstra-code)=
 ## Insert improved candidates and skip obsolete ones
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 from heapq import heappush, heappop
@@ -51,6 +61,65 @@ def dijkstra(graph, source):
                 heappush(heap, (candidate, next(sequence), v))
     return distance, parent
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function dijkstra(graph, source) {
+    if (!graph.has(source)) throw new KeyError(String(source));
+    for (const adjacent of graph.values()) for (const [v,w] of adjacent)
+        if (w < 0) throw new RangeError("Dijkstra requires nonnegative weights");
+    const distance = new Map([...graph.keys()].map(v => [v, Infinity]));
+    const parent = new Map([...graph.keys()].map(v => [v, null]));
+    distance.set(source, 0); let sequence = 0;
+    const heap = new MinHeap(entry_less); heap.push([0, sequence++, source]);
+    while (heap.size()) {
+        const [cost, serial, u] = heap.pop();
+        if (cost !== distance.get(u)) continue;
+        for (const [v,w] of graph.get(u)) {
+            const candidate = cost + w;
+            if (candidate < distance.get(v)) {
+                distance.set(v, candidate); parent.set(v, u); heap.push([candidate, sequence++, v]);
+            }
+        }
+    }
+    return [distance, parent];
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function dijkstra(graph, source)
+    haskey(graph, source) || throw(KeyError(source))
+    any(w < 0 for adjacent in values(graph) for (v,w) in adjacent) && throw(ArgumentError("Dijkstra requires nonnegative weights"))
+    distance = Dict(v=>Inf for v in keys(graph)); parent = Dict{Any,Any}(v=>nothing for v in keys(graph))
+    distance[source] = 0; sequence = 0; heap = MinHeap(entry_less)
+    heap_push!(heap, (0, sequence, source)); sequence += 1
+    while !isempty(heap.data)
+        cost, serial, u = heap_pop!(heap)
+        cost != distance[u] && continue
+        for (v,w) in graph[u]
+            candidate = cost + w
+            if candidate < distance[v]
+                distance[v] = candidate; parent[v] = u
+                heap_push!(heap, (candidate, sequence, v)); sequence += 1
+            end
+        end
+    end
+    return (distance, parent)
+end
+```
+
+:::
+
+::::
 
 The listing includes all its imports. The counter resolves equal-cost heap ties without comparing vertex objects, as in [priority-queue entries](../heaps/heap-applications.md). The code checks negativity across the whole input, including unreachable edges. Its other input preconditions include finite weights and destinations that are graph keys.
 

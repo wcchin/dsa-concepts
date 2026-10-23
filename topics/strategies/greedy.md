@@ -7,6 +7,10 @@
 
 **Builds on:** [Strategy contracts](strategy-selection.md), [stable sorting](../sorting/sorting-properties.md) and [correctness arguments](../analysis/correctness.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/strategies.js) · [Julia](../../examples/languages/strategies.jl).
+
+State definitions, pruning conditions and tie policies are shared. Julia returns one-based position tuples/subsets, and its coin table uses slot a+1 for amount a. The finite numeric examples require representable intermediate arithmetic in each runtime.
+
 (greedy-choice)=
 ## Fix a choice only when it is safe
 
@@ -16,6 +20,12 @@ A **greedy** algorithm makes a local choice and commits to it. The key obligatio
 ## Select as many compatible activities as possible
 
 Activities occupy half-open intervals `[start,end)` with start < end. Touching endpoints are compatible: an activity ending at 3 can precede one starting at 3. To maximise the number selected, sort by finish time and repeatedly take the next compatible activity.
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def select_activities(activities):
@@ -30,6 +40,44 @@ def select_activities(activities):
             last_end = activity[2]
     return chosen
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function select_activities(activities) {
+    activities = [...activities];
+    if (activities.some(([name,start,end]) => start >= end)) throw new RangeError("start must precede end");
+    const chosen = []; let last_end = -Infinity;
+    for (const activity of activities.slice().sort((a,b)=>a[2]-b[2] || a[1]-b[1])) {
+        if (activity[1] >= last_end) { chosen.push(activity); last_end = activity[2]; }
+    }
+    return chosen;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function select_activities(activities)
+    activities = collect(activities)
+    any(start >= finish for (name,start,finish) in activities) && throw(ArgumentError("start must precede end"))
+    chosen = Any[]; last_end = -Inf
+    for activity in sort(activities; by=a->(a[3],a[2]), alg=MergeSort)
+        if activity[2] >= last_end; push!(chosen, activity); last_end = activity[3]; end
+    end
+    return chosen
+end
+```
+
+:::
+
+::::
 
 Finite numeric endpoints and bounded-cost comparisons are assumed. The function returns activity records and leaves the caller's input unchanged. Sorting dominates at $O(n\log(n+1))$ time; this copying implementation uses $O(n)$ space including the returned records' references.
 

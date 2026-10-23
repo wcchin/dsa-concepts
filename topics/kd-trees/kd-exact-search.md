@@ -7,10 +7,20 @@
 
 **Builds on:** [Construction](kd-construction.md) establishes the axis and tie rules that lookup must follow.
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/kd-trees.js) · [Julia](../../examples/languages/kd-trees.jl).
+
+JavaScript points are arrays compared by same_point; Julia points are value tuples. Julia coordinate/child indices are one-based (x=1, y=2; SW/SE/NW/NE=1/2/3/4), while depth still starts at zero. R-tree orientation uses exact big-integer arithmetic for the supplied integer-coordinate geometry; nearest distances remain floating calculations. General R-tree update code is still conceptual in every language.
+
 (kd-exact-search)=
 ## Check the entire point before choosing a side
 
 Exact search asks whether a particular coordinate tuple is stored. At each node, first test full-point equality. Otherwise compare the active coordinate and use the same `<` left, `>=` right rule as insertion.
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def kd_search(node, point, depth=0):
@@ -25,6 +35,44 @@ def kd_search(node, point, depth=0):
         depth += 1
     return None
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function kd_search(node,point,depth=0) {
+    while (node!==null) {
+        if (same_point(point,node.point)) return node;
+        const axis=depth%2;
+        node=point[axis]<node.point[axis] ? node.left : node.right;
+        depth++;
+    }
+    return null;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function kd_search(node,point,depth=0)
+    while node!==nothing
+        point==node.point && return node
+        axis=mod(depth,2)+1
+        node=point[axis]<node.point[axis] ? node.left : node.right
+        depth+=1
+    end
+    return nothing
+end
+```
+
+:::
+
+::::
 
 The result is a node or `None`. The full-tree call starts at depth 0. An arbitrary subtree starts at its actual depth, since resetting that depth would change the axes and invalidate the decisions.
 

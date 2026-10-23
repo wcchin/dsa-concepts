@@ -7,6 +7,10 @@
 
 **Builds on:** [Recursive summation](recursive-calls.md) and [working/output-space conventions](../analysis/code-and-space.md#auxiliary-and-output-space).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/recursion.js) · [Julia](../../examples/languages/recursion.jl).
+
+The same base cases, smaller subproblems and merge choices apply. Native recursion limits and bounded numeric arithmetic still matter; copying slices is included in the implementation cost.
+
 Recursion does not replace the current call. It starts another call while the caller retains the state needed to continue afterwards.
 
 (stack-frames)=
@@ -27,6 +31,12 @@ Local bindings are separate, but referenced objects may still be shared. Passing
 
 The distinction is especially visible when work occurs on both sides of a recursive call:
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 def trace_calls(n):
     if n == 0:
@@ -38,6 +48,44 @@ def trace_calls(n):
 
 trace_calls(2)
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function trace_calls(n) {
+    if (n === 0) { console.log("base"); return; }
+    console.log("enter", n);
+    trace_calls(n - 1);
+    console.log("leave", n);
+}
+trace_calls(2);
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function trace_calls(n)
+    if n == 0
+        println("base")
+        return nothing
+    end
+    println("enter ", n)
+    trace_calls(n - 1)
+    println("leave ", n)
+    return nothing
+end
+trace_calls(2)
+```
+
+:::
+
+::::
 
 For this example, n is a nonnegative integer. The output is:
 
@@ -74,6 +122,12 @@ Python limits recursion depth to protect the interpreter stack. A mathematically
 
 An iterative version avoids growing the Python call stack:
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 def sum_to_iterative(n):
     if type(n) is not int or n < 0:
@@ -85,6 +139,42 @@ def sum_to_iterative(n):
 
 print(sum_to_iterative(3))  # 6
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function sum_to_iterative(n) {
+    if (!Number.isSafeInteger(n) || n < 0) throw new RangeError("Expected a nonnegative integer");
+    let total = 0;
+    for (let value = 1; value <= n; value++) total += value;
+    return total;
+}
+console.log(sum_to_iterative(3));
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function sum_to_iterative(n)
+    (n isa Int && n >= 0) || throw(ArgumentError("Expected a nonnegative integer"))
+    total = 0
+    for value in 1:n
+        total += value
+    end
+    return total
+end
+println(sum_to_iterative(3))
+```
+
+:::
+
+::::
 
 Both versions perform linear work in n under the introductory model, but this loop uses Θ(1) working words. A recursive call placed last in a function does not make Python eliminate its frame. Prefer a suitable loop or explicit stack when input-dependent recursion can become deep, rather than assuming a larger recursion limit solves the design problem.
 

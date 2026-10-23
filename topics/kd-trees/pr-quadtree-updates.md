@@ -7,10 +7,20 @@
 
 **Builds on:** [PR construction, exact lookup and range search](pr-quadtree-operations.md), plus the shared [box-distance helper](point-quadtree-updates.md#spatial-box-distance). These functions take an existing `PRQuadTree`.
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/kd-trees.js) · [Julia](../../examples/languages/kd-trees.jl).
+
+JavaScript points are arrays compared by same_point; Julia points are value tuples. Julia coordinate/child indices are one-based (x=1, y=2; SW/SE/NW/NE=1/2/3/4), while depth still starts at zero. R-tree orientation uses exact big-integer arithmetic for the supplied integer-coordinate geometry; nearest distances remain floating calculations. General R-tree update code is still conceptual in every language.
+
 (pr-quadtree-nearest)=
 ## Query outside the root, too
 
 Insertion must respect the root's half-open extent. A nearest query can be anywhere: a point outside the root can still have a nearest stored point inside. Use cell distance to prioritise children and exact point distance to update the answer.
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def pr_nearest(tree, query):
@@ -32,12 +42,66 @@ def pr_nearest(tree, query):
     return best
 ```
 
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function pr_nearest(tree,query) {
+    let best=null,best_d2=Infinity; const stack=[tree.root];
+    while (stack.length) {
+        const node=stack.pop(); if (box_distance2(query,node.bounds)>best_d2) continue;
+        if (node.children===null) {
+            for (const point of node.points) {
+                const d2=(point[0]-query[0])**2+(point[1]-query[1])**2;
+                if (best===null || d2<best_d2) { best=point; best_d2=d2; }
+            }
+        } else stack.push(...node.children.slice().sort((a,b)=>box_distance2(query,b.bounds)-box_distance2(query,a.bounds)));
+    }
+    return best;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function pr_nearest(tree,query)
+    best=nothing; best_d2=Inf; stack=Any[tree.root]
+    while !isempty(stack)
+        node=pop!(stack); box_distance2(query,node.bounds)>best_d2 && continue
+        if node.children===nothing
+            for point in node.points
+                d2=sum((point[i]-query[i])^2 for i in 1:2)
+                if best===nothing || d2<best_d2; best=point; best_d2=d2; end
+            end
+        else
+            append!(stack,sort(collect(node.children);by=c->box_distance2(query,c.bounds),rev=true,alg=MergeSort))
+        end
+    end
+    return best
+end
+```
+
+:::
+
+::::
+
 An empty leaf cannot improve the candidate; an overflow bucket must test all its points. Return `None` for an empty tree and one first-encountered nearest point on ties. The closure-based bound is safe even when the nearest boundary belongs to a different half-open cell. For the shared data, Q=(12,2) returns G=(9,2), squared distance 9, although Q is outside `[0,12)²`.
 
 (pr-quadtree-deletion)=
 ## Remove from the owning bucket, then merge upwards
 
 Keep the descent path. After removal, if a parent has four leaf children whose combined occupancy is at most the bucket target, replace them with one leaf bucket. Repeat towards the root. If a parent cannot merge, its ancestors cannot yet have four leaf children along this path either.
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def pr_delete(tree, point):
@@ -61,6 +125,57 @@ def pr_delete(tree, point):
         parent.children = None
     return True
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function pr_delete(tree,point) {
+    const key=JSON.stringify(point); if (!tree.members.has(key)) return false;
+    let node=tree.root; const path=[];
+    while (node.children!==null) {
+        path.push(node); const pivot=[node.children[0].bounds[2],node.children[0].bounds[3]];
+        node=node.children[point_quadrant(point,pivot)];
+    }
+    node.points.splice(node.points.findIndex(p=>same_point(p,point)),1); tree.members.delete(key);
+    for (const parent of path.reverse()) {
+        const children=parent.children;
+        if (children.some(c=>c.children!==null) || children.reduce((s,c)=>s+c.points.length,0)>tree.capacity) break;
+        parent.points=children.flatMap(c=>c.points); parent.children=null;
+    }
+    return true;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function pr_delete!(tree,point)
+    point in tree.members || return false
+    node=tree.root; path=Any[]
+    while node.children!==nothing
+        push!(path,node); pivot=(node.children[1].bounds[3],node.children[1].bounds[4])
+        node=node.children[point_quadrant(point,pivot)]
+    end
+    deleteat!(node.points,findfirst(==(point),node.points)); delete!(tree.members,point)
+    for parent in Iterators.reverse(path)
+        children=parent.children
+        any(c.children!==nothing for c in children) && break
+        sum(length(c.points) for c in children)>tree.capacity && break
+        parent.points=Any[p for c in children for p in c.points]; parent.children=nothing
+    end
+    return true
+end
+```
+
+:::
+
+::::
 
 Return `True` only if a point was removed; the same point can be inserted again afterwards. The last deletion leaves an empty root leaf with its original extent. Keep `members` and the buckets consistent by using the public insertion and deletion functions rather than editing node fields.
 

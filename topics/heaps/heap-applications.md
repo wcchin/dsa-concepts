@@ -7,6 +7,10 @@
 
 **Builds on:** [Numeric heap operations](heap-insertion.md) and [extraction](heap-removal.md), plus [Python tuples](../foundations/collections-and-classes.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/heaps.js) · [Julia](../../examples/languages/heaps.jl).
+
+The Julia heap array starts at 1: parent=floor(i/2), children=2i and 2i+1. The support MinHeap implements heap repair rather than sorting on each removal. Stable record heaps compare priority and a unique counter before the payload; max queues negate numeric priorities.
+
 ## Public contract and representation invariant
 
 Use the [priority-queue operation table](priority-queues.md#priority-queue-adt). The classes below insert one entry per call and return items from peek/removal; repeated payloads are not deduplicated. Empty access raises `IndexError`, so `None` remains valid data. Size counts entries, not distinct payload identities. Both classes promise FIFO within equal priorities.
@@ -18,6 +22,12 @@ For `MinPriorityQueue`, `_heap` is a valid heap of `(priority,sequence,item)` en
 
 Python's `heapq` min-heap functions work with lists: `heapify` establishes heap order, `heappush` inserts, and `heappop` removes the minimum. The minimum can be inspected at index 0. The list still exposes ordinary list operations, so the caller must preserve the heap invariant.
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 import heapq
 
@@ -27,6 +37,34 @@ heapq.heappush(values, 1)
 assert heapq.heappop(values) == 1
 assert values[0] == 2
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+var values = build_min_heap([9, 5, 6, 2, 3, 4]);
+push_min(values, 1);
+console.assert(pop_min(values) === 1);
+console.assert(values[0] === 2);
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+values = build_min_heap([9, 5, 6, 2, 3, 4])
+push_min!(values, 1)
+@assert pop_min!(values) == 1
+@assert values[1] == 2
+```
+
+:::
+
+::::
 
 The teaching sift functions show one valid implementation. Their exact intermediate layout need not match the library's; compare invariants and returned results rather than requiring an identical tied layout.
 
@@ -43,6 +81,12 @@ An increasing sequence number selects earlier arrivals among equal priorities. B
 For arrivals A with priority 4, B with 1, C with 1 and D with 3, store sequence numbers 0, 1, 2 and 3. Removal gives B, C, D, A: priority first, then arrival only within ties. The sequence does not turn the whole structure into a FIFO queue.
 
 ![Entries with priorities and unique sequence numbers remove in priority order, with B preceding equal-priority C by arrival number.](../../assets/heaps/stable-priority-ties.svg)
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 from itertools import count
@@ -79,12 +123,61 @@ class MinPriorityQueue:
         return heapq.heappop(self._heap)[2]
 ```
 
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+// MinHeap and entry_less are in the shared support file.
+class MinPriorityQueue {
+    constructor() { this._heap = new MinHeap(entry_less); this._sequence = 0; }
+    size() { return this._heap.size(); }
+    is_empty() { return this.size() === 0; }
+    insert(item, priority) { this._heap.push([priority, this._sequence++, item]); }
+    peek_min() { return this._heap.peek()[2]; }
+    remove_min() { return this._heap.pop()[2]; }
+    extract_min() { return this.remove_min(); }
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+mutable struct MinPriorityQueue
+    heap::MinHeap
+    sequence::Int
+end
+MinPriorityQueue() = MinPriorityQueue(MinHeap(entry_less), 0)
+Base.length(q::MinPriorityQueue) = length(q.heap.data)
+Base.isempty(q::MinPriorityQueue) = length(q) == 0
+function pq_insert!(q::MinPriorityQueue, item, priority)
+    heap_push!(q.heap, (priority, q.sequence, item)); q.sequence += 1; return nothing
+end
+peek_min(q::MinPriorityQueue) = heap_peek(q.heap)[3]
+remove_min!(q::MinPriorityQueue) = heap_pop!(q.heap)[3]
+extract_min!(q::MinPriorityQueue) = remove_min!(q)
+```
+
+:::
+
+::::
+
 This class reuses the `heapq` import above. It returns **items**, while the numeric teaching heap returns priorities. Inputs must have consistently ordered priorities. Each instance owns its own heap and arrival counter; empty operations raise, so `None` can safely be an item.
 
 (max-priority-adapter)=
 ## A max-priority interface for numeric priorities
 
 For finite numeric priorities, negation turns largest-first selection into smallest-first selection. Keep arrival numbers increasing so ties remain FIFO. This composition exposes max names, rather than inheriting misleading min-named methods.
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 class MaxPriorityQueue:
@@ -112,6 +205,45 @@ class MaxPriorityQueue:
     def extract_max(self):
         return self.remove_max()
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+class MaxPriorityQueue {
+    constructor() { this._queue = new MinPriorityQueue(); }
+    size() { return this._queue.size(); }
+    is_empty() { return this.size() === 0; }
+    insert(item, priority) { this._queue.insert(item, -priority); }
+    peek_max() { return this._queue.peek_min(); }
+    remove_max() { return this._queue.remove_min(); }
+    extract_max() { return this.remove_max(); }
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+struct MaxPriorityQueue
+    queue::MinPriorityQueue
+end
+MaxPriorityQueue() = MaxPriorityQueue(MinPriorityQueue())
+Base.length(q::MaxPriorityQueue) = length(q.queue)
+Base.isempty(q::MaxPriorityQueue) = isempty(q.queue)
+pq_insert!(q::MaxPriorityQueue, item, priority) = pq_insert!(q.queue, item, -priority)
+peek_max(q::MaxPriorityQueue) = peek_min(q.queue)
+remove_max!(q::MaxPriorityQueue) = remove_min!(q.queue)
+extract_max!(q::MaxPriorityQueue) = remove_max!(q)
+```
+
+:::
+
+::::
 
 Insert A(4), B(1), C(1), D(3): this class extracts A,D,B,C. B still precedes C among equal priorities. Negative priorities also work: −1 is greater than −5, so a max queue selects the −1 item first. The minimum adapter and maximum adapter have independent storage and counters.
 

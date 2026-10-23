@@ -7,16 +7,52 @@
 
 **Builds on:** [Fewest-link routes](transport-hops.md), [heaps](../heaps/heaps.md) and [Dijkstra](../graph-algorithms/dijkstra.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/applications.js) · [Julia](../../examples/languages/applications.jl).
+
+Reuse the translated graph algorithms and the same invented dataset. Julia travel/build columns are 3 and 4, versus 2 and 3 in Python/JavaScript. The translated construction adjacency is named build_graph_view to distinguish it from the graph-builder function. All versions keep the isolated harbour, distinguish absence from a zero-length route, and separate minutes from construction units.
+
 (transport-dijkstra-question)=
 ## Accumulate minutes along the route
 
 Now minimise travel minutes from Gate A. The time graph contains positive weights, satisfying [Dijkstra's nonnegative-weight condition](../graph-algorithms/dijkstra.md). The heap prioritises a tentative whole-route cost, and relaxation can replace an earlier, slower route.
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 time_distance, time_parent = dijkstra(time_graph, "A")
 fastest_route = weighted_path_to("A", "F", time_distance, time_parent)
 fastest_minutes = route_total(fastest_route, links, 2)
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+var [time_distance, time_parent] = dijkstra(time_graph, "A");
+var fastest_route = weighted_path_to("A", "F", time_distance, time_parent);
+var fastest_minutes = route_total(fastest_route, links, 2);
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+time_distance, time_parent = dijkstra(time_graph, "A")
+fastest_route = weighted_path_to("A", "F", time_distance, time_parent)
+fastest_minutes = route_total(fastest_route, links, 3)
+```
+
+:::
+
+::::
 
 (transport-dijkstra-trace)=
 ## A better route can have more links

@@ -3,7 +3,7 @@
   display: none !important;
 }
 
-/* Keep long lines inside the pilot's code blocks on narrow screens. */
+/* Keep long lines inside the language-tab code blocks on narrow screens. */
 .code-language-tabs .myst-tab-item-body,
 .code-language-tabs .myst-tab-item-text {
   min-width: 0;

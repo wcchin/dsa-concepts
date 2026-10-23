@@ -7,6 +7,10 @@
 
 **Builds on:** [Heap construction](heap-construction.md), [record priorities](heap-applications.md) and [sorting properties](../sorting/sorting-properties.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/heaps.js) · [Julia](../../examples/languages/heaps.jl).
+
+The Julia heap array starts at 1: parent=floor(i/2), children=2i and 2i+1. The support MinHeap implements heap repair rather than sorting on each removal. Stable record heaps compare priority and a unique counter before the payload; max queues negate numeric priorities.
+
 ## Sorting and queue contracts are different
 
 `heapsort(a)` rearranges a supplied list into ascending order, preserves every record/multiplicity and returns `None`. Empty and singleton lists are valid. Repeated min extraction instead consumes a heap and returns its removed values one by one; collecting them creates a separate ordered result. The [record queue](heap-applications.md) returns payloads under its tie policy, not necessarily bare priorities.
@@ -22,6 +26,12 @@ That process differs in space usage from the in-place heapsort below, although b
 ## A max-heap places the next largest item at the end
 
 To sort an existing array in ascending order, build a **max-heap**. Swap its root with the last item in the active prefix, shorten the prefix, and sift down within that prefix. The completed suffix is sorted and is no longer part of the active heap.
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def heapsort(a):
@@ -42,6 +52,55 @@ def heapsort(a):
         a[0], a[end] = a[end], a[0]
         sift_down_max(0, end)
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function heapsort(a) {
+    function sift_down_max(i, end) {
+        while (2 * i + 1 < end) {
+            let child = 2 * i + 1, right = child + 1;
+            if (right < end && a[right] > a[child]) child = right;
+            if (a[i] >= a[child]) break;
+            [a[i], a[child]] = [a[child], a[i]]; i = child;
+        }
+    }
+    for (let i = Math.floor(a.length / 2) - 1; i >= 0; i--) sift_down_max(i, a.length);
+    for (let end = a.length - 1; end > 0; end--) {
+        [a[0], a[end]] = [a[end], a[0]]; sift_down_max(0, end);
+    }
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function heapsort!(a)
+    function sift_down_max(i, last)
+        while 2i <= last
+            child = 2i; right = child + 1
+            right <= last && a[right] > a[child] && (child = right)
+            a[i] >= a[child] && break
+            a[i], a[child] = a[child], a[i]; i = child
+        end
+    end
+    for i in div(length(a), 2):-1:1; sift_down_max(i, length(a)); end
+    for last in length(a):-1:2
+        a[1], a[last] = a[last], a[1]; sift_down_max(1, last - 1)
+    end
+    return nothing
+end
+```
+
+:::
+
+::::
 
 `end` is **exclusive** in the helper. It prevents a repair from moving completed suffix values back into the heap. The function changes `a` and returns `None`; empty and singleton inputs require no sorting iterations.
 

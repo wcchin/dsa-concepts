@@ -7,10 +7,20 @@
 
 **Builds on:** [The shared model](transport-model.md) and [union–find operations](../union-find/union-find.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/applications.js) · [Julia](../../examples/languages/applications.jl).
+
+Reuse the translated graph algorithms and the same invented dataset. Julia travel/build columns are 3 and 4, versus 2 and 3 in Python/JavaScript. The translated construction adjacency is named build_graph_view to distinguish it from the graph-builder function. All versions keep the isolated harbour, distinguish absence from a zero-length route, and separate minutes from construction units.
+
 (transport-incremental-connectivity)=
 ## Answer after each arriving connection
 
 Imagine opening candidate links in the declared input order. Before any are opened, every place is separate. After each opening, an operator asks how many groups remain. This is a useful [union–find](../union-find/union-find.md) workload: merges and membership queries are interleaved.
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 place_index = {place: i for i, place in enumerate(places)}
@@ -20,6 +30,38 @@ for u, v, minutes, build_units in links:
     merged = sets.union(place_index[u], place_index[v])
     opening_log.append((u, v, merged, sets.components))
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+var place_index = new Map([...places.keys()].map((v,i) => [v,i]));
+var sets = new DisjointSet(places.size), opening_log = [];
+for (const [u,v,minutes,build_units] of links) {
+    const merged = sets.union(place_index.get(u), place_index.get(v));
+    opening_log.push([u,v,merged,sets.components]);
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+place_index = Dict(v=>i for (i,v) in enumerate(keys(places)))
+sets = DisjointSet(length(places)); opening_log = Any[]
+for (u,v,minutes,build_units) in links
+    merged = union_sets!(sets, place_index[u], place_index[v])
+    push!(opening_log, (u,v,merged,sets.components))
+end
+```
+
+:::
+
+::::
 
 (transport-connectivity-trace)=
 ## A connection can be useful without merging two components

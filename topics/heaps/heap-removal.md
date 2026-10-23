@@ -7,6 +7,10 @@
 
 **Builds on:** [Heap representation](heap-representation.md) and [insertion](heap-insertion.md) establish the valid starting state.
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/heaps.js) · [Julia](../../examples/languages/heaps.jl).
+
+The Julia heap array starts at 1: parent=floor(i/2), children=2i and 2i+1. The support MinHeap implements heap repair rather than sorting on each removal. Stable record heaps compare priority and a unique counter before the payload; max queues negate numeric priorities.
+
 ## Operation contracts
 
 | Helper | Return | Mutation / empty policy |
@@ -22,6 +26,12 @@ The full input list must be a valid min-heap for peek/pop. Duplicates are separa
 
 The root holds a minimum, so `peek_min` only needs to check emptiness and read index 0. Removal must additionally repair the remaining heap.
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 def peek_min(heap):
     if not heap:
@@ -29,10 +39,43 @@ def peek_min(heap):
     return heap[0]
 ```
 
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function peek_min(heap) {
+    if (!heap.length) throw new RangeError("empty heap"); return heap[0];
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function peek_min(heap::AbstractVector)
+    isempty(heap) && throw(BoundsError())
+    return heap[1]
+end
+```
+
+:::
+
+::::
+
 (sift-down)=
 ## Swap with the smaller child
 
 Assume the two child subtrees are already valid heaps. If the current item exceeds a child, choose the **smaller existing child** and swap. Choosing the larger child could leave the smaller child below a parent that is still too large.
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def sift_down(heap, i):
@@ -48,10 +91,55 @@ def sift_down(heap, i):
         i = child
 ```
 
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function sift_down(heap, i) {
+    const n = heap.length;
+    while (2 * i + 1 < n) {
+        let child = 2 * i + 1, right = child + 1;
+        if (right < n && heap[right] < heap[child]) child = right;
+        if (heap[i] <= heap[child]) break;
+        [heap[i], heap[child]] = [heap[child], heap[i]]; i = child;
+    }
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function sift_down!(heap, i)
+    n = length(heap)
+    while 2i <= n
+        child = 2i; right = child + 1
+        right <= n && heap[right] < heap[child] && (child = right)
+        heap[i] <= heap[child] && break
+        heap[i], heap[child] = heap[child], heap[i]; i = child
+    end
+    return nothing
+end
+```
+
+:::
+
+::::
+
 The loop requires a left child. A right child is compared only when its index is valid. If children tie, this code chooses the left one; it does not thereby promise stable removal of equal-priority records.
 
 (heap-remove-min)=
 ## Remove the final leaf, then move its item to the root
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def pop_min(heap):
@@ -64,6 +152,36 @@ def pop_min(heap):
         sift_down(heap, 0)
     return result
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function pop_min(heap) {
+    const result = peek_min(heap), last = heap.pop();
+    if (heap.length) { heap[0] = last; sift_down(heap, 0); }
+    return result;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function pop_min!(heap)
+    result = peek_min(heap); last_item = pop!(heap)
+    if !isempty(heap); heap[1] = last_item; sift_down!(heap, 1); end
+    return result
+end
+```
+
+:::
+
+::::
 
 Removing the last slot preserves complete shape. Moving its item to the root can violate order downwards, but the remaining child subtrees are still valid. Sift-down restores their connection to the root. Removing index 0 with `pop(0)` would instead shift the array and destroy this structural reasoning.
 

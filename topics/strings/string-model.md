@@ -7,6 +7,10 @@
 
 **Builds on:** [Identity/equality and values](../foundations/objects-and-references.md) and [string-key hashing assumptions](../maps-sets-hashing/hashing.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/strings.js) · [Julia](../../examples/languages/strings.jl).
+
+All matching positions count Unicode code points. JavaScript and Julia collect characters into arrays for constant-time access, adding O(n+m) preparation and storage to text/pattern scans; this is additional to the Python bounds. Julia results are one-based character-array positions, not byte indices into a Julia String. Rolling hashes use BigInt arithmetic explicitly; JavaScript custom base/modulus arguments are BigInts (for example 3n).
+
 (string-query-contracts)=
 ## Ask what must match
 
@@ -26,6 +30,12 @@ A prefix is a substring beginning at index zero. A substring need not begin ther
 
 Python `str` is an immutable sequence of Unicode code points. An index counts code points, not UTF-8 bytes and not necessarily displayed characters. For example, `"é"` has length one, while `"e\u0301"` has length two: the latter combines e with a combining accent. They can look alike but compare unequal.
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 import unicodedata
 
@@ -34,6 +44,33 @@ decomposed = "e\u0301"
 assert composed != decomposed
 assert unicodedata.normalize("NFC", composed) == unicodedata.normalize("NFC", decomposed)
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+var composed = "é", decomposed = "e\u0301";
+console.assert(composed !== decomposed);
+console.assert(composed.normalize("NFC") === decomposed.normalize("NFC"));
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+using Unicode
+composed = "é"; decomposed = "e\u0301"
+@assert composed != decomposed
+@assert Unicode.normalize(composed, :NFC) == Unicode.normalize(decomposed, :NFC)
+```
+
+:::
+
+::::
 
 These examples use the same units for text, pattern, trie edges and returned indices. They do not split displayed grapheme clusters or decode byte sequences automatically. Reference: [Python's Unicode HOWTO](https://docs.python.org/3/howto/unicode.html).
 

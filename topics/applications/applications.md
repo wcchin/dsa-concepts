@@ -26,3 +26,5 @@ The transport case offers six readings and twelve checks. Preserve the distincti
 [Download the standalone Python example](../../examples/transport_network.py). It includes the reused algorithms, shared data and all case-study calculations. Save the downloaded file as `transport_network.py`, then run `python transport_network.py` with Python 3; no external package, notebook or private course repository is required. To follow the page listings, keep the downloaded module in the working directory and read them in route order in one Python session.
 
 The first integrated case is developed here. Dependency scheduling and a spatial service directory remain possible future applications, rather than completed lessons. This material is independent of course assessments.
+
+Code listings offer Python, JavaScript and Julia tabs where a runnable example is present. Python remains the explanation and trace language; see the [language guide](../../code-languages.md) for native conventions and runnable topic downloads.

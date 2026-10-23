@@ -7,6 +7,10 @@
 
 **Builds on:** [Maps](maps.md) associates keys with values; a set retains only membership.
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/maps-sets-hashing.js) · [Julia](../../examples/languages/maps-sets-hashing.jl).
+
+Native containers have different equality and iteration rules. JavaScript examples use primitive keys; array keys compare by identity. The low-level helpers use the supplied teaching hash: h(k)=k for integer traces. Julia helper indices are one-based; table layouts for other native hash functions need not match Python. Snapshot containers differ in type, not ownership.
+
 A **Set** stores distinct elements and answers membership questions. Unlike a [Map](maps.md), it does not associate a separate value with each element. Adding an equal element again leaves the size unchanged.
 
 (set-operation-contract)=
@@ -35,6 +39,12 @@ Starting empty, add S01, S02, S01: all three calls return `None`, and size is tw
 
 (set-interface-code)=
 ## Python implementation of the stated interface
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 class HashSet:
@@ -75,6 +85,56 @@ class HashSet:
         return HashSet(self._elements - other._elements)
 ```
 
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+class HashSet {
+    constructor(elements = []) { this._elements = new Set(elements); }
+    size() { return this._elements.size; }
+    is_empty() { return this.size() === 0; }
+    add(item) { this._elements.add(item); }
+    contains(item) { return this._elements.has(item); }
+    remove(item) { if (!this.contains(item)) throw new KeyError(String(item)); this._elements.delete(item); }
+    discard(item) { this._elements.delete(item); }
+    elements() { return [...this._elements]; }
+    union(other) { return new HashSet([...this._elements, ...other._elements]); }
+    intersection(other) { return new HashSet([...this._elements].filter(x => other.contains(x))); }
+    difference(other) { return new HashSet([...this._elements].filter(x => !other.contains(x))); }
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+mutable struct HashSet
+    elements::Set{Any}
+end
+HashSet(elements=()) = HashSet(Set{Any}(elements))
+Base.length(s::HashSet) = length(s.elements)
+Base.isempty(s::HashSet) = isempty(s.elements)
+add!(s::HashSet, item) = (push!(s.elements, item); nothing)
+contains_item(s::HashSet, item) = item in s.elements
+function remove!(s::HashSet, item)
+    item in s.elements || throw(KeyError(item))
+    delete!(s.elements, item); return nothing
+end
+discard!(s::HashSet, item) = (delete!(s.elements, item); nothing)
+element_snapshot(s::HashSet) = Tuple(s.elements)
+set_union(a::HashSet, b::HashSet) = HashSet(union(a.elements, b.elements))
+set_intersection(a::HashSet, b::HashSet) = HashSet(intersect(a.elements, b.elements))
+set_difference(a::HashSet, b::HashSet) = HashSet(setdiff(a.elements, b.elements))
+```
+
+:::
+
+::::
+
 `other` must be another `HashSet`. Construction and combinations create independent membership containers, not deep copies of the elements. Subsequent additions to the result do not add records to its operands. This is an adapter, not a custom hash-table allocator.
 
 ## Implementation choices and correctness
@@ -82,6 +142,12 @@ class HashSet:
 Delegating to a set preserves distinctness; add never increases size for an equal existing element. Strict remove reports a violated presence assumption; discard supports idempotent cleanup. Choosing between them is an interface decision. The internal storage can change while these observable promises remain the same. The [hashing readings](hashing.md) explain the implementation assumptions separately.
 
 ## Set operations and membership
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 visited = set()             # {} would create an empty dictionary
@@ -93,6 +159,34 @@ count = len(visited)        # 2
 visited.discard("S03")      # absent: no change
 ```
 
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+var visited = new Set();
+visited.add("S01"); visited.add("S02"); visited.add("S01");
+var present = visited.has("S02"), count = visited.size;
+visited.delete("S03"); // missing member: no change
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+visited = Set{String}()
+push!(visited, "S01"); push!(visited, "S02"); push!(visited, "S01")
+present = "S02" in visited; count = length(visited)
+delete!(visited, "S03")
+```
+
+:::
+
+::::
+
 Python also provides `remove`, which raises `KeyError` if the element is absent. The choice between `remove` and `discard` expresses how the client wants to handle absence.
 
 The Set contains S01 and S02. Do not interpret its printed arrangement as an insertion or sorted-order guarantee. Sorting the elements for display creates a separate ordered result.
@@ -101,12 +195,45 @@ The Set contains S01 and S02. Do not interpret its printed arrangement as an ins
 
 Suppose the observations are S01, S02, S01. A Set records two distinct stations but loses the fact that S01 appeared twice. Use a Map from station to count when frequency matters:
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 observations = ["S01", "S02", "S01"]
 counts = {}
 for station in observations:
     counts[station] = counts.get(station, 0) + 1
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+var observations = ["S01", "S02", "S01"], counts = new Map();
+for (const station of observations) counts.set(station, (counts.get(station) ?? 0) + 1);
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+observations = ["S01", "S02", "S01"]
+counts = Dict{String,Int}()
+for station in observations
+    counts[station] = get(counts, station, 0) + 1
+end
+```
+
+:::
+
+::::
 
 The resulting associations are S01 → 2 and S02 → 1. This illustrates a question to ask before choosing a collection: do we need distinctness, frequency, order, or associated records?
 

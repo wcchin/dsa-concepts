@@ -7,6 +7,10 @@
 
 **Builds on:** [BST nodes and lookup](bst-lookup-insertion.md) establish the representation.
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/searching.js) · [Julia](../../examples/languages/searching.jl).
+
+Python and JavaScript positions are zero-based; Julia vector positions and insertion boundaries are one-based. A missing lookup is None/null/nothing, while a boundary query can return the one-past-end position. Julia public ordered-set operations use functions such as add!, ordered_keys and range_keys.
+
 ## Operation contracts and invariant
 
 All traversals return a new list of key references and leave links unchanged; empty trees give `[]`. All assume a finite acyclic tree. Inorder is sorted only under the strict BST invariant. Extreme/strict-neighbour helpers return a node, or `None` if no such node exists, without mutation.
@@ -27,6 +31,12 @@ These outputs refer to the seven-node reference tree **before** inserting 65. Pr
 (bst-inorder)=
 ## Inorder exposes the BST's sorted order
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 def inorder_keys(root):
     result = []
@@ -42,6 +52,46 @@ def inorder_keys(root):
     return result
 ```
 
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function inorder_keys(root) {
+    const out = [];
+    function visit(node) {
+        if (node === null) return;
+        visit(node.left);
+        out.push(node.key);
+        visit(node.right);
+    }
+    visit(root); return out;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function inorder_keys(root)
+    out = Any[]
+    function visit(node)
+        node === nothing && return
+        visit(node.left)
+        push!(out, node.key)
+        visit(node.right)
+    end
+    visit(root); return out
+end
+```
+
+:::
+
+::::
+
 Why sorted? Recursively sorted left keys are all smaller than the node; recursively sorted right keys are all larger. Concatenating them in left–node–right order preserves ascending order. This conclusion uses the **BST** invariant: inorder on an arbitrary binary tree need not be sorted.
 
 ![Inorder traversal numbers visits from 20 through 80 in ascending order, independently of each node's depth.](../../assets/searching/bst-inorder.svg)
@@ -49,6 +99,12 @@ Why sorted? Recursively sorted left keys are all smaller than the node; recursiv
 The helper performs constant local work per node, so time is $\Theta(n)$. Its returned list occupies $\Theta(n)$ output space; the recursion needs $O(h+1)$ additional stack space. Avoid repeatedly concatenating subtree lists if you intend this linear-time analysis.
 
 ## Preorder and postorder implementations
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def preorder_keys(root):
@@ -72,10 +128,78 @@ def postorder_keys(root):
     return out
 ```
 
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function preorder_keys(root) {
+    const out = [];
+    function visit(node) {
+        if (node === null) return;
+        out.push(node.key);
+        visit(node.left);
+        visit(node.right);
+    }
+    visit(root); return out;
+}
+
+function postorder_keys(root) {
+    const out = [];
+    function visit(node) {
+        if (node === null) return;
+        visit(node.left);
+        visit(node.right);
+        out.push(node.key);
+    }
+    visit(root); return out;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function preorder_keys(root)
+    out = Any[]
+    function visit(node)
+        node === nothing && return
+        push!(out, node.key)
+        visit(node.left)
+        visit(node.right)
+    end
+    visit(root); return out
+end
+
+function postorder_keys(root)
+    out = Any[]
+    function visit(node)
+        node === nothing && return
+        visit(node.left)
+        visit(node.right)
+        push!(out, node.key)
+    end
+    visit(root); return out
+end
+```
+
+:::
+
+::::
+
 Each node is visited once, in the declared order. All three listings append into one output list rather than repeatedly concatenate subtree results: O(n+1) time, O(h+1) stack and O(n) output. Recursion follows the links, so a deep ordinary BST can encounter Python's recursion-depth limit; AVL bounds the abstract depth but does not change the traversal's linear output cost.
 
 (bst-minimum-maximum)=
 ## Extreme keys are at opposite edges
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def bst_minimum(node):
@@ -85,6 +209,36 @@ def bst_minimum(node):
         node = node.left
     return node
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function bst_minimum(node) {
+    if (node === null) return null;
+    while (node.left !== null) node = node.left;
+    return node;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function bst_minimum(node)
+    node === nothing && return nothing
+    while node.left !== nothing; node = node.left; end
+    return node
+end
+```
+
+:::
+
+::::
 
 Follow left links to find the minimum; follow right links for the maximum. The result is a node, or `None` for an empty tree. Each operation takes $O(h+1)$ time and constant iterative auxiliary space.
 
@@ -96,6 +250,12 @@ If a node has a right subtree, its **inorder successor** is that subtree's minim
 For node 50, the reference successor is 60. Adding a right child 65 to 60 does not change that fact. The successor's own left child must be empty, but its right child need not be. This is crucial for [two-child deletion](bst-deletion.md).
 
 ## Maximum and strict-neighbour implementations
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def bst_maximum(node):
@@ -127,6 +287,68 @@ def bst_predecessor(root, key):
             node = node.left
     return candidate
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function bst_maximum(node) {
+    if (node === null) return null;
+    while (node.right !== null) node = node.right;
+    return node;
+}
+function bst_successor(root, key) {
+    let candidate = null, node = root;
+    while (node !== null) {
+        if (key < node.key) { candidate = node; node = node.left; }
+        else node = node.right;
+    }
+    return candidate;
+}
+function bst_predecessor(root, key) {
+    let candidate = null, node = root;
+    while (node !== null) {
+        if (node.key < key) { candidate = node; node = node.right; }
+        else node = node.left;
+    }
+    return candidate;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function bst_maximum(node)
+    node === nothing && return nothing
+    while node.right !== nothing; node = node.right; end
+    return node
+end
+function bst_successor(root, key)
+    candidate = nothing; node = root
+    while node !== nothing
+        if key < node.key; candidate = node; node = node.left
+        else; node = node.right; end
+    end
+    return candidate
+end
+function bst_predecessor(root, key)
+    candidate = nothing; node = root
+    while node !== nothing
+        if node.key < key; candidate = node; node = node.right
+        else; node = node.left; end
+    end
+    return candidate
+end
+```
+
+:::
+
+::::
 
 For successor, a key greater than the query is a candidate; only its left subtree can improve it. A key at most the query excludes its entire left side. Predecessor mirrors that reasoning. Retaining a candidate replaces the need for parent pointers. Equality is deliberately excluded: the successor/predecessor is strictly greater/smaller, even when the query is stored.
 

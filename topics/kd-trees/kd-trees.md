@@ -58,3 +58,5 @@ The downloadable comparison script supplies its own definitions and data. It inc
 - [Point-quadtree nearest and rebuilding](point-quadtree-updates.md#pilot-point-quadtree-updates-checks).
 - [PR nearest and merging](pr-quadtree-updates.md#pilot-pr-quadtree-updates-checks).
 - [R-tree distance and condensation](r-tree-operations.md#pilot-r-tree-operations-checks).
+
+Code listings offer Python, JavaScript and Julia tabs where a runnable example is present. Python remains the explanation and trace language; see the [language guide](../../code-languages.md) for native conventions and runnable topic downloads.

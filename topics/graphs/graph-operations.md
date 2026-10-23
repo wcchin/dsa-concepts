@@ -7,6 +7,10 @@
 
 **Builds on:** [Graph modelling](graph-concepts.md) and the [adjacency-list invariant](graph-representations.md#graph-representation-contract).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/graphs.js) · [Julia](../../examples/languages/graphs.jl).
+
+JavaScript graphs use Map; Julia graphs use Dict. Stored neighbour order is preserved, but Julia Dict vertex iteration can change valid component ordering or tied choices. The shared DequeBuffer supplies constant-time linked endpoints. The figures and check answers use Python’s declared iteration order.
+
 (graph-operation-contract)=
 ## Keep the vertex set and connection policy explicit
 
@@ -33,6 +37,12 @@ Edge queries/updates require both endpoints to exist and raise `KeyError` otherw
 
 (graph-operation-code)=
 ## Maintain reciprocal lists when required
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def add_vertex(graph, v):
@@ -94,6 +104,112 @@ def build_graph(vertices, edges, *, directed=False):
         add_edge(graph, u, v, directed=directed)
     return graph
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function add_vertex(graph, v) {
+    if (v === null) throw new TypeError("null is reserved for missing parents");
+    if (!graph.has(v)) graph.set(v, []);
+}
+function require_endpoints(graph, u, v) {
+    if (!graph.has(u)) throw new KeyError(String(u));
+    if (!graph.has(v)) throw new KeyError(String(v));
+}
+function add_edge(graph, u, v, directed = false) {
+    require_endpoints(graph, u, v);
+    if (u === v) throw new RangeError("no self-loops");
+    if (!graph.get(u).includes(v)) graph.get(u).push(v);
+    if (!directed && !graph.get(v).includes(u)) graph.get(v).push(u);
+}
+function has_edge(graph, u, v) { require_endpoints(graph, u, v); return graph.get(u).includes(v); }
+function neighbours(graph, u) {
+    if (!graph.has(u)) throw new KeyError(String(u)); return graph.get(u).slice();
+}
+function remove_edge(graph, u, v, directed = false) {
+    require_endpoints(graph, u, v);
+    const i = graph.get(u).indexOf(v);
+    if (i < 0) throw new KeyError("missing edge");
+    graph.get(u).splice(i, 1);
+    if (!directed) graph.get(v).splice(graph.get(v).indexOf(u), 1);
+}
+function remove_vertex(graph, v) {
+    if (!graph.has(v)) throw new KeyError(String(v));
+    for (const [u, adjacent] of graph) {
+        const i = adjacent.indexOf(v); if (u !== v && i >= 0) adjacent.splice(i, 1);
+    }
+    graph.delete(v);
+}
+function vertex_count(graph) { return graph.size; }
+function edge_count(graph, directed = false) {
+    let entries = 0; for (const a of graph.values()) entries += a.length;
+    return directed ? entries : entries / 2;
+}
+function build_graph(vertices, edges, directed = false) {
+    const graph = new Map();
+    for (const v of vertices) add_vertex(graph, v);
+    for (const [u, v] of edges) add_edge(graph, u, v, directed);
+    return graph;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function add_vertex!(graph, v)
+    v === nothing && throw(ArgumentError("nothing is reserved for missing parents"))
+    get!(graph, v, Any[]); return nothing
+end
+function require_endpoints(graph, u, v)
+    haskey(graph, u) || throw(KeyError(u)); haskey(graph, v) || throw(KeyError(v))
+end
+function add_edge!(graph, u, v; directed=false)
+    require_endpoints(graph, u, v)
+    u == v && throw(ArgumentError("no self-loops"))
+    !(v in graph[u]) && push!(graph[u], v)
+    !directed && !(u in graph[v]) && push!(graph[v], u)
+    return nothing
+end
+has_edge(graph, u, v) = (require_endpoints(graph, u, v); v in graph[u])
+neighbours(graph, u) = copy(graph[u])
+function remove_edge!(graph, u, v; directed=false)
+    require_endpoints(graph, u, v)
+    i = findfirst(==(v), graph[u]); i === nothing && throw(KeyError((u,v)))
+    deleteat!(graph[u], i)
+    !directed && deleteat!(graph[v], findfirst(==(u), graph[v]))
+    return nothing
+end
+function remove_vertex!(graph, v)
+    haskey(graph, v) || throw(KeyError(v))
+    for u in keys(graph)
+        if u != v
+            i = findfirst(==(v), graph[u]); i !== nothing && deleteat!(graph[u], i)
+        end
+    end
+    delete!(graph, v); return nothing
+end
+vertex_count(graph) = length(graph)
+function edge_count(graph; directed=false)
+    entries = sum(length, values(graph); init=0)
+    return directed ? entries : div(entries, 2)
+end
+function build_graph(vertices, edges; directed=false)
+    graph = Dict{Any,Vector{Any}}()
+    for v in vertices; add_vertex!(graph, v); end
+    for (u,v) in edges; add_edge!(graph, u, v; directed=directed); end
+    return graph
+end
+```
+
+:::
+
+::::
 
 `remove_vertex` visits all vertex lists because incoming connections are not indexed separately. It changes lists during that loop but deletes the dictionary key only afterwards. The simple-graph invariant means each other list contains v at most once. Successful operations preserve valid endpoints, distinct neighbours and, where applicable, reciprocity.
 

@@ -7,6 +7,10 @@
 
 **Builds on:** [All-match baseline](substring-baseline.md) and [aggregate/sequence analysis](../analysis/cases-and-bounds.md#expected-versus-amortised-analysis).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/strings.js) · [Julia](../../examples/languages/strings.jl).
+
+All matching positions count Unicode code points. JavaScript and Julia collect characters into arrays for constant-time access, adding O(n+m) preparation and storage to text/pattern scans; this is additional to the Python bounds. Julia results are one-based character-array positions, not byte indices into a Julia String. Rolling hashes use BigInt arithmetic explicitly; JavaScript custom base/modulus arguments are BigInts (for example 3n).
+
 (pattern-border)=
 ## A border is a prefix that is also a suffix
 
@@ -16,6 +20,12 @@ For pattern `"ababaca"`, the table is `[0,0,1,2,3,0,1]`. At index 4, the prefix 
 
 (kmp-prefix-function)=
 ## Fall back through shorter known borders
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def prefix_function(pattern):
@@ -30,6 +40,44 @@ def prefix_function(pattern):
     return pi
 ```
 
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function prefix_function(pattern) {
+    const p = [...pattern], pi = Array(p.length).fill(0); let j = 0;
+    for (let i = 1; i < p.length; i++) {
+        while (j > 0 && p[i] !== p[j]) j = pi[j-1];
+        if (p[i] === p[j]) j++;
+        pi[i] = j;
+    }
+    return pi;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function prefix_function(pattern)
+    p = collect(pattern); pi = zeros(Int, length(p)); j = 0
+    for i in 2:length(p)
+        while j > 0 && p[i] != p[j+1]; j = pi[j]; end
+        p[i] == p[j+1] && (j += 1)
+        pi[i] = j
+    end
+    return pi
+end
+```
+
+:::
+
+::::
+
 Before processing the next symbol, j describes a border of the previous prefix. If it cannot extend, any shorter viable border must also be a border of that border. `pi[j-1]` supplies the next candidate length, decreasing j without retrying every shorter length. Equality extends a border by one. The empty pattern gives an empty table.
 
 ![The prefix-function table for ababaca includes border length three for ababa and falls through lengths three, one and zero before accepting the c position's zero.](../../assets/strings/kmp-borders.svg)
@@ -40,6 +88,12 @@ Build the prefix table for a short pattern before tracing the text scan. Keep th
 
 (kmp-find-all)=
 ## Preserve the text position while shortening the matched prefix
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def kmp_find_all(text, pattern):
@@ -58,6 +112,48 @@ def kmp_find_all(text, pattern):
             j = pi[j - 1]
     return matches
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function kmp_find_all(text, pattern) {
+    const t = [...text], p = [...pattern];
+    if (!p.length) return Array.from({length:t.length+1}, (_,i) => i);
+    const pi = prefix_function(p), matches = []; let j = 0;
+    for (let i = 0; i < t.length; i++) {
+        while (j > 0 && t[i] !== p[j]) j = pi[j-1];
+        if (t[i] === p[j]) j++;
+        if (j === p.length) { matches.push(i-p.length+1); j = pi[j-1]; }
+    }
+    return matches;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function kmp_find_all(text, pattern)
+    t, p = collect(text), collect(pattern)
+    isempty(p) && return collect(1:length(t)+1)
+    pi = prefix_function(p); matches = Int[]; j = 0
+    for (i,char) in enumerate(t)
+        while j > 0 && char != p[j+1]; j = pi[j]; end
+        char == p[j+1] && (j += 1)
+        if j == length(p); push!(matches, i-length(p)+1); j = pi[j]; end
+    end
+    return matches
+end
+```
+
+:::
+
+::::
 
 Before comparing the current text symbol, the previously matched prefix of length j equals a suffix of text processed so far. On mismatch, retain its longest border that might still extend with the current symbol. No occurrence is skipped: a surviving overlapping alignment must have that prefix/suffix agreement. The text index never moves backwards, although one symbol can be compared against several pattern positions.
 

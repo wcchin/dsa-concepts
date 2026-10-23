@@ -7,6 +7,10 @@
 
 **Builds on:** [The shared model](transport-model.md) and [BFS](../graphs/breadth-first-search.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/applications.js) · [Julia](../../examples/languages/applications.jl).
+
+Reuse the translated graph algorithms and the same invented dataset. Julia travel/build columns are 3 and 4, versus 2 and 3 in Python/JavaScript. The translated construction adjacency is named build_graph_view to distinguish it from the graph-builder function. All versions keep the isolated harbour, distinguish absence from a zero-length route, and separate minutes from construction units.
+
 (transport-bfs-question)=
 ## Give every edge the same contribution
 
@@ -14,11 +18,43 @@ The question is: from Gate A to Park F, which route uses the fewest links? This 
 
 The [BFS implementation](../graphs/breadth-first-search.md#bfs-code) stores discovered hop distances in a dictionary, waiting vertices in a deque, and one predecessor per discovered vertex. It marks at enqueue, so alternative routes do not add the same vertex repeatedly.
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 order, hop_parent, hop_distance = bfs(hop_graph, "A")
 fewest_route = path_to(hop_parent, "F")
 fewest_minutes = route_total(fewest_route, links, 2)
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+var [order, hop_parent, hop_distance] = bfs(hop_graph, "A");
+var fewest_route = path_to(hop_parent, "F");
+var fewest_minutes = route_total(fewest_route, links, 2);
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+order, hop_parent, hop_distance = bfs(hop_graph, "A")
+fewest_route = path_to(hop_parent, "F")
+fewest_minutes = route_total(fewest_route, links, 3)
+```
+
+:::
+
+::::
 
 (transport-bfs-result)=
 ## Read the route and its guarantee separately

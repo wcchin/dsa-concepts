@@ -7,6 +7,10 @@
 
 **Builds on:** [Graph representations](graph-representations.md), [graph operations](graph-operations.md) and [FIFO queues](../linear-structures/queues-and-deques.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/graphs.js) · [Julia](../../examples/languages/graphs.jl).
+
+JavaScript graphs use Map; Julia graphs use Dict. Stored neighbour order is preserved, but Julia Dict vertex iteration can change valid component ordering or tied choices. The shared DequeBuffer supplies constant-time linked endpoints. The figures and check answers use Python’s declared iteration order.
+
 (breadth-first-search)=
 ## Expand the earliest discovered waiting vertex
 
@@ -25,6 +29,12 @@ A vertex is **discovered** when first encountered and recorded. It is **expanded
 ## Mark a vertex when it joins the queue
 
 This code uses the adjacency-list contract from the previous page. `distance` also serves as the discovered set. Invalid start labels raise `KeyError`; isolated but valid vertices are ordinary inputs.
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 from collections import deque
@@ -46,6 +56,52 @@ def bfs(graph, start):
                 queue.append(v)
     return order, parent, distance
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function bfs(graph, start) {
+    if (!graph.has(start)) throw new KeyError(String(start));
+    const distance = new Map([[start, 0]]), parent = new Map([[start, null]]), order = [];
+    const queue = new DequeBuffer([start]);
+    while (!queue.is_empty()) {
+        const u = queue.remove_first(); order.push(u);
+        for (const v of graph.get(u)) if (!distance.has(v)) {
+            distance.set(v, distance.get(u) + 1); parent.set(v, u); queue.add_last(v);
+        }
+    }
+    return [order, parent, distance];
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function bfs(graph, start)
+    haskey(graph, start) || throw(KeyError(start))
+    distance = Dict{Any,Int}(start=>0); parent = Dict{Any,Any}(start=>nothing); order = Any[]
+    queue = DequeBuffer([start])
+    while queue.n > 0
+        u = db_remove_first!(queue); push!(order, u)
+        for v in graph[u]
+            if !haskey(distance, v)
+                distance[v] = distance[u] + 1; parent[v] = u; db_add_last!(queue, v)
+            end
+        end
+    end
+    return (order, parent, distance)
+end
+```
+
+:::
+
+::::
 
 (bfs-discovery-marking)=
 ## Discovery prevents duplicate work
@@ -70,6 +126,12 @@ The distances are A:0; B,C:1; D,E,F:2; G:3. This is a **shortest-hop** guarantee
 (bfs-parent-path)=
 ## Parents recover one route
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 def path_to(parent, target):
     if target not in parent:
@@ -82,6 +144,38 @@ def path_to(parent, target):
     path.reverse()
     return path
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function path_to(parent, target) {
+    if (!parent.has(target)) return null;
+    const path = []; let current = target;
+    while (current !== null) { path.push(current); current = parent.get(current); }
+    return path.reverse();
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function path_to(parent, target)
+    haskey(parent, target) || return nothing
+    path = Any[]; current = target
+    while current !== nothing; push!(path, current); current = parent[current]; end
+    return reverse!(path)
+end
+```
+
+:::
+
+::::
 
 Here parent dictionaries come from a traversal and vertex labels are non-`None` strings. `None` marks the start's missing parent. Following G's parents backwards gives G, F, C, A; reversing yields **A, C, F, G**. A path to the start is `[A]`; an unreachable H returns `None`.
 

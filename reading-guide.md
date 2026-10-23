@@ -14,6 +14,8 @@ The sidebar follows a suggested learning sequence: foundations and structures, s
 
 Topic 9 follows BSTs and AVL trees to compare spatial invariants with one-dimensional ordering; AVL rotations do not generally preserve k-d-tree partitions. Topics 10–13 establish heaps, traversal and union–find before graph optimisation. Within Topic 13, only Kruskal requires the disjoint-set class. Spatial search is not a prerequisite for the graph route, and Topics 14–15 are optional extensions: the transport case in Topic 16 can be read directly after Topic 13.
 
+Python is the reference for explanations and traces. Every code panel also offers JavaScript and Julia tabs; choose a language with a click or tap. Read the [code language guide](code-languages.md) for indexing, mutation and download conventions.
+
 ## A common reasoning thread
 
 Each topic asks what the input means, which operations are required, what the representation stores, which invariant remains true, why the procedure finishes, and how work and live storage grow. Use the [correctness checklist](topics/analysis/correctness.md) and [cost model](topics/analysis/counting-work.md) across the whole book.

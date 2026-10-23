@@ -6,6 +6,8 @@ Developed from the CS2040HS teaching materials at the National University of Sin
 
 **Current coverage:** All sixteen topics have developed, aligned self-reading material, including a complete transport-network application. Topics 14–15 add optional DSA concepts beyond the lecture inventory. See the [coverage review](coverage-review.md) for additions, limitations and priorities.
 
+Code panels offer Python, JavaScript and Julia. See the [language guide and topic downloads](code-languages.md); explanations and diagrams use Python as their reference.
+
 ## Choose a reading route
 
 Start with [Foundations](topics/foundations/foundations.md), [Algorithm analysis](topics/analysis/analysis.md) and [Recursion](topics/recursion/recursion.md). These establish the language, cost models and proof habits used throughout the book.

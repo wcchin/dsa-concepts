@@ -7,6 +7,10 @@
 
 **Builds on:** [Queue contracts](queues-and-deques.md) and [array indexing](arrays.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/linear-structures.js) · [Julia](../../examples/languages/linear-structures.jl).
+
+Julia uses one-based positions and named functions such as enqueue! rather than Python-style instance methods. Endpoint adapters use the supplied linked DequeBuffer, so they do not hide linear array-front shifts. Empty operations reject the request; null/nothing remain valid payloads.
+
 ## Operation contract for this implementation
 
 Use the [queue operation table](queues-and-deques.md#queue-adt): enqueue returns `None`; front observes; dequeue removes and returns the front record. `size()` and `len(q)` agree. Empty front/dequeue raise `IndexError`; a full enqueue raises `OverflowError` before mutation. Capacity must be a positive exact integer or construction raises `ValueError`. `None` is a valid record.
@@ -31,6 +35,12 @@ Maintain $0\leq\text{size}\leq c$ and $0\leq\text{front}<c$. The next enqueue po
 ## A complete fixed-capacity implementation
 
 This queue rejects an enqueue when full. It does not silently discard an older item. `None` is allowed as data: occupancy is determined by indices and size, not by testing whether a slot contains `None`.
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 class CircularQueue:
@@ -69,6 +79,69 @@ class CircularQueue:
         self._size -= 1
         return item
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+class CircularQueue {
+    constructor(capacity) {
+        if (!Number.isSafeInteger(capacity) || capacity <= 0) throw new RangeError("positive integer capacity required");
+        this._data = Array(capacity).fill(null); this._front = 0; this._size = 0;
+    }
+    size() { return this._size; }
+    is_empty() { return this._size === 0; }
+    enqueue(item) {
+        if (this._size === this._data.length) throw new RangeError("queue is full");
+        this._data[(this._front + this._size) % this._data.length] = item;
+        this._size++;
+    }
+    front() { if (this.is_empty()) throw new RangeError("empty queue"); return this._data[this._front]; }
+    dequeue() {
+        const item = this.front(); this._data[this._front] = null;
+        this._front = (this._front + 1) % this._data.length; this._size--; return item;
+    }
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+mutable struct CircularQueue
+    data::Vector{Any}
+    front_index::Int
+    n::Int
+end
+function CircularQueue(capacity)
+    (capacity isa Int && capacity > 0) || throw(ArgumentError("positive integer capacity required"))
+    return CircularQueue(Any[nothing for _ in 1:capacity], 1, 0)
+end
+Base.length(q::CircularQueue) = q.n
+Base.isempty(q::CircularQueue) = q.n == 0
+function enqueue!(q::CircularQueue, item)
+    q.n == length(q.data) && throw(OverflowError("queue is full"))
+    back = mod(q.front_index - 1 + q.n, length(q.data)) + 1
+    q.data[back] = item; q.n += 1; return nothing
+end
+function queue_front(q::CircularQueue)
+    isempty(q) && throw(BoundsError())
+    return q.data[q.front_index]
+end
+function dequeue!(q::CircularQueue)
+    item = queue_front(q); q.data[q.front_index] = nothing
+    q.front_index = mod(q.front_index, length(q.data)) + 1; q.n -= 1
+    return item
+end
+```
+
+:::
+
+::::
 
 `dequeue` first uses the observing method `front()` to check for emptiness and save the item. Clearing the vacated slot releases the queue's reference to that object. Then the index advances modulo capacity and the size decreases. No remaining item shifts.
 

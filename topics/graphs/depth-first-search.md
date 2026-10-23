@@ -7,6 +7,10 @@
 
 **Builds on:** [Recursive call frames](../recursion/call-stack.md) and [BFS state/results](breadth-first-search.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/graphs.js) · [Julia](../../examples/languages/graphs.jl).
+
+JavaScript graphs use Map; Julia graphs use Dict. Stored neighbour order is preserved, but Julia Dict vertex iteration can change valid component ordering or tied choices. The shared DequeBuffer supplies constant-time linked endpoints. The figures and check answers use Python’s declared iteration order.
+
 (depth-first-search)=
 ## Finish a branch before resuming its caller
 
@@ -23,6 +27,12 @@ Neighbour order fixes this implementation's exact trace, but not the set of reac
 
 (dfs-code)=
 ## Mark on entry and finish after neighbour checks
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def dfs(graph, start):
@@ -44,6 +54,48 @@ def dfs(graph, start):
     visit(start)
     return discovery, finish, parent
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function dfs(graph, start) {
+    if (!graph.has(start)) throw new KeyError(String(start));
+    const seen = new Set(), parent = new Map([[start, null]]), discovery = [], finish = [];
+    function visit(u) {
+        seen.add(u); discovery.push(u);
+        for (const v of graph.get(u)) if (!seen.has(v)) { parent.set(v, u); visit(v); }
+        finish.push(u);
+    }
+    visit(start); return [discovery, finish, parent];
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function dfs(graph, start)
+    haskey(graph, start) || throw(KeyError(start))
+    seen = Set{Any}(); parent = Dict{Any,Any}(start=>nothing); discovery = Any[]; finish = Any[]
+    function visit(u)
+        push!(seen, u); push!(discovery, u)
+        for v in graph[u]
+            if !(v in seen); parent[v] = u; visit(v); end
+        end
+        push!(finish, u)
+    end
+    visit(start); return (discovery, finish, parent)
+end
+```
+
+:::
+
+::::
 
 (dfs-discovery-completion)=
 ## Discovery and completion are different events

@@ -7,6 +7,10 @@
 
 **Builds on:** Use the [shared points and query contracts](spatial-queries.md); depth zero compares x.
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/kd-trees.js) · [Julia](../../examples/languages/kd-trees.jl).
+
+JavaScript points are arrays compared by same_point; Julia points are value tuples. Julia coordinate/child indices are one-based (x=1, y=2; SW/SE/NW/NE=1/2/3/4), while depth still starts at zero. R-tree orientation uses exact big-integer arithmetic for the supplied integer-coordinate geometry; nearest distances remain floating calculations. General R-tree update code is still conceptual in every language.
+
 (kd-tree)=
 ## A coordinate determines the next branch
 
@@ -34,6 +38,12 @@ A coordinate tie is not full equality. Distinct points `(5, 4)` and `(5, 7)` hav
 
 ![The shared seven points form a k-d tree labelled by active axis, with E below D and G below F.](../../assets/kd-trees/kd-shared-tree.svg)
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 class KDNode:
     def __init__(self, point):
@@ -58,6 +68,58 @@ root = None
 for point in points:
     root = kd_insert(root, point)
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+class KDNode {
+    constructor(point) { this.point=point; this.left=null; this.right=null; }
+}
+function kd_insert(node,point,depth=0) {
+    if (node===null) return new KDNode(point);
+    if (same_point(point,node.point)) return node;
+    const axis=depth%2;
+    if (point[axis]<node.point[axis]) node.left=kd_insert(node.left,point,depth+1);
+    else node.right=kd_insert(node.right,point,depth+1);
+    return node;
+}
+var points=[[5,4],[2,7],[8,1],[1,3],[3,6],[7,5],[9,2]], root=null;
+for (const point of points) root=kd_insert(root,point);
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+mutable struct KDNode
+    point
+    left
+    right
+end
+KDNode(point)=KDNode(point,nothing,nothing)
+function kd_insert(node,point,depth=0)
+    node===nothing && return KDNode(point)
+    point==node.point && return node
+    axis=mod(depth,2)+1
+    if point[axis]<node.point[axis]; node.left=kd_insert(node.left,point,depth+1)
+    else; node.right=kd_insert(node.right,point,depth+1); end
+    return node
+end
+points=[(5,4),(2,7),(8,1),(1,3),(3,6),(7,5),(9,2)]
+root=let tree=nothing
+    for point in points; tree=kd_insert(tree,point); end
+    tree
+end
+```
+
+:::
+
+::::
 
 Call with depth 0 for the full tree and reconnect the returned root. Recursion supplies the correct axis for each child. Inserting E follows A left by x, B left by y, then D right by x. The insertion-order tree is not automatically balanced.
 

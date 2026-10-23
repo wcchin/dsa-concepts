@@ -7,6 +7,10 @@
 
 **Builds on:** [BST insertion](bst-lookup-insertion.md) and [minimum/successor](bst-traversal.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/searching.js) · [Julia](../../examples/languages/searching.jl).
+
+Python and JavaScript positions are zero-based; Julia vector positions and insertion boundaries are one-based. A missing lookup is None/null/nothing, while a boundary query can return the one-past-end position. Julia public ordered-set operations use functions such as add!, ordered_keys and range_keys.
+
 ## Operation contract and representation invariant
 
 `bst_delete(root,key)` returns the resulting root, removes at most one matching key and leaves absence as a no-op. An empty tree returns `None`. Every other key must remain once under strict ancestor bounds. The function does not return the removed key or maintain a total count. The [ordered-set adapter](ordered-set-operations.md) supplies strict `remove`, tolerant `discard`, extraction and size bookkeeping.
@@ -49,6 +53,12 @@ Choosing the largest key in the left subtree—the **predecessor**—is also val
 
 This code reuses `BSTNode` and `bst_minimum` from the preceding pages. Deleting an absent key leaves the key set unchanged.
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 def bst_delete(node, key):
     if node is None:
@@ -67,6 +77,52 @@ def bst_delete(node, key):
         node.right = bst_delete(node.right, successor.key)
     return node
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function bst_delete(node, key) {
+    if (node === null) return null;
+    if (key < node.key) node.left = bst_delete(node.left, key);
+    else if (key > node.key) node.right = bst_delete(node.right, key);
+    else {
+        if (node.left === null) return node.right;
+        if (node.right === null) return node.left;
+        const successor = bst_minimum(node.right);
+        node.key = successor.key;
+        node.right = bst_delete(node.right, successor.key);
+    }
+    return node;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function bst_delete(node, key)
+    node === nothing && return nothing
+    if key < node.key; node.left = bst_delete(node.left, key)
+    elseif key > node.key; node.right = bst_delete(node.right, key)
+    else
+        node.left === nothing && return node.right
+        node.right === nothing && return node.left
+        successor = bst_minimum(node.right)
+        node.key = successor.key
+        node.right = bst_delete(node.right, successor.key)
+    end
+    return node
+end
+```
+
+:::
+
+::::
 
 Call it as `root = bst_delete(root, key)`. Returning and reconnecting subtree roots handles root replacement and internal edits uniformly. Searching and removing the successor together still follow only $O(h+1)$ links overall; recursive stack space is $O(h+1)$.
 

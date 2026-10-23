@@ -7,6 +7,10 @@
 
 **Builds on:** [Sift-down](heap-removal.md) repairs a root whose child subtrees are already heaps.
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/heaps.js) · [Julia](../../examples/languages/heaps.jl).
+
+The Julia heap array starts at 1: parent=floor(i/2), children=2i and 2i+1. The support MinHeap implements heap repair rather than sorting on each removal. Stable record heaps compare priority and a unique counter before the payload; max queues negate numeric priorities.
+
 ## Construction contract and implementation choice
 
 `build_min_heap(values)` returns a **new list** holding exactly the supplied priorities with their multiplicities, arranged as a min-heap. It does not sort them or mutate an input list. The copy is shallow. Finite numeric priorities satisfy this topic's comparison contract; empty input returns a new empty list. For a general iterable, iteration consumes it to produce the copy.
@@ -18,6 +22,12 @@ The public record queues start empty; this numeric builder is not a bulk-constru
 
 Given an unordered collection, repeated insertion is valid, but a bottom-up builder can do less work. Every leaf is already a one-item heap. Visit internal nodes from the last one back to the root, applying sift-down at each position.
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 def build_min_heap(values):
     heap = list(values)
@@ -25,6 +35,38 @@ def build_min_heap(values):
         sift_down(heap, i)
     return heap
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function build_min_heap(values) {
+    const heap = [...values];
+    for (let i = Math.floor(heap.length / 2) - 1; i >= 0; i--) sift_down(heap, i);
+    return heap;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function build_min_heap(values)
+    heap = collect(values)
+    for i in div(length(heap), 2):-1:1
+        sift_down!(heap, i)
+    end
+    return heap
+end
+```
+
+:::
+
+::::
 
 This function reuses `sift_down` from the preceding page. It copies the input once, then modifies and returns that new list. Empty and singleton inputs need no repair iterations. An in-place version would omit the initial copy and operate on a supplied list.
 

@@ -7,6 +7,10 @@
 
 **Builds on:** [AVL insertion](avl-insertion.md), [AVL deletion](avl-deletion.md) and Topic 7's [OrderedSet adapter](../searching/ordered-set-operations.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/balanced-trees.js) · [Julia](../../examples/languages/balanced-trees.jl).
+
+The same BST readers and OrderedSet interface are reused from Topic 7. Julia updates use function calls, not dot methods. All variants use empty height −1, leaf height 0, and left height minus right height; rotations must return and reconnect the new subtree root.
+
 (avl-operation-contract)=
 ## Purpose and operation contracts
 
@@ -34,6 +38,12 @@ Insert 30,10,20. The insertion reading's LR repair yields root 20 with children 
 
 Read the Topic 7 query helpers and adapter, then Topic 8's node/height, rotation, rebalance, insertion and deletion definitions in one session. The shared readers inspect only `key`, `left` and `right`; no separate AVL search algorithm is required.
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 balanced = OrderedSet(avl_insert, avl_delete)
 for key in [30, 10, 20]:
@@ -46,6 +56,44 @@ assert balanced.range_keys(15, 30) == [20, 30]
 assert balanced.extract_min() == 10
 assert balanced.keys() == [20, 30]
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+var balanced = new OrderedSet(avl_insert, avl_delete);
+for (const key of [30, 10, 20]) balanced.add(key);
+balanced.add(20);
+console.assert(balanced.size() === 3);
+console.assert(JSON.stringify(balanced.keys()) === "[10,20,30]");
+console.assert(balanced.successor(15) === 20);
+console.assert(JSON.stringify(balanced.range_keys(15, 30)) === "[20,30]");
+console.assert(balanced.extract_min() === 10);
+console.assert(JSON.stringify(balanced.keys()) === "[20,30]");
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+balanced = OrderedSet(avl_insert, avl_delete)
+for key in [30, 10, 20]; add!(balanced, key); end
+add!(balanced, 20)
+@assert length(balanced) == 3
+@assert ordered_keys(balanced) == [10, 20, 30]
+@assert successor(balanced, 15) == 20
+@assert range_keys(balanced, 15, 30) == [20, 30]
+@assert extract_min!(balanced) == 10
+@assert ordered_keys(balanced) == [20, 30]
+```
+
+:::
+
+::::
 
 ## Implementation choices and correctness
 

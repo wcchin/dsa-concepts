@@ -7,6 +7,10 @@
 
 **Builds on:** [BST range reporting](../searching/bst-range-queries.md) already uses ordering to exclude subtrees.
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/kd-trees.js) · [Julia](../../examples/languages/kd-trees.jl).
+
+JavaScript points are arrays compared by same_point; Julia points are value tuples. Julia coordinate/child indices are one-based (x=1, y=2; SW/SE/NW/NE=1/2/3/4), while depth still starts at zero. R-tree orientation uses exact big-integer arithmetic for the supplied integer-coordinate geometry; nearest distances remain floating calculations. General R-tree update code is still conceptual in every language.
+
 (spatial-query-contracts)=
 ## Specify the objects and the question
 
@@ -16,6 +20,12 @@ For point range reporting, this topic uses a **closed** query rectangle `(xmin, 
 
 (shared-spatial-dataset)=
 ## Keep the data and query fixed while changing the index
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 from math import isfinite
@@ -41,6 +51,49 @@ def scan_range(points, rect):
     rect = checked_rect(rect)
     return [p for p in points if in_closed_rect(p, rect)]
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+var shared_points = [[5,4],[2,7],[8,1],[1,3],[3,6],[7,5],[9,2]], shared_query = [1,2,4,7];
+function same_point(a,b) { return a[0] === b[0] && a[1] === b[1]; }
+function checked_rect(rect) {
+    if (rect.length !== 4 || !rect.every(Number.isFinite)) throw new RangeError("four finite coordinates required");
+    if (rect[0]>rect[2] || rect[1]>rect[3]) throw new RangeError("reversed bounds");
+    return [...rect];
+}
+function in_closed_rect([x,y],[xmin,ymin,xmax,ymax]) { return xmin<=x && x<=xmax && ymin<=y && y<=ymax; }
+function scan_range(points,rect) { rect=checked_rect(rect); return points.filter(p=>in_closed_rect(p,rect)); }
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+shared_points = [(5,4),(2,7),(8,1),(1,3),(3,6),(7,5),(9,2)]
+shared_query = (1,2,4,7)
+function checked_rect(rect)
+    (length(rect)==4 && all(isfinite,rect)) || throw(ArgumentError("four finite coordinates required"))
+    (rect[1]<=rect[3] && rect[2]<=rect[4]) || throw(ArgumentError("reversed bounds"))
+    return Tuple(rect)
+end
+function in_closed_rect(point,rect)
+    x,y=point; xmin,ymin,xmax,ymax=rect
+    return xmin<=x<=xmax && ymin<=y<=ymax
+end
+function scan_range(points,rect)
+    rect=checked_rect(rect); return [p for p in points if in_closed_rect(p,rect)]
+end
+```
+
+:::
+
+::::
 
 The points are A through G in the order shown. The shared query returns **B=(2,7), D=(1,3), E=(3,6)**. These are the same coordinates and inclusive bounds as the existing k-d-tree pages. The helpers assume numeric coordinate pairs; they validate rectangle order and finiteness, not arbitrary object types. The shared list contains distinct points. For another dataset, deduplicate before comparing with these point-set indexes; the scan itself reports the supplied records. Comparing result sets avoids confusing a traversal-order difference with a wrong answer.
 

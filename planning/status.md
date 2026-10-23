@@ -1,30 +1,28 @@
 # Current progress and task list
 
-Updated 23 October 2026 after the first language-tab pilot. **This is the authoritative progress checklist.** Dated earlier records are in the [development archive](archive/development-history-2026-10-23.md); they are historical, not pending work.
+Updated 23 October 2026 after the book-wide language-tab rollout. **This is the authoritative progress checklist.** Dated earlier records are in the [development archive](archive/development-history-2026-10-23.md); they are historical, not pending work.
 
 ## Completed
 
 - [x] Standalone Jupyter Book v2 repository, established branding, concept indexes and prerequisite routes.
 - [x] Automatic build checks and publication on pushes to main, using the pinned Jupyter Book 2.1.7 workflow.
 - [x] Attribution and licensing at article headers and the footer: © 2026 Benny Chin · Content CC BY-NC-ND 4.0 · Code MIT.
-- [x] Develop and align all sixteen topics: 120 readings, sixteen topic overviews and five front-matter pages (141 navigation pages).
+- [x] Develop and align all sixteen topics: 120 readings, sixteen topic overviews and six front-matter pages (142 navigation pages).
 - [x] Supply two goals, a prerequisite/context cue, a misconception reminder and two explained open checks per reading: 240 checks.
 - [x] Complete the original spatial-search and transport application examples; distinguish conceptual-only update/build variants.
 - [x] Review book-wide sequence, terminology, prerequisites, repeated explanation, study effort and reading transitions. See the [review findings](editorial-review.md).
 - [x] Reconcile stale pilot/alignment text, consolidate history, and separate current scope from future extensions.
-- [x] Publish the first Python/JavaScript/Julia tab pilot on binary search, retaining Python as the teaching language and documenting native indexing/absence conventions. See [the pilot record](language-tabs.md).
+- [x] Expand all 155 code panels across 92 readings and all sixteen topics to Python/JavaScript/Julia tabs, preserving Python as the teaching language. Supply a [student language guide](../code-languages.md), 32 generated topic downloads and behavioural checks. See the [authoring record](language-tabs.md).
 
 ## Next stages, in order
 
 | Order | Task | Status and completion criterion |
 |---|---|---|
-| 1 | Review the published language-tab pilot | Implemented on binary search. Review readability and address native-theme keyboard/assistive-technology support before broad rollout; direct source links provide an alternative |
-| 2 | Expand language coverage | Pending the pilot. Apply the agreed pattern gradually; do not describe planned translations as supplied implementations |
-| 3 | Pilot interactive tracing checks | Planned. Start with a small JupyterQuiz example and validate feedback/trace semantics before wider use |
-| 4 | Explore prepared algorithm visualisations | Later. Separate from browser notebooks; choose a small example with synchronised code and state |
-| 5 | Add selected content extensions | Planned after the stable reading edition. Follow the prioritised [coverage roadmap](../coverage-review.md), starting with graph extensions, selection/non-comparison sorting and contrasting DP problems |
+| 1 | Pilot interactive tracing checks | Planned. Start with a small JupyterQuiz example and validate feedback/trace semantics before wider use |
+| 2 | Explore prepared algorithm visualisations | Later. Choose a small example with synchronised code and state |
+| 3 | Add selected content extensions | Follow the prioritised [coverage roadmap](../coverage-review.md), starting with graph extensions, selection/non-comparison sorting and contrasting DP problems |
 
-Language tabs are piloted on one reading, not rolled out book-wide. Python remains canonical. Interactive quizzes and code visualisers are planned; browser notebooks remain deferred.
+The language-tab rollout is complete. Python remains canonical; theory-only pages do not need artificial code panels. Native mouse/touch tab selection and shared language selection across panels are retained. Custom keyboard-navigation work is outside the agreed scope; direct source/download links remain available. Interactive quizzes and visualisers are planned; browser notebooks remain deferred.
 
 ## Current scope boundaries
 

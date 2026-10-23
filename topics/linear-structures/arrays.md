@@ -7,6 +7,10 @@
 
 **Builds on:** [Sequence contracts](sequence-adt.md) define positional operations; this page explains their storage movements.
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/linear-structures.js) · [Julia](../../examples/languages/linear-structures.jl).
+
+Julia uses one-based positions and named functions such as enqueue! rather than Python-style instance methods. Endpoint adapters use the supplied linked DequeBuffer, so they do not hide linear array-front shifts. Empty operations reject the request; null/nothing remain valid payloads.
+
 ## Operation mapping
 
 The [sequence interface](sequence-adt.md) calls indexed observation `get`, replacement `set`, insertion `insert`, and removal-and-return `remove_at`. The wrapper maps them to `a[i]`, indexed assignment, `list.insert` and `list.pop(i)` after checking its stricter index policy. This page explains the movements behind that code; a raw array alone does not automatically grow.
@@ -42,6 +46,12 @@ Removing position $i$ shifts the later $n-i-1$ references left. A simple fixed-b
 
 Replacing a value is different from inserting one. `a[i] = x` retains the same length and other positions. `a.insert(i, x)` increases the length and changes the positions of later items.
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 route = ["A", "B", "C", "D"]
 route.insert(1, "X")
@@ -50,6 +60,39 @@ assert route.pop(1) == "X"
 route[1] = "Y"
 assert route == ["A", "Y", "C", "D"]
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+var route = ["A", "B", "C", "D"];
+route.splice(1, 0, "X");
+console.assert(JSON.stringify(route) === '["A","X","B","C","D"]');
+console.assert(route.splice(1, 1)[0] === "X");
+route[1] = "Y";
+console.assert(JSON.stringify(route) === '["A","Y","C","D"]');
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+route = ["A", "B", "C", "D"]
+insert!(route, 2, "X")
+@assert route == ["A", "X", "B", "C", "D"]
+removed = route[2]; deleteat!(route, 2)
+@assert removed == "X"
+route[2] = "Y"
+@assert route == ["A", "Y", "C", "D"]
+```
+
+:::
+
+::::
 
 (array-locality)=
 ## Locality and limitations

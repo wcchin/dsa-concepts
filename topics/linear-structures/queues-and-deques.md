@@ -7,6 +7,10 @@
 
 **Builds on:** [Stacks](stacks.md) shows newest-first removal; a queue selects by arrival order.
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/linear-structures.js) · [Julia](../../examples/languages/linear-structures.jl).
+
+Julia uses one-based positions and named functions such as enqueue! rather than Python-style instance methods. Endpoint adapters use the supplied linked DequeBuffer, so they do not hide linear array-front shifts. Empty operations reject the request; null/nothing remain valid payloads.
+
 (queue-adt)=
 ## Purpose and operation contracts
 
@@ -39,6 +43,12 @@ In this adapter, the underlying deque's left end is the front and its right end 
 (queue-adapter-code)=
 ## Python implementation
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 from collections import deque
 
@@ -68,6 +78,44 @@ class Queue:
             raise IndexError("dequeue from empty queue")
         return self._items.popleft()
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+// DequeBuffer is defined in the downloadable shared support file.
+class Queue {
+    constructor() { this._items = new DequeBuffer(); }
+    size() { return this._items.size(); }
+    is_empty() { return this.size() === 0; }
+    enqueue(item) { this._items.add_last(item); }
+    front() { return this._items.peek_first(); }
+    dequeue() { return this._items.remove_first(); }
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+mutable struct Queue
+    items::DequeBuffer
+end
+Queue() = Queue(DequeBuffer())
+Base.length(q::Queue) = q.items.n
+Base.isempty(q::Queue) = length(q) == 0
+enqueue!(q::Queue, item) = db_add_last!(q.items, item)
+queue_front(q::Queue) = db_first(q.items)
+dequeue!(q::Queue) = db_remove_first!(q.items)
+```
+
+:::
+
+::::
 
 ## Implementation choices and correctness
 

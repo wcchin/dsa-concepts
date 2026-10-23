@@ -7,6 +7,10 @@
 
 **Builds on:** [Exact binary search](binary-search.md) returns one match rather than the whole duplicate run.
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/searching.js) · [Julia](../../examples/languages/searching.jl).
+
+Python and JavaScript positions are zero-based; Julia vector positions and insertion boundaries are one-based. A missing lookup is None/null/nothing, while a boundary query can return the one-past-end position. Julia public ordered-set operations use functions such as add!, ordered_keys and range_keys.
+
 ## Operation contracts
 
 | Query on an ascending sequence | Return | Empty input |
@@ -21,6 +25,12 @@ Both observe without mutation. The returned position n is a valid boundary but n
 
 A lower-bound query returns the first index i with `a[i] >= target`, or `len(a)` if no such item exists. The sequence must already be ascending under the comparison used. Unlike exact search, an absent target still has a meaningful insertion position.
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 def lower_bound(a, target):
     low, high = 0, len(a)
@@ -33,10 +43,52 @@ def lower_bound(a, target):
     return low
 ```
 
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function lower_bound(a, target) {
+    let low = 0, high = a.length;
+    while (low < high) {
+        const mid = low + Math.floor((high - low) / 2);
+        if (a[mid] < target) low = mid + 1; else high = mid;
+    }
+    return low;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function lower_bound(a, target)
+    low, high = 1, length(a) + 1
+    while low < high
+        mid = low + div(high - low, 2)
+        if a[mid] < target; low = mid + 1; else; high = mid; end
+    end
+    return low
+end
+```
+
+:::
+
+::::
+
 The candidate interval is **half-open**: `[low, high)`. Every position before low is known too small; every position at or after high is known at least the target. Equality keeps mid as a possible boundary by moving high to mid. The loop stops when the two boundaries coincide. Mixing these updates with the inclusive exact-search loop from the previous page would be incorrect.
 
 (upper-bound-search)=
 ## Find the first position strictly greater
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def upper_bound(a, target):
@@ -49,6 +101,42 @@ def upper_bound(a, target):
             high = mid
     return low
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function upper_bound(a, target) {
+    let low = 0, high = a.length;
+    while (low < high) {
+        const mid = low + Math.floor((high - low) / 2);
+        if (a[mid] <= target) low = mid + 1; else high = mid;
+    }
+    return low;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function upper_bound(a, target)
+    low, high = 1, length(a) + 1
+    while low < high
+        mid = low + div(high - low, 2)
+        if a[mid] <= target; low = mid + 1; else; high = mid; end
+    end
+    return low
+end
+```
+
+:::
+
+::::
 
 Now positions before low are at most the target, while positions at or after high are strictly greater. Equal keys move the boundary right instead of left. Both functions work on an empty list and can return n without ever reading index n.
 

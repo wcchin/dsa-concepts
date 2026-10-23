@@ -7,6 +7,10 @@
 
 **Builds on:** [Chaining](chaining.md) and [probing](open-addressing.md) use different search invariants.
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/maps-sets-hashing.js) · [Julia](../../examples/languages/maps-sets-hashing.jl).
+
+Native containers have different equality and iteration rules. JavaScript examples use primitive keys; array keys compare by identity. The low-level helpers use the supplied teaching hash: h(k)=k for integer traces. Julia helper indices are one-based; table layouts for other native hash functions need not match Python. Snapshot containers differ in type, not ownership.
+
 Let n be the number of live entries and m the capacity. The **load factor** is $\alpha=n/m$. It summarises occupancy; it does not describe how evenly keys are distributed.
 
 ## Load factor and collision strategies
@@ -54,6 +58,12 @@ Membership can use the same exact-key search without treating a stored None as a
 
 ## Rebuild helpers illustrate maintenance
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 def rebuild_chained(table, capacity):
     if type(capacity) is not int or capacity <= 0:
@@ -73,6 +83,54 @@ def rebuild_probed(table, capacity):
             put_probed(fresh, slot[0], slot[1])
     return fresh
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function rebuild_chained(table, capacity) {
+    if (!Number.isSafeInteger(capacity) || capacity <= 0) throw new RangeError("positive integer capacity required");
+    const fresh = Array.from({length: capacity}, () => []);
+    for (const bucket of table) for (const [key, value] of bucket) put_chained(fresh, key, value);
+    return fresh;
+}
+function rebuild_probed(table, capacity) {
+    if (!Number.isSafeInteger(capacity) || capacity <= 0) throw new RangeError("positive integer capacity required");
+    const fresh = Array(capacity).fill(EMPTY);
+    for (const slot of table) if (slot !== EMPTY && slot !== DELETED) put_probed(fresh, slot[0], slot[1]);
+    return fresh;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function rebuild_chained(table, capacity)
+    (capacity isa Int && capacity > 0) || throw(ArgumentError("positive integer capacity required"))
+    fresh = [Any[] for _ in 1:capacity]
+    for bucket in table, (key, value) in bucket
+        put_chained!(fresh, key, value)
+    end
+    return fresh
+end
+function rebuild_probed(table, capacity)
+    (capacity isa Int && capacity > 0) || throw(ArgumentError("positive integer capacity required"))
+    fresh = Any[EMPTY for _ in 1:capacity]
+    for slot in table
+        if slot !== EMPTY && slot !== DELETED; put_probed!(fresh, slot[1], slot[2]); end
+    end
+    return fresh
+end
+```
+
+:::
+
+::::
 
 These helpers reuse preceding definitions and return a new table, leaving the old table unchanged. Probing reinserts live entries in old physical-slot order; deleted markers disappear. A requested probing capacity smaller than n raises OverflowError during rebuilding; the original remains valid. A caller keeps the returned table only after successful construction.
 

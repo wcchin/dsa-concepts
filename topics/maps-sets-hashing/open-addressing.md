@@ -7,6 +7,10 @@
 
 **Builds on:** [Hashing](hashing.md), [map contracts](maps.md) and collision handling in [chaining](chaining.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/maps-sets-hashing.js) · [Julia](../../examples/languages/maps-sets-hashing.jl).
+
+Native containers have different equality and iteration rules. JavaScript examples use primitive keys; array keys compare by identity. The low-level helpers use the supplied teaching hash: h(k)=k for integer traces. Julia helper indices are one-based; table layouts for other native hash functions need not match Python. Snapshot containers differ in type, not ownership.
+
 Open addressing stores entries directly in table slots. A collision triggers a sequence of candidate positions. For **linear probing**, position $j$ in the sequence is $(h(k)+j)\bmod m$, for $j=0,\ldots,m-1$.
 
 ## Linear probing and wraparound
@@ -51,6 +55,12 @@ The table has fixed capacity in these functions. There is no hidden automatic gr
 
 ## A bounded lookup
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 EMPTY = object()
 DELETED = object()
@@ -69,6 +79,49 @@ def get_probed(table, key):
             return value
     raise KeyError(key)
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+var EMPTY = Symbol("empty"), DELETED = Symbol("deleted");
+function get_probed(table, key) {
+    const m = table.length, start = hash_index(key, m);
+    for (let step = 0; step < m; step++) {
+        const slot = table[(start + step) % m];
+        if (slot === EMPTY) throw new KeyError(String(key));
+        if (slot === DELETED) continue;
+        if (slot[0] === key) return slot[1];
+    }
+    throw new KeyError(String(key));
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+const EMPTY = Ref(:empty)
+const DELETED = Ref(:deleted)
+function get_probed(table, key)
+    m = length(table); start = hash_index(key, m)
+    for step in 0:m-1
+        slot = table[mod(start - 1 + step, m) + 1]
+        slot === EMPTY && throw(KeyError(key))
+        slot === DELETED && continue
+        slot[1] == key && return slot[2]
+    end
+    throw(KeyError(key))
+end
+```
+
+:::
+
+::::
 
 Create a new table with `[EMPTY] * 7`; sharing an unmodified marker object is intentional. Check marker identity before unpacking an occupied pair. The loop visits at most m slots, including when tombstones or live entries leave no `EMPTY` slot. Capacity must be positive.
 
@@ -89,6 +142,12 @@ First trace lookup past a tombstone and explain why only EMPTY permits an early 
 ## Complete insertion, replacement and deletion helpers
 
 Read these functions in the same session as the EMPTY/DELETED objects and lookup above. Marker identity must be shared across all operations.
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def put_probed(table, key, value):
@@ -126,6 +185,73 @@ def remove_probed(table, key):
             return slot[1]
     raise KeyError(key)
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function put_probed(table, key, value) {
+    const m = table.length, start = hash_index(key, m); let first_deleted = null;
+    for (let step = 0; step < m; step++) {
+        const i = (start + step) % m, slot = table[i];
+        if (slot === EMPTY) { table[first_deleted === null ? i : first_deleted] = [key, value]; return true; }
+        if (slot === DELETED) { if (first_deleted === null) first_deleted = i; }
+        else if (slot[0] === key) { table[i] = [key, value]; return false; }
+    }
+    if (first_deleted !== null) { table[first_deleted] = [key, value]; return true; }
+    throw new RangeError("hash table is full");
+}
+function remove_probed(table, key) {
+    const m = table.length, start = hash_index(key, m);
+    for (let step = 0; step < m; step++) {
+        const i = (start + step) % m, slot = table[i];
+        if (slot === EMPTY) throw new KeyError(String(key));
+        if (slot !== DELETED && slot[0] === key) { table[i] = DELETED; return slot[1]; }
+    }
+    throw new KeyError(String(key));
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function put_probed!(table, key, value)
+    m = length(table); start = hash_index(key, m); first_deleted = nothing
+    for step in 0:m-1
+        i = mod(start - 1 + step, m) + 1; slot = table[i]
+        if slot === EMPTY
+            target = first_deleted === nothing ? i : first_deleted
+            table[target] = (key, value); return true
+        elseif slot === DELETED
+            first_deleted === nothing && (first_deleted = i)
+        elseif slot[1] == key
+            table[i] = (key, value); return false
+        end
+    end
+    if first_deleted !== nothing; table[first_deleted] = (key, value); return true; end
+    throw(OverflowError("hash table is full"))
+end
+function remove_probed!(table, key)
+    m = length(table); start = hash_index(key, m)
+    for step in 0:m-1
+        i = mod(start - 1 + step, m) + 1; slot = table[i]
+        slot === EMPTY && throw(KeyError(key))
+        if slot !== DELETED && slot[1] == key
+            table[i] = DELETED; return slot[2]
+        end
+    end
+    throw(KeyError(key))
+end
+```
+
+:::
+
+::::
 
 A full table can still replace an existing key. If no EMPTY exists, a complete cycle either finds the key or proves its absence; a remembered tombstone can then be reused. With no reusable slot, a new-key put raises without changing the table. Delete marks a successful match as DELETED and returns its value; failed deletion leaves the table unchanged.
 

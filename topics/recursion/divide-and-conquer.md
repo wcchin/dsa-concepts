@@ -7,6 +7,10 @@
 
 **Builds on:** [Recursive calls](recursive-calls.md), [stack sequencing](call-stack.md) and [shallow copying](../foundations/mutation-and-copying.md#shallow-copy).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/recursion.js) · [Julia](../../examples/languages/recursion.jl).
+
+The same base cases, smaller subproblems and merge choices apply. Native recursion limits and bounded numeric arithmetic still matter; copying slices is included in the implementation cost.
+
 Recursion is a mechanism for expressing calls. **Divide-and-conquer** is a strategy for organising a solution: divide the problem into smaller subproblems, solve them, then combine their answers. Many implementations use recursion, but the two ideas are not synonyms.
 
 (divide-conquer-combine)=
@@ -71,6 +75,12 @@ The merge's `<=` chooses the left item on a tie. Combined with contiguous left/r
 (merge-sort-code)=
 ## A complete sequential implementation
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 def merge_sorted(left, right):
     result = []
@@ -97,6 +107,66 @@ def merge_sort(values):
 values = [38, 12, 27, 5, 19, 8, 31, 14]
 print(merge_sort(values))  # [5, 8, 12, 14, 19, 27, 31, 38]
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function merge_sorted(left, right) {
+    const result = [];
+    let i = 0, j = 0;
+    while (i < left.length && j < right.length) {
+        if (left[i] <= right[j]) result.push(left[i++]);
+        else result.push(right[j++]);
+    }
+    while (i < left.length) result.push(left[i++]);
+    while (j < right.length) result.push(right[j++]);
+    return result;
+}
+function merge_sort(values) {
+    if (values.length <= 1) return values.slice();
+    const middle = Math.floor(values.length / 2);
+    return merge_sorted(merge_sort(values.slice(0, middle)), merge_sort(values.slice(middle)));
+}
+
+console.log(merge_sort([38, 12, 27, 5, 19, 8, 31, 14]));
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function merge_sorted(left, right)
+    result = Any[]
+    i, j = 1, 1
+    while i <= length(left) && j <= length(right)
+        if left[i] <= right[j]
+            push!(result, left[i]); i += 1
+        else
+            push!(result, right[j]); j += 1
+        end
+    end
+    append!(result, left[i:end])
+    append!(result, right[j:end])
+    return result
+end
+function merge_sort(values)
+    length(values) <= 1 && return copy(values)
+    middle = div(length(values), 2)
+    return merge_sorted(merge_sort(values[1:middle]), merge_sort(values[middle+1:end]))
+end
+
+values = [38, 12, 27, 5, 19, 8, 31, 14]
+println(merge_sort(values))
+```
+
+:::
+
+::::
 
 This version accepts lists of mutually comparable values and returns a new sorted list. It does not mutate the caller’s outer list or copy the payload objects deeply. Empty and singleton inputs return a shallow copy immediately. Every larger call produces two strictly smaller inputs.
 

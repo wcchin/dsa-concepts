@@ -7,6 +7,10 @@
 
 **Builds on:** [Map](maps.md) and [set](sets.md) contracts specify which exact-key operations are needed.
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/maps-sets-hashing.js) · [Julia](../../examples/languages/maps-sets-hashing.jl).
+
+Native containers have different equality and iteration rules. JavaScript examples use primitive keys; array keys compare by identity. The low-level helpers use the supplied teaching hash: h(k)=k for integer traces. Julia helper indices are one-based; table layouts for other native hash functions need not match Python. Snapshot containers differ in type, not ownership.
+
 Hashing uses a key to select a small part of a table to examine. It supports exact-key retrieval; it does not by itself organise keys by magnitude or geographical proximity.
 
 ## Operation role and invariant
@@ -33,11 +37,46 @@ Reducing many possible keys to a finite number of positions makes collisions una
 
 A hashable object has a hash value that stays stable during its lifetime and obeys the equality/hash contract. Python requires dictionary keys and set elements to be hashable. Lists and dictionaries are unhashable. A tuple is hashable only when all its elements are hashable.
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 locations = {(2, 3): "Stop A"}   # tuple of integers: valid key
 records = {"S01": [72, 81]}     # list as a value: valid
 records["S01"].append(85)       # values need not be hashable
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+// JS Map compares array keys by identity, not by coordinate value.
+var point = [2, 3], locations = new Map([[point, "Stop A"]]);
+console.assert(locations.get(point) === "Stop A");
+console.assert(!locations.has([2, 3]));
+var records = new Map([["S01", [72, 81]]]);
+records.get("S01").push(85);
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+locations = Dict((2, 3) => "Stop A")
+records = Dict("S01" => [72, 81])
+push!(records["S01"], 85)
+```
+
+:::
+
+::::
 
 “Immutable” and “hashable” are related but not interchangeable definitions. A tuple containing a list is unhashable. User-defined classes can have other equality and hashing policies. For a value-based key, changing information used by hashing or equality can invalidate lookup assumptions; using a stable immutable key is the clearest design for these examples.
 

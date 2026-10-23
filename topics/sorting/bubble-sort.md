@@ -7,6 +7,10 @@
 
 **Builds on:** [Insertion sort](insertion-sort.md) introduces invariants and inversions.
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/sorting.js) · [Julia](../../examples/languages/sorting.jl).
+
+Teaching sorts retain their mutation/return policy: JavaScript mutators return undefined and Julia teaching mutators return nothing. Built-in sort APIs are shown separately: JavaScript sort and Julia sort! return their mutated arrays. The Timsort/Powersort discussion describes Python’s implementation, not the algorithms used by the other runtimes.
+
 (bubble-sort)=
 ## Repair neighbouring pairs
 
@@ -15,6 +19,12 @@ Scan left to right, comparing adjacent values and swapping a pair when the left 
 ![Four adjacent comparisons move 7 to the end of 7, 2, 6, 3, 5.](../../assets/sorting/bubble-pass.svg)
 
 ## Python implementation
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def bubble_sort(a):
@@ -27,6 +37,48 @@ def bubble_sort(a):
         if not swapped:
             break
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function bubble_sort(a) {
+    for (let end = a.length - 1; end > 0; end--) {
+        let swapped = false;
+        for (let j = 0; j < end; j++) {
+            if (a[j] > a[j + 1]) { [a[j], a[j + 1]] = [a[j + 1], a[j]]; swapped = true; }
+        }
+        if (!swapped) break;
+    }
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function bubble_sort!(a)
+    for last in length(a):-1:2
+        swapped = false
+        for j in 1:last-1
+            if a[j] > a[j + 1]
+                a[j], a[j + 1] = a[j + 1], a[j]
+                swapped = true
+            end
+        end
+        !swapped && break
+    end
+    return nothing
+end
+```
+
+:::
+
+::::
 
 (bubble-invariant)=
 ## The sorted suffix invariant

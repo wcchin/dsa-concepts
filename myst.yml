@@ -14,6 +14,7 @@ project:
   - file: index.md
   - file: concepts.md
   - file: reading-guide.md
+  - file: code-languages.md
   - file: coverage-review.md
   - file: licensing.md
   - file: topics/foundations/foundations.md

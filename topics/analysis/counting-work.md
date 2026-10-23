@@ -7,6 +7,10 @@
 
 **Builds on:** [Objects, references and collections](../foundations/foundations.md) and basic Python loops/functions.
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/analysis.js) · [Julia](../../examples/languages/analysis.jl).
+
+The comparison counts are shared. JavaScript returns multiple results in arrays, Julia in tuples; graph/node references and absence use each language’s conventions.
+
 Observed runtime tells us how long one implementation took on one input in one environment. Algorithm analysis asks how its resource use depends on the input.
 
 (input-size)=
@@ -38,6 +42,12 @@ The later node snippet has a different purpose: it **mutates links** after a val
 
 A **cost model** states what work we count and what operations we treat as constant cost. For a simple search, a useful basic operation is an equality comparison with the target:
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 def contains_with_count(values, target):
     comparisons = 0
@@ -52,12 +62,60 @@ print(contains_with_count(stations, "UTN"))  # (True, 3)
 print(contains_with_count(stations, "BG"))   # (False, 4)
 ```
 
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function contains_with_count(values, target) {
+    let comparisons = 0;
+    for (const value of values) {
+        comparisons++;
+        if (value === target) return [true, comparisons];
+    }
+    return [false, comparisons];
+}
+let stations = ["KR", "MUS", "UTN", "CLM"];
+console.log(contains_with_count(stations, "UTN"));
+console.log(contains_with_count(stations, "BG"));
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function contains_with_count(values, target)
+    comparisons = 0
+    for value in values
+        comparisons += 1
+        value == target && return (true, comparisons)
+    end
+    return (false, comparisons)
+end
+stations = ["KR", "MUS", "UTN", "CLM"]
+println(contains_with_count(stations, "UTN"))
+println(contains_with_count(stations, "BG"))
+```
+
+:::
+
+::::
+
 The counter makes our selected work visible; it is instrumentation, not a necessary part of membership search. Count comparisons with the target, not source lines or every occurrence of an operator.
 
 We initially treat list access, reference updates and operations on small values as constant time. Comparing long strings or doing arithmetic on very large Python integers can violate that assumption. State the model before applying it; more detailed models can produce different analyses.
 
 (operation-count)=
 ## Exact counts depend on what is counted
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def visit_count(values):
@@ -70,6 +128,42 @@ print(visit_count(["KR", "MUS", "UTN"]))  # 3
 print(visit_count([]))                      # 0
 ```
 
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function visit_count(values) {
+    let visits = 0;
+    for (const value of values) visits++;
+    return visits;
+}
+console.log(visit_count(["KR", "MUS", "UTN"]));
+console.log(visit_count([]));
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function visit_count(values)
+    visits = 0
+    for value in values
+        visits += 1
+    end
+    return visits
+end
+println(visit_count(["KR", "MUS", "UTN"]))
+println(visit_count([]))
+```
+
+:::
+
+::::
+
 There are exactly n body executions. A corresponding `while` loop that tests whether more items remain checks its condition n + 1 times, including the final failed test. Different selected operations can have different counts.
 
 A weighted model for the complete traversal might be T(n) = an + b, with positive constants a and b representing per-item and setup work. This is a consistent abstract model, not a universal count of Python machine instructions. Counting comparisons can characterise total time when the remaining overhead has a compatible bound; that connection should be justified rather than assumed for every algorithm.
@@ -78,6 +172,12 @@ A weighted model for the complete traversal might be T(n) = an + b, with positiv
 ## Separate finding a position from changing it
 
 For a finite acyclic route, listing every stop or searching unsuccessfully visits all n nodes. Insertion after an **already known** node can use two link assignments:
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 class Node:
@@ -90,6 +190,42 @@ new = Node("MUS")
 new.next = known.next
 known.next = new
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+class Node {
+    constructor(value, next_node = null) { this.value = value; this.next = next_node; }
+}
+let known = new Node("KR", new Node("UTN"));
+let added = new Node("MUS");
+added.next = known.next;
+known.next = added;
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+mutable struct Node
+    value
+    next
+end
+Node(value) = Node(value, nothing)
+known = Node("KR", Node("UTN"))
+added = Node("MUS")
+added.next = known.next
+known.next = added
+```
+
+:::
+
+::::
 
 The assignments link KR to MUS and MUS to UTN. Here `new` is an unlinked node and `known` is a valid supplied node. The update count is two, independent of the route’s length; allocation and validation are separate work.
 

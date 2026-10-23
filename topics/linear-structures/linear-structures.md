@@ -44,3 +44,5 @@ The wrappers are complete implementations of their stated interfaces; they deleg
 Review [Topic 1’s ADT introduction](../foundations/adt-basics.md), [objects and references](../foundations/objects-and-references.md), [classes and invariants](../foundations/collections-and-classes.md) and [algorithm analysis](../analysis/analysis.md). Later topics develop maps, sets and priority queues as separate ADT families.
 
 Start with [contracts](adts-and-contracts.md), or use the [concept index](../../concepts.md) for an individual operation.
+
+Code listings offer Python, JavaScript and Julia tabs where a runnable example is present. Python remains the explanation and trace language; see the [language guide](../../code-languages.md) for native conventions and runnable topic downloads.

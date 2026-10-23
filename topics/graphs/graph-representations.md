@@ -7,10 +7,20 @@
 
 **Builds on:** [Graph modelling](graph-concepts.md), [reference sharing](../foundations/mutation-and-copying.md) and [hashing assumptions](../maps-sets-hashing/performance.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/graphs.js) · [Julia](../../examples/languages/graphs.jl).
+
+JavaScript graphs use Map; Julia graphs use Dict. Stored neighbour order is preserved, but Julia Dict vertex iteration can change valid component ordering or tied choices. The shared DequeBuffer supplies constant-time linked endpoints. The figures and check answers use Python’s declared iteration order.
+
 (adjacency-list)=
 ## Store each vertex's neighbours
 
 An **adjacency list** records the neighbours reachable by one edge from each vertex. In Python, a dictionary can map each label to a list. Lists give a specified iteration order; this example uses alphabetical neighbour order.
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 graph = {
@@ -24,6 +34,33 @@ graph = {
     "H": [],
 }
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+var graph = new Map([
+    ["A", ["B", "C"]], ["B", ["A", "D", "E"]], ["C", ["A", "F"]],
+    ["D", ["B", "E"]], ["E", ["B", "D", "F"]], ["F", ["C", "E", "G"]],
+    ["G", ["F"]], ["H", []]
+]);
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+graph = Dict("A"=>["B","C"], "B"=>["A","D","E"], "C"=>["A","F"],
+    "D"=>["B","E"], "E"=>["B","D","F"], "F"=>["C","E","G"], "G"=>["F"], "H"=>String[])
+```
+
+:::
+
+::::
 
 (graph-representation-contract)=
 ## Keep vertices and edges consistent
@@ -39,6 +76,12 @@ Fix the vertex order A through H. An **adjacency matrix** has entry 1 in row u, 
 
 ![The adjacency-list rows and the matching eight-by-eight matrix represent the same edges; H has an empty list and a zero matrix row and column.](../../assets/graphs/adjacency-representations.svg)
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 vertices = list(graph)
 index = {v: i for i, v in enumerate(vertices)}
@@ -48,6 +91,33 @@ for u in vertices:
     for v in graph[u]:
         matrix[index[u]][index[v]] = 1
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+var vertices = [...graph.keys()], index = new Map(vertices.map((v, i) => [v, i]));
+var matrix = Array.from({length: vertices.length}, () => Array(vertices.length).fill(0));
+for (const u of vertices) for (const v of graph.get(u)) matrix[index.get(u)][index.get(v)] = 1;
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+vertices = collect(keys(graph))
+index = Dict(v=>i for (i,v) in enumerate(vertices))
+matrix = zeros(Int, length(vertices), length(vertices))
+for u in vertices, v in graph[u]; matrix[index[u], index[v]] = 1; end
+```
+
+:::
+
+::::
 
 Each row is a separate list. `[[0] * n] * n` would alias a single row: changing one entry would unexpectedly change the same column in every row. This is the [reference-sharing issue from Topic 1](../foundations/mutation-and-copying.md).
 

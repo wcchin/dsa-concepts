@@ -7,6 +7,10 @@
 
 **Builds on:** [BST lookup/insertion](bst-lookup-insertion.md), [ordered queries](bst-traversal.md), [ranges](bst-range-queries.md) and [deletion](bst-deletion.md) supply the functions used below.
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/searching.js) · [Julia](../../examples/languages/searching.jl).
+
+Python and JavaScript positions are zero-based; Julia vector positions and insertion boundaries are one-based. A missing lookup is None/null/nothing, while a boundary query can return the one-past-end position. Julia public ordered-set operations use functions such as add!, ordered_keys and range_keys.
+
 (ordered-set-contract)=
 ## Purpose and operation contracts
 
@@ -46,6 +50,12 @@ The adapter owns a private root and a cached total count. Reachable nodes hold e
 ## Python implementation
 
 Read the preceding helper listings in one session first. Both kinds of nodes expose `key`, `left` and `right`, so the read-only helpers can work on either. The constructor receives the chosen pair of insert/delete algorithms; use a matching pair for one representation throughout its lifetime.
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 class OrderedSet:
@@ -115,6 +125,87 @@ class OrderedSet:
     def range_keys(self, low, high):
         return bst_range_keys(self._root, low, high)
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+class OrderedSet {
+    constructor(insert_key, delete_key) {
+        this._root = null; this._size = 0;
+        this._insert_key = insert_key; this._delete_key = delete_key;
+    }
+    size() { return this._size; }
+    is_empty() { return this._size === 0; }
+    contains(key) { return bst_search(this._root, key) !== null; }
+    add(key) {
+        if (!this.contains(key)) { this._root = this._insert_key(this._root, key); this._size++; }
+    }
+    remove(key) {
+        if (!this.contains(key)) throw new KeyError(String(key));
+        this._root = this._delete_key(this._root, key); this._size--;
+    }
+    discard(key) { if (this.contains(key)) this.remove(key); }
+    _required_key(node) { if (node === null) throw new KeyError("no matching key"); return node.key; }
+    minimum() { return this._required_key(bst_minimum(this._root)); }
+    maximum() { return this._required_key(bst_maximum(this._root)); }
+    successor(key) { return this._required_key(bst_successor(this._root, key)); }
+    predecessor(key) { return this._required_key(bst_predecessor(this._root, key)); }
+    extract_min() { const key = this.minimum(); this.remove(key); return key; }
+    extract_max() { const key = this.maximum(); this.remove(key); return key; }
+    keys() { return inorder_keys(this._root); }
+    range_keys(low, high) { return bst_range_keys(this._root, low, high); }
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+mutable struct OrderedSet
+    root
+    n::Int
+    insert_key
+    delete_key
+end
+OrderedSet(insert_key, delete_key) = OrderedSet(nothing, 0, insert_key, delete_key)
+Base.length(s::OrderedSet) = s.n
+Base.isempty(s::OrderedSet) = s.n == 0
+contains_key(s::OrderedSet, key) = bst_search(s.root, key) !== nothing
+function add!(s::OrderedSet, key)
+    if !contains_key(s, key); s.root = s.insert_key(s.root, key); s.n += 1; end
+    return nothing
+end
+function remove!(s::OrderedSet, key)
+    contains_key(s, key) || throw(KeyError(key))
+    s.root = s.delete_key(s.root, key); s.n -= 1; return nothing
+end
+discard!(s::OrderedSet, key) = (contains_key(s, key) && remove!(s, key); nothing)
+function required_key(node)
+    node === nothing && throw(KeyError("no matching key"))
+    return node.key
+end
+Base.minimum(s::OrderedSet) = required_key(bst_minimum(s.root))
+Base.maximum(s::OrderedSet) = required_key(bst_maximum(s.root))
+successor(s::OrderedSet, key) = required_key(bst_successor(s.root, key))
+predecessor(s::OrderedSet, key) = required_key(bst_predecessor(s.root, key))
+function extract_min!(s::OrderedSet)
+    key = minimum(s); remove!(s, key); return key
+end
+function extract_max!(s::OrderedSet)
+    key = maximum(s); remove!(s, key); return key
+end
+ordered_keys(s::OrderedSet) = inorder_keys(s.root)
+range_keys(s::OrderedSet, low, high) = bst_range_keys(s.root, low, high)
+```
+
+:::
+
+::::
 
 Create `ordinary = OrderedSet(bst_insert, bst_delete)`. After reading Topic 8, create `balanced = OrderedSet(avl_insert, avl_delete)` instead. The adapter starts empty; it does not convert an existing BST into an AVL tree.
 

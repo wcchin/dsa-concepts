@@ -25,3 +25,5 @@ Read **idea and visual trace → implementation → why it works → implementat
 The running numeric input is `[7,2,6,3,5]`. Label equal-key records when checking stability, and also consider empty, singleton, sorted, reverse-sorted and all-equal inputs. Counts refer to the implementation actually shown. The short Timsort/Powersort reading is conceptual and uses the built-in interface rather than offering an incomplete replacement.
 
 [Heapsort](../heaps/heap-sorting-costs.md#in-place-heapsort) is developed after heap construction in Topic 10. Its iterative max-heap implementation is included in the comparison here; follow the link when ready rather than requiring heap knowledge before this chapter.
+
+Code listings offer Python, JavaScript and Julia tabs where a runnable example is present. Python remains the explanation and trace language; see the [language guide](../../code-languages.md) for native conventions and runnable topic downloads.

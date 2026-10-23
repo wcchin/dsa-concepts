@@ -7,6 +7,10 @@
 
 **Builds on:** [Union–find operations](../union-find/disjoint-sets.md#disjoint-set-interface), [the complete class](../union-find/union-compression.md#disjoint-set-code) and [safe-edge reasoning](spanning-trees.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/graph-algorithms.js) · [Julia](../../examples/languages/graph-algorithms.jl).
+
+These versions reuse the translated deque, heap and disjoint-set definitions. Julia Dict order can select a different valid topological order or tied forest; compare the objective, feasibility and optimum cost rather than requiring an identical printed edge order. Heap counters avoid comparing payloads.
+
 (kruskal-algorithm)=
 ## Consider the globally lightest remaining edge
 
@@ -24,6 +28,12 @@ Run the complete [DisjointSet class](../union-find/union-compression.md#disjoint
 (kruskal-code)=
 ## Union reports whether a merge actually occurred
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 def kruskal_forest(vertices, edges):
     vertices = list(vertices)
@@ -38,6 +48,45 @@ def kruskal_forest(vertices, edges):
             total += w
     return chosen, total, sets.components
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function kruskal_forest(vertices, edges) {
+    vertices = [...vertices]; const index = new Map(vertices.map((v,i) => [v,i]));
+    if (index.size !== vertices.length) throw new RangeError("vertices must be unique");
+    const sets = new DisjointSet(vertices.length), chosen = []; let total = 0;
+    for (const [w,u,v] of [...edges].sort((a,b) => a[0]-b[0])) {
+        if (!index.has(u) || !index.has(v)) throw new KeyError("unknown endpoint");
+        if (sets.union(index.get(u), index.get(v))) { chosen.push([w,u,v]); total += w; }
+    }
+    return [chosen, total, sets.components];
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function kruskal_forest(vertices, edges)
+    vertices = collect(vertices); index = Dict(v=>i for (i,v) in enumerate(vertices))
+    length(index) == length(vertices) || throw(ArgumentError("vertices must be unique"))
+    sets = DisjointSet(length(vertices)); chosen = Any[]; total = 0
+    for (w,u,v) in sort(collect(edges); by=e->e[1], alg=MergeSort)
+        if union_sets!(sets, index[u], index[v]); push!(chosen, (w,u,v)); total += w; end
+    end
+    return (chosen, total, sets.components)
+end
+```
+
+:::
+
+::::
 
 The edge list contains each undirected edge once, with valid endpoints and finite numeric weights. Sorting creates a new list; it does not mutate the input. Equal weights retain input order because Python's sort is stable. This makes the trace reproducible without comparing vertex labels, but another tie order could yield another equally good forest.
 

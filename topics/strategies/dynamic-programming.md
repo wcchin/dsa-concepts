@@ -7,6 +7,10 @@
 
 **Builds on:** [State relevance](strategy-selection.md#state-and-subproblem), [recursive progress](../recursion/recursive-calls.md) and [shortest-path predecessors](../graph-algorithms/shortest-path-state.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/strategies.js) · [Julia](../../examples/languages/strategies.jl).
+
+State definitions, pruning conditions and tie policies are shared. Julia returns one-based position tuples/subsets, and its coin table uses slot a+1 for amount a. The finite numeric examples require representable intermediate arithmetic in each runtime.
+
 (dynamic-programming)=
 ## Solve equivalent subproblems once
 
@@ -20,6 +24,12 @@ An impossible state has value infinity; a minimum over no available choices is i
 
 (memoisation)=
 ## Top-down memoisation retains recursive structure
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def coin_problem(coins, amount):
@@ -44,6 +54,62 @@ def min_coins_memo(coins, amount):
     return None if result == float("inf") else result
 ```
 
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function coin_problem(coins, amount) {
+    coins = [...coins];
+    if (!Number.isSafeInteger(amount) || amount<0 || coins.some(c=>!Number.isSafeInteger(c)||c<=0))
+        throw new RangeError("nonnegative amount and positive integer coins required");
+    return [...new Set(coins)].sort((a,b)=>a-b);
+}
+function min_coins_memo(coins, amount) {
+    coins = coin_problem(coins,amount); const memo = new Map([[0,0]]);
+    function solve(a) {
+        if (!memo.has(a)) {
+            let best = Infinity;
+            for (const c of coins) if (c<=a) best = Math.min(best,1+solve(a-c));
+            memo.set(a,best);
+        }
+        return memo.get(a);
+    }
+    const result = solve(amount); return result === Infinity ? null : result;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function coin_problem(coins, amount)
+    coins = collect(coins)
+    (amount isa Int && amount >= 0) || throw(ArgumentError("invalid amount"))
+    all(c isa Int && c > 0 for c in coins) || throw(ArgumentError("invalid coin"))
+    return sort(unique(coins))
+end
+function min_coins_memo(coins, amount)
+    coins = coin_problem(coins,amount); memo = Dict{Int,Float64}(0=>0)
+    function solve(a)
+        if !haskey(memo,a)
+            best = Inf
+            for c in coins; c <= a && (best = min(best,1+solve(a-c))); end
+            memo[a] = best
+        end
+        return memo[a]
+    end
+    result = solve(amount); return result == Inf ? nothing : Int(result)
+end
+```
+
+:::
+
+::::
+
 The dictionary caches both possible and impossible states. Positive denominations ensure recursive amounts decrease. Recursion depth can still grow with A, so Python can reach its recursion limit; memoisation reduces repeated work, not necessarily depth.
 
 :::{note} Pause and trace
@@ -52,6 +118,12 @@ Work out the minimum counts for a few small amounts using the recurrence first. 
 
 (tabulation)=
 ## Bottom-up tabulation follows the state dependencies
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def min_coin_change(coins, amount):
@@ -73,6 +145,48 @@ def min_coin_change(coins, amount):
         a -= choice[a]
     return best[amount], selected
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function min_coin_change(coins, amount) {
+    coins = coin_problem(coins,amount);
+    const best = Array(amount+1).fill(Infinity), choice = Array(amount+1).fill(null); best[0] = 0;
+    for (let a=1;a<=amount;a++) for (const c of coins) {
+        if (c<=a && best[a-c]+1<best[a]) { best[a]=best[a-c]+1; choice[a]=c; }
+    }
+    if (best[amount] === Infinity) return null;
+    const selected = []; let a=amount;
+    while (a>0) { selected.push(choice[a]); a-=choice[a]; }
+    return [best[amount],selected];
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function min_coin_change(coins, amount)
+    coins = coin_problem(coins,amount)
+    best = fill(Inf,amount+1); choice = zeros(Int,amount+1); best[1]=0
+    for a in 1:amount, c in coins
+        if c<=a && best[a-c+1]+1<best[a+1]; best[a+1]=best[a-c+1]+1; choice[a+1]=c; end
+    end
+    best[amount+1] == Inf && return nothing
+    selected = Int[]; a=amount
+    while a>0; push!(selected,choice[a+1]); a-=choice[a+1]; end
+    return (Int(best[amount+1]),selected)
+end
+```
+
+:::
+
+::::
 
 (coin-change-contract)=
 ## Compare count-only and reconstructed answers

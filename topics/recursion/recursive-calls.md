@@ -7,6 +7,10 @@
 
 **Builds on:** [Function arguments and references](../foundations/mutation-and-copying.md#function-arguments) and [correctness/progress reasoning](../analysis/correctness.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/recursion.js) · [Julia](../../examples/languages/recursion.jl).
+
+The same base cases, smaller subproblems and merge choices apply. Native recursion limits and bounded numeric arithmetic still matter; copying slices is included in the implementation cost.
+
 A function is recursive when its computation leads to another call of itself, directly or through other functions. The examples here use direct recursion: the same function solves a smaller instance and uses its result to finish the original task.
 
 (recursive-definition)=
@@ -23,6 +27,12 @@ The recursive rule does not yet perform the addition. It says that the result of
 (base-and-recursive-cases)=
 ## Base case and recursive case
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 def sum_to(n):
     if type(n) is not int or n < 0:
@@ -34,6 +44,38 @@ def sum_to(n):
 print(sum_to(3))  # 6
 print(sum_to(0))  # 0
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function sum_to(n) {
+    if (!Number.isSafeInteger(n) || n < 0) throw new RangeError("Expected a nonnegative integer");
+    if (n === 0) return 0;
+    return n + sum_to(n - 1);
+}
+console.log(sum_to(3)); console.log(sum_to(0));
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function sum_to(n)
+    (n isa Int && n >= 0) || throw(ArgumentError("Expected a nonnegative integer"))
+    n == 0 && return 0
+    return n + sum_to(n - 1)
+end
+println(sum_to(3)); println(sum_to(0))
+```
+
+:::
+
+::::
 
 The **base case** returns an answer directly. The **recursive case** calls the same function on a smaller value, then completes the pending addition. The guard rejects inputs outside the stated domain; otherwise a negative input would keep decreasing without reaching zero. The explicit check accepts Python `int` values exactly, excluding Booleans and other types.
 

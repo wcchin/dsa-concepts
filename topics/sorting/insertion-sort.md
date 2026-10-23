@@ -7,6 +7,10 @@
 
 **Builds on:** [Sorting contracts](sorting-properties.md) define order, multiplicities and equal-key stability.
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/sorting.js) · [Julia](../../examples/languages/sorting.jl).
+
+Teaching sorts retain their mutation/return policy: JavaScript mutators return undefined and Julia teaching mutators return nothing. Built-in sort APIs are shown separately: JavaScript sort and Julia sort! return their mutated arrays. The Timsort/Powersort discussion describes Python’s implementation, not the algorithms used by the other runtimes.
+
 (insertion-sort)=
 ## Grow a sorted prefix
 
@@ -15,6 +19,12 @@ Imagine arranging cards in your hand. Keep the cards already considered in order
 ![Insertion sort grows the sorted prefix of 7, 2, 6, 3, 5 by one value per iteration.](../../assets/sorting/insertion-prefix.svg)
 
 ## Python implementation
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def insertion_sort(a):
@@ -26,6 +36,46 @@ def insertion_sort(a):
             j -= 1
         a[j + 1] = item
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function insertion_sort(a) {
+    for (let i = 1; i < a.length; i++) {
+        const item = a[i];
+        let j = i - 1;
+        while (j >= 0 && a[j] > item) { a[j + 1] = a[j]; j--; }
+        a[j + 1] = item;
+    }
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function insertion_sort!(a)
+    for i in 2:length(a)
+        item = a[i]
+        j = i - 1
+        while j >= 1 && a[j] > item
+            a[j + 1] = a[j]
+            j -= 1
+        end
+        a[j + 1] = item
+    end
+    return nothing
+end
+```
+
+:::
+
+::::
 
 (insertion-invariant)=
 ## The prefix invariant

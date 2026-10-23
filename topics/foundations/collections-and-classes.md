@@ -7,6 +7,10 @@
 
 **Builds on:** [Object/reference locations](objects-and-references.md) and [mutation/sharing contracts](mutation-and-copying.md#mutation-operation-contracts).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/foundations.js) · [Julia](../../examples/languages/foundations.jl).
+
+These are language comparisons: Python-specific identity, type-hint and default-argument explanations remain about Python. JavaScript arrays use identity equality; the comparison example checks contents explicitly. Julia uses mutable structs and function-style methods; its default expressions, like JavaScript’s, are evaluated per call.
+
 Built-in collections give us useful representations immediately. Classes let us define objects with named state and operations. Both approaches require clear decisions about what the data means and which states are valid.
 
 (built-in-collections)=
@@ -26,6 +30,12 @@ A tuple is useful for coordinates because each position has a fixed interpretati
 (unpacking-and-comprehensions)=
 ## Unpacking and comprehensions
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 location = (1.2937, 103.7845)
 latitude, longitude = location
@@ -39,6 +49,40 @@ busy_stops = [
 print(busy_stops)  # ['Kent Ridge', 'University Town']
 ```
 
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+let location = [1.2937, 103.7845];
+let [latitude, longitude] = location;
+let passenger_counts = new Map([
+    ["Kent Ridge", 12], ["Museum", 7], ["University Town", 18]
+]);
+let busy_stops = [...passenger_counts]
+    .filter(([name, count]) => count >= 10).map(([name]) => name);
+console.log(busy_stops);
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+location = (1.2937, 103.7845)
+latitude, longitude = location
+# A vector of pairs keeps the example's display order explicit.
+passenger_counts = ["Kent Ridge"=>12, "Museum"=>7, "University Town"=>18]
+busy_stops = [name for (name, count) in passenger_counts if count >= 10]
+println(busy_stops)
+```
+
+:::
+
+::::
+
 Unpacking gives names to the two coordinate fields. In the comprehension, `.items()` supplies key-value pairs. For each pair, the condition selects a name for the new list. Reading it as “iterate, test, produce” helps distinguish the input representation from the output collection. The resulting order follows the dictionary’s iteration order, not a ranking by passenger count.
 
 (classes-and-instances)=
@@ -47,6 +91,12 @@ Unpacking gives names to the two coordinate fields. In the comprehension, `.item
 A **class** defines a type of object and its behaviour. An **instance** is a particular object of that class. An **attribute** holds named state or another accessible member; a **method** supplies behaviour associated with an object.
 
 The following teaching model records a passenger count associated with each shuttle stop. It is deliberately small: it illustrates state updates, rather than modelling all transport operations.
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 class ShuttleStop:
@@ -83,6 +133,72 @@ museum.alight(1)
 print(museum)  # ShuttleStop('MUS', 'Museum', passengers=2)
 print(utown)   # ShuttleStop('UTN', 'University Town', passengers=8)
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+class ShuttleStop {
+    constructor(code, name) {
+        this.code = code; this.name = name; this._passengers = 0;
+    }
+    _check_number(number) {
+        if (!Number.isSafeInteger(number) || number < 0)
+            throw new RangeError("Expected a nonnegative integer count");
+    }
+    board(number = 1) { this._check_number(number); this._passengers += number; }
+    alight(number = 1) {
+        this._check_number(number);
+        if (number > this._passengers) throw new RangeError("Not enough passengers");
+        this._passengers -= number;
+    }
+    toString() {
+        return `ShuttleStop(${this.code}, ${this.name}, passengers=${this._passengers})`;
+    }
+}
+let museum = new ShuttleStop("MUS", "Museum");
+let utown = new ShuttleStop("UTN", "University Town");
+museum.board(3); utown.board(8); museum.alight(1);
+console.log(String(museum)); console.log(String(utown));
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+mutable struct ShuttleStop
+    code
+    name
+    passengers::Int
+end
+ShuttleStop(code, name) = ShuttleStop(code, name, 0)
+function check_number(number)
+    (number isa Int && number >= 0) || throw(ArgumentError("Expected a nonnegative integer count"))
+end
+function board!(stop::ShuttleStop, number=1)
+    check_number(number)
+    stop.passengers += number
+    return nothing
+end
+function alight!(stop::ShuttleStop, number=1)
+    check_number(number)
+    number <= stop.passengers || throw(ArgumentError("Not enough passengers"))
+    stop.passengers -= number
+    return nothing
+end
+museum = ShuttleStop("MUS", "Museum")
+utown = ShuttleStop("UTN", "University Town")
+board!(museum, 3); board!(utown, 8); alight!(museum, 1)
+println(museum); println(utown)
+```
+
+:::
+
+::::
 
 `__init__` initialises each newly created instance. Assignments to `self.code`, `self.name` and `self._passengers` establish instance attributes. Each stop has its own count; updating Museum does not change University Town. `__repr__` supplies an informative representation for inspection. Here `!r` requests the representation of each string, including its quotes.
 
@@ -130,6 +246,12 @@ You can study this page in two sittings: collection choices and validated instan
 (linked-objects)=
 ## References connect instances into structures
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 class RouteNode:
     def __init__(self, stop, next_node=None):
@@ -144,6 +266,46 @@ while current is not None:
     print(current.stop.name)
     current = current.next
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+class RouteNode {
+    constructor(stop, next_node = null) { this.stop = stop; this.next = next_node; }
+}
+let second = new RouteNode(new ShuttleStop("MUS", "Museum"));
+let first = new RouteNode(new ShuttleStop("KR", "Kent Ridge"), second);
+for (let current = first; current !== null; current = current.next)
+    console.log(current.stop.name);
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+mutable struct RouteNode
+    stop
+    next
+end
+RouteNode(stop) = RouteNode(stop, nothing)
+second = RouteNode(ShuttleStop("MUS", "Museum"))
+first_node = RouteNode(ShuttleStop("KR", "Kent Ridge"), second)
+let current = first_node
+    while current !== nothing
+        println(current.stop.name)
+        current = current.next
+    end
+end
+```
+
+:::
+
+::::
 
 The output is Kent Ridge followed by Museum. Each node refers to a stop and either another node or `None`. The stop is an object in its own right; the node is the object that gives it a position in this route.
 

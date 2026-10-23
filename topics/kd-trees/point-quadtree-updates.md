@@ -7,10 +7,20 @@
 
 **Builds on:** [Point-quadtree construction, exact lookup and range search](point-quadtrees.md). Use its node class, child order and shared points.
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/kd-trees.js) · [Julia](../../examples/languages/kd-trees.jl).
+
+JavaScript points are arrays compared by same_point; Julia points are value tuples. Julia coordinate/child indices are one-based (x=1, y=2; SW/SE/NW/NE=1/2/3/4), while depth still starts at zero. R-tree orientation uses exact big-integer arithmetic for the supplied integer-coordinate geometry; nearest distances remain floating calculations. General R-tree update code is still conceptual in every language.
+
 (spatial-box-distance)=
 ## Distance to a cell is a lower bound
 
 For each coordinate, the distance is zero inside the interval, otherwise the gap to the closer edge. Sum the squared coordinate gaps. This is the exact distance to a closed rectangle, and a safe lower bound for any point inside it. For half-open cells, use the closure: a possibly unattained boundary minimum is still a safe lower bound.
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def box_distance2(query, bounds):
@@ -26,10 +36,52 @@ def point_quad_cells(bounds, pivot):
             (xmin, y, x, ymax), (x, y, xmax, ymax))
 ```
 
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function box_distance2(query,[xmin,ymin,xmax,ymax]) {
+    const dx=Math.max(xmin-query[0],0,query[0]-xmax), dy=Math.max(ymin-query[1],0,query[1]-ymax);
+    return dx*dx+dy*dy;
+}
+function point_quad_cells([xmin,ymin,xmax,ymax],[x,y]) {
+    return [[xmin,ymin,x,y],[x,ymin,xmax,y],[xmin,y,x,ymax],[x,y,xmax,ymax]];
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function box_distance2(query,bounds)
+    xmin,ymin,xmax,ymax=bounds
+    dx=max(xmin-query[1],0,query[1]-xmax); dy=max(ymin-query[2],0,query[2]-ymax)
+    return dx^2+dy^2
+end
+function point_quad_cells(bounds,pivot)
+    xmin,ymin,xmax,ymax=bounds; x,y=pivot
+    return ((xmin,ymin,x,y),(x,ymin,xmax,y),(xmin,y,x,ymax),(x,y,xmax,ymax))
+end
+```
+
+:::
+
+::::
+
 Start the point tree with an unbounded root cell. Split each inherited cell through its node's pivot; the resulting four cells enclose the corresponding children. These functions assume finite query coordinates, ordinary arithmetic without overflow, and the established Cartesian axes.
 
 (point-quadtree-nearest)=
 ## Visit promising cells before less promising ones
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def point_quad_nearest(root, query):
@@ -53,6 +105,54 @@ def point_quad_nearest(root, query):
     return best
 ```
 
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function point_quad_nearest(root,query) {
+    let best=null,best_d2=Infinity;
+    const stack=root===null ? [] : [[root,[-Infinity,-Infinity,Infinity,Infinity]]];
+    while (stack.length) {
+        const [node,bounds]=stack.pop(); if (box_distance2(query,bounds)>best_d2) continue;
+        const d2=(node.point[0]-query[0])**2+(node.point[1]-query[1])**2;
+        if (best===null || d2<best_d2) { best=node.point; best_d2=d2; }
+        const cells=point_quad_cells(bounds,node.point), children=[];
+        node.children.forEach((child,i)=>{if(child!==null)children.push([child,cells[i]])});
+        children.sort((a,b)=>box_distance2(query,b[1])-box_distance2(query,a[1]));
+        stack.push(...children);
+    }
+    return best;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function point_quad_nearest(root,query)
+    best=nothing; best_d2=Inf
+    stack=root===nothing ? Any[] : Any[(root,(-Inf,-Inf,Inf,Inf))]
+    while !isempty(stack)
+        node,bounds=pop!(stack); box_distance2(query,bounds)>best_d2 && continue
+        d2=sum((node.point[i]-query[i])^2 for i in 1:2)
+        if best===nothing || d2<best_d2; best=node.point; best_d2=d2; end
+        cells=point_quad_cells(bounds,node.point)
+        children=Any[(child,cell) for (child,cell) in zip(node.children,cells) if child!==nothing]
+        sort!(children;by=p->box_distance2(query,p[2]),rev=true,alg=MergeSort)
+        append!(stack,children)
+    end
+    return best
+end
+```
+
+:::
+
+::::
+
 The smallest bound is popped first, but every popped cell is tested against the **current** best distance. An early candidate is not final. Return one nearest point, choosing the first encountered on a tie; an empty tree returns `None`. Sorting at most four children costs constant time per visited node.
 
 For Q=(4,5), A=(5,4) and E=(3,6) both have squared distance 2. A is encountered first, so this listing keeps A. A cell bound equal to 2 is not pruned: equality can contain a tied answer. The query's owning quadrant is only a starting preference, not a proof that other quadrants are irrelevant.
@@ -61,6 +161,12 @@ For Q=(4,5), A=(5,4) and E=(3,6) both have squared distance 2. A is encountered 
 ## Delete by rebuilding the affected subtree
 
 Removing a pivot removes both of its split lines. Simply promoting one child can invalidate where its siblings belong. A clear teaching strategy is to collect the affected subtree's points, omit the target, and reinsert the survivors into a fresh point quadtree. The rebuilt subtree stays inside the same ancestor region.
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def point_quad_delete(root, point):
@@ -86,6 +192,58 @@ def point_quad_delete(root, point):
     parent.children[branch] = replacement
     return root
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function point_quad_delete(root,point) {
+    let parent=null,branch=null,node=root;
+    while (node!==null && !same_point(node.point,point)) {
+        parent=node; branch=point_quadrant(point,node.point); node=node.children[branch];
+    }
+    if (node===null) return root;
+    const survivors=[],stack=[node];
+    while (stack.length) {
+        const current=stack.pop(); if (!same_point(current.point,point)) survivors.push(current.point);
+        for (const child of current.children.slice().reverse()) if (child!==null) stack.push(child);
+    }
+    let replacement=null;
+    for (const survivor of survivors) replacement=point_quad_insert(replacement,survivor);
+    if (parent===null) return replacement;
+    parent.children[branch]=replacement; return root;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function point_quad_delete(root,point)
+    parent=nothing; branch=nothing; node=root
+    while node!==nothing && node.point!=point
+        parent=node; branch=point_quadrant(point,node.point); node=node.children[branch]
+    end
+    node===nothing && return root
+    survivors=Any[]; stack=Any[node]
+    while !isempty(stack)
+        current=pop!(stack); current.point!=point && push!(survivors,current.point)
+        append!(stack,(c for c in Iterators.reverse(current.children) if c!==nothing))
+    end
+    replacement=nothing
+    for survivor in survivors; replacement=point_quad_insert(replacement,survivor); end
+    parent===nothing && return replacement
+    parent.children[branch]=replacement; return root
+end
+```
+
+:::
+
+::::
 
 Always retain the return value: `point_root = point_quad_delete(point_root, point)`. An absent point leaves the tree unchanged. Deleting the only point returns `None`. On the shared tree, deleting B rebuilds its subtree using E, leaving E at A's NW child. This is a complete, deliberately simple deletion implementation; more specialised local repair algorithms are beyond this reading.
 

@@ -7,6 +7,10 @@
 
 **Builds on:** [Parent forests](parent-forests.md) and [amortised reasoning](../linear-structures/dynamic-arrays.md#amortised-array-append).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/union-find.js) · [Julia](../../examples/languages/union-find.jl).
+
+JavaScript member indices are 0..n−1; Julia members are 1..n. Element count, component count and component size remain distinct. Julia find_set! and union_sets! may mutate representation links, preserving the same abstract partition and union-by-size tie rule.
+
 (union-by-size)=
 ## Attach the smaller root tree to the larger
 
@@ -23,6 +27,12 @@ During find, first locate the root, then redirect every member on the traversed 
 
 (disjoint-set-code)=
 ## A complete fixed-universe implementation
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 class DisjointSet:
@@ -74,6 +84,85 @@ class DisjointSet:
     def component_size(self, x):
         return self.size[self.find(x)]
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+class DisjointSet {
+    constructor(n) {
+        if (!Number.isSafeInteger(n) || n < 0) throw new RangeError("nonnegative integer size required");
+        this.parent = Array.from({length:n}, (_, i) => i);
+        this.sizes = Array(n).fill(1); this.components = n;
+    }
+    _check(x) {
+        if (!Number.isInteger(x) || x < 0 || x >= this.parent.length) throw new RangeError("member index out of range");
+    }
+    find(x) {
+        this._check(x); let root = x;
+        while (this.parent[root] !== root) root = this.parent[root];
+        while (this.parent[x] !== x) {
+            const next_x = this.parent[x]; this.parent[x] = root; x = next_x;
+        }
+        return root;
+    }
+    union(a, b) {
+        let ra = this.find(a), rb = this.find(b);
+        if (ra === rb) return false;
+        if (this.sizes[ra] < this.sizes[rb]) [ra, rb] = [rb, ra];
+        this.parent[rb] = ra; this.sizes[ra] += this.sizes[rb]; this.components--; return true;
+    }
+    connected(a, b) { return this.find(a) === this.find(b); }
+    size() { return this.parent.length; }
+    is_empty() { return this.size() === 0; }
+    component_count() { return this.components; }
+    component_size(x) { return this.sizes[this.find(x)]; }
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+mutable struct DisjointSet
+    parent::Vector{Int}
+    sizes::Vector{Int}
+    components::Int
+end
+function DisjointSet(n)
+    (n isa Int && n >= 0) || throw(ArgumentError("nonnegative integer size required"))
+    return DisjointSet(collect(1:n), ones(Int, n), n)
+end
+function find_set!(s::DisjointSet, x)
+    (x isa Int && 1 <= x <= length(s.parent)) || throw(BoundsError(s.parent, x))
+    root = x
+    while s.parent[root] != root; root = s.parent[root]; end
+    while s.parent[x] != x
+        next_x = s.parent[x]; s.parent[x] = root; x = next_x
+    end
+    return root
+end
+function union_sets!(s::DisjointSet, a, b)
+    ra, rb = find_set!(s, a), find_set!(s, b)
+    ra == rb && return false
+    if s.sizes[ra] < s.sizes[rb]; ra, rb = rb, ra; end
+    s.parent[rb] = ra; s.sizes[ra] += s.sizes[rb]; s.components -= 1
+    return true
+end
+connected(s::DisjointSet, a, b) = find_set!(s, a) == find_set!(s, b)
+Base.length(s::DisjointSet) = length(s.parent)
+Base.isempty(s::DisjointSet) = length(s) == 0
+component_count(s::DisjointSet) = s.components
+component_size(s::DisjointSet, x) = s.sizes[find_set!(s, x)]
+```
+
+:::
+
+::::
 
 The explicit bounds check rejects negative Python indices rather than accidentally treating −1 as the last member. Equal sizes retain the first argument's root. Clients must preserve the internal arrays; changing them directly can break the forest or its metadata.
 

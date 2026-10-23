@@ -22,3 +22,5 @@ The examples use ordinary Python code listings. They index Python string code po
 Across eight readings, specify the query, comparison units, valid inputs and result/error policies before tracing nodes or matches. Then connect the invariant to implementation choices, preprocessing, working/index state and output costs. Use the same empty, overlapping and equal-prefix cases when comparing methods; a faster scan must still satisfy the same match contract.
 
 The [complete trie interface](trie-operations.md#trie-complete-interface) includes key count, emptiness, insert/delete boolean returns and the size field. The [cost comparison](string-choices.md#string-method-cost-summary) distinguishes prefix indexing from all-match scanning. Trie-node, prefix-query and KMP helper dependencies are explicit; advanced ranking, approximate/multiple-pattern and suffix-index methods remain extensions.
+
+Code listings offer Python, JavaScript and Julia tabs where a runnable example is present. Python remains the explanation and trace language; see the [language guide](../../code-languages.md) for native conventions and runnable topic downloads.

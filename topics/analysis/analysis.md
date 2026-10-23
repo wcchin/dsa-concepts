@@ -25,3 +25,5 @@ Across the five readings, start with the operation contract and size parameters,
 Use the worked counts to justify a bound before reading its simplified growth class. Later topics apply the same cost models to sorting, recursion, hashing, trees and graphs.
 
 Use the [concept index](../../concepts.md) for a particular term. Continue with [Recursion and divide-and-conquer](../recursion/recursion.md). For a later application, see [hash-table performance](../maps-sets-hashing/performance.md).
+
+Code listings offer Python, JavaScript and Julia tabs where a runnable example is present. Python remains the explanation and trace language; see the [language guide](../../code-languages.md) for native conventions and runnable topic downloads.

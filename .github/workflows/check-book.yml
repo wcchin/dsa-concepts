@@ -23,7 +23,7 @@ jobs:
         with:
           name: book-preview
           path: _build/html
-  language-pilot:
+  language-code:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -36,5 +36,7 @@ jobs:
       - uses: julia-actions/setup-julia@v2
         with:
           version: '1.10.10'
+      - name: Check all displayed language implementations
+        run: python tests/check_language_tabs.py
       - name: Check displayed binary-search implementations
         run: python tests/check_binary_search_tabs.py

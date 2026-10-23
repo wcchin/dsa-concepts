@@ -7,12 +7,22 @@
 
 **Builds on:** [BFS distances and parents](../graphs/breadth-first-search.md) and [weighted graph models](../graphs/graph-concepts.md#weighted-graphs).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/graph-algorithms.js) · [Julia](../../examples/languages/graph-algorithms.jl).
+
+These versions reuse the translated deque, heap and disjoint-set definitions. Julia Dict order can select a different valid topological order or tied forest; compare the objective, feasibility and optimum cost rather than requiring an identical printed edge order. Heap counters avoid comparing payloads.
+
 (weighted-shortest-path)=
 ## Minimise the sum along a source-to-target route
 
 A weighted shortest path minimises its edge-weight sum. It differs from BFS's hop count: a direct edge of weight 10 can lose to two edges of weight 2. In a directed graph, every step must follow an outgoing edge.
 
 The shared graph uses these outgoing lists. G remains an explicit isolated vertex.
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 weighted = {
@@ -23,6 +33,34 @@ weighted = {
     "F": [], "G": [],
 }
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+var weighted = new Map([
+    ["A", [["B",4],["C",1]]], ["B", [["D",1],["E",7]]],
+    ["C", [["B",2],["D",5],["F",8]]], ["D", [["E",3]]],
+    ["E", [["F",1]]], ["F", []], ["G", []]
+]);
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+weighted = Dict("A"=>[("B",4),("C",1)], "B"=>[("D",1),("E",7)],
+    "C"=>[("B",2),("D",5),("F",8)], "D"=>[("E",3)], "E"=>[("F",1)],
+    "F"=>Tuple{String,Int}[], "G"=>Tuple{String,Int}[])
+```
+
+:::
+
+::::
 
 ![The shared directed weighted graph offers several routes from A and leaves G unreachable.](../../assets/graph-algorithms/weighted-routes.svg)
 
@@ -50,6 +88,12 @@ A predecessor records one improving route. Equal candidates need not replace it.
 (weighted-route-recovery)=
 ## Recover the route using results from the same run
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 from math import inf
 
@@ -64,6 +108,39 @@ def weighted_path_to(source, target, distance, parent):
     path.reverse()
     return path
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function weighted_path_to(source, target, distance, parent) {
+    if (!distance.has(target)) throw new KeyError(String(target));
+    if (distance.get(target) === Infinity) return null;
+    const path = []; let current = target;
+    while (current !== null) { path.push(current); current = parent.get(current); }
+    return path.reverse();
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function weighted_path_to(source, target, distance, parent)
+    distance[target] == Inf && return nothing
+    path = Any[]; current = target
+    while current !== nothing; push!(path, current); current = parent[current]; end
+    return reverse!(path)
+end
+```
+
+:::
+
+::::
 
 Use valid source and target keys, non-`None` vertex labels, and predecessor results from the same algorithm run. The `source` argument documents that association; this helper does not independently validate a supplied predecessor structure. The source returns a one-vertex path. An unreachable vertex has infinite distance and returns `None`, even though its predecessor and the source's predecessor are both `None`.
 

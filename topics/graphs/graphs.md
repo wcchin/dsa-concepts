@@ -21,3 +21,5 @@ The shared lecture graph has vertices A through H and eight undirected edges. Al
 Read the graph model and representation before tracing discovery, expansion and completion. Use the same stored neighbour order as the diagram when predicting exact parents or visit order; tied valid answers can differ under another order.
 
 Graph mutation is separate from algorithms that observe a fixed graph and return snapshots. The [operation contract](graph-operations.md#graph-operation-contract) states returns and errors; the [traversal comparison](graph-traversal-costs.md) distinguishes reachable-region results, full partitions, working state and output storage. Directed cycle/SCC algorithms remain extensions.
+
+Code listings offer Python, JavaScript and Julia tabs where a runnable example is present. Python remains the explanation and trace language; see the [language guide](../../code-languages.md) for native conventions and runnable topic downloads.

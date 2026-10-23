@@ -7,6 +7,10 @@
 
 **Builds on:** [R-tree nodes and the shared line records](r-tree-representation.md), [range candidates and exact refinement](r-tree-queries.md), and the shared [box-distance helper](point-quadtree-updates.md#spatial-box-distance).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/kd-trees.js) · [Julia](../../examples/languages/kd-trees.jl).
+
+JavaScript points are arrays compared by same_point; Julia points are value tuples. Julia coordinate/child indices are one-based (x=1, y=2; SW/SE/NW/NE=1/2/3/4), while depth still starts at zero. R-tree orientation uses exact big-integer arithmetic for the supplied integer-coordinate geometry; nearest distances remain floating calculations. General R-tree update code is still conceptual in every language.
+
 ## The complete operation route
 
 The preceding [range-search reading](r-tree-queries.md) defines the candidate traversal reused below. On this page, read construction/insertion concepts, exact lookup, nearest search and deletion; return to range refinement when comparing the five operations. The supplied `r_root` remains a deliberately small, given tree. Exact and nearest functions below are runnable against it. General insertion, splitting, bulk loading and condensation are explained algorithmically, not supplied as Python implementations. Do not edit `segments` without also maintaining the tree entries and ancestor bounds.
@@ -29,6 +33,12 @@ For the shared tree, use M=3 and m=2. Inserting L6=((11,0),(12,1)) would enlarge
 
 A coordinate pair is not the identity of a line record. Here exact geometry lookup returns **all identifiers whose undirected segment has the same two endpoints**. Reversing endpoint order counts as the same segment; distinct identifiers with that geometry remain distinct records. This is different from asking which segments merely touch a query point or cross a rectangle.
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 def rtree_exact_segment(root, query_segment, records):
     candidates = rtree_candidates(root, segment_bounds(query_segment))
@@ -36,6 +46,37 @@ def rtree_exact_segment(root, query_segment, records):
     return [key for key in candidates
             if records[key] == (a, b) or records[key] == (b, a)]
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function rtree_exact_segment(root,query_segment,records) {
+    const candidates=rtree_candidates(root,segment_bounds(query_segment)),[a,b]=query_segment;
+    return candidates.filter(key=>{
+        const [c,d]=records.get(key);
+        return (same_point(c,a)&&same_point(d,b))||(same_point(c,b)&&same_point(d,a));
+    });
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function rtree_exact_segment(root,query_segment,records)
+    candidates=rtree_candidates(root,segment_bounds(query_segment)); a,b=query_segment
+    return [key for key in candidates if records[key]==(a,b) || records[key]==(b,a)]
+end
+```
+
+:::
+
+::::
 
 The existing range-candidate function may admit many other lines with overlapping MBRs. The final endpoint test establishes equality. A tighter traversal could descend only into child boxes containing the query MBR, but this reuse is correct because an equal geometry necessarily has an overlapping MBR. For lookup by a known record identifier alone, an ordinary dictionary is usually the direct tool.
 
@@ -47,6 +88,12 @@ This page supports two study blocks. First connect construction and exact lookup
 ## Nearest line means exact point-to-segment distance
 
 Project the query onto the segment's supporting line, clamp the parameter to [0,1], then measure to that closest point. A zero-length segment is a point. The following numeric teaching code uses ordinary floating arithmetic for projection; it is not a robust exact-geometry kernel for extreme magnitudes or roundoff-sensitive ties.
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def point_segment_distance2(query, segment):
@@ -85,6 +132,72 @@ def rtree_nearest(root, query, records):
             enqueue(item)
     return best
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function point_segment_distance2(query,[a,b]) {
+    const dx=b[0]-a[0],dy=b[1]-a[1],length2=dx*dx+dy*dy;
+    const t=length2===0 ? 0 : Math.max(0,Math.min(1,((query[0]-a[0])*dx+(query[1]-a[1])*dy)/length2));
+    return (query[0]-(a[0]+t*dx))**2+(query[1]-(a[1]+t*dy))**2;
+}
+function rtree_nearest(root,query,records) {
+    let serial=0,best=null,best_d2=Infinity; const pending=new MinHeap(entry_less);
+    function enqueue(node) {
+        for (const [box,item] of node.entries) {
+            const bound=box_distance2(query,box);
+            if (bound<=best_d2) pending.push([bound,serial++,node.leaf,item]);
+        }
+    }
+    enqueue(root);
+    while (pending.size()) {
+        const [bound,sequence,is_record,item]=pending.pop(); if (bound>best_d2) break;
+        if (is_record) {
+            const d2=point_segment_distance2(query,records.get(item));
+            if(best===null||d2<best_d2){best=item;best_d2=d2;}
+        } else enqueue(item);
+    }
+    return best;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function point_segment_distance2(query,segment)
+    a,b=segment; dx,dy=b[1]-a[1],b[2]-a[2]; length2=dx^2+dy^2
+    t=length2==0 ? 0 : clamp(((query[1]-a[1])*dx+(query[2]-a[2])*dy)/length2,0,1)
+    return (query[1]-(a[1]+t*dx))^2+(query[2]-(a[2]+t*dy))^2
+end
+function rtree_nearest(root,query,records)
+    serial=0; best=nothing; best_d2=Inf; pending=MinHeap(entry_less)
+    function enqueue(node)
+        for (box,item) in node.entries
+            bound=box_distance2(query,box)
+            if bound<=best_d2; heap_push!(pending,(bound,serial,node.leaf,item)); serial+=1; end
+        end
+    end
+    enqueue(root)
+    while !isempty(pending.data)
+        bound,sequence,is_record,item=heap_pop!(pending); bound>best_d2 && break
+        if is_record
+            d2=point_segment_distance2(query,records[item])
+            if best===nothing || d2<best_d2; best=item; best_d2=d2; end
+        else; enqueue(item); end
+    end
+    return best
+end
+```
+
+:::
+
+::::
 
 The heap orders **lower bounds**, not final answers. The serial number prevents comparisons between nodes or identifiers on equal bounds. When the smallest remaining bound exceeds the best exact distance, every pending entry can be skipped. Return one nearest record identifier; ties retain the first encountered, and an empty root returns `None`.
 

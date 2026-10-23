@@ -7,6 +7,10 @@
 
 **Builds on:** [BST deletion](../searching/bst-deletion.md) and the [shared rebalance helper](avl-cases.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/balanced-trees.js) · [Julia](../../examples/languages/balanced-trees.jl).
+
+The same BST readers and OrderedSet interface are reused from Topic 7. Julia updates use function calls, not dot methods. All variants use empty height −1, leaf height 0, and left height minus right height; rotations must return and reconnect the new subtree root.
+
 ## Operation contract
 
 `avl_delete(root,key)` returns the surviving subtree root, deleting a present key once and treating an absent key as a no-op. An empty tree returns `None`; deleting a singleton returns `None` as the new root. All remaining nodes must preserve strict key order, cached heights and AVL balance. Public strict removal, tolerant discard and returned-key extraction are supplied by [the common adapter](avl-operations.md).
@@ -17,6 +21,12 @@
 First apply [ordinary BST deletion](../searching/bst-deletion.md): remove a leaf, retain the whole child subtree for a one-child node, or copy a successor key and delete its original node. Then update heights and rebalance each remaining ancestor on the return path.
 
 This code uses the same `rebalance` helper as insertion. An absent key leaves the key set unchanged. Keys are distinct and no associated values are stored in this teaching model.
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def avl_delete(node, key):
@@ -38,6 +48,52 @@ def avl_delete(node, key):
         node.right = avl_delete(node.right, successor.key)
     return rebalance(node)
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function avl_delete(node, key) {
+    if (node === null) return null;
+    if (key < node.key) node.left = avl_delete(node.left, key);
+    else if (key > node.key) node.right = avl_delete(node.right, key);
+    else {
+        if (node.left === null) return node.right;
+        if (node.right === null) return node.left;
+        let successor = node.right;
+        while (successor.left !== null) successor = successor.left;
+        node.key = successor.key; node.right = avl_delete(node.right, successor.key);
+    }
+    return rebalance(node);
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function avl_delete(node, key)
+    node === nothing && return nothing
+    if key < node.key; node.left = avl_delete(node.left, key)
+    elseif key > node.key; node.right = avl_delete(node.right, key)
+    else
+        node.left === nothing && return node.right
+        node.right === nothing && return node.left
+        successor = node.right
+        while successor.left !== nothing; successor = successor.left; end
+        node.key = successor.key; node.right = avl_delete(node.right, successor.key)
+    end
+    return rebalance(node)
+end
+```
+
+:::
+
+::::
 
 Call it as `root = avl_delete(root, key)`. When a removed node returns its only child, that child's unchanged subtree already has valid heights. Its parent receives the result and performs the next balance check. A singleton deletion returns `None` directly.
 

@@ -22,3 +22,5 @@ The figures show where every retained subtree goes. A rotation is complete only 
 Follow contracts, invariants, visual traces, code, implementation choices and costs. When drawing a rotation, account for both middle and outside subtrees before checking the cached heights.
 
 Check ordering, actual versus cached heights and every balance factor after updates; the owning adapter also maintains total size. Full node-identity preservation, parent pointers and rank/select augmentation are outside this implementation. The [final operation table](avl-operations.md#avl-all-operation-costs) separates path length from traversal/output size and local rotation work.
+
+Code listings offer Python, JavaScript and Julia tabs where a runnable example is present. Python remains the explanation and trace language; see the [language guide](../../code-languages.md) for native conventions and runnable topic downloads.

@@ -7,6 +7,10 @@
 
 **Builds on:** [Partitioning](partitioning.md) supplies the exact helper used below.
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/sorting.js) · [Julia](../../examples/languages/sorting.jl).
+
+Teaching sorts retain their mutation/return policy: JavaScript mutators return undefined and Julia teaching mutators return nothing. Built-in sort APIs are shown separately: JavaScript sort and Julia sort! return their mutated arrays. The Timsort/Powersort discussion describes Python’s implementation, not the algorithms used by the other runtimes.
+
 (quicksort)=
 ## Partition, then recurse
 
@@ -17,6 +21,12 @@ The following code uses exactly the `partition` function from [the preceding pag
 ![Quicksort partitions 7, 2, 6, 3, 5 around 5, then sorts the two remaining ranges.](../../assets/sorting/quicksort-tree.svg)
 
 ## Python implementation
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def quicksort(a):
@@ -29,6 +39,45 @@ def quicksort(a):
 
     sort_range(0, len(a) - 1)
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function quicksort(a) {
+    function sort_range(lo, hi) {
+        if (lo >= hi) return;
+        const p = partition(a, lo, hi);
+        sort_range(lo, p - 1);
+        sort_range(p + 1, hi);
+    }
+    sort_range(0, a.length - 1);
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function quicksort!(a)
+    function sort_range(lo, hi)
+        lo >= hi && return
+        p = partition!(a, lo, hi)
+        sort_range(lo, p - 1)
+        sort_range(p + 1, hi)
+    end
+    sort_range(1, length(a))
+    return nothing
+end
+```
+
+:::
+
+::::
 
 It modifies `a` and returns `None`. Empty lists start with `(lo, hi) = (0, -1)` and immediately return. Singleton ranges also need no partition.
 

@@ -7,6 +7,10 @@
 
 **Builds on:** [Python lists](../foundations/collections-and-classes.md) and [cost models](../analysis/counting-work.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/sorting.js) · [Julia](../../examples/languages/sorting.jl).
+
+Teaching sorts retain their mutation/return policy: JavaScript mutators return undefined and Julia teaching mutators return nothing. Built-in sort APIs are shown separately: JavaScript sort and Julia sort! return their mutated arrays. The Timsort/Powersort discussion describes Python’s implementation, not the algorithms used by the other runtimes.
+
 (sorting-specification)=
 ## Order without losing records
 
@@ -32,12 +36,46 @@ The input is a Python list of mutually comparable values under a consistent orde
 
 A record can contain several fields. The **key** is the field or computed value that determines order. Sorting students by score does not mean rearranging the fields within each student record.
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 students = [("Alice", 80), ("Ben", 70), ("Chen", 80)]
 by_score = sorted(students, key=lambda student: student[1])
 assert by_score == [("Ben", 70), ("Alice", 80), ("Chen", 80)]
 assert students[0] == ("Alice", 80)  # original list is unchanged
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+let students = [["Alice", 80], ["Ben", 70], ["Chen", 80]];
+let by_score = students.slice().sort((a, b) => a[1] - b[1]);
+console.assert(JSON.stringify(by_score) === JSON.stringify([["Ben", 70], ["Alice", 80], ["Chen", 80]]));
+console.assert(students[0][0] === "Alice");
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+students = [("Alice", 80), ("Ben", 70), ("Chen", 80)]
+by_score = sort(students; by=student -> student[2], alg=MergeSort)
+@assert by_score == [("Ben", 70), ("Alice", 80), ("Chen", 80)]
+@assert students[1] == ("Alice", 80)
+```
+
+:::
+
+::::
 
 (stable-sorting)=
 ## Stability preserves the order of ties
@@ -60,12 +98,46 @@ Quicksort's partition uses constant additional storage, but recursive calls requ
 
 `sorted(iterable, key=...)` returns a new list. `a.sort(key=...)` rearranges an existing list and returns `None`. Both provide stable sorting and accept `reverse=True` for descending order. Descending sorting also preserves the original order among equal keys. The word “in-place” in Python interface descriptions refers to mutation; built-in sorting can still allocate O(n) temporary storage. These interfaces are useful for practical code; implementing the elementary algorithms lets us examine why they work.
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 values = [3, 1, 2]
 result = values.sort()
 assert values == [1, 2, 3]
 assert result is None
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+let values = [3, 1, 2];
+let result = values.sort((a, b) => a - b);
+console.assert(JSON.stringify(values) === "[1,2,3]");
+console.assert(result === values); // JS sort returns the mutated array, unlike Python.
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+values = [3, 1, 2]
+result = sort!(values)
+@assert values == [1, 2, 3]
+@assert result === values # Julia sort! also returns its array.
+```
+
+:::
+
+::::
 
 :::{tip} Common misconception
 **Mutating a list and using constant extra space are the same guarantee.** A mutating algorithm can allocate large buffers.

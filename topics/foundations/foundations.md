@@ -25,3 +25,5 @@ Begin with the required result and state changes. Identify which names, containe
 Use the reference diagrams to predict which object a name, slot or attribute reaches before running the code. Full container interfaces and formal time/space analysis are developed in later topics; the goal here is to explain the state change correctly.
 
 For a particular term, use the [concept index](../../concepts.md). Continue with [Analysing algorithms](../analysis/analysis.md). For a developed application of these foundations, see [Maps, Sets and Hashing](../maps-sets-hashing/maps-sets-hashing.md).
+
+Code listings offer Python, JavaScript and Julia tabs where a runnable example is present. Python remains the explanation and trace language; see the [language guide](../../code-languages.md) for native conventions and runnable topic downloads.

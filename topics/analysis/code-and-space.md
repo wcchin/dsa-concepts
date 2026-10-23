@@ -7,10 +7,20 @@
 
 **Builds on:** [Cases and bounds](cases-and-bounds.md) and [shallow copies](../foundations/mutation-and-copying.md#shallow-copy).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/analysis.js) · [Julia](../../examples/languages/analysis.jl).
+
+The comparison counts are shared. JavaScript returns multiple results in arrays, Julia in tuples; graph/node references and absence use each language’s conventions.
+
 Loop syntax suggests where to look, but iteration counts and operation costs determine the result. Explain the count first, then simplify its growth.
 
 (consecutive-loops)=
 ## Consecutive loops add their costs
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def count_two_passes(values):
@@ -24,10 +34,54 @@ def count_two_passes(values):
 print(count_two_passes(["KR", "MUS", "UTN"]))  # 6
 ```
 
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function count_two_passes(values) {
+    let work = 0;
+    for (const value of values) work++;
+    for (const value of values) work++;
+    return work;
+}
+console.log(count_two_passes(["KR", "MUS", "UTN"]));
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function count_two_passes(values)
+    work = 0
+    for value in values
+        work += 1
+    end
+    for value in values
+        work += 1
+    end
+    return work
+end
+println(count_two_passes(["KR", "MUS", "UTN"]))
+```
+
+:::
+
+::::
+
 For n items, the selected operation executes n + n = 2n times. Including setup and loop overhead does not change tight time Θ(n) under a unit-cost model. Two consecutive linear passes do not become quadratic.
 
 (nested-and-triangular-loops)=
 ## Count the inner work in nested loops
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def count_pairs(n):
@@ -45,6 +99,44 @@ def count_pairs(n):
 print(count_pairs(5))  # (25, 10)
 ```
 
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function count_pairs(n) {
+    let full = 0, triangular = 0;
+    for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) full++;
+    for (let i = 0; i < n; i++) for (let j = 0; j < i; j++) triangular++;
+    return [full, triangular];
+}
+console.log(count_pairs(5));
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function count_pairs(n)
+    full, triangular = 0, 0
+    for i in 0:n-1, j in 0:n-1
+        full += 1
+    end
+    for i in 0:n-1, j in 0:i-1
+        triangular += 1
+    end
+    return (full, triangular)
+end
+println(count_pairs(5))
+```
+
+:::
+
+::::
+
 The first nest performs n operations for each of n outer iterations: n² total. In the second, the inner range depends on i, so add the row lengths:
 
 $$
@@ -59,6 +151,12 @@ Nesting does not always mean Θ(n²). If an inner loop performs a fixed three op
 
 (repeated-halving)=
 ## Repeated halving gives logarithmic iteration counts
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def halving_steps(n):
@@ -76,12 +174,55 @@ print(halving_steps(13))  # 3
 print(halving_steps(1))   # 0
 ```
 
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function halving_steps(n) {
+    if (n < 1) throw new RangeError("n must be positive");
+    let steps = 0, remaining = n;
+    while (remaining > 1) { remaining = Math.floor(remaining / 2); steps++; }
+    return steps;
+}
+console.log(halving_steps(16)); console.log(halving_steps(13)); console.log(halving_steps(1));
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function halving_steps(n)
+    n >= 1 || throw(ArgumentError("n must be positive"))
+    steps, remaining = 0, n
+    while remaining > 1
+        remaining = div(remaining, 2)
+        steps += 1
+    end
+    return steps
+end
+println(halving_steps(16)); println(halving_steps(13)); println(halving_steps(1))
+```
+
+:::
+
+::::
+
 Assume n is a positive integer. For 16, updates give 8, 4, 2, 1. For 13, floor division gives 6, 3, 1. After k updates, the remainder is floor(n/2ᵏ). The exact body count is **floor(log₂ n)**, not generally ceil(log₂ n). Division and the stopping condition determine the rounding.
 
 Time is Θ(log n) asymptotically with constant-cost arithmetic. Θ(1 + log n) also makes fixed work at n = 1 explicit. Here n is the starting numerical value; measured against its binary bit length b, the iteration count is Θ(b). The integer precondition is part of the example; the code is not a general-purpose numeric validator.
 
 (branch-costs)=
 ## Count the branch that runs
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def inspect_count(values, detailed):
@@ -91,6 +232,36 @@ def inspect_count(values, detailed):
         return 1
     return count_two_passes(values)
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function inspect_count(values, detailed) {
+    if (values.length === 0) return 0;
+    if (!detailed) return 1;
+    return count_two_passes(values);
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function inspect_count(values, detailed)
+    isempty(values) && return 0
+    !detailed && return 1
+    return count_two_passes(values)
+end
+```
+
+:::
+
+::::
 
 This calls `count_two_passes` from the first example on this page. For a nonempty list, the non-detailed path takes fixed time, while the detailed path traverses it twice. Over both choices of `detailed`, best-case time is Θ(1) and worst-case time is Θ(n). If `detailed` is fixed by the specification, analyse that restricted input family.
 
@@ -124,6 +295,12 @@ Space complexity describes storage as size grows. Distinguish existing input, re
 (auxiliary-and-output-space)=
 ### State whether output storage is included
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 def count_values(values):
     count = 0
@@ -137,6 +314,50 @@ def copy_values(values):
         result.append(value)
     return result
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function count_values(values) {
+    let count = 0;
+    for (const value of values) count++;
+    return count;
+}
+function copy_values(values) {
+    const result = [];
+    for (const value of values) result.push(value);
+    return result;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function count_values(values)
+    count = 0
+    for value in values
+        count += 1
+    end
+    return count
+end
+function copy_values(values)
+    result = Any[]
+    for value in values
+        push!(result, value)
+    end
+    return result
+end
+```
+
+:::
+
+::::
 
 | Function | Time | Working storage excluding input/output | Output storage |
 |---|---|---|---|

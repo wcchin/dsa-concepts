@@ -7,6 +7,10 @@
 
 **Builds on:** [BFS](breadth-first-search.md), [DFS](depth-first-search.md) and [graph direction](graph-concepts.md#directed-undirected-graphs).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/graphs.js) · [Julia](../../examples/languages/graphs.jl).
+
+JavaScript graphs use Map; Julia graphs use Dict. Stored neighbour order is preserved, but Julia Dict vertex iteration can change valid component ordering or tied choices. The shared DequeBuffer supplies constant-time linked endpoints. The figures and check answers use Python’s declared iteration order.
+
 (graph-reachability)=
 ## A single start explores only what it can reach
 
@@ -35,6 +39,12 @@ Reciprocal undirected adjacency is a precondition, not something the function ve
 
 This routine assumes **undirected**, reciprocal adjacency lists. It imports `deque` explicitly and iterates vertices in dictionary insertion order.
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 from collections import deque
 
@@ -55,6 +65,54 @@ def connected_components(graph):
         groups.append(group)
     return groups
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function connected_components(graph) {
+    const seen = new Set(), groups = [];
+    for (const start of graph.keys()) {
+        if (seen.has(start)) continue;
+        seen.add(start); const queue = new DequeBuffer([start]), group = [];
+        while (!queue.is_empty()) {
+            const u = queue.remove_first(); group.push(u);
+            for (const v of graph.get(u)) if (!seen.has(v)) { seen.add(v); queue.add_last(v); }
+        }
+        groups.push(group);
+    }
+    return groups;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function connected_components(graph)
+    seen = Set{Any}(); groups = Any[]
+    for start in keys(graph)
+        start in seen && continue
+        push!(seen, start); queue = DequeBuffer([start]); group = Any[]
+        while queue.n > 0
+            u = db_remove_first!(queue); push!(group, u)
+            for v in graph[u]
+                if !(v in seen); push!(seen, v); db_add_last!(queue, v); end
+            end
+        end
+        push!(groups, group)
+    end
+    return groups
+end
+```
+
+:::
+
+::::
 
 For the shared graph, the result is `[['A', 'B', 'C', 'D', 'E', 'F', 'G'], ['H']]`. After A's traversal, the outer checks at B through G do not launch another search because those vertices are already seen. H starts the second search.
 

@@ -7,6 +7,10 @@
 
 **Builds on:** [Node/height definitions](avl-invariants.md), [rotations](avl-rotations.md) and [rebalance](avl-cases.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/balanced-trees.js) · [Julia](../../examples/languages/balanced-trees.jl).
+
+The same BST readers and OrderedSet interface are reused from Topic 7. Julia updates use function calls, not dot methods. All variants use empty height −1, leaf height 0, and left height minus right height; rotations must return and reconnect the new subtree root.
+
 ## Operation contract
 
 `avl_insert(root,key)` returns a new subtree root, preserving all existing distinct keys and adding key only if absent. Empty input creates an AVL leaf; duplicates are no-ops. It requires a valid AVL input and stable total-order comparisons. This helper returns a root, not the public add result; [the adapter](avl-operations.md) handles count and interface results.
@@ -17,6 +21,12 @@
 Insertion first follows ordinary BST comparisons. A missing child becomes a new leaf; an existing equal key changes nothing. The recursive return path then updates heights and repairs imbalance.
 
 This function uses `AVLNode` and the helpers from the previous pages. Its return value is the root of the resulting subtree.
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def avl_insert(node, key):
@@ -34,6 +44,46 @@ root = None
 for key in [30, 10, 20]:
     root = avl_insert(root, key)
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function avl_insert(node, key) {
+    if (node === null) return new AVLNode(key);
+    if (key < node.key) node.left = avl_insert(node.left, key);
+    else if (key > node.key) node.right = avl_insert(node.right, key);
+    else return node;
+    return rebalance(node);
+}
+var root = null;
+for (const key of [30, 10, 20]) root = avl_insert(root, key);
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function avl_insert(node, key)
+    node === nothing && return AVLNode(key)
+    if key < node.key; node.left = avl_insert(node.left, key)
+    elseif key > node.key; node.right = avl_insert(node.right, key)
+    else; return node; end
+    return rebalance(node)
+end
+root = let tree = nothing
+    for key in [30, 10, 20]; tree = avl_insert(tree, key); end
+    tree
+end
+```
+
+:::
+
+::::
 
 (avl-bottom-up-repair)=
 ## Children must be correct before their parent is checked

@@ -7,6 +7,10 @@
 
 **Builds on:** [Construction](kd-construction.md), [exact lookup](kd-exact-search.md) and [shape constraints](kd-shape.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/kd-trees.js) · [Julia](../../examples/languages/kd-trees.jl).
+
+JavaScript points are arrays compared by same_point; Julia points are value tuples. Julia coordinate/child indices are one-based (x=1, y=2; SW/SE/NW/NE=1/2/3/4), while depth still starts at zero. R-tree orientation uses exact big-integer arithmetic for the supplied integer-coordinate geometry; nearest distances remain floating calculations. General R-tree update code is still conceptual in every language.
+
 (kd-deletion)=
 ## Delete the point, preserve the split rules
 
@@ -23,6 +27,12 @@ The second case deliberately uses a **minimum**, not the ordinary BST maximum-le
 ## Find a minimum on the requested axis
 
 If a node splits on that axis, its right subtree cannot improve on the node, so only the left side needs consideration. At the other axis, either child may contain the requested minimum.
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def kd_axis_min(node, axis, depth):
@@ -61,6 +71,76 @@ def kd_delete(node, point, depth=0):
         node.right = kd_delete(node.right, point, depth + 1)
     return node
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function kd_axis_min(node,axis,depth) {
+    if (node===null) return null;
+    if (depth%2===axis) return node.left===null ? node.point : kd_axis_min(node.left,axis,depth+1);
+    const candidates=[node.point];
+    for (const child of [node.left,node.right]) {
+        const p=kd_axis_min(child,axis,depth+1); if (p!==null) candidates.push(p);
+    }
+    return candidates.reduce((a,b)=>b[axis]<a[axis] ? b : a);
+}
+function kd_delete(node,point,depth=0) {
+    if (node===null) return null;
+    const axis=depth%2;
+    if (same_point(point,node.point)) {
+        if (node.right!==null) {
+            const replacement=kd_axis_min(node.right,axis,depth+1);
+            node.point=replacement; node.right=kd_delete(node.right,replacement,depth+1);
+        } else if (node.left!==null) {
+            const replacement=kd_axis_min(node.left,axis,depth+1);
+            node.point=replacement; node.right=kd_delete(node.left,replacement,depth+1); node.left=null;
+        } else return null;
+    } else if (point[axis]<node.point[axis]) node.left=kd_delete(node.left,point,depth+1);
+    else node.right=kd_delete(node.right,point,depth+1);
+    return node;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function kd_axis_min(node,axis,depth)
+    node===nothing && return nothing
+    if mod(depth,2)+1==axis
+        return node.left===nothing ? node.point : kd_axis_min(node.left,axis,depth+1)
+    end
+    candidates=Any[node.point]
+    for child in (node.left,node.right)
+        point=kd_axis_min(child,axis,depth+1); point!==nothing && push!(candidates,point)
+    end
+    return reduce((a,b)->b[axis]<a[axis] ? b : a,candidates)
+end
+function kd_delete(node,point,depth=0)
+    node===nothing && return nothing
+    axis=mod(depth,2)+1
+    if point==node.point
+        if node.right!==nothing
+            replacement=kd_axis_min(node.right,axis,depth+1)
+            node.point=replacement; node.right=kd_delete(node.right,replacement,depth+1)
+        elseif node.left!==nothing
+            replacement=kd_axis_min(node.left,axis,depth+1)
+            node.point=replacement; node.right=kd_delete(node.left,replacement,depth+1); node.left=nothing
+        else; return nothing; end
+    elseif point[axis]<node.point[axis]; node.left=kd_delete(node.left,point,depth+1)
+    else; node.right=kd_delete(node.right,point,depth+1); end
+    return node
+end
+```
+
+:::
+
+::::
 
 Call `root = kd_delete(root, point)`; an absent point leaves the stored set unchanged. The code uses the same finite numeric tuple and duplicate policy as insertion. On the seven-point tree, deleting A=(5,4) takes F=(7,5), the minimum x in A's right subtree, as the root replacement. The right subtree then loses F while all six other points remain searchable.
 

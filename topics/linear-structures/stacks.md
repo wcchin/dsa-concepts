@@ -7,6 +7,10 @@
 
 **Builds on:** [Sequence operations](sequence-adt.md) permit arbitrary positions; a stack exposes only its top.
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/linear-structures.js) · [Julia](../../examples/languages/linear-structures.jl).
+
+Julia uses one-based positions and named functions such as enqueue! rather than Python-style instance methods. Endpoint adapters use the supplied linked DequeBuffer, so they do not hide linear array-front shifts. Empty operations reject the request; null/nothing remain valid payloads.
+
 (stack-adt)=
 ## LIFO and the top
 
@@ -36,6 +40,12 @@ Starting empty, push A, B and C: each push returns `None`. `peek()` returns C an
 
 Use the back of a Python list as the top. Adding or removing there avoids shifting the earlier references.
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 class Stack:
     def __init__(self):
@@ -64,6 +74,49 @@ class Stack:
         return not self._items
 ```
 
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+class Stack {
+    constructor() { this._items = []; }
+    push(item) { this._items.push(item); }
+    pop() { if (this.is_empty()) throw new RangeError("empty stack"); return this._items.pop(); }
+    peek() { if (this.is_empty()) throw new RangeError("empty stack"); return this._items.at(-1); }
+    size() { return this._items.length; }
+    is_empty() { return this.size() === 0; }
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+mutable struct Stack
+    items::Vector{Any}
+end
+Stack() = Stack(Any[])
+stack_push!(s::Stack, item) = (push!(s.items, item); nothing)
+function stack_pop!(s::Stack)
+    isempty(s.items) && throw(BoundsError())
+    return pop!(s.items)
+end
+function stack_peek(s::Stack)
+    isempty(s.items) && throw(BoundsError())
+    return s.items[end]
+end
+Base.length(s::Stack) = length(s.items)
+Base.isempty(s::Stack) = isempty(s.items)
+```
+
+:::
+
+::::
+
 The representation rule is: `_items` holds the logical stack from bottom to top, and its last position is the top. The underscore marks internal state by convention; clients should use the stack methods. `push` returns `None`, while `pop` returns the removed item.
 
 ## Implementation choices and operation costs
@@ -89,6 +142,12 @@ Undo history reverses recent actions: changing a colour is undone before the ear
 
 For nested brackets, keep unmatched opening symbols in a stack. A closing symbol must match the top. Counting opening and closing symbols is insufficient: `({)}` has equal counts but incorrect nesting.
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 def brackets_balanced(text):
     openers = []
@@ -101,6 +160,48 @@ def brackets_balanced(text):
                 return False
     return not openers
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function brackets_balanced(text) {
+    const openers = [], matching = new Map([[")", "("], ["]", "["], ["}", "{"]]);
+    for (const symbol of text) {
+        if (["(", "[", "{"].includes(symbol)) openers.push(symbol);
+        else if (matching.has(symbol)) {
+            if (!openers.length || openers.pop() !== matching.get(symbol)) return false;
+        }
+    }
+    return openers.length === 0;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function brackets_balanced(text)
+    openers = Char[]
+    matching = Dict(')'=>'(', ']'=>'[', '}'=>'{')
+    for symbol in text
+        if symbol in "([{"
+            push!(openers, symbol)
+        elseif haskey(matching, symbol)
+            (isempty(openers) || pop!(openers) != matching[symbol]) && return false
+        end
+    end
+    return isempty(openers)
+end
+```
+
+:::
+
+::::
 
 The invariant is that the stack contains exactly the unmatched openers in the processed prefix, in nesting order. An unexpected closer or wrong type rejects immediately; leftover openers reject at the end. This teaching function ignores all non-bracket characters; it does not parse quoted strings or comments in a programming language.
 

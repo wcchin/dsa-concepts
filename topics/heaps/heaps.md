@@ -29,3 +29,5 @@ Each reading follows **purpose/contract → representation and invariant → vis
 The public [min/max contract table](priority-queues.md#priority-queue-adt) separates entry count, duplicate payloads and empty behaviour. Record adapters delegate internal storage to heapq; numeric functions expose the repair mechanics. Bulk construction is shown for numeric priorities, not as an unimplemented method on the record class.
 
 Arbitrary-item removal, indexed priority changes, automatic obsolete-entry cleanup and hard latency guarantees are not supplied by the small queue classes. Their conceptual strategies remain explained separately. The [cost comparison](heap-sorting-costs.md#heap-operation-costs) counts resizing, output and key-operation assumptions explicitly.
+
+Code listings offer Python, JavaScript and Julia tabs where a runnable example is present. Python remains the explanation and trace language; see the [language guide](../../code-languages.md) for native conventions and runnable topic downloads.

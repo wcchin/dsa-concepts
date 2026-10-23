@@ -7,6 +7,10 @@
 
 **Builds on:** [Partitions and representatives](disjoint-sets.md) and [array/reference models](../linear-structures/arrays.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/union-find.js) · [Julia](../../examples/languages/union-find.jl).
+
+JavaScript member indices are 0..n−1; Julia members are 1..n. Element count, component count and component size remain distinct. Julia find_set! and union_sets! may mutate representation links, preserving the same abstract partition and union-by-size tie rule.
+
 (union-find-parent-forest)=
 ## Represent each set as a rooted tree
 
@@ -19,12 +23,46 @@ For `[0, 0, 0, 2, 4, 4, 6]`, the represented groups are `{0,1,2,3}`, `{4,5}` and
 (basic-find)=
 ## Follow the entire path, not just one parent
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 def find_root(parent, x):
     while parent[x] != x:
         x = parent[x]
     return x
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function find_root(parent, x) {
+    while (parent[x] !== x) x = parent[x];
+    return x;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function find_root(parent, x)
+    while parent[x] != x; x = parent[x]; end
+    return x
+end
+```
+
+:::
+
+::::
 
 The helper assumes a valid index and a well-formed parent forest. `find_root(parent, 3)` follows **3, 2, 0** and returns 0. `find_root(parent, 1)` follows **1, 0** and returns the same representative. Testing only `parent[3] == parent[1]` would incorrectly claim they belong to different sets.
 

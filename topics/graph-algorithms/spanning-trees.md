@@ -7,12 +7,22 @@
 
 **Builds on:** [Undirected components](../graphs/graph-components.md), [weighted modelling](shortest-path-state.md) and [algorithm correctness](../analysis/correctness.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/graph-algorithms.js) · [Julia](../../examples/languages/graph-algorithms.jl).
+
+These versions reuse the translated deque, heap and disjoint-set definitions. Julia Dict order can select a different valid topological order or tied forest; compare the objective, feasibility and optimum cost rather than requiring an identical printed edge order. Heap counters avoid comparing payloads.
+
 (minimum-spanning-tree)=
 ## Minimise the cost of connecting every vertex
 
 A **spanning tree** of a connected undirected graph includes every vertex, is connected, and has no cycle. With n vertices it has n−1 edges. A **minimum spanning tree (MST)** minimises the sum of its chosen edge weights. There is no designated source and no requirement to preserve shortest routes from any particular vertex.
 
 For a disconnected graph, a spanning tree of the entire graph does not exist. A **minimum spanning forest (MSF)** contains an MST for each component, including isolated singleton components. If there are c components, the forest has n−c chosen edges.
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 vertices = list("ABCDEF")
@@ -29,6 +39,42 @@ def weighted_adjacency(vertices, edges):
         graph[v].append((u, weight))
     return graph
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+var vertices = [..."ABCDEF"];
+var edges = [[4,"A","B"],[2,"A","C"],[1,"B","C"],[5,"B","D"],[8,"C","D"],
+    [10,"C","E"],[2,"D","E"],[6,"D","F"],[3,"E","F"]];
+function weighted_adjacency(vertices, edges) {
+    const graph = new Map([...vertices].map(v => [v, []]));
+    for (const [w,u,v] of edges) { graph.get(u).push([v,w]); graph.get(v).push([u,w]); }
+    return graph;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+vertices = string.(collect("ABCDEF"))
+edges = [(4,"A","B"),(2,"A","C"),(1,"B","C"),(5,"B","D"),(8,"C","D"),
+    (10,"C","E"),(2,"D","E"),(6,"D","F"),(3,"E","F")]
+function weighted_adjacency(vertices, edges)
+    graph = Dict(v=>Any[] for v in vertices)
+    for (w,u,v) in edges; push!(graph[u], (v,w)); push!(graph[v], (u,w)); end
+    return graph
+end
+```
+
+:::
+
+::::
 
 Vertices are unique; each undirected edge appears once in this edge list and twice in adjacency storage. Endpoints must be present in the vertex list. An isolated vertex belongs in that list even though no edge names it.
 

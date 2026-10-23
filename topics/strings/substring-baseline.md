@@ -7,6 +7,10 @@
 
 **Builds on:** [String models](string-model.md), [first-occurrence contracts](../foundations/data-and-algorithms.md#first-search-contract) and [loop correctness](../analysis/correctness.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/strings.js) · [Julia](../../examples/languages/strings.jl).
+
+All matching positions count Unicode code points. JavaScript and Julia collect characters into arrays for constant-time access, adding O(n+m) preparation and storage to text/pattern scans; this is additional to the Python bounds. Julia results are one-based character-array positions, not byte indices into a Julia String. Rolling hashes use BigInt arithmetic explicitly; JavaScript custom base/modulus arguments are BigInts (for example 3n).
+
 (substring-match-contract)=
 ## Return every starting index, including overlaps
 
@@ -16,6 +20,12 @@ The empty pattern matches every boundary, so on text length n it returns `[0, 1,
 
 (naive-substring-search)=
 ## Check each alignment directly
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def naive_find_all(text, pattern):
@@ -31,6 +41,47 @@ def naive_find_all(text, pattern):
             matches.append(start)
     return matches
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function naive_find_all(text, pattern) {
+    const t = [...text], p = [...pattern], n = t.length, m = p.length;
+    if (m === 0) return Array.from({length:n+1}, (_,i) => i);
+    const matches = [];
+    for (let start = 0; start <= n - m; start++) {
+        let j = 0; while (j < m && t[start+j] === p[j]) j++;
+        if (j === m) matches.push(start);
+    }
+    return matches;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function naive_find_all(text, pattern)
+    t, p = collect(text), collect(pattern); n, m = length(t), length(p)
+    m == 0 && return collect(1:n+1)
+    matches = Int[]
+    for start in 1:n-m+1
+        j = 0
+        while j < m && t[start+j] == p[j+1]; j += 1; end
+        j == m && push!(matches, start)
+    end
+    return matches
+end
+```
+
+:::
+
+::::
 
 At an alignment, the first j positions have matched. A mismatch proves this alignment is not an occurrence; reaching m proves it is. Trying every possible starting index proves completeness, and moving by one retains overlaps. A negative range bound naturally gives no alignments when m>n.
 

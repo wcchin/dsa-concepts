@@ -7,10 +7,20 @@
 
 **Builds on:** Use the [spatial-query helpers](spatial-queries.md), [quadrant function](point-quadtrees.md#point-quadtree-ties) and [PR storage rules](point-region-quadtrees.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/kd-trees.js) · [Julia](../../examples/languages/kd-trees.jl).
+
+JavaScript points are arrays compared by same_point; Julia points are value tuples. Julia coordinate/child indices are one-based (x=1, y=2; SW/SE/NW/NE=1/2/3/4), while depth still starts at zero. R-tree orientation uses exact big-integer arithmetic for the supplied integer-coordinate geometry; nearest distances remain floating calculations. General R-tree update code is still conceptual in every language.
+
 (pr-quadtree-cell-helpers)=
 ## Encode one ownership rule in shared helpers
 
 These listings reuse `checked_rect`, `in_closed_rect` and `shared_points` from the spatial-query page. Points are finite numeric two-element tuples; exact duplicates are ignored. Child order remains SW, SE, NW, NE.
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def in_half_open_cell(point, cell):
@@ -39,6 +49,55 @@ class PRNode:
         self.children = None
 ```
 
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function in_half_open_cell([x,y],[xmin,ymin,xmax,ymax]) { return xmin<=x && x<xmax && ymin<=y && y<ymax; }
+function cell_query_overlap([xmin,ymin,xmax,ymax],[a,b,c,d]) { return c>=xmin && a<xmax && d>=ymin && b<ymax; }
+function midpoint_cells([xmin,ymin,xmax,ymax]) {
+    const mx=xmin/2+xmax/2, my=ymin/2+ymax/2;
+    if (!(xmin<mx && mx<xmax && ymin<my && my<ymax)) return null;
+    return [[xmin,ymin,mx,my],[mx,ymin,xmax,my],[xmin,my,mx,ymax],[mx,my,xmax,ymax]];
+}
+class PRNode {
+    constructor(bounds) { this.bounds=bounds; this.points=[]; this.children=null; }
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function in_half_open_cell(point,cell)
+    x,y=point; xmin,ymin,xmax,ymax=cell
+    return xmin<=x<xmax && ymin<=y<ymax
+end
+function cell_query_overlap(cell,query)
+    xmin,ymin,xmax,ymax=cell; a,b,c,d=query
+    return c>=xmin && a<xmax && d>=ymin && b<ymax
+end
+function midpoint_cells(cell)
+    xmin,ymin,xmax,ymax=cell; mx=xmin/2+xmax/2; my=ymin/2+ymax/2
+    (xmin<mx<xmax && ymin<my<ymax) || return nothing
+    return ((xmin,ymin,mx,my),(mx,ymin,xmax,my),(xmin,my,mx,ymax),(mx,my,xmax,ymax))
+end
+mutable struct PRNode
+    bounds
+    points::Vector{Any}
+    children
+end
+PRNode(bounds)=PRNode(bounds,Any[],nothing)
+```
+
+:::
+
+::::
+
 The overlap test is intentionally asymmetric: a query whose minimum equals the cell's excluded maximum cannot find a point in that cell. A query whose maximum equals the cell's included minimum can. Midpoint calculation avoids summing two large same-sign endpoints before halving; the strict interior test also detects numerical failure to shrink a cell.
 
 :::{note} Pause and trace
@@ -47,6 +106,12 @@ Trace child ownership and bounds for one midpoint case before reading insertion.
 
 (pr-quadtree-insertion)=
 ## Redistribute records when a leaf becomes internal
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 class PRQuadTree:
@@ -118,6 +183,127 @@ pr_tree = PRQuadTree((0, 0, 12, 12), capacity=1)
 for point in shared_points:
     pr_tree.insert(point)
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+class PRQuadTree {
+    constructor(bounds,capacity=1,max_depth=16) {
+        bounds=checked_rect(bounds);
+        if (bounds[0]===bounds[2] || bounds[1]===bounds[3]) throw new RangeError("positive extent required");
+        if (!Number.isSafeInteger(capacity)||capacity<1||!Number.isSafeInteger(max_depth)||max_depth<0)
+            throw new RangeError("invalid capacity/depth");
+        this.root=new PRNode(bounds); this.capacity=capacity; this.max_depth=max_depth; this.members=new Set();
+    }
+    insert(point) {
+        if (!in_half_open_cell(point,this.root.bounds)) throw new RangeError("point outside extent");
+        const key=JSON.stringify(point); if (this.members.has(key)) return false;
+        const pending=[[this.root,point,0]];
+        while (pending.length) {
+            const [node,p,depth]=pending.pop();
+            if (node.children!==null) {
+                const pivot=[node.children[0].bounds[2],node.children[0].bounds[3]];
+                pending.push([node.children[point_quadrant(p,pivot)],p,depth+1]); continue;
+            }
+            const subdivisions=midpoint_cells(node.bounds);
+            if (node.points.length<this.capacity || depth>=this.max_depth || subdivisions===null) { node.points.push(p); continue; }
+            const records=[...node.points,p]; node.points=[]; node.children=subdivisions.map(c=>new PRNode(c));
+            const pivot=[subdivisions[0][2],subdivisions[0][3]];
+            for (const old of records) pending.push([node.children[point_quadrant(old,pivot)],old,depth+1]);
+        }
+        this.members.add(key); return true;
+    }
+    contains(point) {
+        if (!in_half_open_cell(point,this.root.bounds)) return false;
+        let node=this.root;
+        while (node.children!==null) {
+            const pivot=[node.children[0].bounds[2],node.children[0].bounds[3]];
+            node=node.children[point_quadrant(point,pivot)];
+        }
+        return node.points.some(p=>same_point(p,point));
+    }
+    range_query(rect) {
+        rect=checked_rect(rect); const out=[],stack=[this.root];
+        while (stack.length) {
+            const node=stack.pop(); if (!cell_query_overlap(node.bounds,rect)) continue;
+            if (node.children===null) for (const p of node.points) { if(in_closed_rect(p,rect))out.push(p); }
+            else stack.push(...node.children.slice().reverse());
+        }
+        return out;
+    }
+}
+var pr_tree=new PRQuadTree([0,0,12,12],1);
+for (const point of shared_points) pr_tree.insert(point);
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+mutable struct PRQuadTree
+    root::PRNode
+    capacity::Int
+    max_depth::Int
+    members::Set{Any}
+end
+function PRQuadTree(bounds,capacity=1,max_depth=16)
+    bounds=checked_rect(bounds)
+    (bounds[1]<bounds[3] && bounds[2]<bounds[4]) || throw(ArgumentError("positive extent required"))
+    (capacity isa Int && capacity>=1 && max_depth isa Int && max_depth>=0) || throw(ArgumentError("invalid capacity/depth"))
+    return PRQuadTree(PRNode(bounds),capacity,max_depth,Set{Any}())
+end
+function pr_insert!(tree::PRQuadTree,point)
+    in_half_open_cell(point,tree.root.bounds) || throw(ArgumentError("point outside extent"))
+    point in tree.members && return false
+    pending=Any[(tree.root,point,0)]
+    while !isempty(pending)
+        node,p,depth=pop!(pending)
+        if node.children!==nothing
+            pivot=(node.children[1].bounds[3],node.children[1].bounds[4])
+            push!(pending,(node.children[point_quadrant(p,pivot)],p,depth+1)); continue
+        end
+        subdivisions=midpoint_cells(node.bounds)
+        if length(node.points)<tree.capacity || depth>=tree.max_depth || subdivisions===nothing
+            push!(node.points,p); continue
+        end
+        records=copy(node.points); push!(records,p); node.points=Any[]
+        node.children=[PRNode(cell) for cell in subdivisions]
+        pivot=(subdivisions[1][3],subdivisions[1][4])
+        for old in records; push!(pending,(node.children[point_quadrant(old,pivot)],old,depth+1)); end
+    end
+    push!(tree.members,point); return true
+end
+function pr_contains(tree::PRQuadTree,point)
+    in_half_open_cell(point,tree.root.bounds) || return false
+    node=tree.root
+    while node.children!==nothing
+        pivot=(node.children[1].bounds[3],node.children[1].bounds[4])
+        node=node.children[point_quadrant(point,pivot)]
+    end
+    return point in node.points
+end
+function pr_range(tree::PRQuadTree,rect)
+    rect=checked_rect(rect); out=Any[]; stack=Any[tree.root]
+    while !isempty(stack)
+        node=pop!(stack); cell_query_overlap(node.bounds,rect) || continue
+        if node.children===nothing
+            append!(out,(p for p in node.points if in_closed_rect(p,rect)))
+        else; append!(stack,reverse(node.children)); end
+    end
+    return out
+end
+pr_tree=PRQuadTree((0,0,12,12),1)
+for point in shared_points; pr_insert!(pr_tree,point); end
+```
+
+:::
+
+::::
 
 `point_quadrant` comes from the preceding point-quadtree page. Every successful insertion increases the point set by one. Splitting moves the old bucket records into children and clears the internal bucket, preserving each stored point exactly once. The `members` set prevents duplicate insertion; `contains` deliberately demonstrates the spatial path and terminal bucket test rather than merely consulting that set. Clients must preserve these internal structures.
 

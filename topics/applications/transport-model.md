@@ -7,6 +7,10 @@
 
 **Builds on:** [Maps and sets](../maps-sets-hashing/maps-sets-hashing.md) and [graph representations](../graphs/graph-representations.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/applications.js) · [Julia](../../examples/languages/applications.jl).
+
+Reuse the translated graph algorithms and the same invented dataset. Julia travel/build columns are 3 and 4, versus 2 and 3 in Python/JavaScript. The translated construction adjacency is named build_graph_view to distinguish it from the graph-builder function. All versions keep the isolated harbour, distinguish absence from a zero-length route, and separate minutes from construction units.
+
 (transport-case-model)=
 ## Decide what vertices and edges represent
 
@@ -18,6 +22,12 @@ A trip along a link has a travel time. Building that link has a separate constru
 
 (transport-data-representations)=
 ## Keep one source table and derive each adjacency view
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 from transport_network import (
@@ -58,12 +68,76 @@ time_graph = adjacency_view(places, links, 2)
 build_graph = adjacency_view(places, links, 3)
 ```
 
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+// Use BFS, Dijkstra, DisjointSet, Prim and Kruskal from the preceding topics.
+var places = new Map([["A","Gate"],["B","Museum"],["C","Library"],["D","Market"],
+    ["E","Clinic"],["F","Park"],["G","Harbour"]]);
+var links = [["A","B",12,3],["A","C",3,6],["B","C",2,2],["B","D",3,4],
+    ["C","D",9,1],["C","E",12,7],["D","E",3,5],["D","F",8,2],["E","F",2,3]];
+function adjacency_view(places, links, weight_column = null) {
+    if (![null,2,3].includes(weight_column)) throw new RangeError("invalid weight column");
+    const graph = new Map([...places.keys()].map(v => [v, []]));
+    for (const row of links) {
+        const [u,v] = row;
+        if (!graph.has(u) || !graph.has(v)) throw new KeyError("unknown endpoint");
+        graph.get(u).push(weight_column === null ? v : [v,row[weight_column]]);
+        graph.get(v).push(weight_column === null ? u : [u,row[weight_column]]);
+    }
+    return graph;
+}
+var hop_graph = adjacency_view(places, links), time_graph = adjacency_view(places, links, 2);
+var build_graph_view = adjacency_view(places, links, 3);
+const edge_key = (u,v) => JSON.stringify([u,v].sort());
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+# Reuse the preceding topics' graph algorithms and disjoint sets.
+places = Dict("A"=>"Gate","B"=>"Museum","C"=>"Library","D"=>"Market",
+    "E"=>"Clinic","F"=>"Park","G"=>"Harbour")
+links = [("A","B",12,3),("A","C",3,6),("B","C",2,2),("B","D",3,4),
+    ("C","D",9,1),("C","E",12,7),("D","E",3,5),("D","F",8,2),("E","F",2,3)]
+function adjacency_view(places, links, weight_column=nothing)
+    weight_column in (nothing,3,4) || throw(ArgumentError("invalid weight column"))
+    graph = Dict(v=>Any[] for v in keys(places))
+    for row in links
+        u,v = row[1:2]
+        push!(graph[u], weight_column === nothing ? v : (v,row[weight_column]))
+        push!(graph[v], weight_column === nothing ? u : (u,row[weight_column]))
+    end
+    return graph
+end
+hop_graph = adjacency_view(places, links)
+time_graph = adjacency_view(places, links, 3)
+build_graph_view = adjacency_view(places, links, 4)
+edge_key(u,v) = u <= v ? (u,v) : (v,u)
+```
+
+:::
+
+::::
+
 The `places` dictionary is an exact-key map from a stable identifier to a display name. All places become graph keys, including G, which has no incident link. Each undirected link appears once in `links` and twice in adjacency storage. The input contract requires distinct valid endpoints per link, no repeated unordered pairs, and finite positive weights. The helper derives views from this declared valid table; it is not a general data-cleaning routine.
 
 The link order controls neighbour order, and therefore tie choices in BFS. It does not give a priority to cheap edges. A coordinate on the diagram indicates layout only; it is not used to calculate a weight.
 
 (transport-route-measurement)=
 ## Measure an answer with the same units as its question
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def route_total(route, links, weight_column):
@@ -76,6 +150,43 @@ def route_total(route, links, weight_column):
     return sum(weights[frozenset((u, v))]
                for u, v in zip(route, route[1:]))
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function route_total(route, links, weight_column) {
+    if (![2,3].includes(weight_column)) throw new RangeError("invalid weight column");
+    if (route === null) return null;
+    const weights = new Map(links.map(row => [edge_key(row[0],row[1]),row[weight_column]]));
+    const rest = route.slice(1); let total = 0;
+    for (let i = 0; i < rest.length; i++) {
+        const key = edge_key(route[i],rest[i]);
+        if (!weights.has(key)) throw new KeyError("missing link"); total += weights.get(key);
+    }
+    return total;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function route_total(route, links, weight_column)
+    weight_column in (3,4) || throw(ArgumentError("invalid weight column"))
+    route === nothing && return nothing
+    weights = Dict(edge_key(row[1],row[2])=>row[weight_column] for row in links)
+    return sum((weights[edge_key(u,v)] for (u,v) in zip(route,route[2:end])); init=0)
+end
+```
+
+:::
+
+::::
 
 This helper assumes an actual route from the graph algorithms, with valid vertices and consecutive endpoints connected by declared links. A one-vertex route costs zero; `None` remains absence, not a zero-cost trip. A `frozenset` makes an unordered endpoint-pair key, appropriate here because there are no parallel links and direction is deliberately ignored.
 

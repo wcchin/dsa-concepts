@@ -7,6 +7,10 @@
 
 **Builds on:** [Exact lookup](kd-exact-search.md) follows one path; range reporting may need more than one.
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/kd-trees.js) · [Julia](../../examples/languages/kd-trees.jl).
+
+JavaScript points are arrays compared by same_point; Julia points are value tuples. Julia coordinate/child indices are one-based (x=1, y=2; SW/SE/NW/NE=1/2/3/4), while depth still starts at zero. R-tree orientation uses exact big-integer arithmetic for the supplied integer-coordinate geometry; nearest distances remain floating calculations. General R-tree update code is still conceptual in every language.
+
 (kd-range-query)=
 ## Report all points inside an inclusive rectangle
 
@@ -33,6 +37,12 @@ The current point being outside the rectangle does **not** justify pruning both 
 (kd-range-code)=
 ## Traverse every region that can still contribute
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 def kd_range(root, low, high):
     if any(low[i] > high[i] for i in range(2)):
@@ -54,6 +64,50 @@ def kd_range(root, low, high):
     visit(root, 0)
     return out
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function kd_range(root,low,high) {
+    if (low.some((x,i)=>x>high[i])) throw new RangeError("reversed bounds");
+    const out=[];
+    function visit(node,depth) {
+        if (node===null) return;
+        const p=node.point, axis=depth%2;
+        if (p.every((x,i)=>low[i]<=x && x<=high[i])) out.push(p);
+        if (low[axis]<p[axis]) visit(node.left,depth+1);
+        if (high[axis]>=p[axis]) visit(node.right,depth+1);
+    }
+    visit(root,0); return out;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function kd_range(root,low,high)
+    any(low[i]>high[i] for i in 1:2) && throw(ArgumentError("reversed bounds"))
+    out=Any[]
+    function visit(node,depth)
+        node===nothing && return
+        p=node.point; axis=mod(depth,2)+1
+        all(low[i]<=p[i]<=high[i] for i in 1:2) && push!(out,p)
+        low[axis]<p[axis] && visit(node.left,depth+1)
+        high[axis]>=p[axis] && visit(node.right,depth+1)
+    end
+    visit(root,0); return out
+end
+```
+
+:::
+
+::::
 
 This function checks the current point, then visits left before right when permitted. It returns traversal order, not sorted order or distance order. The output list is created separately for each call, avoiding a shared mutable default argument.
 

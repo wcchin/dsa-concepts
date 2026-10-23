@@ -7,6 +7,10 @@
 
 **Builds on:** [Sorting contracts](sorting-properties.md) and list indexing from Topic 1.
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/sorting.js) · [Julia](../../examples/languages/sorting.jl).
+
+Teaching sorts retain their mutation/return policy: JavaScript mutators return undefined and Julia teaching mutators return nothing. Built-in sort APIs are shown separately: JavaScript sort and Julia sort! return their mutated arrays. The Timsort/Powersort discussion describes Python’s implementation, not the algorithms used by the other runtimes.
+
 (partitioning)=
 ## Classification before sorting
 
@@ -26,6 +30,12 @@ The code uses an inclusive range `lo..hi`. It selects `a[hi]` as pivot and retur
 
 ## Python implementation
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 def partition(a, lo, hi):
     pivot = a[hi]
@@ -37,6 +47,50 @@ def partition(a, lo, hi):
     a[boundary], a[hi] = a[hi], a[boundary]
     return boundary
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function partition(a, lo, hi) {
+    const pivot = a[hi];
+    let boundary = lo;
+    for (let scan = lo; scan < hi; scan++) {
+        if (a[scan] <= pivot) {
+            [a[boundary], a[scan]] = [a[scan], a[boundary]];
+            boundary++;
+        }
+    }
+    [a[boundary], a[hi]] = [a[hi], a[boundary]];
+    return boundary;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function partition!(a, lo, hi)
+    pivot = a[hi]
+    boundary = lo
+    for scan in lo:hi-1
+        if a[scan] <= pivot
+            a[boundary], a[scan] = a[scan], a[boundary]
+            boundary += 1
+        end
+    end
+    a[boundary], a[hi] = a[hi], a[boundary]
+    return boundary
+end
+```
+
+:::
+
+::::
 
 Call this only with `0 <= lo <= hi < len(a)`. `hi` is inclusive here, although Python slices and `range` exclude their stop index. The scan excludes `hi` so the pivot stays in place until the final swap.
 

@@ -7,6 +7,10 @@
 
 **Builds on:** [Queue contracts](queues-and-deques.md) and the [Node class](linked-structures.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/linear-structures.js) · [Julia](../../examples/languages/linear-structures.jl).
+
+Julia uses one-based positions and named functions such as enqueue! rather than Python-style instance methods. Endpoint adapters use the supplied linked DequeBuffer, so they do not hide linear array-front shifts. Empty operations reject the request; null/nothing remain valid payloads.
+
 ## Operation contract for this implementation
 
 Use the same [FIFO operation table](queues-and-deques.md#queue-adt). Enqueue returns `None`; front observes; dequeue removes and returns the earliest waiting record. `size()` and `len(q)` return the stored count. Empty front/dequeue raise `IndexError` before mutation. This version has no configured capacity or full-state rejection. Duplicates and `None` are allowed.
@@ -34,6 +38,12 @@ The empty case matters twice: adding the first item must establish both endpoint
 ## Implement the two transitions explicitly
 
 This code reuses the `Node` class from [Linked structures](linked-structures.md). It does not impose a fixed capacity.
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 class LinkedQueue:
@@ -76,6 +86,66 @@ class LinkedQueue:
         removed.next = None
         return removed.value
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+class LinkedQueue {
+    constructor() { this._head = null; this._tail = null; this._size = 0; }
+    size() { return this._size; }
+    is_empty() { return this._size === 0; }
+    enqueue(item) {
+        const added = new Node(item);
+        if (this.is_empty()) this._head = added; else this._tail.next = added;
+        this._tail = added; this._size++;
+    }
+    front() { if (this.is_empty()) throw new RangeError("empty queue"); return this._head.value; }
+    dequeue() {
+        const item = this.front(), removed = this._head;
+        this._head = removed.next; this._size--;
+        if (this._head === null) this._tail = null;
+        removed.next = null; return item;
+    }
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+mutable struct LinkedQueue
+    head
+    tail
+    n::Int
+end
+LinkedQueue() = LinkedQueue(nothing, nothing, 0)
+Base.length(q::LinkedQueue) = q.n
+Base.isempty(q::LinkedQueue) = q.n == 0
+function enqueue!(q::LinkedQueue, item)
+    added = Node(item)
+    if isempty(q); q.head = added; else; q.tail.next = added; end
+    q.tail = added; q.n += 1; return nothing
+end
+function queue_front(q::LinkedQueue)
+    isempty(q) && throw(BoundsError())
+    return q.head.value
+end
+function dequeue!(q::LinkedQueue)
+    item = queue_front(q); removed = q.head
+    q.head = removed.next; q.n -= 1
+    q.head === nothing && (q.tail = nothing)
+    removed.next = nothing; return item
+end
+```
+
+:::
+
+::::
 
 On the first enqueue, `new.next` is already `None`; assigning head and tail to the same node establishes the invariant. On later enqueues, link the old tail to the new node before changing tail.
 

@@ -18,3 +18,5 @@ These are introductions, not a claim to cover every dynamic program, string algo
 ## A common design route
 
 Across six readings, specify the problem/output contract, define sufficient state, justify each commitment or prune, trace the code, then count preprocessing, working state and returned data. Cost claims use the [stated numeric/word model](../analysis/counting-work.md#cost-model), with preprocessing and output counted explicitly. Trace the candidate schedule, subproblem, partial subset or window before comparing strategies. The examples introduce these design patterns; further DP families and complexity theory are listed in the coverage review.
+
+Code listings offer Python, JavaScript and Julia tabs where a runnable example is present. Python remains the explanation and trace language; see the [language guide](../../code-languages.md) for native conventions and runnable topic downloads.

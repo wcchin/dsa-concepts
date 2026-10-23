@@ -7,6 +7,10 @@
 
 **Builds on:** [BST whole-subtree order](../searching/tree-basics.md) and [height-dependent costs](../searching/search-costs.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/balanced-trees.js) · [Julia](../../examples/languages/balanced-trees.jl).
+
+The same BST readers and OrderedSet interface are reused from Topic 7. Julia updates use function calls, not dot methods. All variants use empty height −1, leaf height 0, and left height minus right height; rotations must return and reconnect the new subtree root.
+
 (avl-invariant)=
 ## Add balance to BST order
 
@@ -25,6 +29,12 @@ A small height difference only at the root is insufficient. A descendant can be 
 
 We count edges on the longest downward path. An empty subtree has height −1, a leaf has height 0, and a nonempty node has height one plus the larger child height.
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 class AVLNode:
     def __init__(self, key):
@@ -42,6 +52,42 @@ def update_height(node):
 def balance_factor(node):
     return height(node.left) - height(node.right)
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+class AVLNode {
+    constructor(key) { this.key = key; this.left = null; this.right = null; this.height = 0; }
+}
+function height(node) { return node === null ? -1 : node.height; }
+function update_height(node) { node.height = 1 + Math.max(height(node.left), height(node.right)); }
+function balance_factor(node) { return height(node.left) - height(node.right); }
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+mutable struct AVLNode
+    key
+    left
+    right
+    height::Int
+end
+AVLNode(key) = AVLNode(key, nothing, nothing, 0)
+height(node) = node === nothing ? -1 : node.height
+update_height!(node) = (node.height = 1 + max(height(node.left), height(node.right)); nothing)
+balance_factor(node) = height(node.left) - height(node.right)
+```
+
+:::
+
+::::
 
 The helper reads cached child heights. It does not traverse their descendants. Recomputing every subtree height from scratch at each ancestor would defeat the intended constant local work per update level.
 

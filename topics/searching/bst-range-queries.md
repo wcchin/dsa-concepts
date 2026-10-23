@@ -7,6 +7,10 @@
 
 **Builds on:** [Inorder traversal and BST ordering](bst-traversal.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/searching.js) · [Julia](../../examples/languages/searching.jl).
+
+Python and JavaScript positions are zero-based; Julia vector positions and insertion boundaries are one-based. A missing lookup is None/null/nothing, while a boundary query can return the one-past-end position. Julia public ordered-set operations use functions such as add!, ordered_keys and range_keys.
+
 ## Operation contract
 
 `bst_range_keys(root,low,high)` observes a distinct-key BST and returns a new ascending list for the **closed** interval. Equal bounds can report one stored key. A valid empty-tree query returns `[]`; low>high raises `ValueError` even when the tree is empty. Bounds and keys must use the same total order.
@@ -15,6 +19,12 @@
 ## Report every key inside an interval
 
 Exact lookup asks for one key. A range query asks for all keys satisfying `low <= key <= high`. BST whole-subtree ordering lets us skip the left subtree when the current key is at most low, and skip the right subtree when it is at least high.
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def bst_range_keys(root, low, high):
@@ -35,6 +45,48 @@ def bst_range_keys(root, low, high):
     visit(root)
     return out
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function bst_range_keys(root, low, high) {
+    if (low > high) throw new RangeError("lower bound exceeds upper bound");
+    const out = [];
+    function visit(node) {
+        if (node === null) return;
+        if (low < node.key) visit(node.left);
+        if (low <= node.key && node.key <= high) out.push(node.key);
+        if (node.key < high) visit(node.right);
+    }
+    visit(root); return out;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function bst_range_keys(root, low, high)
+    low <= high || throw(ArgumentError("lower bound exceeds upper bound"))
+    out = Any[]
+    function visit(node)
+        node === nothing && return
+        low < node.key && visit(node.left)
+        low <= node.key <= high && push!(out, node.key)
+        node.key < high && visit(node.right)
+    end
+    visit(root); return out
+end
+```
+
+:::
+
+::::
 
 The function assumes the strict, distinct-key BST invariant from this topic and returns keys in ascending order because it preserves inorder traversal. Before insertion of 65 into the reference tree, interval `[35,70]` returns `[40,50,60,70]`. An empty tree returns an empty list.
 

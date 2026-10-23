@@ -7,6 +7,10 @@
 
 **Builds on:** [All-match contracts](substring-baseline.md), [hash collisions](../maps-sets-hashing/hashing.md) and [fixed-window updates](../strategies/sequence-patterns.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/strings.js) · [Julia](../../examples/languages/strings.jl).
+
+All matching positions count Unicode code points. JavaScript and Julia collect characters into arrays for constant-time access, adding O(n+m) preparation and storage to text/pattern scans; this is additional to the Python bounds. Julia results are one-based character-array positions, not byte indices into a Julia String. Rolling hashes use BigInt arithmetic explicitly; JavaScript custom base/modulus arguments are BigInts (for example 3n).
+
 (polynomial-string-hash)=
 ## Treat a fixed-length window as a polynomial fingerprint
 
@@ -24,6 +28,12 @@ Only the residue of $b^{m-1}$ is needed. Python's modulo normalises a negative i
 
 (rabin-karp-verified)=
 ## A matching fingerprint is a candidate, not an answer
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def rolling_find_all(text, pattern, *, base=257, modulus=1_000_000_007):
@@ -53,6 +63,74 @@ def rolling_find_all(text, pattern, *, base=257, modulus=1_000_000_007):
                            + incoming) % modulus
     return matches
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function rolling_find_all(text, pattern, {base=257n, modulus=1000000007n} = {}) {
+    if (typeof base !== "bigint" || base < 2n || typeof modulus !== "bigint" || modulus < 2n)
+        throw new RangeError("base and modulus must be BigInts at least 2");
+    const t = [...text], p = [...pattern], n = t.length, m = p.length;
+    if (!m) return Array.from({length:n+1}, (_,i) => i);
+    if (m > n) return [];
+    let high = 1n, power = m-1, factor = base % modulus;
+    while (power > 0) {
+        if (power % 2) high = high * factor % modulus;
+        factor = factor * factor % modulus; power = Math.floor(power / 2);
+    }
+    const code = c => BigInt(c.codePointAt(0));
+    const mod = x => (x % modulus + modulus) % modulus;
+    let target_hash = 0n, window_hash = 0n;
+    for (let j=0; j<m; j++) {
+        target_hash = mod(target_hash * base + code(p[j]));
+        window_hash = mod(window_hash * base + code(t[j]));
+    }
+    const matches = [];
+    for (let start=0; start<=n-m; start++) {
+        if (window_hash === target_hash && p.every((c,j) => t[start+j] === c)) matches.push(start);
+        if (start+m<n) window_hash = mod((window_hash-code(t[start])*high)*base+code(t[start+m]));
+    }
+    return matches;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function rolling_find_all(text, pattern; base=257, modulus=1_000_000_007)
+    (base isa Integer && !(base isa Bool) && base >= 2) || throw(ArgumentError("invalid base"))
+    (modulus isa Integer && !(modulus isa Bool) && modulus >= 2) || throw(ArgumentError("invalid modulus"))
+    b, q = big(base), big(modulus) # exact modular arithmetic, including custom parameters
+    t, p = collect(text), collect(pattern); n, m = length(t), length(p)
+    m == 0 && return collect(1:n+1)
+    m > n && return Int[]
+    high = powermod(b, m-1, q); target_hash = big(0); window_hash = big(0)
+    for j in 1:m
+        target_hash = mod(target_hash*b + Int(p[j]), q)
+        window_hash = mod(window_hash*b + Int(t[j]), q)
+    end
+    matches = Int[]
+    for start in 1:n-m+1
+        if window_hash == target_hash && all(t[start+j-1] == p[j] for j in 1:m)
+            push!(matches, start)
+        end
+        if start+m <= n
+            window_hash = mod((window_hash-Int(t[start])*high)*b+Int(t[start+m]), q)
+        end
+    end
+    return matches
+end
+```
+
+:::
+
+::::
 
 This is a verified Rabin–Karp-style search. The invariant is that `window_hash` equals the polynomial hash of the current window. The initial loop establishes it; the update formula maintains it. Equal strings must have equal fingerprints, so no true occurrence is filtered out. Direct verification excludes false candidates.
 

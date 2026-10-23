@@ -7,12 +7,22 @@
 
 **Builds on:** [Connectivity](transport-connectivity.md) and [minimum spanning forests](../graph-algorithms/spanning-trees.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/applications.js) · [Julia](../../examples/languages/applications.jl).
+
+Reuse the translated graph algorithms and the same invented dataset. Julia travel/build columns are 3 and 4, versus 2 and 3 in Python/JavaScript. The translated construction adjacency is named build_graph_view to distinguish it from the graph-builder function. All versions keep the isolated harbour, distinguish absence from a zero-length route, and separate minutes from construction units.
+
 (transport-construction-objective)=
 ## Change the objective and choose the matching weight
 
 Suppose the candidate links have not yet been built. The planner wants a connected network at minimum total **construction units**, without a travel-time requirement or redundancy constraint. With an undirected model, this is a minimum-spanning-tree question inside each candidate-connected component.
 
 Because G has no candidate link, no spanning tree can connect all seven places. An algorithm can construct a [minimum spanning forest](../graph-algorithms/spanning-trees.md), but it cannot invent a missing harbour connection.
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 construction_edges = [(cost, u, v) for u, v, minutes, cost in links]
@@ -21,6 +31,32 @@ chosen_build, build_total, build_components = kruskal_forest(
 )
 prim_chosen, prim_total, prim_components = prim_forest(build_graph)
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+var construction_edges = links.map(([u,v,minutes,cost]) => [cost,u,v]);
+var [chosen_build, build_total, build_components] = kruskal_forest(places.keys(), construction_edges);
+var [prim_chosen, prim_total, prim_components] = prim_forest(build_graph_view);
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+construction_edges = [(cost,u,v) for (u,v,minutes,cost) in links]
+chosen_build, build_total, build_components = kruskal_forest(keys(places), construction_edges)
+prim_chosen, prim_total, prim_components = prim_forest(build_graph_view)
+```
+
+:::
+
+::::
 
 (transport-mst-result)=
 ## Verify both the total and the retained coverage
@@ -34,6 +70,12 @@ The cut/exchange argument justifies accepting these light edges without sacrific
 (transport-design-route-tradeoff)=
 ## A cheap network can make travel slower
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 chosen_pairs = {frozenset((u, v)) for cost, u, v in chosen_build}
 built_links = [row for row in links
@@ -42,6 +84,36 @@ built_time_graph = adjacency_view(places, built_links, 2)
 built_distance, built_parent = dijkstra(built_time_graph, "A")
 built_route = weighted_path_to("A", "F", built_distance, built_parent)
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+var chosen_pairs = new Set(chosen_build.map(([cost,u,v]) => edge_key(u,v)));
+var built_links = links.filter(row => chosen_pairs.has(edge_key(row[0],row[1])));
+var built_time_graph = adjacency_view(places, built_links, 2);
+var [built_distance, built_parent] = dijkstra(built_time_graph, "A");
+var built_route = weighted_path_to("A", "F", built_distance, built_parent);
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+chosen_pairs = Set(edge_key(u,v) for (cost,u,v) in chosen_build)
+built_links = [row for row in links if edge_key(row[1],row[2]) in chosen_pairs]
+built_time_graph = adjacency_view(places, built_links, 3)
+built_distance, built_parent = dijkstra(built_time_graph, "A")
+built_route = weighted_path_to("A", "F", built_distance, built_parent)
+```
+
+:::
+
+::::
 
 On this constructed tree, A-to-F follows **A–B–C–D–F**, taking **31 minutes**: 12+2+9+8. The full candidate network offered 13 minutes. Minimising edge construction cost did not preserve fastest routes; the chosen tree also has no backup route if an edge fails.
 

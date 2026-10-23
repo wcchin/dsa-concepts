@@ -7,6 +7,10 @@
 
 **Builds on:** [String contracts](string-model.md), [tree terminology](../searching/tree-basics.md) and [dictionary models](../maps-sets-hashing/hashing.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/strings.js) · [Julia](../../examples/languages/strings.jl).
+
+All matching positions count Unicode code points. JavaScript and Julia collect characters into arrays for constant-time access, adding O(n+m) preparation and storage to text/pattern scans; this is additional to the Python bounds. Julia results are one-based character-array positions, not byte indices into a Julia String. Rolling hashes use BigInt arithmetic explicitly; JavaScript custom base/modulus arguments are BigInts (for example 3n).
+
 (trie-prefix-invariant)=
 ## A node represents the path from the root
 
@@ -26,12 +30,46 @@ A leaf test cannot replace the terminal flag. Terminal flags also let the root s
 (trie-sparse-children)=
 ## Store only the outgoing symbols that exist
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 class TrieNode:
     def __init__(self):
         self.children = {}
         self.terminal = False
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+class TrieNode {
+    constructor() { this.children = new Map(); this.terminal = false; }
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+mutable struct TrieNode
+    children::Dict{Char,Any}
+    terminal::Bool
+end
+TrieNode() = TrieNode(Dict{Char,Any}(), false)
+```
+
+:::
+
+::::
 
 Every child dictionary maps a one-code-point string to one node. Each node has at most one outgoing edge for a given symbol. Different incoming symbols lead to different nodes: this representation is a tree, not a graph that merges equal suffixes.
 

@@ -7,6 +7,10 @@
 
 **Builds on:** [Queues](queues-and-deques.md) restrict additions/removals to opposite ends; here both ends are exposed.
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/linear-structures.js) · [Julia](../../examples/languages/linear-structures.jl).
+
+Julia uses one-based positions and named functions such as enqueue! rather than Python-style instance methods. Endpoint adapters use the supplied linked DequeBuffer, so they do not hide linear array-front shifts. Empty operations reject the request; null/nothing remain valid payloads.
+
 (deque-operation-contract)=
 ## A deque exposes both ends
 
@@ -29,6 +33,12 @@ The interface below is unbounded: it does not automatically discard an item. Rep
 
 The wrapped library deque stores exactly the logical records, from first to last. All methods preserve that order except for the one endpoint addition/removal requested. The next listing uses library names to show the underlying operations directly:
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 from collections import deque
 
@@ -42,8 +52,47 @@ assert items.popleft() == "X"
 assert list(items) == ["A", "B"]
 ```
 
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+// Use the shared linked DequeBuffer; JavaScript has no built-in deque.
+var items = new DequeBuffer();
+items.add_last("B"); items.add_first("A"); items.add_last("C");
+console.assert(items.remove_last() === "C");
+items.add_first("X");
+console.assert(items.remove_first() === "X");
+console.assert(JSON.stringify([...items]) === '["A","B"]');
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+items = DequeBuffer()
+db_add_last!(items, "B"); db_add_first!(items, "A"); db_add_last!(items, "C")
+@assert db_remove_last!(items) == "C"
+db_add_first!(items, "X")
+@assert db_remove_first!(items) == "X"
+@assert db_values(items) == ["A", "B"]
+```
+
+:::
+
+::::
+
 (deque-wrapper-code)=
 ## Python implementation with the ADT names
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 from collections import deque
@@ -88,6 +137,49 @@ class Deque:
         return self._items.pop()
 ```
 
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+class Deque {
+    constructor() { this._items = new DequeBuffer(); }
+    size() { return this._items.size(); }
+    is_empty() { return this.size() === 0; }
+    add_first(item) { this._items.add_first(item); }
+    add_last(item) { this._items.add_last(item); }
+    peek_first() { return this._items.peek_first(); }
+    peek_last() { return this._items.peek_last(); }
+    remove_first() { return this._items.remove_first(); }
+    remove_last() { return this._items.remove_last(); }
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+mutable struct Deque
+    items::DequeBuffer
+end
+Deque() = Deque(DequeBuffer())
+Base.length(q::Deque) = q.items.n
+Base.isempty(q::Deque) = length(q) == 0
+add_first!(q::Deque, x) = db_add_first!(q.items, x)
+add_last!(q::Deque, x) = db_add_last!(q.items, x)
+peek_first(q::Deque) = db_first(q.items)
+peek_last(q::Deque) = db_last(q.items)
+remove_first!(q::Deque) = db_remove_first!(q.items)
+remove_last!(q::Deque) = db_remove_last!(q.items)
+```
+
+:::
+
+::::
+
 ## Implementation choices and correctness
 
 The methods delegate to the corresponding endpoint, so each successful removal returns and removes exactly that endpoint record. The wrapper keeps the abstract names consistent without recreating the library's internals. A circular buffer or a doubly linked chain is an alternative representation. A singly linked chain with only head/tail references still needs a predecessor search to remove its tail.
@@ -106,6 +198,12 @@ A deque can implement stack behaviour by using only one end, or queue behaviour 
 
 To retain the latest four readings, add each new reading at the back and discard the oldest at the front when the window exceeds four items.
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 window = deque([12, 15, 14, 18])
 window.append(20)
@@ -113,6 +211,34 @@ if len(window) > 4:
     window.popleft()
 assert list(window) == [15, 14, 18, 20]
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+var window = new DequeBuffer([12, 15, 14, 18]);
+window.add_last(20);
+if (window.size() > 4) window.remove_first();
+console.assert(JSON.stringify([...window]) === "[15,14,18,20]");
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+window = DequeBuffer([12, 15, 14, 18])
+db_add_last!(window, 20)
+window.n > 4 && db_remove_first!(window)
+@assert db_values(window) == [15, 14, 18, 20]
+```
+
+:::
+
+::::
 
 ![A rolling window discards the oldest reading 12 and adds 20, retaining 15, 14, 18, 20.](../../assets/linear-structures/rolling-window.svg)
 
@@ -123,6 +249,12 @@ The invariant after each update is: the window contains the most recent at most 
 
 A palindrome reads the same in both directions. A deque can hold its characters: repeatedly remove and compare both ends until fewer than two remain. `RACECAR` gives matching pairs R/R, A/A and C/C, with E left in the middle.
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 def is_palindrome(sequence):
     remaining = deque(sequence)
@@ -131,6 +263,39 @@ def is_palindrome(sequence):
             return False
     return True
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function is_palindrome(sequence) {
+    const remaining = new DequeBuffer(sequence);
+    while (remaining.size() > 1)
+        if (remaining.remove_first() !== remaining.remove_last()) return false;
+    return true;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function is_palindrome(sequence)
+    remaining = DequeBuffer(sequence)
+    while remaining.n > 1
+        db_remove_first!(remaining) != db_remove_last!(remaining) && return false
+    end
+    return true
+end
+```
+
+:::
+
+::::
 
 This checks exact element equality: it does not remove spaces or normalise case. Building and scanning the deque takes $O(n)$ time and $O(n)$ additional space for $n$ input elements. Two indices into an existing sequence can avoid that extra copy; the deque version illustrates the access policy.
 

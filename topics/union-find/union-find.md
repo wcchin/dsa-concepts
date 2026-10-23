@@ -18,3 +18,5 @@ The code manages a fixed universe of integer indices `0..n-1`. It preserves the 
 The [fixed-universe contract](disjoint-sets.md#disjoint-set-interface) includes root/merge/connectivity operations, element count, component count, component size and emptiness. The [operation table](union-compression.md#union-find-operation-costs) compares plain forests, weighted linking and compression, separating individual calls from amortised sequences.
 
 Read element count, component count and component size as three different observations. The `components` field is also used by Kruskal to report the number of trees in its result. Arbitrary insertion, deletion/splitting, rollback, routes and automatic member enumeration remain outside this class.
+
+Code listings offer Python, JavaScript and Julia tabs where a runnable example is present. Python remains the explanation and trace language; see the [language guide](../../code-languages.md) for native conventions and runnable topic downloads.

@@ -7,6 +7,10 @@
 
 **Builds on:** [Insertion sort](insertion-sort.md), [merge sort](merge-sort.md) and [stability](sorting-properties.md#stable-sorting). This is a conceptual overview, not a complete Timsort implementation.
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/sorting.js) · [Julia](../../examples/languages/sorting.jl).
+
+Teaching sorts retain their mutation/return policy: JavaScript mutators return undefined and Julia teaching mutators return nothing. Built-in sort APIs are shown separately: JavaScript sort and Julia sort! return their mutated arrays. The Timsort/Powersort discussion describes Python’s implementation, not the algorithms used by the other runtimes.
+
 (timsort)=
 ## Idea and visual trace
 
@@ -20,6 +24,12 @@ This tiny example isolates the run/merge idea. A production implementation may e
 
 ## Python interface
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 records = [("A", 4), ("B", 1), ("C", 4)]
 ordered = sorted(records, key=lambda record: record[1])
@@ -29,6 +39,41 @@ result = records.sort(key=lambda record: record[1], reverse=True)
 assert result is None
 assert records == [("A", 4), ("C", 4), ("B", 1)]
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+// Native sort API comparison; this does not claim its engine uses Powersort.
+let records = [["A", 4], ["B", 1], ["C", 4]];
+let ordered = records.slice().sort((a, b) => a[1] - b[1]);
+console.assert(JSON.stringify(ordered) === JSON.stringify([["B", 1], ["A", 4], ["C", 4]]));
+let result = records.sort((a, b) => b[1] - a[1]);
+console.assert(result === records);
+console.assert(JSON.stringify(records) === JSON.stringify([["A", 4], ["C", 4], ["B", 1]]));
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+# Native API comparison, explicitly choosing stable merging, not Powersort.
+records = [("A", 4), ("B", 1), ("C", 4)]
+ordered = sort(records; by=r -> r[2], alg=MergeSort)
+@assert ordered == [("B", 1), ("A", 4), ("C", 4)]
+@assert records == [("A", 4), ("B", 1), ("C", 4)]
+result = sort!(records; by=r -> r[2], rev=true, alg=MergeSort)
+@assert result === records
+@assert records == [("A", 4), ("C", 4), ("B", 1)]
+```
+
+:::
+
+::::
 
 Both interfaces preserve equal-key order, including with `reverse=True`. These are calls to Python's implementation, not a hand-written Timsort listing.
 

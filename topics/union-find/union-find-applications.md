@@ -7,6 +7,10 @@
 
 **Builds on:** [The complete disjoint-set class](union-compression.md) and [graph components](../graphs/graph-components.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/union-find.js) · [Julia](../../examples/languages/union-find.jl).
+
+JavaScript member indices are 0..n−1; Julia members are 1..n. Element count, component count and component size remain distinct. Julia find_set! and union_sets! may mutate representation links, preserving the same abstract partition and union-by-size tie rule.
+
 (incremental-connectivity)=
 ## Merge when an undirected connection arrives
 
@@ -19,6 +23,12 @@ The component count decreases exactly on successful unions. For n vertices, afte
 
 If a and b are already connected by previously accepted forest edges, adding a new edge between them closes a cycle. `union(a,b)` returns `False`, letting a forest builder reject that redundant connection. A repeated copy of an already processed edge is also redundant; whether parallel edges count as separate graph edges depends on the graph model.
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 def connection_forest(n, edges):
     sets = DisjointSet(n)
@@ -30,6 +40,38 @@ def connection_forest(n, edges):
             rejected.append((a, b))
     return chosen, rejected, sets.components
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function connection_forest(n, edges) {
+    const sets = new DisjointSet(n), chosen = [], rejected = [];
+    for (const [a, b] of edges) (sets.union(a, b) ? chosen : rejected).push([a, b]);
+    return [chosen, rejected, sets.components];
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function connection_forest(n, edges)
+    sets = DisjointSet(n); chosen = Any[]; rejected = Any[]
+    for (a, b) in edges
+        push!(union_sets!(sets, a, b) ? chosen : rejected, (a, b))
+    end
+    return (chosen, rejected, sets.components)
+end
+```
+
+:::
+
+::::
 
 This uses the class from the preceding page. It builds an undirected spanning forest of the processed connections, but does **not** minimise any weight. [Kruskal](../graph-algorithms/kruskal.md) adds the crucial increasing-weight scan.
 

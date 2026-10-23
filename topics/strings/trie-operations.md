@@ -7,6 +7,10 @@
 
 **Builds on:** [TrieNode and prefix invariants](trie-representation.md), [state contracts](../foundations/adt-basics.md) and [hash-table assumptions](../maps-sets-hashing/performance.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/strings.js) · [Julia](../../examples/languages/strings.jl).
+
+All matching positions count Unicode code points. JavaScript and Julia collect characters into arrays for constant-time access, adding O(n+m) preparation and storage to text/pattern scans; this is additional to the Python bounds. Julia results are one-based character-array positions, not byte indices into a Julia String. Rolling hashes use BigInt arithmetic explicitly; JavaScript custom base/modulus arguments are BigInts (for example 3n).
+
 (trie-set-contract)=
 ## State duplicates, empty keys and return values
 
@@ -32,6 +36,12 @@ All word/prefix arguments must be strings; the class raises `TypeError` for othe
 
 (trie-set-implementation)=
 ## Walk, mark, and prune only unused suffixes
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 class Trie:
@@ -98,13 +108,146 @@ class Trie:
         return True
 ```
 
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+class Trie {
+    constructor() { this.root = new TrieNode(); this.size = 0; }
+    is_empty() { return this.size === 0; }
+    _walk(text) {
+        if (typeof text !== "string") throw new TypeError("expected a string");
+        let node = this.root;
+        for (const char of text) { node = node.children.get(char); if (node === undefined) return null; }
+        return node;
+    }
+    contains(word) { const node = this._walk(word); return node !== null && node.terminal; }
+    has_prefix(prefix) { return this._walk(prefix) !== null; }
+    insert(word) {
+        if (typeof word !== "string") throw new TypeError("expected a string");
+        let node = this.root;
+        for (const char of word) {
+            if (!node.children.has(char)) node.children.set(char, new TrieNode());
+            node = node.children.get(char);
+        }
+        if (node.terminal) return false;
+        node.terminal = true; this.size++; return true;
+    }
+    delete(word) {
+        if (typeof word !== "string") throw new TypeError("expected a string");
+        let node = this.root; const path = [];
+        for (const char of word) {
+            const child = node.children.get(char); if (child === undefined) return false;
+            path.push([node,char,child]); node = child;
+        }
+        if (!node.terminal) return false;
+        node.terminal = false; this.size--;
+        for (let i = path.length - 1; i >= 0; i--) {
+            const [parent,char,child] = path[i];
+            if (child.terminal || child.children.size) break;
+            parent.children.delete(char);
+        }
+        return true;
+    }
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+mutable struct Trie
+    root::TrieNode
+    n::Int
+end
+Trie() = Trie(TrieNode(), 0)
+Base.length(t::Trie) = t.n
+Base.isempty(t::Trie) = t.n == 0
+function trie_walk(t::Trie, text)
+    text isa AbstractString || throw(ArgumentError("expected a string"))
+    node = t.root
+    for char in text
+        node = get(node.children, char, nothing)
+        node === nothing && return nothing
+    end
+    return node
+end
+function trie_contains(t::Trie, word)
+    node = trie_walk(t, word); return node !== nothing && node.terminal
+end
+has_prefix(t::Trie, prefix) = trie_walk(t, prefix) !== nothing
+function trie_insert!(t::Trie, word)
+    word isa AbstractString || throw(ArgumentError("expected a string"))
+    node = t.root
+    for char in word
+        if !haskey(node.children, char); node.children[char] = TrieNode(); end
+        node = node.children[char]
+    end
+    node.terminal && return false
+    node.terminal = true; t.n += 1; return true
+end
+function trie_delete!(t::Trie, word)
+    word isa AbstractString || throw(ArgumentError("expected a string"))
+    node = t.root; path = Any[]
+    for char in word
+        child = get(node.children, char, nothing); child === nothing && return false
+        push!(path, (node,char,child)); node = child
+    end
+    !node.terminal && return false
+    node.terminal = false; t.n -= 1
+    for (parent,char,child) in Iterators.reverse(path)
+        (child.terminal || !isempty(child.children)) && break
+        delete!(parent.children, char)
+    end
+    return true
+end
+```
+
+:::
+
+::::
+
 Build the shared example once, in this order, for the prefix-query traces on the next page:
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 trie = Trie()
 for word in ["be", "bus", "buses", "busy", "car"]:
     trie.insert(word)
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+var trie = new Trie();
+for (const word of ["be","bus","buses","busy","car"]) trie.insert(word);
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+trie = Trie()
+for word in ["be","bus","buses","busy","car"]; trie_insert!(trie, word); end
+```
+
+:::
+
+::::
 
 (trie-deletion-invariant)=
 ## Deleting a key must preserve other keys' prefixes

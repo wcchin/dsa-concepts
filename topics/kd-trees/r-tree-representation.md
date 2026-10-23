@@ -7,6 +7,10 @@
 
 **Builds on:** A [PR tree](point-region-quadtrees.md) partitions cells; an R-tree groups object bounds instead.
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/kd-trees.js) · [Julia](../../examples/languages/kd-trees.jl).
+
+JavaScript points are arrays compared by same_point; Julia points are value tuples. Julia coordinate/child indices are one-based (x=1, y=2; SW/SE/NW/NE=1/2/3/4), while depth still starts at zero. R-tree orientation uses exact big-integer arithmetic for the supplied integer-coordinate geometry; nearest distances remain floating calculations. General R-tree update code is still conceptual in every language.
+
 ## Follow the five operations
 
 | Operation | Read here |
@@ -36,6 +40,12 @@ The following original example stores five **line segments**. It uses a differen
 
 (r-tree-given-example)=
 ## Build the bounds of a given two-leaf tree
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 segments = {
@@ -70,6 +80,60 @@ r_root = RNode([
     (enclosing_bounds(box for box, _ in group_v.entries), group_v),
 ], False)
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+var segments=new Map([["L1",[[0,0],[10,10]]],["L2",[[0,7],[6,7]]],["L3",[[8,0],[10,2]]],
+    ["L4",[[3,5],[3,9]]],["L5",[[5,6],[9,8]]]]), line_query=[2,6,4,8];
+function segment_bounds([a,b]) { return [Math.min(a[0],b[0]),Math.min(a[1],b[1]),Math.max(a[0],b[0]),Math.max(a[1],b[1])]; }
+function enclosing_bounds(boxes) {
+    boxes=[...boxes]; if(!boxes.length)throw new RangeError("nonempty boxes required");
+    return boxes.reduce((a,b)=>[Math.min(a[0],b[0]),Math.min(a[1],b[1]),Math.max(a[2],b[2]),Math.max(a[3],b[3])]);
+}
+class RNode { constructor(entries,leaf) { this.entries=[...entries]; this.leaf=leaf; } }
+var line_boxes=new Map([...segments].map(([key,value])=>[key,segment_bounds(value)]));
+var group_u=new RNode(["L1","L2"].map(k=>[line_boxes.get(k),k]),true);
+var group_v=new RNode(["L3","L4","L5"].map(k=>[line_boxes.get(k),k]),true);
+var r_root=new RNode([[enclosing_bounds(group_u.entries.map(e=>e[0])),group_u],
+    [enclosing_bounds(group_v.entries.map(e=>e[0])),group_v]],false);
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+segments=Dict("L1"=>((0,0),(10,10)),"L2"=>((0,7),(6,7)),"L3"=>((8,0),(10,2)),
+    "L4"=>((3,5),(3,9)),"L5"=>((5,6),(9,8)))
+line_query=(2,6,4,8)
+function segment_bounds(segment)
+    a,b=segment; return (min(a[1],b[1]),min(a[2],b[2]),max(a[1],b[1]),max(a[2],b[2]))
+end
+function enclosing_bounds(boxes)
+    boxes=collect(boxes)
+    return (minimum(b[1] for b in boxes),minimum(b[2] for b in boxes),
+        maximum(b[3] for b in boxes),maximum(b[4] for b in boxes))
+end
+struct RNode
+    entries::Vector{Any}
+    leaf::Bool
+end
+RNode(entries,leaf)=RNode(Any[entries...],leaf)
+line_boxes=Dict(k=>segment_bounds(v) for (k,v) in segments)
+group_u=RNode([(line_boxes[k],k) for k in ["L1","L2"]],true)
+group_v=RNode([(line_boxes[k],k) for k in ["L3","L4","L5"]],true)
+r_root=RNode([(enclosing_bounds(b for (b,_) in group_u.entries),group_u),
+    (enclosing_bounds(b for (b,_) in group_v.entries),group_v)],false)
+```
+
+:::
+
+::::
 
 Group U encloses `(0,0,10,10)`; group V encloses `(3,0,10,9)`. Both intersect query `(2,6,4,8)`, so neither can be skipped. This deliberately overlapping grouping illustrates query behaviour, not an optimal packing claim. Both leaves are at depth one; their occupancies two and three fit an example maximum of three and minimum of two.
 

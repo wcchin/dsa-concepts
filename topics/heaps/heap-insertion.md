@@ -7,6 +7,10 @@
 
 **Builds on:** [Heap shape, order and indices](heap-representation.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/heaps.js) · [Julia](../../examples/languages/heaps.jl).
+
+The Julia heap array starts at 1: parent=floor(i/2), children=2i and 2i+1. The support MinHeap implements heap repair rather than sorting on each removal. Stable record heaps compare priority and a unique counter before the payload; max queues negate numeric priorities.
+
 ## Operation contracts
 
 | Helper | Precondition | Result and state change |
@@ -26,6 +30,12 @@ Insert a new item at the end of the array. That fills the next leaf position, pr
 
 Compare the item with its parent. If the parent is already at most the item, stop. Otherwise swap them and continue at the parent's index. Each step preserves the stored items and moves the only possible violation one level upward.
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 def sift_up(heap, i):
     while i > 0:
@@ -39,6 +49,43 @@ def push_min(heap, priority):
     heap.append(priority)
     sift_up(heap, len(heap) - 1)
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function sift_up(heap, i) {
+    while (i > 0) {
+        const parent = Math.floor((i - 1) / 2);
+        if (heap[parent] <= heap[i]) break;
+        [heap[parent], heap[i]] = [heap[i], heap[parent]]; i = parent;
+    }
+}
+function push_min(heap, priority) { heap.push(priority); sift_up(heap, heap.length - 1); }
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function sift_up!(heap, i)
+    while i > 1
+        parent = div(i, 2)
+        heap[parent] <= heap[i] && break
+        heap[parent], heap[i] = heap[i], heap[parent]; i = parent
+    end
+    return nothing
+end
+push_min!(heap, priority) = (push!(heap, priority); sift_up!(heap, length(heap)); nothing)
+```
+
+:::
+
+::::
 
 The helper assumes the array arose from appending one item to a valid heap. It is not a general way to fix an arbitrary unordered array. `push_min` changes the same list and returns `None`.
 

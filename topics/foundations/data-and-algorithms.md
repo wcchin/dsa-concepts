@@ -7,6 +7,10 @@
 
 **Builds on:** Basic assignments, lists, functions, conditionals and loops; this opening page introduces the book's reasoning vocabulary.
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/foundations.js) · [Julia](../../examples/languages/foundations.jl).
+
+These are language comparisons: Python-specific identity, type-hint and default-argument explanations remain about Python. JavaScript arrays use identity equality; the comparison example checks contents explicitly. Julia uses mutable structs and function-style methods; its default expressions, like JavaScript’s, are evaluated per call.
+
 A campus shuttle route seems simple: keep a sequence of stops and visit them in order. But a useful program must also answer questions. Which stop comes next? Has a stop already been visited? What changes when a new stop is inserted?
 
 These questions connect the information we store to the operations we need. That connection is the starting point for studying data structures and algorithms.
@@ -25,6 +29,12 @@ An **algorithm** is a procedure with sufficiently precise steps for solving a sp
 
 Consider finding the first occurrence of a target stop in an ordered route:
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 def find_stop(route, target):
     for index, stop in enumerate(route):
@@ -36,6 +46,44 @@ route = ["KR", "MUS", "UTN", "MUS"]
 print(find_stop(route, "MUS"))  # 1
 print(find_stop(route, "CLM"))  # None
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function find_stop(route, target) {
+    for (let index = 0; index < route.length; index++) {
+        if (route[index] === target) return index;
+    }
+    return null;
+}
+let route = ["KR", "MUS", "UTN", "MUS"];
+console.log(find_stop(route, "MUS")); // 1
+console.log(find_stop(route, "CLM")); // null
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function find_stop(route, target)
+    for (index, stop) in enumerate(route)
+        stop == target && return index
+    end
+    return nothing
+end
+route = ["KR", "MUS", "UTN", "MUS"]
+println(find_stop(route, "MUS")) # 2
+println(find_stop(route, "CLM")) # nothing
+```
+
+:::
+
+::::
 
 The problem is **first-occurrence search**, not sorting or finding every match. The input order matters: the first MUS is at index 1. Python indices begin at zero. Here `None` explicitly reports absence, while index 0 is a valid answer. A client should test `result is None`, rather than use a truth-value check that would also treat 0 as false.
 

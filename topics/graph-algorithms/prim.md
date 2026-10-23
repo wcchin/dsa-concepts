@@ -7,6 +7,10 @@
 
 **Builds on:** [The cut property](spanning-trees.md#mst-cut-property) and [stable heap records](../heaps/heap-applications.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/graph-algorithms.js) · [Julia](../../examples/languages/graph-algorithms.jl).
+
+These versions reuse the translated deque, heap and disjoint-set definitions. Julia Dict order can select a different valid topological order or tied forest; compare the objective, feasibility and optimum cost rather than requiring an identical printed edge order. Heap counters avoid comparing payloads.
+
 (prim-algorithm)=
 ## Candidates are edge costs, not source distances
 
@@ -21,6 +25,12 @@ The code assumes valid endpoints, matching reciprocal weights and finite weights
 
 (lazy-prim-code)=
 ## Ignore edges whose destinations have already joined
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 from heapq import heappush, heappop
@@ -51,6 +61,58 @@ def prim_forest(graph):
                     heappush(heap, (cost, next(sequence), v, x))
     return chosen, total, components
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function prim_forest(graph) {
+    const seen = new Set(), chosen = []; let total = 0, components = 0, sequence = 0;
+    for (const root of graph.keys()) {
+        if (seen.has(root)) continue;
+        components++; seen.add(root); const heap = new MinHeap(entry_less);
+        for (const [v,w] of graph.get(root)) if (!seen.has(v)) heap.push([w, sequence++, root, v]);
+        while (heap.size()) {
+            const [w,serial,u,v] = heap.pop(); if (seen.has(v)) continue;
+            seen.add(v); chosen.push([w,u,v]); total += w;
+            for (const [x,cost] of graph.get(v)) if (!seen.has(x)) heap.push([cost, sequence++, v, x]);
+        }
+    }
+    return [chosen, total, components];
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function prim_forest(graph)
+    seen = Set{Any}(); chosen = Any[]; total = 0; components = 0; sequence = 0
+    for root in keys(graph)
+        root in seen && continue
+        components += 1; push!(seen, root); heap = MinHeap(entry_less)
+        for (v,w) in graph[root]
+            if !(v in seen); heap_push!(heap, (w,sequence,root,v)); sequence += 1; end
+        end
+        while !isempty(heap.data)
+            w,serial,u,v = heap_pop!(heap); v in seen && continue
+            push!(seen, v); push!(chosen, (w,u,v)); total += w
+            for (x,cost) in graph[v]
+                if !(x in seen); heap_push!(heap, (cost,sequence,v,x)); sequence += 1; end
+            end
+        end
+    end
+    return (chosen, total, components)
+end
+```
+
+:::
+
+::::
 
 The listing includes its heap and counter imports. Input adjacency lists must represent an undirected graph with reciprocal edges of equal weights. The function leaves them unchanged and returns chosen edges, their total and the component count.
 

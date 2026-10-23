@@ -7,6 +7,10 @@
 
 **Builds on:** [K-d construction](kd-construction.md) splits through a stored point; here both axes are used at each node.
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/kd-trees.js) · [Julia](../../examples/languages/kd-trees.jl).
+
+JavaScript points are arrays compared by same_point; Julia points are value tuples. Julia coordinate/child indices are one-based (x=1, y=2; SW/SE/NW/NE=1/2/3/4), while depth still starts at zero. R-tree orientation uses exact big-integer arithmetic for the supplied integer-coordinate geometry; nearest distances remain floating calculations. General R-tree update code is still conceptual in every language.
+
 ## Follow the five operations
 
 | Operation | Read here |
@@ -29,6 +33,12 @@ This is a change in the branching rule, not a midpoint subdivision. Inserting an
 ## Assign every coordinate tie to exactly one quadrant
 
 Use Cartesian axes, with y increasing northwards. West means `x < sx`; east means `x >= sx`. South means `y < sy`; north means `y >= sy`. Detect an identical point before branching. This gives child order **SW, SE, NW, NE**.
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def point_quadrant(point, pivot):
@@ -66,6 +76,78 @@ for point in shared_points:
     point_root = point_quad_insert(point_root, point)
 ```
 
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function point_quadrant(point,pivot) { return Number(point[0]>=pivot[0])+2*Number(point[1]>=pivot[1]); }
+class PointQuadNode {
+    constructor(point) { this.point=point; this.children=Array(4).fill(null); }
+}
+function point_quad_insert(root,point) {
+    if (root===null) return new PointQuadNode(point);
+    let node=root;
+    while (true) {
+        if (same_point(point,node.point)) return root;
+        const q=point_quadrant(point,node.point), child=node.children[q];
+        if (child===null) { node.children[q]=new PointQuadNode(point); return root; }
+        node=child;
+    }
+}
+function point_quad_contains(root,point) {
+    let node=root;
+    while (node!==null) {
+        if (same_point(point,node.point)) return true;
+        node=node.children[point_quadrant(point,node.point)];
+    }
+    return false;
+}
+var point_root=null;
+for (const point of shared_points) point_root=point_quad_insert(point_root,point);
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+point_quadrant(point,pivot)=1+Int(point[1]>=pivot[1])+2Int(point[2]>=pivot[2])
+mutable struct PointQuadNode
+    point
+    children::Vector{Any}
+end
+PointQuadNode(point)=PointQuadNode(point,Any[nothing for _ in 1:4])
+function point_quad_insert(root,point)
+    root===nothing && return PointQuadNode(point)
+    node=root
+    while true
+        point==node.point && return root
+        q=point_quadrant(point,node.point); child=node.children[q]
+        if child===nothing; node.children[q]=PointQuadNode(point); return root; end
+        node=child
+    end
+end
+function point_quad_contains(root,point)
+    node=root
+    while node!==nothing
+        point==node.point && return true
+        node=node.children[point_quadrant(point,node.point)]
+    end
+    return false
+end
+point_root=let tree=nothing
+    for point in shared_points; tree=point_quad_insert(tree,point); end
+    tree
+end
+```
+
+:::
+
+::::
+
 The code assumes finite numeric two-element tuples, as on the k-d-tree pages. It returns the resulting root and ignores repeated identical points. These iterative operations use constant working space. Insert/search follow one path, costing $O(h+1)$ for nonempty tree height h, with linear worst-case paths; an empty tree takes constant time. Persistent storage is $O(n)$ for n distinct points.
 
 (point-quadtree-shared-trace)=
@@ -79,6 +161,12 @@ A split line drawn on the plot is a decision boundary, not a stored object or a 
 
 (point-quadtree-range)=
 ## Visit every quadrant the closed query can reach
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def point_quad_range(root, rect):
@@ -101,6 +189,51 @@ def point_quad_range(root, rect):
                 stack.append(node.children[i])
     return out
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function point_quad_range(root,rect) {
+    rect=checked_rect(rect); const [xmin,ymin,xmax,ymax]=rect, out=[], stack=root===null ? [] : [root];
+    while (stack.length) {
+        const node=stack.pop(), [x,y]=node.point;
+        if (in_closed_rect(node.point,rect)) out.push(node.point);
+        const west=xmin<x, east=xmax>=x, south=ymin<y, north=ymax>=y;
+        const possible=[west&&south,east&&south,west&&north,east&&north];
+        for (let i=3;i>=0;i--) if (possible[i] && node.children[i]!==null) stack.push(node.children[i]);
+    }
+    return out;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function point_quad_range(root,rect)
+    rect=checked_rect(rect); xmin,ymin,xmax,ymax=rect
+    out=Any[]; stack=root===nothing ? Any[] : Any[root]
+    while !isempty(stack)
+        node=pop!(stack); x,y=node.point
+        in_closed_rect(node.point,rect) && push!(out,node.point)
+        west,east=xmin<x,xmax>=x; south,north=ymin<y,ymax>=y
+        possible=(west&&south,east&&south,west&&north,east&&north)
+        for i in 4:-1:1
+            possible[i] && node.children[i]!==nothing && push!(stack,node.children[i])
+        end
+    end
+    return out
+end
+```
+
+:::
+
+::::
 
 The shared rectangle visits A, D, B and E, reporting **D, B, E** in this traversal order. It skips A's entire east side, but must search both north and south on the west side. Equal upper query bounds can include north/east ties; equal lower bounds cannot reach strictly west/south points.
 

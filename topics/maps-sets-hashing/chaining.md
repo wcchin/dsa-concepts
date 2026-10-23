@@ -7,6 +7,10 @@
 
 **Builds on:** [Hashing](hashing.md) defines the index and equality rules.
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/maps-sets-hashing.js) · [Julia](../../examples/languages/maps-sets-hashing.jl).
+
+Native containers have different equality and iteration rules. JavaScript examples use primitive keys; array keys compare by identity. The low-level helpers use the supplied teaching hash: h(k)=k for integer traces. Julia helper indices are one-based; table layouts for other native hash functions need not match Python. Snapshot containers differ in type, not ownership.
+
 Separate chaining associates each table index with a bucket of entries. Several unequal keys can share a bucket. Lookup selects one bucket and compares keys inside it.
 
 ## Buckets and lookup in separate chaining
@@ -40,6 +44,12 @@ These are storage-level functions, not a complete Map class. If a caller caches 
 
 This example uses Python lists for buckets; a chain need not be implemented as a linked list.
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 def get_chained(table, key):
     i = hash(key) % len(table)
@@ -49,9 +59,46 @@ def get_chained(table, key):
     raise KeyError(key)
 ```
 
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function get_chained(table, key) {
+    for (const [stored_key, value] of table[hash_index(key, table.length)])
+        if (stored_key === key) return value;
+    throw new KeyError(String(key));
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function get_chained(table, key)
+    for (stored_key, value) in table[hash_index(key, length(table))]
+        stored_key == key && return value
+    end
+    throw(KeyError(key))
+end
+```
+
+:::
+
+::::
+
 The index calculation selects a bucket. The loop establishes whether an equal key occurs there. Reaching the exception means every candidate was checked. The function assumes a nonempty bucket array and a hashable query key.
 
 ## Insertion and replacement
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def put_chained(table, key, value):
@@ -64,10 +111,50 @@ def put_chained(table, key, value):
     return True
 ```
 
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function put_chained(table, key, value) {
+    const bucket = table[hash_index(key, table.length)];
+    for (let j = 0; j < bucket.length; j++) {
+        if (bucket[j][0] === key) { bucket[j] = [key, value]; return false; }
+    }
+    bucket.push([key, value]); return true;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function put_chained!(table, key, value)
+    bucket = table[hash_index(key, length(table))]
+    for (j, entry) in enumerate(bucket)
+        if entry[1] == key; bucket[j] = (key, value); return false; end
+    end
+    push!(bucket, (key, value)); return true
+end
+```
+
+:::
+
+::::
+
 The returned Boolean says whether a new key was added. Search before appending: otherwise replacing key 15 could create a duplicate association. A Map’s size increases only on `True`.
 
 (chained-deletion-code)=
 ## Deletion removes and returns the value
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def remove_chained(table, key):
@@ -79,13 +166,75 @@ def remove_chained(table, key):
     raise KeyError(key)
 ```
 
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function remove_chained(table, key) {
+    const bucket = table[hash_index(key, table.length)];
+    for (let j = 0; j < bucket.length; j++) {
+        if (bucket[j][0] === key) return bucket.splice(j, 1)[0][1];
+    }
+    throw new KeyError(String(key));
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function remove_chained!(table, key)
+    bucket = table[hash_index(key, length(table))]
+    for (j, (stored_key, value)) in enumerate(bucket)
+        if stored_key == key; deleteat!(bucket, j); return value; end
+    end
+    throw(KeyError(key))
+end
+```
+
+:::
+
+::::
+
 Delete decreases a separately maintained size only on success. Removing an entry does not break access to the remaining entries because the bucket itself stays reachable. In our **list-backed buckets**, deletion can also shift later bucket entries; a linked bucket has a different local removal cost. Missing-key removal raises after checking the entire bucket.
 
 ## Separate bucket objects
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 table = [[] for _ in range(7)]
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+var table = Array.from({length: 7}, () => []);
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+table = [Any[] for _ in 1:7]
+```
+
+:::
+
+::::
 
 Each bucket above is a different list. `[[]] * 7` would repeat references to one list and make all buckets change together—an [aliasing](../foundations/foundations.md) error.
 

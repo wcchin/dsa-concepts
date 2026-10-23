@@ -7,6 +7,10 @@
 
 **Builds on:** [AVL height and balance conventions](avl-invariants.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/balanced-trees.js) · [Julia](../../examples/languages/balanced-trees.jl).
+
+The same BST readers and OrderedSet interface are reused from Topic 7. Julia updates use function calls, not dot methods. All variants use empty height −1, leaf height 0, and left height minus right height; rotations must return and reconnect the new subtree root.
+
 ## Rotation contract and preconditions
 
 `rotate_right(z)` requires a nonempty left child; `rotate_left(z)` requires a nonempty right child. Child subtrees must already satisfy strict BST order and have correct cached heights. Each helper changes links, updates the affected heights and returns the new subtree root. It preserves all keys and inorder order; it is not an add/remove operation, and an arbitrary rotation need not restore AVL balance.
@@ -34,6 +38,12 @@ The example deliberately keeps the opposite subtree 70 and the transferred subtr
 
 The helpers below reuse `height` and `update_height` from the previous page. Right rotation requires an existing left child; left rotation requires an existing right child.
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 def rotate_right(z):
     y = z.left
@@ -53,6 +63,46 @@ def rotate_left(z):
     update_height(y)
     return y
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function rotate_right(z) {
+    const y = z.left, middle = y.right;
+    y.right = z; z.left = middle;
+    update_height(z); update_height(y); return y;
+}
+function rotate_left(z) {
+    const y = z.right, middle = y.left;
+    y.left = z; z.right = middle;
+    update_height(z); update_height(y); return y;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function rotate_right(z)
+    y = z.left; middle = y.right
+    y.right = z; z.left = middle
+    update_height!(z); update_height!(y); return y
+end
+function rotate_left(z)
+    y = z.right; middle = y.left
+    y.left = z; z.right = middle
+    update_height!(z); update_height!(y); return y
+end
+```
+
+:::
+
+::::
 
 (rotation-height-updates)=
 ## Update the lower node before the new root

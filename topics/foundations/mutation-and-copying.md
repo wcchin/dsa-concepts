@@ -7,6 +7,10 @@
 
 **Builds on:** [Names, slots, attributes, identity and equality](objects-and-references.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/foundations.js) · [Julia](../../examples/languages/foundations.jl).
+
+These are language comparisons: Python-specific identity, type-hint and default-argument explanations remain about Python. JavaScript arrays use identity equality; the comparison example checks contents explicitly. Julia uses mutable structs and function-style methods; its default expressions, like JavaScript’s, are evaluated per call.
+
 When a program seems to change two variables at once, the underlying cause is often shared access to one mutable object. Trace the objects and references before deciding what changed.
 
 (mutability)=
@@ -16,16 +20,55 @@ An object is **mutable** if its state can change after creation. Lists, dictiona
 
 Immutability concerns the object itself. A tuple’s sequence of references cannot be replaced or extended, but an object referenced from that tuple may still be mutable:
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 record = ("KR", [12, 15])
 record[1].append(18)
 print(record)  # ('KR', [12, 15, 18])
 ```
 
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+// Freeze the outer record, not the array it refers to.
+const record = Object.freeze(["KR", [12, 15]]);
+record[1].push(18);
+console.log(record); // ["KR", [12, 15, 18]]
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+record = ("KR", [12, 15])
+push!(record[2], 18)
+println(record) # ("KR", [12, 15, 18])
+```
+
+:::
+
+::::
+
 The tuple still refers to the same string and list. The list’s state changed. Assigning a different list to `record[1]` would raise `TypeError`.
 
 (mutation-and-rebinding)=
 ## Mutation changes an object; rebinding changes a name
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 route_a = ["KR", "MUS"]
@@ -38,12 +81,52 @@ print(route_a)  # ['KR', 'MUS', 'UTN']
 print(route_b)  # ['CLM']
 ```
 
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+let route_a = ["KR", "MUS"];
+let route_b = route_a;
+route_b.push("UTN");
+console.log(route_a); // ["KR", "MUS", "UTN"]
+route_b = ["CLM"];
+console.log(route_a); // ["KR", "MUS", "UTN"]
+console.log(route_b); // ["CLM"]
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+route_a = ["KR", "MUS"]
+route_b = route_a
+push!(route_b, "UTN")
+println(route_a)
+route_b = ["CLM"]
+println(route_a)
+println(route_b)
+```
+
+:::
+
+::::
+
 `append` mutates the shared list, so both names initially observe its effect. The assignment of `["CLM"]` creates a new list and rebinds `route_b`. It does not redirect `route_a`, which still refers to the earlier list.
 
 For an immutable integer, `count += 1` binds `count` to an integer representing the new result. The previous integer is not edited. Be careful generalising this to collections: list `+=` can mutate a list, whereas list `+` creates a new list. The effect depends on the operation and type.
 
 (function-arguments)=
 ## Function parameters can share the caller’s object
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def replace_route(route):
@@ -59,6 +142,46 @@ extend_route(stops)
 print(stops)  # ['Kent Ridge', 'Botanic Gardens']
 ```
 
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function replace_route(route) { route = ["Botanic Gardens"]; }
+function extend_route(route) { route.push("Botanic Gardens"); }
+let stops = ["Kent Ridge"];
+replace_route(stops);
+console.log(stops); // ["Kent Ridge"]
+extend_route(stops);
+console.log(stops); // ["Kent Ridge", "Botanic Gardens"]
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function replace_route(route)
+    route = ["Botanic Gardens"]
+    return nothing
+end
+function extend_route(route)
+    push!(route, "Botanic Gardens")
+    return nothing
+end
+stops = ["Kent Ridge"]
+replace_route(stops)
+println(stops)
+extend_route(stops)
+println(stops)
+```
+
+:::
+
+::::
+
 On each call, the local parameter `route` initially refers to the object supplied as the argument. `replace_route` changes only that local binding. `extend_route` mutates the shared list. Python does not automatically copy an argument when entering a function, and assigning to the parameter does not assign to the caller’s variable.
 
 Both functions return `None` because neither returns a value explicitly. In particular, `stops = extend_route(stops)` would mutate the list and then bind `stops` to `None`. Similarly, `list.append` itself returns `None`; do not replace the list with its return value.
@@ -70,6 +193,12 @@ Before comparing copies, draw the shared list after the argument-passing example
 (shallow-copy)=
 ## A shallow copy creates a new outer container
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 routes = [["KR", "MUS"], ["KR", "UTN"]]
 backup = routes.copy()
@@ -79,6 +208,38 @@ backup[0].append("CLM")
 print(routes[0])              # ['KR', 'MUS', 'CLM']
 ```
 
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+let routes = [["KR", "MUS"], ["KR", "UTN"]];
+let backup = routes.slice();
+console.log(backup === routes); // false
+console.log(backup[0] === routes[0]); // true
+backup[0].push("CLM");
+console.log(routes[0]); // ["KR", "MUS", "CLM"]
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+routes = [["KR", "MUS"], ["KR", "UTN"]]
+backup = copy(routes)
+println(backup === routes)       # false
+println(backup[1] === routes[1]) # true
+push!(backup[1], "CLM")
+println(routes[1])
+```
+
+:::
+
+::::
+
 `copy()` duplicates the outer list, keeping references to the same inner objects. Appending to the shared first inner list affects what both outer lists expose. Appending an entirely new inner list to `backup`, however, would change only that outer list.
 
 ![The routes and backup names refer to separate outer lists, but both outer lists point to the same two inner lists.](../../assets/foundations/shallow-copy.svg)
@@ -87,6 +248,12 @@ This also explains why `[[]] * 3` produces three references to one inner list. U
 
 (deep-copy)=
 ## A deep copy follows nested structure
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 from copy import deepcopy
@@ -98,12 +265,49 @@ print(original[0])     # ['KR', 'MUS']
 print(independent[0])  # ['KR', 'MUS', 'CLM']
 ```
 
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+let original = [["KR", "MUS"], ["KR", "UTN"]];
+// structuredClone supports these plain nested arrays, not arbitrary class instances.
+let independent = structuredClone(original);
+independent[0].push("CLM");
+console.log(original[0]);
+console.log(independent[0]);
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+original = [["KR", "MUS"], ["KR", "UTN"]]
+independent = deepcopy(original)
+push!(independent[1], "CLM")
+println(original[1])
+println(independent[1])
+```
+
+:::
+
+::::
+
 For this nested-list example, `deepcopy` creates independent inner lists. It is not a rule that every reachable object becomes a unique copy: immutable objects may be reused, and deep copying preserves repeated sharing within the copied structure using a memo. Custom objects can also define copying behaviour. Choose the sharing policy you actually need; copying everything may be expensive or inappropriate.
 
 (mutable-defaults)=
 ## Mutable default arguments persist across calls
 
 Default argument expressions are evaluated when the function is defined, rather than freshly for every call. A default such as `route=[]` can therefore retain state from earlier calls.
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def add_stop(stop, route=None):
@@ -117,6 +321,43 @@ second = add_stop("MUS")
 print(first, second)  # ['KR'] ['MUS']
 print(first is second)  # False
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+// Unlike Python, JavaScript evaluates this default at each call.
+function add_stop(stop, route = []) {
+    route.push(stop);
+    return route;
+}
+let first = add_stop("KR"), second = add_stop("MUS");
+console.log(first, second); // ["KR"] ["MUS"]
+console.log(first === second); // false
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+# Julia also evaluates a default expression at each call.
+function add_stop(stop, route=String[])
+    push!(route, stop)
+    return route
+end
+first_route = add_stop("KR")
+second_route = add_stop("MUS")
+println(first_route, " ", second_route)
+println(first_route === second_route) # false
+```
+
+:::
+
+::::
 
 Here a missing argument selects `None`, and the function creates a fresh list inside the call. If the caller explicitly supplies a list, the function appends to that list. The interface deliberately distinguishes those two cases.
 

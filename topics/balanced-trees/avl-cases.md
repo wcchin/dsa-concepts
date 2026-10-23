@@ -7,6 +7,10 @@
 
 **Builds on:** [Rotations](avl-rotations.md) preserve key order and transferred subtrees.
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/balanced-trees.js) · [Julia](../../examples/languages/balanced-trees.jl).
+
+The same BST readers and OrderedSet interface are reused from Topic 7. Julia updates use function calls, not dot methods. All variants use empty height −1, leaf height 0, and left height minus right height; rotations must return and reconnect the new subtree root.
+
 ## Repair contract
 
 `rebalance(node)` takes a nonempty node whose child subtrees are already valid AVL trees with correct heights. After one valid single-key update, it refreshes this node and returns the repaired subtree root with the same keys. Its caller must reconnect the result. It is not a validator or repair routine for arbitrarily corrupted trees.
@@ -35,6 +39,12 @@ A single rotation in the original LR shape may preserve sorted order but fail to
 (avl-rebalance)=
 ## Choose the repair from child balance factors
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 def rebalance(node):
     update_height(node)
@@ -49,6 +59,49 @@ def rebalance(node):
         return rotate_left(node)
     return node
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function rebalance(node) {
+    update_height(node); const bf = balance_factor(node);
+    if (bf > 1) {
+        if (balance_factor(node.left) < 0) node.left = rotate_left(node.left);
+        return rotate_right(node);
+    }
+    if (bf < -1) {
+        if (balance_factor(node.right) > 0) node.right = rotate_right(node.right);
+        return rotate_left(node);
+    }
+    return node;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function rebalance(node)
+    update_height!(node); bf = balance_factor(node)
+    if bf > 1
+        balance_factor(node.left) < 0 && (node.left = rotate_left(node.left))
+        return rotate_right(node)
+    elseif bf < -1
+        balance_factor(node.right) > 0 && (node.right = rotate_right(node.right))
+        return rotate_left(node)
+    end
+    return node
+end
+```
+
+:::
+
+::::
 
 This helper requires a nonempty node whose child subtrees are already AVL-valid with correct heights. The current node may need repair after a single-key update. Bottom-up recursion establishes that precondition at each level.
 

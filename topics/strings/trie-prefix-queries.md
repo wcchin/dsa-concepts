@@ -7,10 +7,20 @@
 
 **Builds on:** [The complete Trie class](trie-operations.md#trie-set-implementation) and [iterative DFS frames](../graphs/depth-first-search.md#iterative-dfs).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/strings.js) · [Julia](../../examples/languages/strings.jl).
+
+All matching positions count Unicode code points. JavaScript and Julia collect characters into arrays for constant-time access, adding O(n+m) preparation and storage to text/pattern scans; this is additional to the Python bounds. Julia results are one-based character-array positions, not byte indices into a Julia String. Rolling hashes use BigInt arithmetic explicitly; JavaScript custom base/modulus arguments are BigInts (for example 3n).
+
 (trie-autocomplete)=
 ## Descend to a prefix, then report its terminal descendants
 
 A prefix lookup first follows one path. Reporting completions must then visit the matching subtree; finding the prefix does not make every answer free. This generator reuses the preceding `Trie` class.
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def words_with_prefix(trie, prefix):
@@ -34,6 +44,68 @@ def words_with_prefix(trie, prefix):
             yield "".join(path)
         stack.append((child, iter(child.children.items())))
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function* words_with_prefix(trie, prefix) {
+    const node = trie._walk(prefix); if (node === null) return;
+    const path = [...prefix]; if (node.terminal) yield prefix;
+    const stack = [[node, node.children.entries()]];
+    while (stack.length) {
+        const step = stack.at(-1)[1].next();
+        if (step.done) { stack.pop(); if (stack.length) path.pop(); continue; }
+        const [char,child] = step.value; path.push(char);
+        if (child.terminal) yield path.join("");
+        stack.push([child,child.children.entries()]);
+    }
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+struct PrefixWords
+    trie::Trie
+    prefix
+end
+Base.IteratorSize(::Type{PrefixWords}) = Base.SizeUnknown()
+Base.eltype(::Type{PrefixWords}) = String
+words_with_prefix(t::Trie, prefix) = PrefixWords(t, prefix)
+function Base.iterate(w::PrefixWords)
+    node = trie_walk(w.trie, w.prefix) # validation is delayed until iteration
+    node === nothing && return nothing
+    state = (path=collect(w.prefix), stack=Any[(node,iterate(node.children))])
+    node.terminal && return (String(w.prefix), state)
+    return iterate(w, state)
+end
+function Base.iterate(w::PrefixWords, state)
+    while !isempty(state.stack)
+        node, step = state.stack[end]
+        if step === nothing
+            pop!(state.stack)
+            !isempty(state.stack) && pop!(state.path)
+            continue
+        end
+        (char,child), next_state = step
+        state.stack[end] = (node,iterate(node.children,next_state))
+        push!(state.path, char)
+        push!(state.stack, (child,iterate(child.children)))
+        child.terminal && return (join(state.path), state)
+    end
+    return nothing
+end
+```
+
+:::
+
+::::
 
 For the shared keys inserted in the order on the preceding page, `list(words_with_prefix(trie, "bu"))` gives `["bus", "buses", "busy"]`. Prefix `"bus"` includes `"bus"` itself because its node is terminal. Missing prefixes yield nothing. Prefix `""` enumerates every stored key, including the empty key if present.
 
@@ -63,6 +135,12 @@ For prefix length L, V visited nodes in the selected subtree, and Z code points 
 (trie-longest-stored-prefix)=
 ## Remember the deepest terminal node, not just the deepest path
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 def longest_stored_prefix(trie, text):
     if not isinstance(text, str):
@@ -77,6 +155,44 @@ def longest_stored_prefix(trie, text):
             best = i + 1
     return None if best is None else text[:best]
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function longest_stored_prefix(trie, text) {
+    if (typeof text !== "string") throw new TypeError("expected a string");
+    const chars = [...text]; let node = trie.root, best = node.terminal ? 0 : null;
+    for (let i = 0; i < chars.length; i++) {
+        node = node.children.get(chars[i]); if (node === undefined) break;
+        if (node.terminal) best = i + 1;
+    }
+    return best === null ? null : chars.slice(0,best).join("");
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function longest_stored_prefix(trie::Trie, text)
+    text isa AbstractString || throw(ArgumentError("expected a string"))
+    chars = collect(text); node = trie.root; best = node.terminal ? 0 : nothing
+    for (i,char) in enumerate(chars)
+        node = get(node.children, char, nothing); node === nothing && break
+        node.terminal && (best = i)
+    end
+    return best === nothing ? nothing : join(chars[1:best])
+end
+```
+
+:::
+
+::::
 
 `"buseshed"` returns `"buses"`; `"bustop"` returns `"bus"`; `"buoyant"` returns `None` in the shared set, even though part of its path exists. If the empty key is stored, it can be the answer `""`, which is distinct from `None`.
 

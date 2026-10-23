@@ -7,6 +7,10 @@
 
 **Builds on:** [Topological sorting](topological-order.md), [relaxation](shortest-path-state.md) and [Dijkstra's assumptions](dijkstra.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/graph-algorithms.js) · [Julia](../../examples/languages/graph-algorithms.jl).
+
+These versions reuse the translated deque, heap and disjoint-set definitions. Julia Dict order can select a different valid topological order or tied forest; compare the objective, feasibility and optimum cost rather than requiring an identical printed edge order. Heap counters avoid comparing payloads.
+
 (dag-shortest-paths)=
 ## Precedence supplies a different safe processing order
 
@@ -18,6 +22,12 @@ A topological order processes every possible predecessor before its destination.
 `dag_shortest_paths(graph, source)` returns the same all-vertex distance/parent form as Dijkstra, observing the input without mutation. Negative, zero and positive finite weights are permitted. The source must exist (`KeyError` otherwise), every destination must be a key, and the **entire directed graph** must be acyclic (`ValueError` from topological sorting otherwise). An unreachable directed cycle is still invalid.
 
 Tied candidate distances retain the first improving predecessor already stored. The FIFO topological routine supplies one valid processing order; a different valid order can change tied parents while preserving optimum distances. Empty input has no valid source.
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 from math import inf
@@ -40,6 +50,56 @@ def dag_shortest_paths(graph, source):
                 parent[v] = u
     return distance, parent
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function dag_shortest_paths(graph, source) {
+    if (!graph.has(source)) throw new KeyError(String(source));
+    const unweighted = new Map([...graph].map(([u,adjacent]) => [u, adjacent.map(([v,w]) => v)]));
+    const order = topological_sort(unweighted);
+    const distance = new Map([...graph.keys()].map(v => [v, Infinity]));
+    const parent = new Map([...graph.keys()].map(v => [v, null])); distance.set(source, 0);
+    for (const u of order) {
+        if (distance.get(u) === Infinity) continue;
+        for (const [v,w] of graph.get(u)) {
+            const candidate = distance.get(u) + w;
+            if (candidate < distance.get(v)) { distance.set(v, candidate); parent.set(v, u); }
+        }
+    }
+    return [distance, parent];
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function dag_shortest_paths(graph, source)
+    haskey(graph, source) || throw(KeyError(source))
+    unweighted = Dict(u=>[v for (v,w) in graph[u]] for u in keys(graph))
+    order = topological_sort(unweighted)
+    distance = Dict(v=>Inf for v in keys(graph)); parent = Dict{Any,Any}(v=>nothing for v in keys(graph))
+    distance[source] = 0
+    for u in order
+        distance[u] == Inf && continue
+        for (v,w) in graph[u]
+            candidate = distance[u] + w
+            if candidate < distance[v]; distance[v] = candidate; parent[v] = u; end
+        end
+    end
+    return (distance, parent)
+end
+```
+
+:::
+
+::::
 
 Run the complete [`topological_sort` definition](topological-order.md#kahn-algorithm) first; `inf` is imported locally. It checks the entire graph for acyclicity, so even an unreachable directed cycle causes rejection. The weighted graph itself is left unchanged.
 

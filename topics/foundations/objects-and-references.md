@@ -7,12 +7,22 @@
 
 **Builds on:** [Problem specifications and representations](data-and-algorithms.md); familiar assignment and collection syntax.
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/foundations.js) · [Julia](../../examples/languages/foundations.jl).
+
+These are language comparisons: Python-specific identity, type-hint and default-argument explanations remain about Python. JavaScript arrays use identity equality; the comparison example checks contents explicitly. Julia uses mutable structs and function-style methods; its default expressions, like JavaScript’s, are evaluated per call.
+
 To understand a Python data structure, we need a model of what its names and fields refer to. Otherwise, an innocent-looking assignment can be mistaken for a copy, and a reference update can be mistaken for a change to the referenced object.
 
 (objects-and-bindings)=
 ## Objects, names and assignment
 
 An **object** has an identity, a type and a value. A **name** is bound to an object. A **reference** is the connection through which a program refers to an object. These are useful reasoning terms; our diagrams do not claim to show physical memory addresses or Python’s internal layout.
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 stop = "Kent Ridge"
@@ -21,6 +31,34 @@ stop = "Museum"
 print(stop)  # Museum
 ```
 
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+let stop = "Kent Ridge";
+let passengers = 12;
+stop = "Museum";
+console.log(stop); // Museum
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+stop = "Kent Ridge"
+passengers = 12
+stop = "Museum"
+println(stop) # Museum
+```
+
+:::
+
+::::
+
 The first assignment binds `stop` to a string object. The final assignment rebinds that name to another string. It does not edit the characters of the original string.
 
 Objects can be referenced from names, collection entries and attributes. A list entry can therefore refer to another list, and an object attribute can refer to another node. This is how separate objects form larger structures.
@@ -28,11 +66,43 @@ Objects can be referenced from names, collection entries and attributes. A list 
 (aliasing)=
 ## Assignment can create aliases
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 route_a = ["KR", "MUS"]
 route_b = route_a
 print(route_a is route_b)  # True
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+let route_a = ["KR", "MUS"];
+let route_b = route_a;
+console.log(route_a === route_b); // true
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+route_a = ["KR", "MUS"]
+route_b = route_a
+println(route_a === route_b) # true
+```
+
+:::
+
+::::
 
 Evaluating `route_a` supplies the existing list object; assigning it to `route_b` gives that object another name. It does not construct another list. The names are **aliases**.
 
@@ -43,6 +113,12 @@ An arrow means “refers to”. A box represents an object. Two arrows ending at
 (identity-and-equality)=
 ## Identity and equality answer different questions
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 x = ["KR", "MUS"]
 y = ["KR", "MUS"]
@@ -51,6 +127,37 @@ print(x == y)  # True
 print(x is y)  # False
 print(x is z)  # True
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+let x = ["KR", "MUS"], y = ["KR", "MUS"], z = x;
+// JavaScript array equality tests identity, so compare elements for contents.
+console.log(x.length === y.length && x.every((v, i) => v === y[i])); // true
+console.log(x === y); // false
+console.log(x === z); // true
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+x = ["KR", "MUS"]
+y = ["KR", "MUS"]
+z = x
+println(x == y)  # true: contents
+println(x === y) # false: identity
+println(x === z) # true
+```
+
+:::
+
+::::
 
 For these lists, `==` compares their contents and `is` tests whether they are the same object. Separate list expressions create separate lists, so changing x can leave y unchanged even though they began equal. Conversely, z provides another reference to x’s list.
 
@@ -63,10 +170,40 @@ Do not use `is` to compare the values of numbers or strings. Implementations may
 
 `None` is a singleton object: it is a value a reference can identify, not an uninitialised hole. We use it when a function has no search result or a node has no next node.
 
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
+
 ```python
 next_node = None
 print(next_node is None)  # True
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+let next_node = null;
+console.log(next_node === null); // true
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+next_node = nothing
+println(next_node === nothing) # true
+```
+
+:::
+
+::::
 
 Use `is None` and `is not None` for these tests. An empty list is a different object with a different meaning: it is a collection containing zero items. A function that reaches its end without a `return` value also returns `None`.
 

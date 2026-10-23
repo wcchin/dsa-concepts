@@ -7,10 +7,20 @@
 
 **Builds on:** [Array indexing](../linear-structures/arrays.md), [ordered-search exclusion](../searching/binary-search.md) and [analysis conventions](../analysis/code-and-space.md).
 
+**Code languages:** Python defines the explanations, figures and self-checks. Use the [language guide](../../code-languages.md) for native conventions and dependencies. Complete runnable topic examples: [JavaScript](../../examples/languages/strategies.js) · [Julia](../../examples/languages/strategies.jl).
+
+State definitions, pruning conditions and tie policies are shared. Julia returns one-based position tuples/subsets, and its coin table uses slot a+1 for amount a. The finite numeric examples require representable intermediate arithmetic in each runtime.
+
 (prefix-sums)=
 ## Precompute repeated range totals
 
 Let `prefix[i]` be the sum of the first i values, so `prefix[0] = 0`. The sum of half-open range `[left,right)` is `prefix[right] - prefix[left]`.
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def prefix_sums(values):
@@ -20,10 +30,45 @@ def prefix_sums(values):
     return prefix
 ```
 
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function prefix_sums(values) {
+    const prefix = [0]; for (const value of values) prefix.push(prefix.at(-1) + value);
+    return prefix;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function prefix_sums(values)
+    prefix = Any[0]
+    for value in values; push!(prefix, prefix[end] + value); end
+    return prefix
+end
+```
+
+:::
+
+::::
+
 For `[3,1,4,2]`, prefixes are `[0,3,4,8,10]`; indices `[1,3)` sum to `8-3=5`. Building takes $O(n)$ time and storage; each valid bounded range query then takes constant time. Updates to the original values invalidate affected prefix totals. Dynamic range-query structures are a separate extension.
 
 (two-pointer-search)=
 ## Use sorted order to eliminate one endpoint
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def two_sum_sorted(values, target):
@@ -39,10 +84,54 @@ def two_sum_sorted(values, target):
     return None
 ```
 
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function two_sum_sorted(values, target) {
+    let left = 0, right = values.length - 1;
+    while (left < right) {
+        const total = values[left] + values[right];
+        if (total === target) return [left,right];
+        if (total < target) left++; else right--;
+    }
+    return null;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function two_sum_sorted(values, target)
+    left, right = 1, length(values)
+    while left < right
+        total = values[left] + values[right]
+        total == target && return (left,right)
+        if total < target; left += 1; else; right -= 1; end
+    end
+    return nothing
+end
+```
+
+:::
+
+::::
+
 The input must be ascending, with consistent numeric comparison and addition. A sum too small rules out the current left value with every remaining right value; a sum too large rules out the current right value with every remaining left value. Each step moves an endpoint, so time is $O(n)$ and auxiliary space is constant. Two equal values can be used if they occupy different positions.
 
 (sliding-window-sum)=
 ## Update a fixed window by removing and adding one value
+
+::::{tab-set}
+:class: code-language-tabs
+
+:::{tab-item} Python
+:sync: python
 
 ```python
 def max_fixed_window_sum(values, k):
@@ -55,6 +144,43 @@ def max_fixed_window_sum(values, k):
         best = max(best, total)
     return best
 ```
+
+:::
+
+:::{tab-item} JavaScript
+:sync: javascript
+
+```javascript
+function max_fixed_window_sum(values, k) {
+    if (!Number.isSafeInteger(k) || k<1 || k>values.length) throw new RangeError("invalid window size");
+    let total = 0; for (let i=0;i<k;i++) total += values[i];
+    let best = total;
+    for (let right=k;right<values.length;right++) {
+        total += values[right] - values[right-k]; best = Math.max(best,total);
+    }
+    return best;
+}
+```
+
+:::
+
+:::{tab-item} Julia
+:sync: julia
+
+```julia
+function max_fixed_window_sum(values, k)
+    (k isa Int && 1 <= k <= length(values)) || throw(ArgumentError("invalid window size"))
+    total = sum(values[i] for i in 1:k); best = total
+    for right in k+1:length(values)
+        total += values[right] - values[right-k]; best = max(best,total)
+    end
+    return best
+end
+```
+
+:::
+
+::::
 
 Each iteration preserves the sum of the current k-item window. Negative numbers are allowed because the window size is fixed. Time is $O(n)$ and additional working space is $O(1)$ under the numeric word model; no sliced window lists are allocated.
 
